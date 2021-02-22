@@ -39,6 +39,7 @@ namespace Aplikacja_MEMS
             wlaczWylacz.Add(cBoxZyroskop);
             wlaczWylacz.Add(buttonStart);
             wlaczWylacz.Add(buttonStop);
+            wlaczWylacz.Add(cBoxPorty);
 
             ladowaniePaska = new ThreadStart(StartPaska);
             pasek = new Thread(ladowaniePaska);
@@ -120,6 +121,7 @@ namespace Aplikacja_MEMS
             bgW.RunWorkerAsync();
             Thread.Sleep(500);
 
+            // Zamknięcie okna ładowania aplikacji
             Action<int> updateAction1 = new Action<int>((value) => ladowanie.Close());
             ladowanie.Invoke(updateAction1, 32);
 
@@ -127,6 +129,7 @@ namespace Aplikacja_MEMS
         }
         private System.Windows.Forms.Label labelCOM;
 
+        // Włączenie okna ładowania aplikacji
         private void StartPaska()
         {
             Application.Run(ladowanie);
@@ -134,6 +137,7 @@ namespace Aplikacja_MEMS
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            // Ładowanie progressBar podczas włączania aplikacji
             if(ladowanie.progressBar.Value < 90)
             {
                 Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value += 90 / portyCOM.Length);
@@ -143,12 +147,17 @@ namespace Aplikacja_MEMS
                 Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value = 100);
                 ladowanie.progressBar.Invoke(updateAction, 32);
             }
-            
         }
 
         private void UserForm_Shown(object sender, EventArgs e)
         {
             this.TopMost = false;
+        }
+
+        private void buttonOtworz_Click(object sender, EventArgs e)
+        {
+            
+
         }
     }
 }

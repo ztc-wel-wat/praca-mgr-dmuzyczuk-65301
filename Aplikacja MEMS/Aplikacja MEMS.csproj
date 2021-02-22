@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Czujnik.cs" />
     <Compile Include="Ladowanie.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,9 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Plytka.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Plytka1.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\WEL_WAT.jpg" />

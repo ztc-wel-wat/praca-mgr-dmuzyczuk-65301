@@ -353,6 +353,7 @@ namespace Aplikacja_MEMS
             this.buttonOtworz.TabIndex = 3;
             this.buttonOtworz.Text = "Otwórz";
             this.buttonOtworz.UseVisualStyleBackColor = true;
+            this.buttonOtworz.Click += new System.EventHandler(this.buttonOtworz_Click);
             // 
             // buttonZamknij
             // 
