@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
-    public partial class Form1 : Form
+    public partial class Ladowanie : Form
     {
-        public Form1()
+        public Ladowanie()
         {
             InitializeComponent();
         }
