@@ -15,8 +15,12 @@ namespace Aplikacja_MEMS
     public partial class UserForm : Form
     {
         List<Control> wlaczWylacz = new List<Control>();
-
+        string[] portyCOM;
         Ladowanie ladowanie = new Ladowanie();
+        ThreadStart ladowaniePaska;
+        Thread pasek;
+
+
         public UserForm()
         {
             InitializeComponent();
@@ -36,13 +40,15 @@ namespace Aplikacja_MEMS
             wlaczWylacz.Add(buttonStart);
             wlaczWylacz.Add(buttonStop);
 
-            ladowanie.Visible = true;
-            ladowanie.progressBar.Value = 10;
+            ladowaniePaska = new ThreadStart(StartPaska);
+            pasek = new Thread(ladowaniePaska);
+            pasek.Start();
+
         }
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-
+            BackgroundWorker bgW = new BackgroundWorker();
             // Tworzenie tablicy bajtów wyszukującej dostępnych urządzeń MEMS
             byte[] inicjalizacja = new byte[5];
             inicjalizacja[0] = 0x32;
@@ -52,13 +58,14 @@ namespace Aplikacja_MEMS
             inicjalizacja[4] = 0xf0;
 
             // Załądowanie listy wszystkich dostępnych portów COM
-            string[] portyCOM = SerialPort.GetPortNames();
+            portyCOM = SerialPort.GetPortNames();
             List<string> portyMEMS = new List<string>();
 
             int licznik = 0;
             // Tworzenie listy portów COM z podpiętym urządzeniem MEMS
             foreach (string port in portyCOM)
             {
+                bgW = new BackgroundWorker();
 
                 try
                 {
@@ -92,23 +99,56 @@ namespace Aplikacja_MEMS
                 }
                 catch (Exception exc)
                 {
-
+                    if(serialPort.IsOpen)
+                        serialPort.Close();
                 }
 
-                ladowanie.progressBar.Value += (int)(90/portyCOM.Length);
+                bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+                bgW.RunWorkerAsync();
+                Thread.Sleep(300);
+
             }
 
-            ladowanie.progressBar.Value = 100;
 
             // Przypisanie listy dostępnych portów COM z podłączonymi urządzeniami MEMS do okna wybory (comboBox)
             foreach (string port in portyMEMS)
             {
                 cBoxPorty.Items.Add(port);
             }
+            bgW = new BackgroundWorker();
+            bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            bgW.RunWorkerAsync();
+            Thread.Sleep(500);
 
-            ladowanie.progressBar.Value = 100;
-            ladowanie.Visible = false;
+            Action<int> updateAction1 = new Action<int>((value) => ladowanie.Close());
+            ladowanie.Invoke(updateAction1, 32);
+
+
         }
         private System.Windows.Forms.Label labelCOM;
+
+        private void StartPaska()
+        {
+            Application.Run(ladowanie);
+        }
+
+        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if(ladowanie.progressBar.Value < 90)
+            {
+                Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value += 90 / portyCOM.Length);
+                ladowanie.progressBar.Invoke(updateAction, 32);
+            }
+            else {
+                Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value = 100);
+                ladowanie.progressBar.Invoke(updateAction, 32);
+            }
+            
+        }
+
+        private void UserForm_Shown(object sender, EventArgs e)
+        {
+            this.TopMost = false;
+        }
     }
 }

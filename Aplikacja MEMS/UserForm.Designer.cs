@@ -33,6 +33,12 @@ namespace Aplikacja_MEMS
             this.tabControlCzujniki = new System.Windows.Forms.TabControl();
             this.tabPageOgolne = new System.Windows.Forms.TabPage();
             this.gBoxCzujniki = new System.Windows.Forms.GroupBox();
+            this.cBoxHigrometr = new System.Windows.Forms.ComboBox();
+            this.cBoxBarometr = new System.Windows.Forms.ComboBox();
+            this.cBoxTermometr = new System.Windows.Forms.ComboBox();
+            this.cBoxMagnetometr = new System.Windows.Forms.ComboBox();
+            this.cBoxZyroskop = new System.Windows.Forms.ComboBox();
+            this.cBoxAkcelerometr = new System.Windows.Forms.ComboBox();
             this.labelHigrometr = new System.Windows.Forms.Label();
             this.labelBarometr = new System.Windows.Forms.Label();
             this.labelTermometr = new System.Windows.Forms.Label();
@@ -40,6 +46,7 @@ namespace Aplikacja_MEMS
             this.labelZyroskop = new System.Windows.Forms.Label();
             this.labelAkcelerometr = new System.Windows.Forms.Label();
             this.gBoxPolaczenie = new System.Windows.Forms.GroupBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.progressBarDane = new System.Windows.Forms.ProgressBar();
             this.labelStatusDanych = new System.Windows.Forms.Label();
             this.labelPobieranieDanych = new System.Windows.Forms.Label();
@@ -69,21 +76,15 @@ namespace Aplikacja_MEMS
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.cBoxAkcelerometr = new System.Windows.Forms.ComboBox();
-            this.cBoxZyroskop = new System.Windows.Forms.ComboBox();
-            this.cBoxMagnetometr = new System.Windows.Forms.ComboBox();
-            this.cBoxHigrometr = new System.Windows.Forms.ComboBox();
-            this.cBoxBarometr = new System.Windows.Forms.ComboBox();
-            this.cBoxTermometr = new System.Windows.Forms.ComboBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.tabControlCzujniki.SuspendLayout();
             this.tabPageOgolne.SuspendLayout();
             this.gBoxCzujniki.SuspendLayout();
             this.gBoxPolaczenie.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.gBoxInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlCzujniki
@@ -133,6 +134,60 @@ namespace Aplikacja_MEMS
             this.gBoxCzujniki.TabIndex = 2;
             this.gBoxCzujniki.TabStop = false;
             this.gBoxCzujniki.Text = "Czujniki";
+            // 
+            // cBoxHigrometr
+            // 
+            this.cBoxHigrometr.Enabled = false;
+            this.cBoxHigrometr.FormattingEnabled = true;
+            this.cBoxHigrometr.Location = new System.Drawing.Point(528, 101);
+            this.cBoxHigrometr.Name = "cBoxHigrometr";
+            this.cBoxHigrometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxHigrometr.TabIndex = 11;
+            // 
+            // cBoxBarometr
+            // 
+            this.cBoxBarometr.Enabled = false;
+            this.cBoxBarometr.FormattingEnabled = true;
+            this.cBoxBarometr.Location = new System.Drawing.Point(528, 66);
+            this.cBoxBarometr.Name = "cBoxBarometr";
+            this.cBoxBarometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxBarometr.TabIndex = 10;
+            // 
+            // cBoxTermometr
+            // 
+            this.cBoxTermometr.Enabled = false;
+            this.cBoxTermometr.FormattingEnabled = true;
+            this.cBoxTermometr.Location = new System.Drawing.Point(528, 31);
+            this.cBoxTermometr.Name = "cBoxTermometr";
+            this.cBoxTermometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxTermometr.TabIndex = 9;
+            // 
+            // cBoxMagnetometr
+            // 
+            this.cBoxMagnetometr.Enabled = false;
+            this.cBoxMagnetometr.FormattingEnabled = true;
+            this.cBoxMagnetometr.Location = new System.Drawing.Point(176, 101);
+            this.cBoxMagnetometr.Name = "cBoxMagnetometr";
+            this.cBoxMagnetometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagnetometr.TabIndex = 8;
+            // 
+            // cBoxZyroskop
+            // 
+            this.cBoxZyroskop.Enabled = false;
+            this.cBoxZyroskop.FormattingEnabled = true;
+            this.cBoxZyroskop.Location = new System.Drawing.Point(176, 66);
+            this.cBoxZyroskop.Name = "cBoxZyroskop";
+            this.cBoxZyroskop.Size = new System.Drawing.Size(121, 21);
+            this.cBoxZyroskop.TabIndex = 7;
+            // 
+            // cBoxAkcelerometr
+            // 
+            this.cBoxAkcelerometr.Enabled = false;
+            this.cBoxAkcelerometr.FormattingEnabled = true;
+            this.cBoxAkcelerometr.Location = new System.Drawing.Point(176, 31);
+            this.cBoxAkcelerometr.Name = "cBoxAkcelerometr";
+            this.cBoxAkcelerometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAkcelerometr.TabIndex = 6;
             // 
             // labelHigrometr
             // 
@@ -215,6 +270,15 @@ namespace Aplikacja_MEMS
             this.gBoxPolaczenie.TabIndex = 1;
             this.gBoxPolaczenie.TabStop = false;
             this.gBoxPolaczenie.Text = "Połączenie";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
+            this.pictureBox2.Location = new System.Drawing.Point(328, 38);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(80, 80);
+            this.pictureBox2.TabIndex = 11;
+            this.pictureBox2.TabStop = false;
             // 
             // progressBarDane
             // 
@@ -401,7 +465,7 @@ namespace Aplikacja_MEMS
             // 
             this.tabPageDane.Location = new System.Drawing.Point(4, 22);
             this.tabPageDane.Name = "tabPageDane";
-            this.tabPageDane.Size = new System.Drawing.Size(678, 474);
+            this.tabPageDane.Size = new System.Drawing.Size(734, 474);
             this.tabPageDane.TabIndex = 2;
             this.tabPageDane.Text = "Dane";
             this.tabPageDane.UseVisualStyleBackColor = true;
@@ -478,68 +542,10 @@ namespace Aplikacja_MEMS
             // 
             this.serialPort.BaudRate = 921600;
             // 
-            // cBoxAkcelerometr
+            // backgroundWorker
             // 
-            this.cBoxAkcelerometr.Enabled = false;
-            this.cBoxAkcelerometr.FormattingEnabled = true;
-            this.cBoxAkcelerometr.Location = new System.Drawing.Point(176, 31);
-            this.cBoxAkcelerometr.Name = "cBoxAkcelerometr";
-            this.cBoxAkcelerometr.Size = new System.Drawing.Size(121, 21);
-            this.cBoxAkcelerometr.TabIndex = 6;
-            // 
-            // cBoxZyroskop
-            // 
-            this.cBoxZyroskop.Enabled = false;
-            this.cBoxZyroskop.FormattingEnabled = true;
-            this.cBoxZyroskop.Location = new System.Drawing.Point(176, 66);
-            this.cBoxZyroskop.Name = "cBoxZyroskop";
-            this.cBoxZyroskop.Size = new System.Drawing.Size(121, 21);
-            this.cBoxZyroskop.TabIndex = 7;
-            // 
-            // cBoxMagnetometr
-            // 
-            this.cBoxMagnetometr.Enabled = false;
-            this.cBoxMagnetometr.FormattingEnabled = true;
-            this.cBoxMagnetometr.Location = new System.Drawing.Point(176, 101);
-            this.cBoxMagnetometr.Name = "cBoxMagnetometr";
-            this.cBoxMagnetometr.Size = new System.Drawing.Size(121, 21);
-            this.cBoxMagnetometr.TabIndex = 8;
-            // 
-            // cBoxHigrometr
-            // 
-            this.cBoxHigrometr.Enabled = false;
-            this.cBoxHigrometr.FormattingEnabled = true;
-            this.cBoxHigrometr.Location = new System.Drawing.Point(528, 101);
-            this.cBoxHigrometr.Name = "cBoxHigrometr";
-            this.cBoxHigrometr.Size = new System.Drawing.Size(121, 21);
-            this.cBoxHigrometr.TabIndex = 11;
-            // 
-            // cBoxBarometr
-            // 
-            this.cBoxBarometr.Enabled = false;
-            this.cBoxBarometr.FormattingEnabled = true;
-            this.cBoxBarometr.Location = new System.Drawing.Point(528, 66);
-            this.cBoxBarometr.Name = "cBoxBarometr";
-            this.cBoxBarometr.Size = new System.Drawing.Size(121, 21);
-            this.cBoxBarometr.TabIndex = 10;
-            // 
-            // cBoxTermometr
-            // 
-            this.cBoxTermometr.Enabled = false;
-            this.cBoxTermometr.FormattingEnabled = true;
-            this.cBoxTermometr.Location = new System.Drawing.Point(528, 31);
-            this.cBoxTermometr.Name = "cBoxTermometr";
-            this.cBoxTermometr.Size = new System.Drawing.Size(121, 21);
-            this.cBoxTermometr.TabIndex = 9;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
-            this.pictureBox2.Location = new System.Drawing.Point(328, 38);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox2.TabIndex = 11;
-            this.pictureBox2.TabStop = false;
+            this.backgroundWorker.WorkerSupportsCancellation = true;
+            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             // 
             // UserForm
             // 
@@ -552,19 +558,21 @@ namespace Aplikacja_MEMS
             this.MaximizeBox = false;
             this.Name = "UserForm";
             this.Text = "Aplikacja MEMS";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.UserForm_Load);
+            this.Shown += new System.EventHandler(this.UserForm_Shown);
             this.tabControlCzujniki.ResumeLayout(false);
             this.tabPageOgolne.ResumeLayout(false);
             this.gBoxCzujniki.ResumeLayout(false);
             this.gBoxCzujniki.PerformLayout();
             this.gBoxPolaczenie.ResumeLayout(false);
             this.gBoxPolaczenie.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.gBoxInfo.ResumeLayout(false);
             this.gBoxInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -618,6 +626,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ComboBox cBoxZyroskop;
         private System.Windows.Forms.ComboBox cBoxAkcelerometr;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker;
     }
 }
 
