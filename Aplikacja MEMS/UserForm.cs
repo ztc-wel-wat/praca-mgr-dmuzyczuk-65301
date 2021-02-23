@@ -15,6 +15,8 @@ namespace Aplikacja_MEMS
     public partial class UserForm : Form
     {
         List<Control> wlaczWylacz = new List<Control>();
+        List<ComboBox> wyczysc = new List<ComboBox>();
+
         string[] portyCOM;
         Ladowanie ladowanie = new Ladowanie();
         ThreadStart ladowaniePaska;
@@ -38,8 +40,16 @@ namespace Aplikacja_MEMS
             wlaczWylacz.Add(cBoxTermometr);
             wlaczWylacz.Add(cBoxZyroskop);
             wlaczWylacz.Add(buttonStart);
-            wlaczWylacz.Add(buttonStop);
+            wlaczWylacz.Add(buttonZamknij);
             wlaczWylacz.Add(cBoxPorty);
+
+            // Lista comboboxów do wyczyszczenia po ponownym załądowaniu portu COM
+            wyczysc.Add(cBoxAkcelerometr);
+            wyczysc.Add(cBoxBarometr);
+            wyczysc.Add(cBoxHigrometr);
+            wyczysc.Add(cBoxMagnetometr);
+            wyczysc.Add(cBoxTermometr);
+            wyczysc.Add(cBoxZyroskop);
 
             ladowaniePaska = new ThreadStart(StartPaska);
             pasek = new Thread(ladowaniePaska);
@@ -50,13 +60,6 @@ namespace Aplikacja_MEMS
         private void UserForm_Load(object sender, EventArgs e)
         {
             BackgroundWorker bgW = new BackgroundWorker();
-            // Tworzenie tablicy bajtów wyszukującej dostępnych urządzeń MEMS
-            byte[] inicjalizacja = new byte[5];
-            inicjalizacja[0] = 0x32;
-            inicjalizacja[1] = 0x01;
-            inicjalizacja[2] = 0x02;
-            inicjalizacja[3] = 0xcb;
-            inicjalizacja[4] = 0xf0;
 
             // Załądowanie listy wszystkich dostępnych portów COM
             portyCOM = SerialPort.GetPortNames();
@@ -72,11 +75,15 @@ namespace Aplikacja_MEMS
                 {
                     serialPort.PortName = port;
                     serialPort.Open();
-                    serialPort.Write(inicjalizacja, 0, 5);
 
-                    // Wysłanie zapytania
+                    // Wysłanie zapytania do urządzenia 
+                    serialPort.Write(Komunikacja.Zapytanie(0x02, this, 0x00), 0, 5);
+
+                    // Pobranie odpowiedzi z bufora COM
                     byte[] odp = new byte[serialPort.ReadBufferSize];
                     int odpowiedz = serialPort.Read(odp, 0, serialPort.ReadBufferSize);
+
+
 
                     // Dodawanie spisu dostępnych urządzeń (napis w boxie "Informacje")
                     if (odpowiedz > 0)
@@ -100,7 +107,7 @@ namespace Aplikacja_MEMS
                 }
                 catch (Exception exc)
                 {
-                    if(serialPort.IsOpen)
+                    if (serialPort.IsOpen)
                         serialPort.Close();
                 }
 
@@ -138,12 +145,13 @@ namespace Aplikacja_MEMS
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Ładowanie progressBar podczas włączania aplikacji
-            if(ladowanie.progressBar.Value < 90)
+            if (ladowanie.progressBar.Value < 90)
             {
                 Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value += 90 / portyCOM.Length);
                 ladowanie.progressBar.Invoke(updateAction, 32);
             }
-            else {
+            else
+            {
                 Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value = 100);
                 ladowanie.progressBar.Invoke(updateAction, 32);
             }
@@ -156,7 +164,171 @@ namespace Aplikacja_MEMS
 
         private void buttonOtworz_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                byte[] odp = new byte[serialPort.ReadBufferSize];
+                int licznik = 0;
+
+                serialPort.PortName = cBoxPorty.Text;
+                serialPort.Open();
+
+                // Czyszczenie listy poprzednich urzadzen
+                foreach (ComboBox cBox in wyczysc)
+                {
+                    cBox.Items.Clear();
+                }
+
+                buttonOtworz.Enabled = false;
+                cBoxPorty.Enabled = false;
+
+                // Pobranie list czujnikow
+                byte[] listaAkcelerometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x01), this); // Akcelerometry
+                byte[] listaZyroskopow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x02), this); // Żyroskopy
+                byte[] listaMagnetometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x03), this); // Magnetometry
+                byte[] listaTermometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x04), this); // Termometry
+                byte[] listaHigrometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x05), this); // Higrometry
+                byte[] listaBarometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x06), this); // Barometry
+
+                // Wypisanie list do combo boxów
+                ZaladujListeUrzadzen("Akcelerometr", listaAkcelerometrow);
+                ZaladujListeUrzadzen("Żyroskop", listaZyroskopow);
+                ZaladujListeUrzadzen("Magnetometr", listaMagnetometrow);
+                ZaladujListeUrzadzen("Termometr", listaTermometrow);
+                ZaladujListeUrzadzen("Higrometr", listaHigrometrow);
+                ZaladujListeUrzadzen("Barometr", listaBarometrow);
+
+                progressBarCOM.Value = 90;
+                // Włączanie/wyłączanie przycisków
+                foreach (Control control in wlaczWylacz)
+                {
+                    control.Enabled = true;
+                }
+                buttonOtworz.Enabled = false;
+                cBoxPorty.Enabled = false;
+
+
+                progressBarCOM.Value = 100;
+
+
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Wystąpił błąd podczas połączenia z portem szeregowym. Sprawdź parametry połączenia.", "Błąd");
+                if (serialPort.IsOpen)
+                    serialPort.Close();
+
+                progressBarCOM.Value = 0;
+
+                // Włączanie/wyłączanie przycisków
+                foreach (Control control in wlaczWylacz)
+                {
+                    control.Enabled = false;
+                }
+
+                buttonOtworz.Enabled = true;
+                cBoxPorty.Enabled = true;
+            }
+        }
+
+        private void bgWorkerOtworz_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void buttonZamknij_Click(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+                serialPort.Close();
+
+            progressBarCOM.Value = 0;
+
+
+            // Włączanie/wyłączanie przycisków
+            foreach (Control control in wlaczWylacz)
+            {
+                control.Enabled = false;
+            }
+
+            buttonOtworz.Enabled = true;
+            cBoxPorty.Enabled = true;
+        }
+
+        private void ZaladujListeUrzadzen(string urzadzenie, byte[] dane)
+        {
+            List<string> czujniki = new List<string>();
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            string bufor = "";
+            int poczatek = 5;
+
+            // Wyszukiwanie znaku przecinka, tlumaczenie oraz tworzenie listy urządzen na string
+            for (int i = 5; i < (dane.Length-2); i++)
+            {
+                switch (dane[i])
+                {
+                    case 0x2C:
+                        bufor = ascii.GetString(dane, poczatek, i - poczatek);
+                        czujniki.Add(bufor);
+                        bufor = "";
+                        poczatek = i + 1;
+                        break;
+                }
+            }
+            // Dodawanie ostatniego czujnika (po nim nie ma znaku przecinka
+            bufor = ascii.GetString(dane, poczatek, (dane.Length - 2) - poczatek);
+            czujniki.Add(bufor);
+
+            // Aktualizowanie comboboxów wyboru czujnika
+            switch (urzadzenie)
+            {
+                case "Akcelerometr":
+                    foreach (string czujnik in czujniki)
+                    {
+                        cBoxAkcelerometr.Items.Add(czujnik);
+                    }
+                    cBoxAkcelerometr.Text = cBoxAkcelerometr.Items[0].ToString();
+                    break;
+
+                case "Żyroskop":
+                    foreach (string czujnik in czujniki)
+                    {
+                        cBoxZyroskop.Items.Add(czujnik);
+                    }
+                    cBoxZyroskop.Text = cBoxZyroskop.Items[0].ToString();
+                    break;
+
+                case "Magnetometr":
+                    foreach (string czujnik in czujniki)
+                    {
+                        cBoxMagnetometr.Items.Add(czujnik);
+                    }
+                    cBoxMagnetometr.Text = cBoxMagnetometr.Items[0].ToString();
+                    break;
+
+                case "Termometr":
+                    foreach (string czujnik in czujniki)
+                    {
+                        cBoxTermometr.Items.Add(czujnik);
+                    }
+                    cBoxTermometr.Text = cBoxTermometr.Items[0].ToString();
+                    break;
+
+                case "Higrometr":
+                    foreach (string czujnik in czujniki)
+                    {
+                        cBoxHigrometr.Items.Add(czujnik);
+                    }
+                    cBoxHigrometr.Text = cBoxHigrometr.Items[0].ToString();
+                    break;
+
+                case "Barometr":
+                    foreach (string czujnik in czujniki)
+                    {
+                        cBoxBarometr.Items.Add(czujnik);
+                    }
+                    cBoxBarometr.Text = cBoxBarometr.Items[0].ToString();
+                    break;
+            }
+            progressBarCOM.Value += 5;
 
         }
     }

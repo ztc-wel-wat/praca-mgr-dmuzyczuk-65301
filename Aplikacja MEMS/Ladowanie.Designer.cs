@@ -50,7 +50,6 @@ namespace Aplikacja_MEMS
             this.Controls.Add(this.progressBar);
             this.MaximizeBox = false;
             this.Name = "Ladowanie";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ładowanie Aplikacji MEMS";
             this.TopMost = true;

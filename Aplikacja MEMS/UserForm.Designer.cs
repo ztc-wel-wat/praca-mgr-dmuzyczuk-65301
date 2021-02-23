@@ -76,7 +76,7 @@ namespace Aplikacja_MEMS
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.bgWorkerOtworz = new System.ComponentModel.BackgroundWorker();
             this.tabControlCzujniki.SuspendLayout();
             this.tabPageOgolne.SuspendLayout();
             this.gBoxCzujniki.SuspendLayout();
@@ -137,56 +137,67 @@ namespace Aplikacja_MEMS
             // 
             // cBoxHigrometr
             // 
+            this.cBoxHigrometr.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxHigrometr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxHigrometr.Enabled = false;
             this.cBoxHigrometr.FormattingEnabled = true;
-            this.cBoxHigrometr.Location = new System.Drawing.Point(528, 101);
+            this.cBoxHigrometr.Location = new System.Drawing.Point(524, 101);
             this.cBoxHigrometr.Name = "cBoxHigrometr";
-            this.cBoxHigrometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxHigrometr.Size = new System.Drawing.Size(140, 21);
             this.cBoxHigrometr.TabIndex = 11;
             // 
             // cBoxBarometr
             // 
+            this.cBoxBarometr.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxBarometr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxBarometr.Enabled = false;
             this.cBoxBarometr.FormattingEnabled = true;
-            this.cBoxBarometr.Location = new System.Drawing.Point(528, 66);
+            this.cBoxBarometr.Location = new System.Drawing.Point(524, 66);
             this.cBoxBarometr.Name = "cBoxBarometr";
-            this.cBoxBarometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxBarometr.Size = new System.Drawing.Size(140, 21);
             this.cBoxBarometr.TabIndex = 10;
             // 
             // cBoxTermometr
             // 
+            this.cBoxTermometr.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxTermometr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxTermometr.Enabled = false;
             this.cBoxTermometr.FormattingEnabled = true;
-            this.cBoxTermometr.Location = new System.Drawing.Point(528, 31);
+            this.cBoxTermometr.Location = new System.Drawing.Point(524, 31);
             this.cBoxTermometr.Name = "cBoxTermometr";
-            this.cBoxTermometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxTermometr.Size = new System.Drawing.Size(140, 21);
             this.cBoxTermometr.TabIndex = 9;
             // 
             // cBoxMagnetometr
             // 
+            this.cBoxMagnetometr.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxMagnetometr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxMagnetometr.Enabled = false;
             this.cBoxMagnetometr.FormattingEnabled = true;
-            this.cBoxMagnetometr.Location = new System.Drawing.Point(176, 101);
+            this.cBoxMagnetometr.Location = new System.Drawing.Point(172, 101);
             this.cBoxMagnetometr.Name = "cBoxMagnetometr";
-            this.cBoxMagnetometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagnetometr.Size = new System.Drawing.Size(140, 21);
             this.cBoxMagnetometr.TabIndex = 8;
             // 
             // cBoxZyroskop
             // 
+            this.cBoxZyroskop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxZyroskop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxZyroskop.Enabled = false;
             this.cBoxZyroskop.FormattingEnabled = true;
-            this.cBoxZyroskop.Location = new System.Drawing.Point(176, 66);
+            this.cBoxZyroskop.Location = new System.Drawing.Point(172, 66);
             this.cBoxZyroskop.Name = "cBoxZyroskop";
-            this.cBoxZyroskop.Size = new System.Drawing.Size(121, 21);
+            this.cBoxZyroskop.Size = new System.Drawing.Size(140, 21);
             this.cBoxZyroskop.TabIndex = 7;
             // 
             // cBoxAkcelerometr
             // 
+            this.cBoxAkcelerometr.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxAkcelerometr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxAkcelerometr.Enabled = false;
-            this.cBoxAkcelerometr.FormattingEnabled = true;
-            this.cBoxAkcelerometr.Location = new System.Drawing.Point(176, 31);
+            this.cBoxAkcelerometr.Location = new System.Drawing.Point(172, 31);
             this.cBoxAkcelerometr.Name = "cBoxAkcelerometr";
-            this.cBoxAkcelerometr.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAkcelerometr.Size = new System.Drawing.Size(140, 21);
             this.cBoxAkcelerometr.TabIndex = 6;
             // 
             // labelHigrometr
@@ -309,6 +320,7 @@ namespace Aplikacja_MEMS
             // 
             // buttonStart
             // 
+            this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStart.Enabled = false;
             this.buttonStart.Location = new System.Drawing.Point(435, 55);
             this.buttonStart.Name = "buttonStart";
@@ -319,6 +331,7 @@ namespace Aplikacja_MEMS
             // 
             // buttonStop
             // 
+            this.buttonStop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStop.Enabled = false;
             this.buttonStop.ForeColor = System.Drawing.Color.Red;
             this.buttonStop.Location = new System.Drawing.Point(571, 55);
@@ -347,6 +360,7 @@ namespace Aplikacja_MEMS
             // 
             // buttonOtworz
             // 
+            this.buttonOtworz.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonOtworz.Location = new System.Drawing.Point(31, 55);
             this.buttonOtworz.Name = "buttonOtworz";
             this.buttonOtworz.Size = new System.Drawing.Size(130, 23);
@@ -357,6 +371,7 @@ namespace Aplikacja_MEMS
             // 
             // buttonZamknij
             // 
+            this.buttonZamknij.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonZamknij.Enabled = false;
             this.buttonZamknij.ForeColor = System.Drawing.Color.Red;
             this.buttonZamknij.Location = new System.Drawing.Point(167, 55);
@@ -365,9 +380,11 @@ namespace Aplikacja_MEMS
             this.buttonZamknij.TabIndex = 2;
             this.buttonZamknij.Text = "Zamknij";
             this.buttonZamknij.UseVisualStyleBackColor = true;
+            this.buttonZamknij.Click += new System.EventHandler(this.buttonZamknij_Click);
             // 
             // cBoxPorty
             // 
+            this.cBoxPorty.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cBoxPorty.FormattingEnabled = true;
             this.cBoxPorty.Location = new System.Drawing.Point(208, 28);
             this.cBoxPorty.Name = "cBoxPorty";
@@ -401,7 +418,7 @@ namespace Aplikacja_MEMS
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka1;
+            this.pictureBox1.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
             this.pictureBox1.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
             this.pictureBox1.Location = new System.Drawing.Point(538, 10);
             this.pictureBox1.Name = "pictureBox1";
@@ -543,10 +560,10 @@ namespace Aplikacja_MEMS
             // 
             this.serialPort.BaudRate = 921600;
             // 
-            // backgroundWorker
+            // bgWorkerOtworz
             // 
-            this.backgroundWorker.WorkerSupportsCancellation = true;
-            this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
+            this.bgWorkerOtworz.WorkerSupportsCancellation = true;
+            this.bgWorkerOtworz.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorkerOtworz_DoWork);
             // 
             // UserForm
             // 
@@ -599,7 +616,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Label labelWersja;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TabPage tabPageDane;
-        private System.IO.Ports.SerialPort serialPort;
+        public System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.ComboBox cBoxPorty;
         private System.Windows.Forms.Label labelWyborPortu;
         private System.Windows.Forms.Label labelZyroskop;
@@ -609,7 +626,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Label labelPobieranieDanych;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonStop;
-        private System.Windows.Forms.ProgressBar progressBarCOM;
+        public System.Windows.Forms.ProgressBar progressBarCOM;
         private System.Windows.Forms.Label labelStatusCOM;
         private System.Windows.Forms.Button buttonOtworz;
         private System.Windows.Forms.Button buttonZamknij;
@@ -627,7 +644,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ComboBox cBoxZyroskop;
         private System.Windows.Forms.ComboBox cBoxAkcelerometr;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker;
+        private System.ComponentModel.BackgroundWorker bgWorkerOtworz;
     }
 }
 

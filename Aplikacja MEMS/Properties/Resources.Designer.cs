@@ -73,16 +73,6 @@ namespace Aplikacja_MEMS.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Plytka1 {
-            get {
-                object obj = ResourceManager.GetObject("Plytka1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap WEL_WAT {
             get {
                 object obj = ResourceManager.GetObject("WEL_WAT", resourceCulture);
