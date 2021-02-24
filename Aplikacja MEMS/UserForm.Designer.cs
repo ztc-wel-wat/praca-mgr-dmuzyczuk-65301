@@ -46,6 +46,7 @@ namespace Aplikacja_MEMS
             this.labelZyroskop = new System.Windows.Forms.Label();
             this.labelAkcelerometr = new System.Windows.Forms.Label();
             this.gBoxPolaczenie = new System.Windows.Forms.GroupBox();
+            this.pBoxLogoWEL = new System.Windows.Forms.PictureBox();
             this.progressBarDane = new System.Windows.Forms.ProgressBar();
             this.labelStatusDanych = new System.Windows.Forms.Label();
             this.labelPobieranieDanych = new System.Windows.Forms.Label();
@@ -58,11 +59,102 @@ namespace Aplikacja_MEMS
             this.cBoxPorty = new System.Windows.Forms.ComboBox();
             this.labelWyborPortu = new System.Windows.Forms.Label();
             this.gBoxInfo = new System.Windows.Forms.GroupBox();
+            this.pBoxPlytka = new System.Windows.Forms.PictureBox();
             this.labelBrakPlytek = new System.Windows.Forms.Label();
             this.labelDostepnePorty = new System.Windows.Forms.Label();
             this.labelWersja = new System.Windows.Forms.Label();
-            this.lableTytul = new System.Windows.Forms.Label();
+            this.labelTytul = new System.Windows.Forms.Label();
             this.tabPageCzujniki = new System.Windows.Forms.TabPage();
+            this.gBoxHigrometr = new System.Windows.Forms.GroupBox();
+            this.labHigNazwaCzujnika = new System.Windows.Forms.Label();
+            this.labHigODR = new System.Windows.Forms.Label();
+            this.gBoxHigRejestr = new System.Windows.Forms.GroupBox();
+            this.buttonHigWczytaj = new System.Windows.Forms.Button();
+            this.buttonHigUstaw = new System.Windows.Forms.Button();
+            this.tBoxHigWartosc = new System.Windows.Forms.TextBox();
+            this.tBoxHigAdres = new System.Windows.Forms.TextBox();
+            this.labHigWartosc = new System.Windows.Forms.Label();
+            this.labHigAdres = new System.Windows.Forms.Label();
+            this.buttonHigOtworz = new System.Windows.Forms.Button();
+            this.buttonHigRysujWykres = new System.Windows.Forms.Button();
+            this.cBoxHigODR = new System.Windows.Forms.ComboBox();
+            this.chBoxHigWlaczony = new System.Windows.Forms.CheckBox();
+            this.gBoxMagnetometr = new System.Windows.Forms.GroupBox();
+            this.labMagNazwaCzujnika = new System.Windows.Forms.Label();
+            this.gBoxMagRejestr = new System.Windows.Forms.GroupBox();
+            this.buttonMagWczytaj = new System.Windows.Forms.Button();
+            this.buttonMagUstaw = new System.Windows.Forms.Button();
+            this.tBoxMagWartosc = new System.Windows.Forms.TextBox();
+            this.tBoxMagAdres = new System.Windows.Forms.TextBox();
+            this.labMagWartosc = new System.Windows.Forms.Label();
+            this.labMagAdres = new System.Windows.Forms.Label();
+            this.buttonMagOtworz = new System.Windows.Forms.Button();
+            this.buttonMagRysujWykres = new System.Windows.Forms.Button();
+            this.cBoxMagODR = new System.Windows.Forms.ComboBox();
+            this.labMagODR = new System.Windows.Forms.Label();
+            this.cBoxMagSkala = new System.Windows.Forms.ComboBox();
+            this.labMagSkala = new System.Windows.Forms.Label();
+            this.chBoxMagWlaczony = new System.Windows.Forms.CheckBox();
+            this.gBoxBarometr = new System.Windows.Forms.GroupBox();
+            this.labBarNazwaCzujnika = new System.Windows.Forms.Label();
+            this.labBarODR = new System.Windows.Forms.Label();
+            this.gBoxBarRejestr = new System.Windows.Forms.GroupBox();
+            this.buttonBarWczytaj = new System.Windows.Forms.Button();
+            this.buttonBarUstaw = new System.Windows.Forms.Button();
+            this.tBoxBarWartosc = new System.Windows.Forms.TextBox();
+            this.tBoxBarAdres = new System.Windows.Forms.TextBox();
+            this.labBarWartosc = new System.Windows.Forms.Label();
+            this.labBarAdres = new System.Windows.Forms.Label();
+            this.buttonBarOtworz = new System.Windows.Forms.Button();
+            this.buttonBarRysujWykres = new System.Windows.Forms.Button();
+            this.cBoxBarODR = new System.Windows.Forms.ComboBox();
+            this.chBoxBarWlaczony = new System.Windows.Forms.CheckBox();
+            this.gBoxZyroskop = new System.Windows.Forms.GroupBox();
+            this.LabZyroNazwaCzujnika = new System.Windows.Forms.Label();
+            this.gBoxZyroRejestr = new System.Windows.Forms.GroupBox();
+            this.buttonZyroWczytaj = new System.Windows.Forms.Button();
+            this.buttonZyroUstaw = new System.Windows.Forms.Button();
+            this.tBoxZyroWartosc = new System.Windows.Forms.TextBox();
+            this.tBoxZyroAdres = new System.Windows.Forms.TextBox();
+            this.labZyroWartosc = new System.Windows.Forms.Label();
+            this.labZyroAdres = new System.Windows.Forms.Label();
+            this.buttonZyroOtworz = new System.Windows.Forms.Button();
+            this.buttonZyroRysujWykres = new System.Windows.Forms.Button();
+            this.cBoxZyroODR = new System.Windows.Forms.ComboBox();
+            this.labZyroODR = new System.Windows.Forms.Label();
+            this.cBoxZyroSkala = new System.Windows.Forms.ComboBox();
+            this.labZyroSkala = new System.Windows.Forms.Label();
+            this.chBoxZyroWlaczony = new System.Windows.Forms.CheckBox();
+            this.gBoxTermometr = new System.Windows.Forms.GroupBox();
+            this.labTermNazwaCzujnika = new System.Windows.Forms.Label();
+            this.labTermODR = new System.Windows.Forms.Label();
+            this.gBoxTermRejestr = new System.Windows.Forms.GroupBox();
+            this.buttonTermWczytaj = new System.Windows.Forms.Button();
+            this.buttonTermUstaw = new System.Windows.Forms.Button();
+            this.tBoxTermWartosc = new System.Windows.Forms.TextBox();
+            this.tBoxTermAdres = new System.Windows.Forms.TextBox();
+            this.labTermWartosc = new System.Windows.Forms.Label();
+            this.labTermAdres = new System.Windows.Forms.Label();
+            this.buttonTermOtworz = new System.Windows.Forms.Button();
+            this.buttonTermRysujWYkres = new System.Windows.Forms.Button();
+            this.cBoxTermODR = new System.Windows.Forms.ComboBox();
+            this.chBoxTermWlaczony = new System.Windows.Forms.CheckBox();
+            this.gBoxAkcelerometr = new System.Windows.Forms.GroupBox();
+            this.labAkcNazwa = new System.Windows.Forms.Label();
+            this.gBoxAkcRejestr = new System.Windows.Forms.GroupBox();
+            this.buttonAkcWczytaj = new System.Windows.Forms.Button();
+            this.buttonAkcUstaw = new System.Windows.Forms.Button();
+            this.tBoxAkcWartosc = new System.Windows.Forms.TextBox();
+            this.tBoxAkcAdres = new System.Windows.Forms.TextBox();
+            this.labAkcWartosc = new System.Windows.Forms.Label();
+            this.labAkcAdres = new System.Windows.Forms.Label();
+            this.buttonAkcOtworz = new System.Windows.Forms.Button();
+            this.buttonAkcRysujWykres = new System.Windows.Forms.Button();
+            this.cBoxAkcODR = new System.Windows.Forms.ComboBox();
+            this.labAkcLiczbaProbek = new System.Windows.Forms.Label();
+            this.cBoxAkcSkala = new System.Windows.Forms.ComboBox();
+            this.labAkcSkala = new System.Windows.Forms.Label();
+            this.chBoxWlaczonyAkc = new System.Windows.Forms.CheckBox();
             this.tabPageDane = new System.Windows.Forms.TabPage();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,119 +167,27 @@ namespace Aplikacja_MEMS
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.bgWorkerOtworz = new System.ComponentModel.BackgroundWorker();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.gBoxHigrometr = new System.Windows.Forms.GroupBox();
-            this.gBoxMagnetometr = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.gBoxBarometr = new System.Windows.Forms.GroupBox();
-            this.gBoxŻyroskop = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.gBoxTermometr = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button16 = new System.Windows.Forms.Button();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.gBoxAkcelerometr = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.chBoxWlaczonyAkc = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button17 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.label27 = new System.Windows.Forms.Label();
             this.tabControlCzujniki.SuspendLayout();
             this.tabPageOgolne.SuspendLayout();
             this.gBoxCzujniki.SuspendLayout();
             this.gBoxPolaczenie.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).BeginInit();
             this.gBoxInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxPlytka)).BeginInit();
             this.tabPageCzujniki.SuspendLayout();
-            this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.gBoxHigrometr.SuspendLayout();
+            this.gBoxHigRejestr.SuspendLayout();
             this.gBoxMagnetometr.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.gBoxMagRejestr.SuspendLayout();
             this.gBoxBarometr.SuspendLayout();
-            this.gBoxŻyroskop.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.gBoxBarRejestr.SuspendLayout();
+            this.gBoxZyroskop.SuspendLayout();
+            this.gBoxZyroRejestr.SuspendLayout();
             this.gBoxTermometr.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.gBoxTermRejestr.SuspendLayout();
             this.gBoxAkcelerometr.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
+            this.gBoxAkcRejestr.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlCzujniki
@@ -365,7 +365,7 @@ namespace Aplikacja_MEMS
             // 
             // gBoxPolaczenie
             // 
-            this.gBoxPolaczenie.Controls.Add(this.pictureBox2);
+            this.gBoxPolaczenie.Controls.Add(this.pBoxLogoWEL);
             this.gBoxPolaczenie.Controls.Add(this.progressBarDane);
             this.gBoxPolaczenie.Controls.Add(this.labelStatusDanych);
             this.gBoxPolaczenie.Controls.Add(this.labelPobieranieDanych);
@@ -384,6 +384,15 @@ namespace Aplikacja_MEMS
             this.gBoxPolaczenie.TabIndex = 1;
             this.gBoxPolaczenie.TabStop = false;
             this.gBoxPolaczenie.Text = "Połączenie";
+            // 
+            // pBoxLogoWEL
+            // 
+            this.pBoxLogoWEL.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
+            this.pBoxLogoWEL.Location = new System.Drawing.Point(326, 38);
+            this.pBoxLogoWEL.Name = "pBoxLogoWEL";
+            this.pBoxLogoWEL.Size = new System.Drawing.Size(80, 80);
+            this.pBoxLogoWEL.TabIndex = 11;
+            this.pBoxLogoWEL.TabStop = false;
             // 
             // progressBarDane
             // 
@@ -420,7 +429,7 @@ namespace Aplikacja_MEMS
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(130, 23);
             this.buttonStart.TabIndex = 7;
-            this.buttonStart.Text = "Start";
+            this.buttonStart.Text = " Start";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
@@ -499,11 +508,11 @@ namespace Aplikacja_MEMS
             // 
             // gBoxInfo
             // 
-            this.gBoxInfo.Controls.Add(this.pictureBox1);
+            this.gBoxInfo.Controls.Add(this.pBoxPlytka);
             this.gBoxInfo.Controls.Add(this.labelBrakPlytek);
             this.gBoxInfo.Controls.Add(this.labelDostepnePorty);
             this.gBoxInfo.Controls.Add(this.labelWersja);
-            this.gBoxInfo.Controls.Add(this.lableTytul);
+            this.gBoxInfo.Controls.Add(this.labelTytul);
             this.gBoxInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.gBoxInfo.Location = new System.Drawing.Point(3, 3);
             this.gBoxInfo.Name = "gBoxInfo";
@@ -511,6 +520,16 @@ namespace Aplikacja_MEMS
             this.gBoxInfo.TabIndex = 0;
             this.gBoxInfo.TabStop = false;
             this.gBoxInfo.Text = "Informacje";
+            // 
+            // pBoxPlytka
+            // 
+            this.pBoxPlytka.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
+            this.pBoxPlytka.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
+            this.pBoxPlytka.Location = new System.Drawing.Point(538, 10);
+            this.pBoxPlytka.Name = "pBoxPlytka";
+            this.pBoxPlytka.Size = new System.Drawing.Size(185, 144);
+            this.pBoxPlytka.TabIndex = 4;
+            this.pBoxPlytka.TabStop = false;
             // 
             // labelBrakPlytek
             // 
@@ -543,16 +562,16 @@ namespace Aplikacja_MEMS
             this.labelWersja.TabIndex = 1;
             this.labelWersja.Text = "Wersja aplikacji: 1.0.0";
             // 
-            // lableTytul
+            // labelTytul
             // 
-            this.lableTytul.AutoSize = true;
-            this.lableTytul.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.lableTytul.Location = new System.Drawing.Point(196, 16);
-            this.lableTytul.Name = "lableTytul";
-            this.lableTytul.Size = new System.Drawing.Size(296, 24);
-            this.lableTytul.TabIndex = 0;
-            this.lableTytul.Text = "Aplikacja MEMS czujnika IKS01A2";
-            this.lableTytul.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTytul.AutoSize = true;
+            this.labelTytul.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelTytul.Location = new System.Drawing.Point(196, 16);
+            this.labelTytul.Name = "labelTytul";
+            this.labelTytul.Size = new System.Drawing.Size(296, 24);
+            this.labelTytul.TabIndex = 0;
+            this.labelTytul.Text = "Aplikacja MEMS czujnika IKS01A2";
+            this.labelTytul.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPageCzujniki
             // 
@@ -560,7 +579,7 @@ namespace Aplikacja_MEMS
             this.tabPageCzujniki.Controls.Add(this.gBoxHigrometr);
             this.tabPageCzujniki.Controls.Add(this.gBoxMagnetometr);
             this.tabPageCzujniki.Controls.Add(this.gBoxBarometr);
-            this.tabPageCzujniki.Controls.Add(this.gBoxŻyroskop);
+            this.tabPageCzujniki.Controls.Add(this.gBoxZyroskop);
             this.tabPageCzujniki.Controls.Add(this.gBoxTermometr);
             this.tabPageCzujniki.Controls.Add(this.gBoxAkcelerometr);
             this.tabPageCzujniki.Location = new System.Drawing.Point(4, 22);
@@ -570,6 +589,1084 @@ namespace Aplikacja_MEMS
             this.tabPageCzujniki.TabIndex = 1;
             this.tabPageCzujniki.Text = "Czujniki MEMS";
             this.tabPageCzujniki.UseVisualStyleBackColor = true;
+            // 
+            // gBoxHigrometr
+            // 
+            this.gBoxHigrometr.Controls.Add(this.labHigNazwaCzujnika);
+            this.gBoxHigrometr.Controls.Add(this.labHigODR);
+            this.gBoxHigrometr.Controls.Add(this.gBoxHigRejestr);
+            this.gBoxHigrometr.Controls.Add(this.buttonHigRysujWykres);
+            this.gBoxHigrometr.Controls.Add(this.cBoxHigODR);
+            this.gBoxHigrometr.Controls.Add(this.chBoxHigWlaczony);
+            this.gBoxHigrometr.Enabled = false;
+            this.gBoxHigrometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxHigrometr.Location = new System.Drawing.Point(369, 318);
+            this.gBoxHigrometr.Name = "gBoxHigrometr";
+            this.gBoxHigrometr.Size = new System.Drawing.Size(355, 150);
+            this.gBoxHigrometr.TabIndex = 4;
+            this.gBoxHigrometr.TabStop = false;
+            this.gBoxHigrometr.Text = "Higrometr";
+            // 
+            // labHigNazwaCzujnika
+            // 
+            this.labHigNazwaCzujnika.AutoSize = true;
+            this.labHigNazwaCzujnika.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labHigNazwaCzujnika.Location = new System.Drawing.Point(6, 19);
+            this.labHigNazwaCzujnika.Name = "labHigNazwaCzujnika";
+            this.labHigNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
+            this.labHigNazwaCzujnika.TabIndex = 18;
+            this.labHigNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // labHigODR
+            // 
+            this.labHigODR.AutoSize = true;
+            this.labHigODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labHigODR.Location = new System.Drawing.Point(6, 59);
+            this.labHigODR.Name = "labHigODR";
+            this.labHigODR.Size = new System.Drawing.Size(37, 15);
+            this.labHigODR.TabIndex = 23;
+            this.labHigODR.Text = "ODR:";
+            // 
+            // gBoxHigRejestr
+            // 
+            this.gBoxHigRejestr.Controls.Add(this.buttonHigWczytaj);
+            this.gBoxHigRejestr.Controls.Add(this.buttonHigUstaw);
+            this.gBoxHigRejestr.Controls.Add(this.tBoxHigWartosc);
+            this.gBoxHigRejestr.Controls.Add(this.tBoxHigAdres);
+            this.gBoxHigRejestr.Controls.Add(this.labHigWartosc);
+            this.gBoxHigRejestr.Controls.Add(this.labHigAdres);
+            this.gBoxHigRejestr.Controls.Add(this.buttonHigOtworz);
+            this.gBoxHigRejestr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxHigRejestr.Location = new System.Drawing.Point(154, 39);
+            this.gBoxHigRejestr.Name = "gBoxHigRejestr";
+            this.gBoxHigRejestr.Size = new System.Drawing.Size(195, 105);
+            this.gBoxHigRejestr.TabIndex = 21;
+            this.gBoxHigRejestr.TabStop = false;
+            this.gBoxHigRejestr.Text = "Rejestr";
+            // 
+            // buttonHigWczytaj
+            // 
+            this.buttonHigWczytaj.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonHigWczytaj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonHigWczytaj.Location = new System.Drawing.Point(107, 54);
+            this.buttonHigWczytaj.Name = "buttonHigWczytaj";
+            this.buttonHigWczytaj.Size = new System.Drawing.Size(66, 23);
+            this.buttonHigWczytaj.TabIndex = 20;
+            this.buttonHigWczytaj.Text = "Wczytaj";
+            this.buttonHigWczytaj.UseVisualStyleBackColor = true;
+            // 
+            // buttonHigUstaw
+            // 
+            this.buttonHigUstaw.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonHigUstaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonHigUstaw.Location = new System.Drawing.Point(30, 54);
+            this.buttonHigUstaw.Name = "buttonHigUstaw";
+            this.buttonHigUstaw.Size = new System.Drawing.Size(66, 23);
+            this.buttonHigUstaw.TabIndex = 19;
+            this.buttonHigUstaw.Text = "Ustaw";
+            this.buttonHigUstaw.UseVisualStyleBackColor = true;
+            // 
+            // tBoxHigWartosc
+            // 
+            this.tBoxHigWartosc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxHigWartosc.Location = new System.Drawing.Point(107, 28);
+            this.tBoxHigWartosc.Name = "tBoxHigWartosc";
+            this.tBoxHigWartosc.Size = new System.Drawing.Size(66, 20);
+            this.tBoxHigWartosc.TabIndex = 18;
+            // 
+            // tBoxHigAdres
+            // 
+            this.tBoxHigAdres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxHigAdres.Location = new System.Drawing.Point(30, 28);
+            this.tBoxHigAdres.Name = "tBoxHigAdres";
+            this.tBoxHigAdres.Size = new System.Drawing.Size(66, 20);
+            this.tBoxHigAdres.TabIndex = 17;
+            // 
+            // labHigWartosc
+            // 
+            this.labHigWartosc.AutoSize = true;
+            this.labHigWartosc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labHigWartosc.Location = new System.Drawing.Point(117, 10);
+            this.labHigWartosc.Name = "labHigWartosc";
+            this.labHigWartosc.Size = new System.Drawing.Size(54, 15);
+            this.labHigWartosc.TabIndex = 16;
+            this.labHigWartosc.Text = "Wartość:";
+            // 
+            // labHigAdres
+            // 
+            this.labHigAdres.AutoSize = true;
+            this.labHigAdres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labHigAdres.Location = new System.Drawing.Point(43, 10);
+            this.labHigAdres.Name = "labHigAdres";
+            this.labHigAdres.Size = new System.Drawing.Size(41, 15);
+            this.labHigAdres.TabIndex = 15;
+            this.labHigAdres.Text = "Adres:";
+            // 
+            // buttonHigOtworz
+            // 
+            this.buttonHigOtworz.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonHigOtworz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonHigOtworz.Location = new System.Drawing.Point(30, 79);
+            this.buttonHigOtworz.Name = "buttonHigOtworz";
+            this.buttonHigOtworz.Size = new System.Drawing.Size(143, 23);
+            this.buttonHigOtworz.TabIndex = 14;
+            this.buttonHigOtworz.Text = "Otwórz rejestr";
+            this.buttonHigOtworz.UseVisualStyleBackColor = true;
+            // 
+            // buttonHigRysujWykres
+            // 
+            this.buttonHigRysujWykres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonHigRysujWykres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonHigRysujWykres.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonHigRysujWykres.ForeColor = System.Drawing.Color.LimeGreen;
+            this.buttonHigRysujWykres.Location = new System.Drawing.Point(249, 15);
+            this.buttonHigRysujWykres.Name = "buttonHigRysujWykres";
+            this.buttonHigRysujWykres.Size = new System.Drawing.Size(100, 23);
+            this.buttonHigRysujWykres.TabIndex = 22;
+            this.buttonHigRysujWykres.Text = "Rysuj wykres";
+            this.buttonHigRysujWykres.UseVisualStyleBackColor = true;
+            // 
+            // cBoxHigODR
+            // 
+            this.cBoxHigODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxHigODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxHigODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxHigODR.FormattingEnabled = true;
+            this.cBoxHigODR.Items.AddRange(new object[] {
+            "1",
+            "7",
+            "12,5"});
+            this.cBoxHigODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxHigODR.Name = "cBoxHigODR";
+            this.cBoxHigODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxHigODR.TabIndex = 20;
+            // 
+            // chBoxHigWlaczony
+            // 
+            this.chBoxHigWlaczony.AutoSize = true;
+            this.chBoxHigWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxHigWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chBoxHigWlaczony.Location = new System.Drawing.Point(9, 37);
+            this.chBoxHigWlaczony.Name = "chBoxHigWlaczony";
+            this.chBoxHigWlaczony.Size = new System.Drawing.Size(78, 19);
+            this.chBoxHigWlaczony.TabIndex = 19;
+            this.chBoxHigWlaczony.Text = "Włączony";
+            this.chBoxHigWlaczony.UseVisualStyleBackColor = true;
+            // 
+            // gBoxMagnetometr
+            // 
+            this.gBoxMagnetometr.Controls.Add(this.labMagNazwaCzujnika);
+            this.gBoxMagnetometr.Controls.Add(this.gBoxMagRejestr);
+            this.gBoxMagnetometr.Controls.Add(this.buttonMagRysujWykres);
+            this.gBoxMagnetometr.Controls.Add(this.cBoxMagODR);
+            this.gBoxMagnetometr.Controls.Add(this.labMagODR);
+            this.gBoxMagnetometr.Controls.Add(this.cBoxMagSkala);
+            this.gBoxMagnetometr.Controls.Add(this.labMagSkala);
+            this.gBoxMagnetometr.Controls.Add(this.chBoxMagWlaczony);
+            this.gBoxMagnetometr.Enabled = false;
+            this.gBoxMagnetometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxMagnetometr.Location = new System.Drawing.Point(8, 318);
+            this.gBoxMagnetometr.Name = "gBoxMagnetometr";
+            this.gBoxMagnetometr.Size = new System.Drawing.Size(355, 150);
+            this.gBoxMagnetometr.TabIndex = 1;
+            this.gBoxMagnetometr.TabStop = false;
+            this.gBoxMagnetometr.Text = "Magnetometr";
+            // 
+            // labMagNazwaCzujnika
+            // 
+            this.labMagNazwaCzujnika.AutoSize = true;
+            this.labMagNazwaCzujnika.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labMagNazwaCzujnika.Location = new System.Drawing.Point(6, 19);
+            this.labMagNazwaCzujnika.Name = "labMagNazwaCzujnika";
+            this.labMagNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
+            this.labMagNazwaCzujnika.TabIndex = 9;
+            this.labMagNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // gBoxMagRejestr
+            // 
+            this.gBoxMagRejestr.Controls.Add(this.buttonMagWczytaj);
+            this.gBoxMagRejestr.Controls.Add(this.buttonMagUstaw);
+            this.gBoxMagRejestr.Controls.Add(this.tBoxMagWartosc);
+            this.gBoxMagRejestr.Controls.Add(this.tBoxMagAdres);
+            this.gBoxMagRejestr.Controls.Add(this.labMagWartosc);
+            this.gBoxMagRejestr.Controls.Add(this.labMagAdres);
+            this.gBoxMagRejestr.Controls.Add(this.buttonMagOtworz);
+            this.gBoxMagRejestr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxMagRejestr.Location = new System.Drawing.Point(154, 39);
+            this.gBoxMagRejestr.Name = "gBoxMagRejestr";
+            this.gBoxMagRejestr.Size = new System.Drawing.Size(195, 105);
+            this.gBoxMagRejestr.TabIndex = 15;
+            this.gBoxMagRejestr.TabStop = false;
+            this.gBoxMagRejestr.Text = "Rejestr";
+            // 
+            // buttonMagWczytaj
+            // 
+            this.buttonMagWczytaj.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMagWczytaj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonMagWczytaj.Location = new System.Drawing.Point(107, 54);
+            this.buttonMagWczytaj.Name = "buttonMagWczytaj";
+            this.buttonMagWczytaj.Size = new System.Drawing.Size(66, 23);
+            this.buttonMagWczytaj.TabIndex = 20;
+            this.buttonMagWczytaj.Text = "Wczytaj";
+            this.buttonMagWczytaj.UseVisualStyleBackColor = true;
+            // 
+            // buttonMagUstaw
+            // 
+            this.buttonMagUstaw.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMagUstaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonMagUstaw.Location = new System.Drawing.Point(30, 54);
+            this.buttonMagUstaw.Name = "buttonMagUstaw";
+            this.buttonMagUstaw.Size = new System.Drawing.Size(66, 23);
+            this.buttonMagUstaw.TabIndex = 19;
+            this.buttonMagUstaw.Text = "Ustaw";
+            this.buttonMagUstaw.UseVisualStyleBackColor = true;
+            // 
+            // tBoxMagWartosc
+            // 
+            this.tBoxMagWartosc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxMagWartosc.Location = new System.Drawing.Point(107, 28);
+            this.tBoxMagWartosc.Name = "tBoxMagWartosc";
+            this.tBoxMagWartosc.Size = new System.Drawing.Size(66, 20);
+            this.tBoxMagWartosc.TabIndex = 18;
+            // 
+            // tBoxMagAdres
+            // 
+            this.tBoxMagAdres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxMagAdres.Location = new System.Drawing.Point(30, 28);
+            this.tBoxMagAdres.Name = "tBoxMagAdres";
+            this.tBoxMagAdres.Size = new System.Drawing.Size(66, 20);
+            this.tBoxMagAdres.TabIndex = 17;
+            // 
+            // labMagWartosc
+            // 
+            this.labMagWartosc.AutoSize = true;
+            this.labMagWartosc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labMagWartosc.Location = new System.Drawing.Point(117, 10);
+            this.labMagWartosc.Name = "labMagWartosc";
+            this.labMagWartosc.Size = new System.Drawing.Size(54, 15);
+            this.labMagWartosc.TabIndex = 16;
+            this.labMagWartosc.Text = "Wartość:";
+            // 
+            // labMagAdres
+            // 
+            this.labMagAdres.AutoSize = true;
+            this.labMagAdres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labMagAdres.Location = new System.Drawing.Point(43, 10);
+            this.labMagAdres.Name = "labMagAdres";
+            this.labMagAdres.Size = new System.Drawing.Size(41, 15);
+            this.labMagAdres.TabIndex = 15;
+            this.labMagAdres.Text = "Adres:";
+            // 
+            // buttonMagOtworz
+            // 
+            this.buttonMagOtworz.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMagOtworz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonMagOtworz.Location = new System.Drawing.Point(30, 79);
+            this.buttonMagOtworz.Name = "buttonMagOtworz";
+            this.buttonMagOtworz.Size = new System.Drawing.Size(143, 23);
+            this.buttonMagOtworz.TabIndex = 14;
+            this.buttonMagOtworz.Text = "Otwórz rejestr";
+            this.buttonMagOtworz.UseVisualStyleBackColor = true;
+            // 
+            // buttonMagRysujWykres
+            // 
+            this.buttonMagRysujWykres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonMagRysujWykres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMagRysujWykres.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonMagRysujWykres.ForeColor = System.Drawing.Color.LimeGreen;
+            this.buttonMagRysujWykres.Location = new System.Drawing.Point(249, 15);
+            this.buttonMagRysujWykres.Name = "buttonMagRysujWykres";
+            this.buttonMagRysujWykres.Size = new System.Drawing.Size(100, 23);
+            this.buttonMagRysujWykres.TabIndex = 16;
+            this.buttonMagRysujWykres.Text = "Rysuj wykres";
+            this.buttonMagRysujWykres.UseVisualStyleBackColor = true;
+            // 
+            // cBoxMagODR
+            // 
+            this.cBoxMagODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxMagODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxMagODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxMagODR.FormattingEnabled = true;
+            this.cBoxMagODR.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "50",
+            "100"});
+            this.cBoxMagODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxMagODR.Name = "cBoxMagODR";
+            this.cBoxMagODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagODR.TabIndex = 14;
+            // 
+            // labMagODR
+            // 
+            this.labMagODR.AutoSize = true;
+            this.labMagODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labMagODR.Location = new System.Drawing.Point(6, 101);
+            this.labMagODR.Name = "labMagODR";
+            this.labMagODR.Size = new System.Drawing.Size(37, 15);
+            this.labMagODR.TabIndex = 13;
+            this.labMagODR.Text = "ODR:";
+            // 
+            // cBoxMagSkala
+            // 
+            this.cBoxMagSkala.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxMagSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxMagSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxMagSkala.FormattingEnabled = true;
+            this.cBoxMagSkala.Items.AddRange(new object[] {
+            "50"});
+            this.cBoxMagSkala.Location = new System.Drawing.Point(9, 77);
+            this.cBoxMagSkala.Name = "cBoxMagSkala";
+            this.cBoxMagSkala.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagSkala.TabIndex = 12;
+            // 
+            // labMagSkala
+            // 
+            this.labMagSkala.AutoSize = true;
+            this.labMagSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labMagSkala.Location = new System.Drawing.Point(6, 59);
+            this.labMagSkala.Name = "labMagSkala";
+            this.labMagSkala.Size = new System.Drawing.Size(75, 15);
+            this.labMagSkala.TabIndex = 11;
+            this.labMagSkala.Text = "Skala (oś Y):";
+            // 
+            // chBoxMagWlaczony
+            // 
+            this.chBoxMagWlaczony.AutoSize = true;
+            this.chBoxMagWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxMagWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chBoxMagWlaczony.Location = new System.Drawing.Point(9, 37);
+            this.chBoxMagWlaczony.Name = "chBoxMagWlaczony";
+            this.chBoxMagWlaczony.Size = new System.Drawing.Size(78, 19);
+            this.chBoxMagWlaczony.TabIndex = 10;
+            this.chBoxMagWlaczony.Text = "Włączony";
+            this.chBoxMagWlaczony.UseVisualStyleBackColor = true;
+            // 
+            // gBoxBarometr
+            // 
+            this.gBoxBarometr.Controls.Add(this.labBarNazwaCzujnika);
+            this.gBoxBarometr.Controls.Add(this.labBarODR);
+            this.gBoxBarometr.Controls.Add(this.gBoxBarRejestr);
+            this.gBoxBarometr.Controls.Add(this.buttonBarRysujWykres);
+            this.gBoxBarometr.Controls.Add(this.cBoxBarODR);
+            this.gBoxBarometr.Controls.Add(this.chBoxBarWlaczony);
+            this.gBoxBarometr.Enabled = false;
+            this.gBoxBarometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxBarometr.Location = new System.Drawing.Point(367, 162);
+            this.gBoxBarometr.Name = "gBoxBarometr";
+            this.gBoxBarometr.Size = new System.Drawing.Size(355, 150);
+            this.gBoxBarometr.TabIndex = 3;
+            this.gBoxBarometr.TabStop = false;
+            this.gBoxBarometr.Text = "Barometr";
+            // 
+            // labBarNazwaCzujnika
+            // 
+            this.labBarNazwaCzujnika.AutoSize = true;
+            this.labBarNazwaCzujnika.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labBarNazwaCzujnika.Location = new System.Drawing.Point(6, 19);
+            this.labBarNazwaCzujnika.Name = "labBarNazwaCzujnika";
+            this.labBarNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
+            this.labBarNazwaCzujnika.TabIndex = 18;
+            this.labBarNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // labBarODR
+            // 
+            this.labBarODR.AutoSize = true;
+            this.labBarODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labBarODR.Location = new System.Drawing.Point(6, 59);
+            this.labBarODR.Name = "labBarODR";
+            this.labBarODR.Size = new System.Drawing.Size(37, 15);
+            this.labBarODR.TabIndex = 23;
+            this.labBarODR.Text = "ODR:";
+            // 
+            // gBoxBarRejestr
+            // 
+            this.gBoxBarRejestr.Controls.Add(this.buttonBarWczytaj);
+            this.gBoxBarRejestr.Controls.Add(this.buttonBarUstaw);
+            this.gBoxBarRejestr.Controls.Add(this.tBoxBarWartosc);
+            this.gBoxBarRejestr.Controls.Add(this.tBoxBarAdres);
+            this.gBoxBarRejestr.Controls.Add(this.labBarWartosc);
+            this.gBoxBarRejestr.Controls.Add(this.labBarAdres);
+            this.gBoxBarRejestr.Controls.Add(this.buttonBarOtworz);
+            this.gBoxBarRejestr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxBarRejestr.Location = new System.Drawing.Point(154, 39);
+            this.gBoxBarRejestr.Name = "gBoxBarRejestr";
+            this.gBoxBarRejestr.Size = new System.Drawing.Size(195, 105);
+            this.gBoxBarRejestr.TabIndex = 21;
+            this.gBoxBarRejestr.TabStop = false;
+            this.gBoxBarRejestr.Text = "Rejestr";
+            // 
+            // buttonBarWczytaj
+            // 
+            this.buttonBarWczytaj.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBarWczytaj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonBarWczytaj.Location = new System.Drawing.Point(107, 54);
+            this.buttonBarWczytaj.Name = "buttonBarWczytaj";
+            this.buttonBarWczytaj.Size = new System.Drawing.Size(66, 23);
+            this.buttonBarWczytaj.TabIndex = 20;
+            this.buttonBarWczytaj.Text = "Wczytaj";
+            this.buttonBarWczytaj.UseVisualStyleBackColor = true;
+            // 
+            // buttonBarUstaw
+            // 
+            this.buttonBarUstaw.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBarUstaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonBarUstaw.Location = new System.Drawing.Point(30, 54);
+            this.buttonBarUstaw.Name = "buttonBarUstaw";
+            this.buttonBarUstaw.Size = new System.Drawing.Size(66, 23);
+            this.buttonBarUstaw.TabIndex = 19;
+            this.buttonBarUstaw.Text = "Ustaw";
+            this.buttonBarUstaw.UseVisualStyleBackColor = true;
+            // 
+            // tBoxBarWartosc
+            // 
+            this.tBoxBarWartosc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxBarWartosc.Location = new System.Drawing.Point(107, 28);
+            this.tBoxBarWartosc.Name = "tBoxBarWartosc";
+            this.tBoxBarWartosc.Size = new System.Drawing.Size(66, 20);
+            this.tBoxBarWartosc.TabIndex = 18;
+            // 
+            // tBoxBarAdres
+            // 
+            this.tBoxBarAdres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxBarAdres.Location = new System.Drawing.Point(30, 28);
+            this.tBoxBarAdres.Name = "tBoxBarAdres";
+            this.tBoxBarAdres.Size = new System.Drawing.Size(66, 20);
+            this.tBoxBarAdres.TabIndex = 17;
+            // 
+            // labBarWartosc
+            // 
+            this.labBarWartosc.AutoSize = true;
+            this.labBarWartosc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labBarWartosc.Location = new System.Drawing.Point(117, 10);
+            this.labBarWartosc.Name = "labBarWartosc";
+            this.labBarWartosc.Size = new System.Drawing.Size(54, 15);
+            this.labBarWartosc.TabIndex = 16;
+            this.labBarWartosc.Text = "Wartość:";
+            // 
+            // labBarAdres
+            // 
+            this.labBarAdres.AutoSize = true;
+            this.labBarAdres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labBarAdres.Location = new System.Drawing.Point(43, 10);
+            this.labBarAdres.Name = "labBarAdres";
+            this.labBarAdres.Size = new System.Drawing.Size(41, 15);
+            this.labBarAdres.TabIndex = 15;
+            this.labBarAdres.Text = "Adres:";
+            // 
+            // buttonBarOtworz
+            // 
+            this.buttonBarOtworz.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBarOtworz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonBarOtworz.Location = new System.Drawing.Point(30, 79);
+            this.buttonBarOtworz.Name = "buttonBarOtworz";
+            this.buttonBarOtworz.Size = new System.Drawing.Size(143, 23);
+            this.buttonBarOtworz.TabIndex = 14;
+            this.buttonBarOtworz.Text = "Otwórz rejestr";
+            this.buttonBarOtworz.UseVisualStyleBackColor = true;
+            // 
+            // buttonBarRysujWykres
+            // 
+            this.buttonBarRysujWykres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonBarRysujWykres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBarRysujWykres.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonBarRysujWykres.ForeColor = System.Drawing.Color.LimeGreen;
+            this.buttonBarRysujWykres.Location = new System.Drawing.Point(249, 15);
+            this.buttonBarRysujWykres.Name = "buttonBarRysujWykres";
+            this.buttonBarRysujWykres.Size = new System.Drawing.Size(100, 23);
+            this.buttonBarRysujWykres.TabIndex = 22;
+            this.buttonBarRysujWykres.Text = "Rysuj wykres";
+            this.buttonBarRysujWykres.UseVisualStyleBackColor = true;
+            // 
+            // cBoxBarODR
+            // 
+            this.cBoxBarODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxBarODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxBarODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxBarODR.FormattingEnabled = true;
+            this.cBoxBarODR.Items.AddRange(new object[] {
+            "1",
+            "7",
+            "12,5"});
+            this.cBoxBarODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxBarODR.Name = "cBoxBarODR";
+            this.cBoxBarODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxBarODR.TabIndex = 20;
+            // 
+            // chBoxBarWlaczony
+            // 
+            this.chBoxBarWlaczony.AutoSize = true;
+            this.chBoxBarWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxBarWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chBoxBarWlaczony.Location = new System.Drawing.Point(9, 37);
+            this.chBoxBarWlaczony.Name = "chBoxBarWlaczony";
+            this.chBoxBarWlaczony.Size = new System.Drawing.Size(78, 19);
+            this.chBoxBarWlaczony.TabIndex = 19;
+            this.chBoxBarWlaczony.Text = "Włączony";
+            this.chBoxBarWlaczony.UseVisualStyleBackColor = true;
+            // 
+            // gBoxZyroskop
+            // 
+            this.gBoxZyroskop.Controls.Add(this.LabZyroNazwaCzujnika);
+            this.gBoxZyroskop.Controls.Add(this.gBoxZyroRejestr);
+            this.gBoxZyroskop.Controls.Add(this.buttonZyroRysujWykres);
+            this.gBoxZyroskop.Controls.Add(this.cBoxZyroODR);
+            this.gBoxZyroskop.Controls.Add(this.labZyroODR);
+            this.gBoxZyroskop.Controls.Add(this.cBoxZyroSkala);
+            this.gBoxZyroskop.Controls.Add(this.labZyroSkala);
+            this.gBoxZyroskop.Controls.Add(this.chBoxZyroWlaczony);
+            this.gBoxZyroskop.Enabled = false;
+            this.gBoxZyroskop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxZyroskop.Location = new System.Drawing.Point(6, 162);
+            this.gBoxZyroskop.Name = "gBoxZyroskop";
+            this.gBoxZyroskop.Size = new System.Drawing.Size(355, 150);
+            this.gBoxZyroskop.TabIndex = 1;
+            this.gBoxZyroskop.TabStop = false;
+            this.gBoxZyroskop.Text = "Żyroskop";
+            // 
+            // LabZyroNazwaCzujnika
+            // 
+            this.LabZyroNazwaCzujnika.AutoSize = true;
+            this.LabZyroNazwaCzujnika.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LabZyroNazwaCzujnika.Location = new System.Drawing.Point(6, 19);
+            this.LabZyroNazwaCzujnika.Name = "LabZyroNazwaCzujnika";
+            this.LabZyroNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
+            this.LabZyroNazwaCzujnika.TabIndex = 9;
+            this.LabZyroNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // gBoxZyroRejestr
+            // 
+            this.gBoxZyroRejestr.Controls.Add(this.buttonZyroWczytaj);
+            this.gBoxZyroRejestr.Controls.Add(this.buttonZyroUstaw);
+            this.gBoxZyroRejestr.Controls.Add(this.tBoxZyroWartosc);
+            this.gBoxZyroRejestr.Controls.Add(this.tBoxZyroAdres);
+            this.gBoxZyroRejestr.Controls.Add(this.labZyroWartosc);
+            this.gBoxZyroRejestr.Controls.Add(this.labZyroAdres);
+            this.gBoxZyroRejestr.Controls.Add(this.buttonZyroOtworz);
+            this.gBoxZyroRejestr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxZyroRejestr.Location = new System.Drawing.Point(154, 39);
+            this.gBoxZyroRejestr.Name = "gBoxZyroRejestr";
+            this.gBoxZyroRejestr.Size = new System.Drawing.Size(195, 105);
+            this.gBoxZyroRejestr.TabIndex = 15;
+            this.gBoxZyroRejestr.TabStop = false;
+            this.gBoxZyroRejestr.Text = "Rejestr";
+            // 
+            // buttonZyroWczytaj
+            // 
+            this.buttonZyroWczytaj.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonZyroWczytaj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonZyroWczytaj.Location = new System.Drawing.Point(107, 54);
+            this.buttonZyroWczytaj.Name = "buttonZyroWczytaj";
+            this.buttonZyroWczytaj.Size = new System.Drawing.Size(66, 23);
+            this.buttonZyroWczytaj.TabIndex = 20;
+            this.buttonZyroWczytaj.Text = "Wczytaj";
+            this.buttonZyroWczytaj.UseVisualStyleBackColor = true;
+            // 
+            // buttonZyroUstaw
+            // 
+            this.buttonZyroUstaw.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonZyroUstaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonZyroUstaw.Location = new System.Drawing.Point(30, 54);
+            this.buttonZyroUstaw.Name = "buttonZyroUstaw";
+            this.buttonZyroUstaw.Size = new System.Drawing.Size(66, 23);
+            this.buttonZyroUstaw.TabIndex = 19;
+            this.buttonZyroUstaw.Text = "Ustaw";
+            this.buttonZyroUstaw.UseVisualStyleBackColor = true;
+            // 
+            // tBoxZyroWartosc
+            // 
+            this.tBoxZyroWartosc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxZyroWartosc.Location = new System.Drawing.Point(107, 28);
+            this.tBoxZyroWartosc.Name = "tBoxZyroWartosc";
+            this.tBoxZyroWartosc.Size = new System.Drawing.Size(66, 20);
+            this.tBoxZyroWartosc.TabIndex = 18;
+            // 
+            // tBoxZyroAdres
+            // 
+            this.tBoxZyroAdres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxZyroAdres.Location = new System.Drawing.Point(30, 28);
+            this.tBoxZyroAdres.Name = "tBoxZyroAdres";
+            this.tBoxZyroAdres.Size = new System.Drawing.Size(66, 20);
+            this.tBoxZyroAdres.TabIndex = 17;
+            // 
+            // labZyroWartosc
+            // 
+            this.labZyroWartosc.AutoSize = true;
+            this.labZyroWartosc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labZyroWartosc.Location = new System.Drawing.Point(117, 10);
+            this.labZyroWartosc.Name = "labZyroWartosc";
+            this.labZyroWartosc.Size = new System.Drawing.Size(54, 15);
+            this.labZyroWartosc.TabIndex = 16;
+            this.labZyroWartosc.Text = "Wartość:";
+            // 
+            // labZyroAdres
+            // 
+            this.labZyroAdres.AutoSize = true;
+            this.labZyroAdres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labZyroAdres.Location = new System.Drawing.Point(43, 10);
+            this.labZyroAdres.Name = "labZyroAdres";
+            this.labZyroAdres.Size = new System.Drawing.Size(41, 15);
+            this.labZyroAdres.TabIndex = 15;
+            this.labZyroAdres.Text = "Adres:";
+            // 
+            // buttonZyroOtworz
+            // 
+            this.buttonZyroOtworz.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonZyroOtworz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonZyroOtworz.Location = new System.Drawing.Point(30, 79);
+            this.buttonZyroOtworz.Name = "buttonZyroOtworz";
+            this.buttonZyroOtworz.Size = new System.Drawing.Size(143, 23);
+            this.buttonZyroOtworz.TabIndex = 14;
+            this.buttonZyroOtworz.Text = "Otwórz rejestr";
+            this.buttonZyroOtworz.UseVisualStyleBackColor = true;
+            // 
+            // buttonZyroRysujWykres
+            // 
+            this.buttonZyroRysujWykres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonZyroRysujWykres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZyroRysujWykres.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonZyroRysujWykres.ForeColor = System.Drawing.Color.LimeGreen;
+            this.buttonZyroRysujWykres.Location = new System.Drawing.Point(249, 15);
+            this.buttonZyroRysujWykres.Name = "buttonZyroRysujWykres";
+            this.buttonZyroRysujWykres.Size = new System.Drawing.Size(100, 23);
+            this.buttonZyroRysujWykres.TabIndex = 16;
+            this.buttonZyroRysujWykres.Text = "Rysuj wykres";
+            this.buttonZyroRysujWykres.UseVisualStyleBackColor = true;
+            // 
+            // cBoxZyroODR
+            // 
+            this.cBoxZyroODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxZyroODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxZyroODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxZyroODR.FormattingEnabled = true;
+            this.cBoxZyroODR.Items.AddRange(new object[] {
+            "12.5",
+            "26",
+            "52",
+            "104",
+            "208",
+            "416",
+            "833",
+            "1660",
+            "3330",
+            "6660"});
+            this.cBoxZyroODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxZyroODR.Name = "cBoxZyroODR";
+            this.cBoxZyroODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxZyroODR.TabIndex = 14;
+            // 
+            // labZyroODR
+            // 
+            this.labZyroODR.AutoSize = true;
+            this.labZyroODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labZyroODR.Location = new System.Drawing.Point(6, 101);
+            this.labZyroODR.Name = "labZyroODR";
+            this.labZyroODR.Size = new System.Drawing.Size(37, 15);
+            this.labZyroODR.TabIndex = 13;
+            this.labZyroODR.Text = "ODR:";
+            // 
+            // cBoxZyroSkala
+            // 
+            this.cBoxZyroSkala.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxZyroSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxZyroSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxZyroSkala.FormattingEnabled = true;
+            this.cBoxZyroSkala.Items.AddRange(new object[] {
+            "125",
+            "250",
+            "500",
+            "1000",
+            "2000"});
+            this.cBoxZyroSkala.Location = new System.Drawing.Point(9, 77);
+            this.cBoxZyroSkala.Name = "cBoxZyroSkala";
+            this.cBoxZyroSkala.Size = new System.Drawing.Size(121, 21);
+            this.cBoxZyroSkala.TabIndex = 12;
+            // 
+            // labZyroSkala
+            // 
+            this.labZyroSkala.AutoSize = true;
+            this.labZyroSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labZyroSkala.Location = new System.Drawing.Point(6, 59);
+            this.labZyroSkala.Name = "labZyroSkala";
+            this.labZyroSkala.Size = new System.Drawing.Size(75, 15);
+            this.labZyroSkala.TabIndex = 11;
+            this.labZyroSkala.Text = "Skala (oś Y):";
+            // 
+            // chBoxZyroWlaczony
+            // 
+            this.chBoxZyroWlaczony.AutoSize = true;
+            this.chBoxZyroWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxZyroWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chBoxZyroWlaczony.Location = new System.Drawing.Point(9, 37);
+            this.chBoxZyroWlaczony.Name = "chBoxZyroWlaczony";
+            this.chBoxZyroWlaczony.Size = new System.Drawing.Size(78, 19);
+            this.chBoxZyroWlaczony.TabIndex = 10;
+            this.chBoxZyroWlaczony.Text = "Włączony";
+            this.chBoxZyroWlaczony.UseVisualStyleBackColor = true;
+            // 
+            // gBoxTermometr
+            // 
+            this.gBoxTermometr.Controls.Add(this.labTermNazwaCzujnika);
+            this.gBoxTermometr.Controls.Add(this.labTermODR);
+            this.gBoxTermometr.Controls.Add(this.gBoxTermRejestr);
+            this.gBoxTermometr.Controls.Add(this.buttonTermRysujWYkres);
+            this.gBoxTermometr.Controls.Add(this.cBoxTermODR);
+            this.gBoxTermometr.Controls.Add(this.chBoxTermWlaczony);
+            this.gBoxTermometr.Enabled = false;
+            this.gBoxTermometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxTermometr.Location = new System.Drawing.Point(367, 6);
+            this.gBoxTermometr.Name = "gBoxTermometr";
+            this.gBoxTermometr.Size = new System.Drawing.Size(355, 150);
+            this.gBoxTermometr.TabIndex = 2;
+            this.gBoxTermometr.TabStop = false;
+            this.gBoxTermometr.Text = "Termometr";
+            // 
+            // labTermNazwaCzujnika
+            // 
+            this.labTermNazwaCzujnika.AutoSize = true;
+            this.labTermNazwaCzujnika.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labTermNazwaCzujnika.Location = new System.Drawing.Point(6, 19);
+            this.labTermNazwaCzujnika.Name = "labTermNazwaCzujnika";
+            this.labTermNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
+            this.labTermNazwaCzujnika.TabIndex = 9;
+            this.labTermNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // labTermODR
+            // 
+            this.labTermODR.AutoSize = true;
+            this.labTermODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labTermODR.Location = new System.Drawing.Point(6, 59);
+            this.labTermODR.Name = "labTermODR";
+            this.labTermODR.Size = new System.Drawing.Size(37, 15);
+            this.labTermODR.TabIndex = 17;
+            this.labTermODR.Text = "ODR:";
+            // 
+            // gBoxTermRejestr
+            // 
+            this.gBoxTermRejestr.Controls.Add(this.buttonTermWczytaj);
+            this.gBoxTermRejestr.Controls.Add(this.buttonTermUstaw);
+            this.gBoxTermRejestr.Controls.Add(this.tBoxTermWartosc);
+            this.gBoxTermRejestr.Controls.Add(this.tBoxTermAdres);
+            this.gBoxTermRejestr.Controls.Add(this.labTermWartosc);
+            this.gBoxTermRejestr.Controls.Add(this.labTermAdres);
+            this.gBoxTermRejestr.Controls.Add(this.buttonTermOtworz);
+            this.gBoxTermRejestr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxTermRejestr.Location = new System.Drawing.Point(154, 39);
+            this.gBoxTermRejestr.Name = "gBoxTermRejestr";
+            this.gBoxTermRejestr.Size = new System.Drawing.Size(195, 105);
+            this.gBoxTermRejestr.TabIndex = 15;
+            this.gBoxTermRejestr.TabStop = false;
+            this.gBoxTermRejestr.Text = "Rejestr";
+            // 
+            // buttonTermWczytaj
+            // 
+            this.buttonTermWczytaj.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTermWczytaj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonTermWczytaj.Location = new System.Drawing.Point(107, 54);
+            this.buttonTermWczytaj.Name = "buttonTermWczytaj";
+            this.buttonTermWczytaj.Size = new System.Drawing.Size(66, 23);
+            this.buttonTermWczytaj.TabIndex = 20;
+            this.buttonTermWczytaj.Text = "Wczytaj";
+            this.buttonTermWczytaj.UseVisualStyleBackColor = true;
+            // 
+            // buttonTermUstaw
+            // 
+            this.buttonTermUstaw.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTermUstaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonTermUstaw.Location = new System.Drawing.Point(30, 54);
+            this.buttonTermUstaw.Name = "buttonTermUstaw";
+            this.buttonTermUstaw.Size = new System.Drawing.Size(66, 23);
+            this.buttonTermUstaw.TabIndex = 19;
+            this.buttonTermUstaw.Text = "Ustaw";
+            this.buttonTermUstaw.UseVisualStyleBackColor = true;
+            // 
+            // tBoxTermWartosc
+            // 
+            this.tBoxTermWartosc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxTermWartosc.Location = new System.Drawing.Point(107, 28);
+            this.tBoxTermWartosc.Name = "tBoxTermWartosc";
+            this.tBoxTermWartosc.Size = new System.Drawing.Size(66, 20);
+            this.tBoxTermWartosc.TabIndex = 18;
+            // 
+            // tBoxTermAdres
+            // 
+            this.tBoxTermAdres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxTermAdres.Location = new System.Drawing.Point(30, 28);
+            this.tBoxTermAdres.Name = "tBoxTermAdres";
+            this.tBoxTermAdres.Size = new System.Drawing.Size(66, 20);
+            this.tBoxTermAdres.TabIndex = 17;
+            // 
+            // labTermWartosc
+            // 
+            this.labTermWartosc.AutoSize = true;
+            this.labTermWartosc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labTermWartosc.Location = new System.Drawing.Point(117, 10);
+            this.labTermWartosc.Name = "labTermWartosc";
+            this.labTermWartosc.Size = new System.Drawing.Size(54, 15);
+            this.labTermWartosc.TabIndex = 16;
+            this.labTermWartosc.Text = "Wartość:";
+            // 
+            // labTermAdres
+            // 
+            this.labTermAdres.AutoSize = true;
+            this.labTermAdres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labTermAdres.Location = new System.Drawing.Point(43, 10);
+            this.labTermAdres.Name = "labTermAdres";
+            this.labTermAdres.Size = new System.Drawing.Size(41, 15);
+            this.labTermAdres.TabIndex = 15;
+            this.labTermAdres.Text = "Adres:";
+            // 
+            // buttonTermOtworz
+            // 
+            this.buttonTermOtworz.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTermOtworz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonTermOtworz.Location = new System.Drawing.Point(30, 79);
+            this.buttonTermOtworz.Name = "buttonTermOtworz";
+            this.buttonTermOtworz.Size = new System.Drawing.Size(143, 23);
+            this.buttonTermOtworz.TabIndex = 14;
+            this.buttonTermOtworz.Text = "Otwórz rejestr";
+            this.buttonTermOtworz.UseVisualStyleBackColor = true;
+            // 
+            // buttonTermRysujWYkres
+            // 
+            this.buttonTermRysujWYkres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonTermRysujWYkres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTermRysujWYkres.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonTermRysujWYkres.ForeColor = System.Drawing.Color.LimeGreen;
+            this.buttonTermRysujWYkres.Location = new System.Drawing.Point(249, 15);
+            this.buttonTermRysujWYkres.Name = "buttonTermRysujWYkres";
+            this.buttonTermRysujWYkres.Size = new System.Drawing.Size(100, 23);
+            this.buttonTermRysujWYkres.TabIndex = 16;
+            this.buttonTermRysujWYkres.Text = "Rysuj wykres";
+            this.buttonTermRysujWYkres.UseVisualStyleBackColor = true;
+            // 
+            // cBoxTermODR
+            // 
+            this.cBoxTermODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxTermODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxTermODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxTermODR.FormattingEnabled = true;
+            this.cBoxTermODR.Items.AddRange(new object[] {
+            "1",
+            "10",
+            "25",
+            "50",
+            "75"});
+            this.cBoxTermODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxTermODR.Name = "cBoxTermODR";
+            this.cBoxTermODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxTermODR.TabIndex = 12;
+            // 
+            // chBoxTermWlaczony
+            // 
+            this.chBoxTermWlaczony.AutoSize = true;
+            this.chBoxTermWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxTermWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chBoxTermWlaczony.Location = new System.Drawing.Point(9, 37);
+            this.chBoxTermWlaczony.Name = "chBoxTermWlaczony";
+            this.chBoxTermWlaczony.Size = new System.Drawing.Size(78, 19);
+            this.chBoxTermWlaczony.TabIndex = 10;
+            this.chBoxTermWlaczony.Text = "Włączony";
+            this.chBoxTermWlaczony.UseVisualStyleBackColor = true;
+            // 
+            // gBoxAkcelerometr
+            // 
+            this.gBoxAkcelerometr.Controls.Add(this.labAkcNazwa);
+            this.gBoxAkcelerometr.Controls.Add(this.gBoxAkcRejestr);
+            this.gBoxAkcelerometr.Controls.Add(this.buttonAkcRysujWykres);
+            this.gBoxAkcelerometr.Controls.Add(this.cBoxAkcODR);
+            this.gBoxAkcelerometr.Controls.Add(this.labAkcLiczbaProbek);
+            this.gBoxAkcelerometr.Controls.Add(this.cBoxAkcSkala);
+            this.gBoxAkcelerometr.Controls.Add(this.labAkcSkala);
+            this.gBoxAkcelerometr.Controls.Add(this.chBoxWlaczonyAkc);
+            this.gBoxAkcelerometr.Enabled = false;
+            this.gBoxAkcelerometr.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.gBoxAkcelerometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxAkcelerometr.Location = new System.Drawing.Point(6, 6);
+            this.gBoxAkcelerometr.Name = "gBoxAkcelerometr";
+            this.gBoxAkcelerometr.Size = new System.Drawing.Size(355, 150);
+            this.gBoxAkcelerometr.TabIndex = 0;
+            this.gBoxAkcelerometr.TabStop = false;
+            this.gBoxAkcelerometr.Text = "Akcelerometr";
+            // 
+            // labAkcNazwa
+            // 
+            this.labAkcNazwa.AutoSize = true;
+            this.labAkcNazwa.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labAkcNazwa.Location = new System.Drawing.Point(6, 19);
+            this.labAkcNazwa.Name = "labAkcNazwa";
+            this.labAkcNazwa.Size = new System.Drawing.Size(99, 15);
+            this.labAkcNazwa.TabIndex = 0;
+            this.labAkcNazwa.Text = "Nazwa czujnika: ";
+            // 
+            // gBoxAkcRejestr
+            // 
+            this.gBoxAkcRejestr.Controls.Add(this.buttonAkcWczytaj);
+            this.gBoxAkcRejestr.Controls.Add(this.buttonAkcUstaw);
+            this.gBoxAkcRejestr.Controls.Add(this.tBoxAkcWartosc);
+            this.gBoxAkcRejestr.Controls.Add(this.tBoxAkcAdres);
+            this.gBoxAkcRejestr.Controls.Add(this.labAkcWartosc);
+            this.gBoxAkcRejestr.Controls.Add(this.labAkcAdres);
+            this.gBoxAkcRejestr.Controls.Add(this.buttonAkcOtworz);
+            this.gBoxAkcRejestr.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.gBoxAkcRejestr.Location = new System.Drawing.Point(154, 39);
+            this.gBoxAkcRejestr.Name = "gBoxAkcRejestr";
+            this.gBoxAkcRejestr.Size = new System.Drawing.Size(195, 105);
+            this.gBoxAkcRejestr.TabIndex = 7;
+            this.gBoxAkcRejestr.TabStop = false;
+            this.gBoxAkcRejestr.Text = "Rejestr";
+            // 
+            // buttonAkcWczytaj
+            // 
+            this.buttonAkcWczytaj.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAkcWczytaj.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonAkcWczytaj.Location = new System.Drawing.Point(107, 54);
+            this.buttonAkcWczytaj.Name = "buttonAkcWczytaj";
+            this.buttonAkcWczytaj.Size = new System.Drawing.Size(66, 23);
+            this.buttonAkcWczytaj.TabIndex = 20;
+            this.buttonAkcWczytaj.Text = "Wczytaj";
+            this.buttonAkcWczytaj.UseVisualStyleBackColor = true;
+            // 
+            // buttonAkcUstaw
+            // 
+            this.buttonAkcUstaw.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAkcUstaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonAkcUstaw.Location = new System.Drawing.Point(30, 54);
+            this.buttonAkcUstaw.Name = "buttonAkcUstaw";
+            this.buttonAkcUstaw.Size = new System.Drawing.Size(66, 23);
+            this.buttonAkcUstaw.TabIndex = 19;
+            this.buttonAkcUstaw.Text = "Ustaw";
+            this.buttonAkcUstaw.UseVisualStyleBackColor = true;
+            // 
+            // tBoxAkcWartosc
+            // 
+            this.tBoxAkcWartosc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxAkcWartosc.Location = new System.Drawing.Point(107, 28);
+            this.tBoxAkcWartosc.Name = "tBoxAkcWartosc";
+            this.tBoxAkcWartosc.Size = new System.Drawing.Size(66, 20);
+            this.tBoxAkcWartosc.TabIndex = 18;
+            // 
+            // tBoxAkcAdres
+            // 
+            this.tBoxAkcAdres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxAkcAdres.Location = new System.Drawing.Point(30, 28);
+            this.tBoxAkcAdres.Name = "tBoxAkcAdres";
+            this.tBoxAkcAdres.Size = new System.Drawing.Size(66, 20);
+            this.tBoxAkcAdres.TabIndex = 17;
+            // 
+            // labAkcWartosc
+            // 
+            this.labAkcWartosc.AutoSize = true;
+            this.labAkcWartosc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labAkcWartosc.Location = new System.Drawing.Point(117, 10);
+            this.labAkcWartosc.Name = "labAkcWartosc";
+            this.labAkcWartosc.Size = new System.Drawing.Size(54, 15);
+            this.labAkcWartosc.TabIndex = 16;
+            this.labAkcWartosc.Text = "Wartość:";
+            // 
+            // labAkcAdres
+            // 
+            this.labAkcAdres.AutoSize = true;
+            this.labAkcAdres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labAkcAdres.Location = new System.Drawing.Point(43, 10);
+            this.labAkcAdres.Name = "labAkcAdres";
+            this.labAkcAdres.Size = new System.Drawing.Size(41, 15);
+            this.labAkcAdres.TabIndex = 15;
+            this.labAkcAdres.Text = "Adres:";
+            // 
+            // buttonAkcOtworz
+            // 
+            this.buttonAkcOtworz.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAkcOtworz.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonAkcOtworz.Location = new System.Drawing.Point(30, 79);
+            this.buttonAkcOtworz.Name = "buttonAkcOtworz";
+            this.buttonAkcOtworz.Size = new System.Drawing.Size(143, 23);
+            this.buttonAkcOtworz.TabIndex = 14;
+            this.buttonAkcOtworz.Text = "Otwórz rejestr";
+            this.buttonAkcOtworz.UseVisualStyleBackColor = true;
+            // 
+            // buttonAkcRysujWykres
+            // 
+            this.buttonAkcRysujWykres.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAkcRysujWykres.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAkcRysujWykres.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonAkcRysujWykres.ForeColor = System.Drawing.Color.LimeGreen;
+            this.buttonAkcRysujWykres.Location = new System.Drawing.Point(249, 15);
+            this.buttonAkcRysujWykres.Name = "buttonAkcRysujWykres";
+            this.buttonAkcRysujWykres.Size = new System.Drawing.Size(100, 23);
+            this.buttonAkcRysujWykres.TabIndex = 8;
+            this.buttonAkcRysujWykres.Text = "Rysuj wykres";
+            this.buttonAkcRysujWykres.UseVisualStyleBackColor = true;
+            // 
+            // cBoxAkcODR
+            // 
+            this.cBoxAkcODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxAkcODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxAkcODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxAkcODR.FormattingEnabled = true;
+            this.cBoxAkcODR.Items.AddRange(new object[] {
+            "12.5",
+            "26",
+            "52",
+            "104",
+            "208",
+            "416",
+            "833",
+            "1660",
+            "3330",
+            "6660"});
+            this.cBoxAkcODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxAkcODR.Name = "cBoxAkcODR";
+            this.cBoxAkcODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAkcODR.TabIndex = 5;
+            // 
+            // labAkcLiczbaProbek
+            // 
+            this.labAkcLiczbaProbek.AutoSize = true;
+            this.labAkcLiczbaProbek.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labAkcLiczbaProbek.Location = new System.Drawing.Point(6, 101);
+            this.labAkcLiczbaProbek.Name = "labAkcLiczbaProbek";
+            this.labAkcLiczbaProbek.Size = new System.Drawing.Size(37, 15);
+            this.labAkcLiczbaProbek.TabIndex = 4;
+            this.labAkcLiczbaProbek.Text = "ODR:";
+            // 
+            // cBoxAkcSkala
+            // 
+            this.cBoxAkcSkala.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxAkcSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxAkcSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxAkcSkala.FormattingEnabled = true;
+            this.cBoxAkcSkala.Items.AddRange(new object[] {
+            "2",
+            "4",
+            "8",
+            "16"});
+            this.cBoxAkcSkala.Location = new System.Drawing.Point(9, 77);
+            this.cBoxAkcSkala.Name = "cBoxAkcSkala";
+            this.cBoxAkcSkala.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAkcSkala.TabIndex = 3;
+            // 
+            // labAkcSkala
+            // 
+            this.labAkcSkala.AutoSize = true;
+            this.labAkcSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labAkcSkala.Location = new System.Drawing.Point(6, 59);
+            this.labAkcSkala.Name = "labAkcSkala";
+            this.labAkcSkala.Size = new System.Drawing.Size(75, 15);
+            this.labAkcSkala.TabIndex = 2;
+            this.labAkcSkala.Text = "Skala (oś Y):";
+            // 
+            // chBoxWlaczonyAkc
+            // 
+            this.chBoxWlaczonyAkc.AutoSize = true;
+            this.chBoxWlaczonyAkc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxWlaczonyAkc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chBoxWlaczonyAkc.Location = new System.Drawing.Point(9, 37);
+            this.chBoxWlaczonyAkc.Name = "chBoxWlaczonyAkc";
+            this.chBoxWlaczonyAkc.Size = new System.Drawing.Size(78, 19);
+            this.chBoxWlaczonyAkc.TabIndex = 1;
+            this.chBoxWlaczonyAkc.Text = "Włączony";
+            this.chBoxWlaczonyAkc.UseVisualStyleBackColor = true;
             // 
             // tabPageDane
             // 
@@ -656,1040 +1753,6 @@ namespace Aplikacja_MEMS
             // 
             this.bgWorkerOtworz.WorkerSupportsCancellation = true;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
-            this.pictureBox2.Location = new System.Drawing.Point(328, 38);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(80, 80);
-            this.pictureBox2.TabIndex = 11;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
-            this.pictureBox1.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
-            this.pictureBox1.Location = new System.Drawing.Point(538, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(185, 144);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
-            // 
-            // gBoxHigrometr
-            // 
-            this.gBoxHigrometr.Controls.Add(this.label24);
-            this.gBoxHigrometr.Controls.Add(this.groupBox6);
-            this.gBoxHigrometr.Controls.Add(this.button24);
-            this.gBoxHigrometr.Controls.Add(this.comboBox9);
-            this.gBoxHigrometr.Controls.Add(this.checkBox5);
-            this.gBoxHigrometr.Controls.Add(this.label27);
-            this.gBoxHigrometr.Enabled = false;
-            this.gBoxHigrometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxHigrometr.Location = new System.Drawing.Point(369, 318);
-            this.gBoxHigrometr.Name = "gBoxHigrometr";
-            this.gBoxHigrometr.Size = new System.Drawing.Size(355, 150);
-            this.gBoxHigrometr.TabIndex = 4;
-            this.gBoxHigrometr.TabStop = false;
-            this.gBoxHigrometr.Text = "Higrometr";
-            // 
-            // gBoxMagnetometr
-            // 
-            this.gBoxMagnetometr.Controls.Add(this.groupBox3);
-            this.gBoxMagnetometr.Controls.Add(this.button12);
-            this.gBoxMagnetometr.Controls.Add(this.comboBox5);
-            this.gBoxMagnetometr.Controls.Add(this.label13);
-            this.gBoxMagnetometr.Controls.Add(this.comboBox6);
-            this.gBoxMagnetometr.Controls.Add(this.label14);
-            this.gBoxMagnetometr.Controls.Add(this.checkBox2);
-            this.gBoxMagnetometr.Controls.Add(this.label15);
-            this.gBoxMagnetometr.Enabled = false;
-            this.gBoxMagnetometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxMagnetometr.Location = new System.Drawing.Point(8, 318);
-            this.gBoxMagnetometr.Name = "gBoxMagnetometr";
-            this.gBoxMagnetometr.Size = new System.Drawing.Size(355, 150);
-            this.gBoxMagnetometr.TabIndex = 1;
-            this.gBoxMagnetometr.TabStop = false;
-            this.gBoxMagnetometr.Text = "Magnetometr";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.button9);
-            this.groupBox3.Controls.Add(this.button10);
-            this.groupBox3.Controls.Add(this.textBox5);
-            this.groupBox3.Controls.Add(this.textBox6);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.button11);
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox3.Location = new System.Drawing.Point(154, 39);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(195, 105);
-            this.groupBox3.TabIndex = 15;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Rejestr";
-            // 
-            // button9
-            // 
-            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button9.Location = new System.Drawing.Point(107, 54);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(66, 23);
-            this.button9.TabIndex = 20;
-            this.button9.Text = "Wczytaj";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // button10
-            // 
-            this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button10.Location = new System.Drawing.Point(30, 54);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(66, 23);
-            this.button10.TabIndex = 19;
-            this.button10.Text = "Ustaw";
-            this.button10.UseVisualStyleBackColor = true;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox5.Location = new System.Drawing.Point(107, 28);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(66, 20);
-            this.textBox5.TabIndex = 18;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox6.Location = new System.Drawing.Point(30, 28);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(66, 20);
-            this.textBox6.TabIndex = 17;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label11.Location = new System.Drawing.Point(117, 10);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(54, 15);
-            this.label11.TabIndex = 16;
-            this.label11.Text = "Wartość:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label12.Location = new System.Drawing.Point(43, 10);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 15);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "Adres:";
-            // 
-            // button11
-            // 
-            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button11.Location = new System.Drawing.Point(30, 79);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(143, 23);
-            this.button11.TabIndex = 14;
-            this.button11.Text = "Otwórz rejestr";
-            this.button11.UseVisualStyleBackColor = true;
-            // 
-            // button12
-            // 
-            this.button12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button12.ForeColor = System.Drawing.Color.LimeGreen;
-            this.button12.Location = new System.Drawing.Point(249, 15);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(100, 23);
-            this.button12.TabIndex = 16;
-            this.button12.Text = "Rysuj wykres";
-            this.button12.UseVisualStyleBackColor = true;
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(9, 119);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(121, 21);
-            this.comboBox5.TabIndex = 14;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label13.Location = new System.Drawing.Point(6, 101);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(87, 15);
-            this.label13.TabIndex = 13;
-            this.label13.Text = "Liczba próbek:";
-            // 
-            // comboBox6
-            // 
-            this.comboBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(9, 77);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(121, 21);
-            this.comboBox6.TabIndex = 12;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label14.Location = new System.Drawing.Point(6, 59);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 15);
-            this.label14.TabIndex = 11;
-            this.label14.Text = "Skala (oś Y):";
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox2.Location = new System.Drawing.Point(9, 37);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(78, 19);
-            this.checkBox2.TabIndex = 10;
-            this.checkBox2.Text = "Włączony";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label15.Location = new System.Drawing.Point(6, 19);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(99, 15);
-            this.label15.TabIndex = 9;
-            this.label15.Text = "Nazwa czujnika: ";
-            // 
-            // gBoxBarometr
-            // 
-            this.gBoxBarometr.Controls.Add(this.label19);
-            this.gBoxBarometr.Controls.Add(this.groupBox5);
-            this.gBoxBarometr.Controls.Add(this.button20);
-            this.gBoxBarometr.Controls.Add(this.comboBox7);
-            this.gBoxBarometr.Controls.Add(this.checkBox4);
-            this.gBoxBarometr.Controls.Add(this.label23);
-            this.gBoxBarometr.Enabled = false;
-            this.gBoxBarometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxBarometr.Location = new System.Drawing.Point(367, 162);
-            this.gBoxBarometr.Name = "gBoxBarometr";
-            this.gBoxBarometr.Size = new System.Drawing.Size(355, 150);
-            this.gBoxBarometr.TabIndex = 3;
-            this.gBoxBarometr.TabStop = false;
-            this.gBoxBarometr.Text = "Barometr";
-            // 
-            // gBoxŻyroskop
-            // 
-            this.gBoxŻyroskop.Controls.Add(this.groupBox2);
-            this.gBoxŻyroskop.Controls.Add(this.button8);
-            this.gBoxŻyroskop.Controls.Add(this.comboBox3);
-            this.gBoxŻyroskop.Controls.Add(this.label8);
-            this.gBoxŻyroskop.Controls.Add(this.comboBox4);
-            this.gBoxŻyroskop.Controls.Add(this.label9);
-            this.gBoxŻyroskop.Controls.Add(this.checkBox1);
-            this.gBoxŻyroskop.Controls.Add(this.label10);
-            this.gBoxŻyroskop.Enabled = false;
-            this.gBoxŻyroskop.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxŻyroskop.Location = new System.Drawing.Point(6, 162);
-            this.gBoxŻyroskop.Name = "gBoxŻyroskop";
-            this.gBoxŻyroskop.Size = new System.Drawing.Size(355, 150);
-            this.gBoxŻyroskop.TabIndex = 1;
-            this.gBoxŻyroskop.TabStop = false;
-            this.gBoxŻyroskop.Text = "Żyroskop";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.button5);
-            this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Controls.Add(this.textBox3);
-            this.groupBox2.Controls.Add(this.textBox4);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox2.Location = new System.Drawing.Point(154, 39);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(195, 105);
-            this.groupBox2.TabIndex = 15;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Rejestr";
-            // 
-            // button5
-            // 
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button5.Location = new System.Drawing.Point(107, 54);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(66, 23);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "Wczytaj";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button6.Location = new System.Drawing.Point(30, 54);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(66, 23);
-            this.button6.TabIndex = 19;
-            this.button6.Text = "Ustaw";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox3.Location = new System.Drawing.Point(107, 28);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(66, 20);
-            this.textBox3.TabIndex = 18;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox4.Location = new System.Drawing.Point(30, 28);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(66, 20);
-            this.textBox4.TabIndex = 17;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label6.Location = new System.Drawing.Point(117, 10);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(54, 15);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Wartość:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label7.Location = new System.Drawing.Point(43, 10);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 15);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Adres:";
-            // 
-            // button7
-            // 
-            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button7.Location = new System.Drawing.Point(30, 79);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(143, 23);
-            this.button7.TabIndex = 14;
-            this.button7.Text = "Otwórz rejestr";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button8
-            // 
-            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button8.ForeColor = System.Drawing.Color.LimeGreen;
-            this.button8.Location = new System.Drawing.Point(249, 15);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 23);
-            this.button8.TabIndex = 16;
-            this.button8.Text = "Rysuj wykres";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(9, 119);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 14;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label8.Location = new System.Drawing.Point(6, 101);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(87, 15);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Liczba próbek:";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(9, 77);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 12;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label9.Location = new System.Drawing.Point(6, 59);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(75, 15);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Skala (oś Y):";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox1.Location = new System.Drawing.Point(9, 37);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(78, 19);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "Włączony";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label10.Location = new System.Drawing.Point(6, 19);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(99, 15);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Nazwa czujnika: ";
-            // 
-            // gBoxTermometr
-            // 
-            this.gBoxTermometr.Controls.Add(this.label18);
-            this.gBoxTermometr.Controls.Add(this.groupBox4);
-            this.gBoxTermometr.Controls.Add(this.button16);
-            this.gBoxTermometr.Controls.Add(this.comboBox8);
-            this.gBoxTermometr.Controls.Add(this.checkBox3);
-            this.gBoxTermometr.Controls.Add(this.label20);
-            this.gBoxTermometr.Enabled = false;
-            this.gBoxTermometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxTermometr.Location = new System.Drawing.Point(367, 6);
-            this.gBoxTermometr.Name = "gBoxTermometr";
-            this.gBoxTermometr.Size = new System.Drawing.Size(355, 150);
-            this.gBoxTermometr.TabIndex = 2;
-            this.gBoxTermometr.TabStop = false;
-            this.gBoxTermometr.Text = "Termometr";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button13);
-            this.groupBox4.Controls.Add(this.button14);
-            this.groupBox4.Controls.Add(this.textBox7);
-            this.groupBox4.Controls.Add(this.textBox8);
-            this.groupBox4.Controls.Add(this.label16);
-            this.groupBox4.Controls.Add(this.label17);
-            this.groupBox4.Controls.Add(this.button15);
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox4.Location = new System.Drawing.Point(154, 39);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(195, 105);
-            this.groupBox4.TabIndex = 15;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Rejestr";
-            // 
-            // button13
-            // 
-            this.button13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button13.Location = new System.Drawing.Point(107, 54);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(66, 23);
-            this.button13.TabIndex = 20;
-            this.button13.Text = "Wczytaj";
-            this.button13.UseVisualStyleBackColor = true;
-            // 
-            // button14
-            // 
-            this.button14.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button14.Location = new System.Drawing.Point(30, 54);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(66, 23);
-            this.button14.TabIndex = 19;
-            this.button14.Text = "Ustaw";
-            this.button14.UseVisualStyleBackColor = true;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox7.Location = new System.Drawing.Point(107, 28);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(66, 20);
-            this.textBox7.TabIndex = 18;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox8.Location = new System.Drawing.Point(30, 28);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(66, 20);
-            this.textBox8.TabIndex = 17;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label16.Location = new System.Drawing.Point(117, 10);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(54, 15);
-            this.label16.TabIndex = 16;
-            this.label16.Text = "Wartość:";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label17.Location = new System.Drawing.Point(43, 10);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(41, 15);
-            this.label17.TabIndex = 15;
-            this.label17.Text = "Adres:";
-            // 
-            // button15
-            // 
-            this.button15.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button15.Location = new System.Drawing.Point(30, 79);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(143, 23);
-            this.button15.TabIndex = 14;
-            this.button15.Text = "Otwórz rejestr";
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // button16
-            // 
-            this.button16.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button16.ForeColor = System.Drawing.Color.LimeGreen;
-            this.button16.Location = new System.Drawing.Point(249, 15);
-            this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(100, 23);
-            this.button16.TabIndex = 16;
-            this.button16.Text = "Rysuj wykres";
-            this.button16.UseVisualStyleBackColor = true;
-            // 
-            // comboBox8
-            // 
-            this.comboBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(9, 77);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(121, 21);
-            this.comboBox8.TabIndex = 12;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox3.Location = new System.Drawing.Point(9, 37);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(78, 19);
-            this.checkBox3.TabIndex = 10;
-            this.checkBox3.Text = "Włączony";
-            this.checkBox3.UseVisualStyleBackColor = true;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label20.Location = new System.Drawing.Point(6, 19);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(99, 15);
-            this.label20.TabIndex = 9;
-            this.label20.Text = "Nazwa czujnika: ";
-            // 
-            // gBoxAkcelerometr
-            // 
-            this.gBoxAkcelerometr.Controls.Add(this.groupBox1);
-            this.gBoxAkcelerometr.Controls.Add(this.button1);
-            this.gBoxAkcelerometr.Controls.Add(this.comboBox2);
-            this.gBoxAkcelerometr.Controls.Add(this.label3);
-            this.gBoxAkcelerometr.Controls.Add(this.comboBox1);
-            this.gBoxAkcelerometr.Controls.Add(this.label2);
-            this.gBoxAkcelerometr.Controls.Add(this.chBoxWlaczonyAkc);
-            this.gBoxAkcelerometr.Controls.Add(this.label1);
-            this.gBoxAkcelerometr.Enabled = false;
-            this.gBoxAkcelerometr.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.gBoxAkcelerometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxAkcelerometr.Location = new System.Drawing.Point(6, 6);
-            this.gBoxAkcelerometr.Name = "gBoxAkcelerometr";
-            this.gBoxAkcelerometr.Size = new System.Drawing.Size(355, 150);
-            this.gBoxAkcelerometr.TabIndex = 0;
-            this.gBoxAkcelerometr.TabStop = false;
-            this.gBoxAkcelerometr.Text = "Akcelerometr";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox1.Location = new System.Drawing.Point(154, 39);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(195, 105);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Rejestr";
-            // 
-            // button4
-            // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button4.Location = new System.Drawing.Point(107, 54);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(66, 23);
-            this.button4.TabIndex = 20;
-            this.button4.Text = "Wczytaj";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(30, 54);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(66, 23);
-            this.button3.TabIndex = 19;
-            this.button3.Text = "Ustaw";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox2.Location = new System.Drawing.Point(107, 28);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(66, 20);
-            this.textBox2.TabIndex = 18;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox1.Location = new System.Drawing.Point(30, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(66, 20);
-            this.textBox1.TabIndex = 17;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(117, 10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(54, 15);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "Wartość:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(43, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 15);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Adres:";
-            // 
-            // button2
-            // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button2.Location = new System.Drawing.Point(30, 79);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(143, 23);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Otwórz rejestr";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.ForeColor = System.Drawing.Color.LimeGreen;
-            this.button1.Location = new System.Drawing.Point(249, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Rysuj wykres";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(9, 119);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 5;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(6, 101);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 15);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Liczba próbek:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(9, 77);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(6, 59);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 15);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Skala (oś Y):";
-            // 
-            // chBoxWlaczonyAkc
-            // 
-            this.chBoxWlaczonyAkc.AutoSize = true;
-            this.chBoxWlaczonyAkc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxWlaczonyAkc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxWlaczonyAkc.Location = new System.Drawing.Point(9, 37);
-            this.chBoxWlaczonyAkc.Name = "chBoxWlaczonyAkc";
-            this.chBoxWlaczonyAkc.Size = new System.Drawing.Size(78, 19);
-            this.chBoxWlaczonyAkc.TabIndex = 1;
-            this.chBoxWlaczonyAkc.Text = "Włączony";
-            this.chBoxWlaczonyAkc.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(6, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nazwa czujnika: ";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label18.Location = new System.Drawing.Point(6, 59);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(87, 15);
-            this.label18.TabIndex = 17;
-            this.label18.Text = "Liczba próbek:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label19.Location = new System.Drawing.Point(6, 59);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(87, 15);
-            this.label19.TabIndex = 23;
-            this.label19.Text = "Liczba próbek:";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.button17);
-            this.groupBox5.Controls.Add(this.button18);
-            this.groupBox5.Controls.Add(this.textBox9);
-            this.groupBox5.Controls.Add(this.textBox10);
-            this.groupBox5.Controls.Add(this.label21);
-            this.groupBox5.Controls.Add(this.label22);
-            this.groupBox5.Controls.Add(this.button19);
-            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox5.Location = new System.Drawing.Point(154, 39);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(195, 105);
-            this.groupBox5.TabIndex = 21;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Rejestr";
-            // 
-            // button17
-            // 
-            this.button17.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button17.Location = new System.Drawing.Point(107, 54);
-            this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(66, 23);
-            this.button17.TabIndex = 20;
-            this.button17.Text = "Wczytaj";
-            this.button17.UseVisualStyleBackColor = true;
-            // 
-            // button18
-            // 
-            this.button18.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button18.Location = new System.Drawing.Point(30, 54);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(66, 23);
-            this.button18.TabIndex = 19;
-            this.button18.Text = "Ustaw";
-            this.button18.UseVisualStyleBackColor = true;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox9.Location = new System.Drawing.Point(107, 28);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(66, 20);
-            this.textBox9.TabIndex = 18;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox10.Location = new System.Drawing.Point(30, 28);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(66, 20);
-            this.textBox10.TabIndex = 17;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label21.Location = new System.Drawing.Point(117, 10);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(54, 15);
-            this.label21.TabIndex = 16;
-            this.label21.Text = "Wartość:";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label22.Location = new System.Drawing.Point(43, 10);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(41, 15);
-            this.label22.TabIndex = 15;
-            this.label22.Text = "Adres:";
-            // 
-            // button19
-            // 
-            this.button19.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button19.Location = new System.Drawing.Point(30, 79);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(143, 23);
-            this.button19.TabIndex = 14;
-            this.button19.Text = "Otwórz rejestr";
-            this.button19.UseVisualStyleBackColor = true;
-            // 
-            // button20
-            // 
-            this.button20.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button20.ForeColor = System.Drawing.Color.LimeGreen;
-            this.button20.Location = new System.Drawing.Point(249, 15);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(100, 23);
-            this.button20.TabIndex = 22;
-            this.button20.Text = "Rysuj wykres";
-            this.button20.UseVisualStyleBackColor = true;
-            // 
-            // comboBox7
-            // 
-            this.comboBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(9, 77);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(121, 21);
-            this.comboBox7.TabIndex = 20;
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox4.Location = new System.Drawing.Point(9, 37);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(78, 19);
-            this.checkBox4.TabIndex = 19;
-            this.checkBox4.Text = "Włączony";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label23.Location = new System.Drawing.Point(6, 19);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(99, 15);
-            this.label23.TabIndex = 18;
-            this.label23.Text = "Nazwa czujnika: ";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label24.Location = new System.Drawing.Point(6, 59);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(87, 15);
-            this.label24.TabIndex = 23;
-            this.label24.Text = "Liczba próbek:";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.button21);
-            this.groupBox6.Controls.Add(this.button22);
-            this.groupBox6.Controls.Add(this.textBox11);
-            this.groupBox6.Controls.Add(this.textBox12);
-            this.groupBox6.Controls.Add(this.label25);
-            this.groupBox6.Controls.Add(this.label26);
-            this.groupBox6.Controls.Add(this.button23);
-            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox6.Location = new System.Drawing.Point(154, 39);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(195, 105);
-            this.groupBox6.TabIndex = 21;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Rejestr";
-            // 
-            // button21
-            // 
-            this.button21.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button21.Location = new System.Drawing.Point(107, 54);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(66, 23);
-            this.button21.TabIndex = 20;
-            this.button21.Text = "Wczytaj";
-            this.button21.UseVisualStyleBackColor = true;
-            // 
-            // button22
-            // 
-            this.button22.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button22.Location = new System.Drawing.Point(30, 54);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(66, 23);
-            this.button22.TabIndex = 19;
-            this.button22.Text = "Ustaw";
-            this.button22.UseVisualStyleBackColor = true;
-            // 
-            // textBox11
-            // 
-            this.textBox11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox11.Location = new System.Drawing.Point(107, 28);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(66, 20);
-            this.textBox11.TabIndex = 18;
-            // 
-            // textBox12
-            // 
-            this.textBox12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBox12.Location = new System.Drawing.Point(30, 28);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(66, 20);
-            this.textBox12.TabIndex = 17;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label25.Location = new System.Drawing.Point(117, 10);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(54, 15);
-            this.label25.TabIndex = 16;
-            this.label25.Text = "Wartość:";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label26.Location = new System.Drawing.Point(43, 10);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(41, 15);
-            this.label26.TabIndex = 15;
-            this.label26.Text = "Adres:";
-            // 
-            // button23
-            // 
-            this.button23.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button23.Location = new System.Drawing.Point(30, 79);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(143, 23);
-            this.button23.TabIndex = 14;
-            this.button23.Text = "Otwórz rejestr";
-            this.button23.UseVisualStyleBackColor = true;
-            // 
-            // button24
-            // 
-            this.button24.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button24.ForeColor = System.Drawing.Color.LimeGreen;
-            this.button24.Location = new System.Drawing.Point(249, 15);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(100, 23);
-            this.button24.TabIndex = 22;
-            this.button24.Text = "Rysuj wykres";
-            this.button24.UseVisualStyleBackColor = true;
-            // 
-            // comboBox9
-            // 
-            this.comboBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(9, 77);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(121, 21);
-            this.comboBox9.TabIndex = 20;
-            // 
-            // checkBox5
-            // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.checkBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkBox5.Location = new System.Drawing.Point(9, 37);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(78, 19);
-            this.checkBox5.TabIndex = 19;
-            this.checkBox5.Text = "Włączony";
-            this.checkBox5.UseVisualStyleBackColor = true;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label27.Location = new System.Drawing.Point(6, 19);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(99, 15);
-            this.label27.TabIndex = 18;
-            this.label27.Text = "Nazwa czujnika: ";
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1710,37 +1773,37 @@ namespace Aplikacja_MEMS
             this.gBoxCzujniki.PerformLayout();
             this.gBoxPolaczenie.ResumeLayout(false);
             this.gBoxPolaczenie.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).EndInit();
             this.gBoxInfo.ResumeLayout(false);
             this.gBoxInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxPlytka)).EndInit();
             this.tabPageCzujniki.ResumeLayout(false);
-            this.menuStrip.ResumeLayout(false);
-            this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.gBoxHigrometr.ResumeLayout(false);
             this.gBoxHigrometr.PerformLayout();
+            this.gBoxHigRejestr.ResumeLayout(false);
+            this.gBoxHigRejestr.PerformLayout();
             this.gBoxMagnetometr.ResumeLayout(false);
             this.gBoxMagnetometr.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
+            this.gBoxMagRejestr.ResumeLayout(false);
+            this.gBoxMagRejestr.PerformLayout();
             this.gBoxBarometr.ResumeLayout(false);
             this.gBoxBarometr.PerformLayout();
-            this.gBoxŻyroskop.ResumeLayout(false);
-            this.gBoxŻyroskop.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.gBoxBarRejestr.ResumeLayout(false);
+            this.gBoxBarRejestr.PerformLayout();
+            this.gBoxZyroskop.ResumeLayout(false);
+            this.gBoxZyroskop.PerformLayout();
+            this.gBoxZyroRejestr.ResumeLayout(false);
+            this.gBoxZyroRejestr.PerformLayout();
             this.gBoxTermometr.ResumeLayout(false);
             this.gBoxTermometr.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.gBoxTermRejestr.ResumeLayout(false);
+            this.gBoxTermRejestr.PerformLayout();
             this.gBoxAkcelerometr.ResumeLayout(false);
             this.gBoxAkcelerometr.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            this.gBoxAkcRejestr.ResumeLayout(false);
+            this.gBoxAkcRejestr.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1760,11 +1823,11 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem;
         private System.Windows.Forms.GroupBox gBoxCzujniki;
         private System.Windows.Forms.GroupBox gBoxPolaczenie;
-        private System.Windows.Forms.Label lableTytul;
+        private System.Windows.Forms.Label labelTytul;
         private System.Windows.Forms.Label labelBrakPlytek;
         private System.Windows.Forms.Label labelDostepnePorty;
         private System.Windows.Forms.Label labelWersja;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pBoxPlytka;
         private System.Windows.Forms.TabPage tabPageDane;
         public System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.ComboBox cBoxPorty;
@@ -1793,98 +1856,98 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ComboBox cBoxMagnetometr;
         private System.Windows.Forms.ComboBox cBoxZyroskop;
         private System.Windows.Forms.ComboBox cBoxAkcelerometr;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pBoxLogoWEL;
         private System.ComponentModel.BackgroundWorker bgWorkerOtworz;
         private System.Windows.Forms.GroupBox gBoxHigrometr;
         private System.Windows.Forms.GroupBox gBoxMagnetometr;
         private System.Windows.Forms.GroupBox gBoxBarometr;
-        private System.Windows.Forms.GroupBox gBoxŻyroskop;
+        private System.Windows.Forms.GroupBox gBoxZyroskop;
         private System.Windows.Forms.GroupBox gBoxTermometr;
         private System.Windows.Forms.GroupBox gBoxAkcelerometr;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Button button15;
-        private System.Windows.Forms.Button button16;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox gBoxMagRejestr;
+        private System.Windows.Forms.Button buttonMagWczytaj;
+        private System.Windows.Forms.Button buttonMagUstaw;
+        private System.Windows.Forms.TextBox tBoxMagWartosc;
+        private System.Windows.Forms.TextBox tBoxMagAdres;
+        private System.Windows.Forms.Label labMagWartosc;
+        private System.Windows.Forms.Label labMagAdres;
+        private System.Windows.Forms.Button buttonMagOtworz;
+        private System.Windows.Forms.Button buttonMagRysujWykres;
+        private System.Windows.Forms.ComboBox cBoxMagODR;
+        private System.Windows.Forms.Label labMagODR;
+        private System.Windows.Forms.ComboBox cBoxMagSkala;
+        private System.Windows.Forms.Label labMagSkala;
+        private System.Windows.Forms.CheckBox chBoxMagWlaczony;
+        private System.Windows.Forms.Label labMagNazwaCzujnika;
+        private System.Windows.Forms.GroupBox gBoxZyroRejestr;
+        private System.Windows.Forms.Button buttonZyroWczytaj;
+        private System.Windows.Forms.Button buttonZyroUstaw;
+        private System.Windows.Forms.TextBox tBoxZyroWartosc;
+        private System.Windows.Forms.TextBox tBoxZyroAdres;
+        private System.Windows.Forms.Label labZyroWartosc;
+        private System.Windows.Forms.Label labZyroAdres;
+        private System.Windows.Forms.Button buttonZyroOtworz;
+        private System.Windows.Forms.Button buttonZyroRysujWykres;
+        private System.Windows.Forms.ComboBox cBoxZyroODR;
+        private System.Windows.Forms.Label labZyroODR;
+        private System.Windows.Forms.ComboBox cBoxZyroSkala;
+        private System.Windows.Forms.Label labZyroSkala;
+        private System.Windows.Forms.CheckBox chBoxZyroWlaczony;
+        private System.Windows.Forms.Label LabZyroNazwaCzujnika;
+        private System.Windows.Forms.GroupBox gBoxTermRejestr;
+        private System.Windows.Forms.Button buttonTermWczytaj;
+        private System.Windows.Forms.Button buttonTermUstaw;
+        private System.Windows.Forms.TextBox tBoxTermWartosc;
+        private System.Windows.Forms.TextBox tBoxTermAdres;
+        private System.Windows.Forms.Label labTermWartosc;
+        private System.Windows.Forms.Label labTermAdres;
+        private System.Windows.Forms.Button buttonTermOtworz;
+        private System.Windows.Forms.Button buttonTermRysujWYkres;
+        private System.Windows.Forms.ComboBox cBoxTermODR;
+        private System.Windows.Forms.CheckBox chBoxTermWlaczony;
+        private System.Windows.Forms.Label labTermNazwaCzujnika;
+        private System.Windows.Forms.GroupBox gBoxAkcRejestr;
+        private System.Windows.Forms.Button buttonAkcWczytaj;
+        private System.Windows.Forms.Button buttonAkcUstaw;
+        private System.Windows.Forms.TextBox tBoxAkcWartosc;
+        private System.Windows.Forms.TextBox tBoxAkcAdres;
+        private System.Windows.Forms.Label labAkcWartosc;
+        private System.Windows.Forms.Label labAkcAdres;
+        private System.Windows.Forms.Button buttonAkcOtworz;
+        private System.Windows.Forms.Button buttonAkcRysujWykres;
+        private System.Windows.Forms.ComboBox cBoxAkcODR;
+        private System.Windows.Forms.Label labAkcLiczbaProbek;
+        private System.Windows.Forms.ComboBox cBoxAkcSkala;
+        private System.Windows.Forms.Label labAkcSkala;
         private System.Windows.Forms.CheckBox chBoxWlaczonyAkc;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Button button18;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.ComboBox comboBox7;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label labAkcNazwa;
+        private System.Windows.Forms.Label labHigODR;
+        private System.Windows.Forms.GroupBox gBoxHigRejestr;
+        private System.Windows.Forms.Button buttonHigWczytaj;
+        private System.Windows.Forms.Button buttonHigUstaw;
+        private System.Windows.Forms.TextBox tBoxHigWartosc;
+        private System.Windows.Forms.TextBox tBoxHigAdres;
+        private System.Windows.Forms.Label labHigWartosc;
+        private System.Windows.Forms.Label labHigAdres;
+        private System.Windows.Forms.Button buttonHigOtworz;
+        private System.Windows.Forms.Button buttonHigRysujWykres;
+        private System.Windows.Forms.ComboBox cBoxHigODR;
+        private System.Windows.Forms.CheckBox chBoxHigWlaczony;
+        private System.Windows.Forms.Label labHigNazwaCzujnika;
+        private System.Windows.Forms.Label labBarODR;
+        private System.Windows.Forms.GroupBox gBoxBarRejestr;
+        private System.Windows.Forms.Button buttonBarWczytaj;
+        private System.Windows.Forms.Button buttonBarUstaw;
+        private System.Windows.Forms.TextBox tBoxBarWartosc;
+        private System.Windows.Forms.TextBox tBoxBarAdres;
+        private System.Windows.Forms.Label labBarWartosc;
+        private System.Windows.Forms.Label labBarAdres;
+        private System.Windows.Forms.Button buttonBarOtworz;
+        private System.Windows.Forms.Button buttonBarRysujWykres;
+        private System.Windows.Forms.ComboBox cBoxBarODR;
+        private System.Windows.Forms.CheckBox chBoxBarWlaczony;
+        private System.Windows.Forms.Label labBarNazwaCzujnika;
+        private System.Windows.Forms.Label labTermODR;
     }
 }
 

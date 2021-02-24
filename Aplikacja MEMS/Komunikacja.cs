@@ -18,7 +18,7 @@ namespace Aplikacja_MEMS
             zapytanie[0] = 0x32;
             zapytanie[1] = 0x01;
             zapytanie[2] = komenda;
-
+            dopelnienie = 3;
             switch (komenda)
             {
                 case 0x02: // Poszukiwanie dostępnych urządzeń STM
