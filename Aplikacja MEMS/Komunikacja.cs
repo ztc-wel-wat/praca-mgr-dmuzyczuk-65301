@@ -10,7 +10,7 @@ namespace Aplikacja_MEMS
     class Komunikacja
     {
 
-        public static byte[] Zapytanie(byte komenda, UserForm panel, byte czujnik)
+        public static byte[] Zapytanie(byte komenda, UserForm panel, byte czujnik, byte czynnosc, byte indeks)
         {
             byte[] zapytanie = new byte[panel.serialPort.WriteBufferSize];
             int dopelnienie = 0;
@@ -25,10 +25,19 @@ namespace Aplikacja_MEMS
                     dopelnienie = 3;
                     break;
 
-                case 0x50: // Podaj liste dostępnych czujników...
-                            zapytanie[3] = 0x14;
-                            zapytanie[4] = czujnik;
+                case 0x50: // Wykonaj...
+                    zapytanie[3] = czynnosc;
+                    zapytanie[4] = czujnik;
+                    switch (czynnosc)
+                    {
+                        case 0x14:  // Podaj listę dostępnych czujników
                             dopelnienie = 5;
+                            break;
+                        case 0x15:  // Załaduj czujniki o indeksie...
+                            zapytanie[5] = indeks;
+                            dopelnienie = 6;
+                            break;
+                    }
                     break;
 
 
@@ -37,7 +46,10 @@ namespace Aplikacja_MEMS
             zapytanie[dopelnienie] = SumaKontrolna(zapytanie, dopelnienie);
             zapytanie[dopelnienie + 1] = 0xf0;
 
-            return zapytanie;
+            byte[] zwroc = new byte[dopelnienie + 2];
+            Array.Copy(zapytanie, zwroc, dopelnienie + 2);
+
+            return zwroc;
         }
         
         public static byte[] OdbierzListyCzujnikow(byte[] dane, UserForm panel)

@@ -16,6 +16,7 @@ namespace Aplikacja_MEMS
     {
         List<Control> wlaczWylacz = new List<Control>();
         List<ComboBox> wyczysc = new List<ComboBox>();
+        List<GroupBox> czujniki = new List<GroupBox>();
 
         string[] portyCOM;
         Ladowanie ladowanie = new Ladowanie();
@@ -42,6 +43,8 @@ namespace Aplikacja_MEMS
             wlaczWylacz.Add(buttonStart);
             wlaczWylacz.Add(buttonZamknij);
             wlaczWylacz.Add(cBoxPorty);
+            wlaczWylacz.Add(buttonStart);
+            wlaczWylacz.Add(buttonStop);
 
             // Lista comboboxów do wyczyszczenia po ponownym załądowaniu portu COM
             wyczysc.Add(cBoxAkcelerometr);
@@ -50,6 +53,14 @@ namespace Aplikacja_MEMS
             wyczysc.Add(cBoxMagnetometr);
             wyczysc.Add(cBoxTermometr);
             wyczysc.Add(cBoxZyroskop);
+
+            // Lista groupBoxów do włączania/wyłączania podczas przesyłu danych
+            czujniki.Add(gBoxAkcelerometr);
+            czujniki.Add(gBoxBarometr);
+            czujniki.Add(gBoxHigrometr);
+            czujniki.Add(gBoxMagnetometr);
+            czujniki.Add(gBoxTermometr);
+            czujniki.Add(gBoxŻyroskop);
 
             ladowaniePaska = new ThreadStart(StartPaska);
             pasek = new Thread(ladowaniePaska);
@@ -77,7 +88,7 @@ namespace Aplikacja_MEMS
                     serialPort.Open();
 
                     // Wysłanie zapytania do urządzenia 
-                    serialPort.Write(Komunikacja.Zapytanie(0x02, this, 0x00), 0, 5);
+                    serialPort.Write(Komunikacja.Zapytanie(0x02, this, 0x00, 0x00, 0x00), 0, 5);
 
                     // Pobranie odpowiedzi z bufora COM
                     byte[] odp = new byte[serialPort.ReadBufferSize];
@@ -167,7 +178,6 @@ namespace Aplikacja_MEMS
             try
             {
                 byte[] odp = new byte[serialPort.ReadBufferSize];
-                int licznik = 0;
 
                 serialPort.PortName = cBoxPorty.Text;
                 serialPort.Open();
@@ -182,12 +192,12 @@ namespace Aplikacja_MEMS
                 cBoxPorty.Enabled = false;
 
                 // Pobranie list czujnikow
-                byte[] listaAkcelerometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x01), this); // Akcelerometry
-                byte[] listaZyroskopow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x02), this); // Żyroskopy
-                byte[] listaMagnetometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x03), this); // Magnetometry
-                byte[] listaTermometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x04), this); // Termometry
-                byte[] listaHigrometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x05), this); // Higrometry
-                byte[] listaBarometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x06), this); // Barometry
+                byte[] listaAkcelerometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x01, 0x14, 0x00), this); // Akcelerometry
+                byte[] listaZyroskopow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x02, 0x14, 0x00), this); // Żyroskopy
+                byte[] listaMagnetometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x03, 0x14, 0x00), this); // Magnetometry
+                byte[] listaTermometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x04, 0x14, 0x00), this); // Termometry
+                byte[] listaHigrometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x05, 0x14, 0x00), this); // Higrometry
+                byte[] listaBarometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x06, 0x14, 0x00), this); // Barometry
 
                 // Wypisanie list do combo boxów
                 ZaladujListeUrzadzen("Akcelerometr", listaAkcelerometrow);
@@ -204,12 +214,10 @@ namespace Aplikacja_MEMS
                     control.Enabled = true;
                 }
                 buttonOtworz.Enabled = false;
+                buttonStop.Enabled = false;
                 cBoxPorty.Enabled = false;
 
-
                 progressBarCOM.Value = 100;
-
-
             }
             catch (Exception exc)
             {
@@ -229,12 +237,6 @@ namespace Aplikacja_MEMS
                 cBoxPorty.Enabled = true;
             }
         }
-
-        private void bgWorkerOtworz_DoWork(object sender, DoWorkEventArgs e)
-        {
-
-        }
-
         private void buttonZamknij_Click(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
@@ -248,6 +250,14 @@ namespace Aplikacja_MEMS
             {
                 control.Enabled = false;
             }
+
+            // Blokowanie groupBoxów
+            foreach (GroupBox box in czujniki)
+            {
+                box.Enabled = false;
+            }
+
+            progressBarDane.Value = 0;
 
             buttonOtworz.Enabled = true;
             cBoxPorty.Enabled = true;
@@ -330,6 +340,49 @@ namespace Aplikacja_MEMS
             }
             progressBarCOM.Value += 5;
 
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            foreach(ComboBox combo in wyczysc)
+            {
+                byte[] buffer = new byte[serialPort.ReadBufferSize];
+                serialPort.Write(Komunikacja.Zapytanie(0x50, this, (byte)(i+1), 0x15, (byte)combo.Items.IndexOf(combo.Text)), 0, 8);
+               // serialPort.Read(buffer, 0, serialPort.ReadBufferSize);
+                i++;
+            }
+
+
+
+
+            // Wyswietlenie drugiej zakładki
+            tabControlCzujniki.SelectedIndex = 1;
+
+            // Odblokowanie groupBoxów
+            foreach(GroupBox box in czujniki)
+            {
+                box.Enabled = true;
+            }
+
+            buttonStart.Enabled = false;
+            buttonStop.Enabled = true;
+
+            progressBarDane.Value = 100;
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            // Blokowanie groupBoxów
+            foreach (GroupBox box in czujniki)
+            {
+                box.Enabled = false;
+            }
+
+            buttonStart.Enabled = true;
+            buttonStop.Enabled = false;
+
+            progressBarDane.Value = 0;
         }
     }
 }
