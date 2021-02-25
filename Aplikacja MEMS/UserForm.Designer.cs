@@ -154,7 +154,7 @@ namespace Aplikacja_MEMS
             this.buttonAkcRysujWykres = new System.Windows.Forms.Button();
             this.labAkcLiczbaProbek = new System.Windows.Forms.Label();
             this.labAkcSkala = new System.Windows.Forms.Label();
-            this.chBoxWlaczonyAkc = new System.Windows.Forms.CheckBox();
+            this.chBoxAkcWlaczony = new System.Windows.Forms.CheckBox();
             this.tabPageDane = new System.Windows.Forms.TabPage();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1493,7 +1493,7 @@ namespace Aplikacja_MEMS
             this.gBoxAkcelerometr.Controls.Add(this.buttonAkcRysujWykres);
             this.gBoxAkcelerometr.Controls.Add(this.labAkcLiczbaProbek);
             this.gBoxAkcelerometr.Controls.Add(this.labAkcSkala);
-            this.gBoxAkcelerometr.Controls.Add(this.chBoxWlaczonyAkc);
+            this.gBoxAkcelerometr.Controls.Add(this.chBoxAkcWlaczony);
             this.gBoxAkcelerometr.Enabled = false;
             this.gBoxAkcelerometr.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.gBoxAkcelerometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -1671,19 +1671,20 @@ namespace Aplikacja_MEMS
             this.labAkcSkala.TabIndex = 2;
             this.labAkcSkala.Text = "Skala (oś Y):";
             // 
-            // chBoxWlaczonyAkc
+            // chBoxAkcWlaczony
             // 
-            this.chBoxWlaczonyAkc.AutoSize = true;
-            this.chBoxWlaczonyAkc.Checked = true;
-            this.chBoxWlaczonyAkc.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chBoxWlaczonyAkc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chBoxWlaczonyAkc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxWlaczonyAkc.Location = new System.Drawing.Point(9, 37);
-            this.chBoxWlaczonyAkc.Name = "chBoxWlaczonyAkc";
-            this.chBoxWlaczonyAkc.Size = new System.Drawing.Size(78, 19);
-            this.chBoxWlaczonyAkc.TabIndex = 1;
-            this.chBoxWlaczonyAkc.Text = "Włączony";
-            this.chBoxWlaczonyAkc.UseVisualStyleBackColor = true;
+            this.chBoxAkcWlaczony.AutoSize = true;
+            this.chBoxAkcWlaczony.Checked = true;
+            this.chBoxAkcWlaczony.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chBoxAkcWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chBoxAkcWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.chBoxAkcWlaczony.Location = new System.Drawing.Point(9, 37);
+            this.chBoxAkcWlaczony.Name = "chBoxAkcWlaczony";
+            this.chBoxAkcWlaczony.Size = new System.Drawing.Size(78, 19);
+            this.chBoxAkcWlaczony.TabIndex = 1;
+            this.chBoxAkcWlaczony.Text = "Włączony";
+            this.chBoxAkcWlaczony.UseVisualStyleBackColor = true;
+            this.chBoxAkcWlaczony.CheckedChanged += new System.EventHandler(this.chBoxAkcWlaczony_CheckedChanged);
             // 
             // tabPageDane
             // 
@@ -1936,7 +1937,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Label labAkcLiczbaProbek;
         private System.Windows.Forms.ComboBox cBoxAkcSkala;
         private System.Windows.Forms.Label labAkcSkala;
-        private System.Windows.Forms.CheckBox chBoxWlaczonyAkc;
+        private System.Windows.Forms.CheckBox chBoxAkcWlaczony;
         private System.Windows.Forms.Label labAkcNazwa;
         private System.Windows.Forms.Label labHigODR;
         private System.Windows.Forms.GroupBox gBoxHigRejestr;

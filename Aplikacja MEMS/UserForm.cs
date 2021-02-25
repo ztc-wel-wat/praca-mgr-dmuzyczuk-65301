@@ -24,6 +24,15 @@ namespace Aplikacja_MEMS
         ThreadStart ladowaniePaska;
         Thread pasek;
 
+        Czujnik akcelerometr;
+        Czujnik zyroskop;
+        Czujnik magnetometr;
+        Czujnik termometr;
+        Czujnik barometr;
+        Czujnik higrometr;
+
+        byte czujnik = 0x77;
+
         public UserForm()
         {
             InitializeComponent();
@@ -84,7 +93,7 @@ namespace Aplikacja_MEMS
             {
 
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 // Usunąć plik
             }
@@ -106,6 +115,7 @@ namespace Aplikacja_MEMS
 
                 try
                 {
+                    // Otwarcie portu
                     serialPort.PortName = port;
                     serialPort.Open();
 
@@ -133,7 +143,6 @@ namespace Aplikacja_MEMS
                         portyMEMS.Add(port);
 
                     }
-
                     serialPort.Close();
                 }
                 catch (Exception exc)
@@ -152,6 +161,7 @@ namespace Aplikacja_MEMS
             {
                 cBoxPorty.Items.Add(port);
             }
+
             bgW = new BackgroundWorker();
             bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
             bgW.RunWorkerAsync();
@@ -199,11 +209,8 @@ namespace Aplikacja_MEMS
                 }
 
                 // Wysłanie ustawień początkowych aplikacji
-                byte czujnik = 0x00;
-                if (chBoxBarWlaczony.Checked == true) ;
 
                 serialPort.Write(Komunikacja.Zapytanie(0x0C, 0x00, 0x00, 0x00), 0, 12);
-
 
                 buttonOtworz.Enabled = false;
                 cBoxPorty.Enabled = false;
@@ -230,6 +237,7 @@ namespace Aplikacja_MEMS
                 {
                     control.Enabled = true;
                 }
+
                 buttonOtworz.Enabled = false;
                 buttonStop.Enabled = false;
                 cBoxPorty.Enabled = false;
@@ -272,6 +280,9 @@ namespace Aplikacja_MEMS
             {
                 box.Enabled = false;
             }
+            
+            // Wstrzymanie wysylania informacji przez płytkę
+            serialPort.Write(Komunikacja.Zapytanie(0x09, 0x00, 0x00, 0x00), 0, 5);
 
             progressBarDane.Value = 0;
 
@@ -365,57 +376,70 @@ namespace Aplikacja_MEMS
         }
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            int i = 0;
-
-            // Blokowanie comboBoxów oraz wysyłąnie informacji o wybranym czujniku
-            foreach (ComboBox combo in wyczysc)
+            try
             {
-                combo.Enabled = false;
-                serialPort.Write(Komunikacja.Zapytanie(0x50, (byte)(i + 1), 0x15, (byte)combo.Items.IndexOf(combo.Text)), 0, 8);
-                i++;
+                int i = 0;
+
+                // Blokowanie comboBoxów oraz wysyłanie informacji o wybranym czujniku
+                foreach (ComboBox combo in wyczysc)
+                {
+                    combo.Enabled = false;
+                    serialPort.Write(Komunikacja.Zapytanie(0x50, (byte)(i + 1), 0x15, (byte)combo.Items.IndexOf(combo.Text)), 0, 8);
+                    i++;
+                }
+
+                // Wysłanie listy włączonych urządzeń
+                serialPort.Write(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00), 0, 13);
+
+                akcelerometr = new Czujnik("Akcelerometr", cBoxAkcelerometr.Text, gBoxAkcelerometr, serialPort);
+                zyroskop = new Czujnik("Żyroskop", cBoxZyroskop.Text, gBoxZyroskop, serialPort);
+                magnetometr = new Czujnik("Magnetometr", cBoxMagnetometr.Text, gBoxMagnetometr, serialPort);
+                termometr = new Czujnik("Termometr", cBoxTermometr.Text, gBoxTermometr, serialPort);
+                barometr = new Czujnik("Barometr", cBoxBarometr.Text, gBoxBarometr, serialPort);
+                higrometr = new Czujnik("Higrometr", cBoxHigrometr.Text, gBoxHigrometr, serialPort);
+
+                czujniki.Add(akcelerometr);
+                czujniki.Add(zyroskop);
+                czujniki.Add(barometr);
+                czujniki.Add(termometr);
+                czujniki.Add(magnetometr);
+                czujniki.Add(higrometr);
+
+                // Rozpoczęcie pobierania danych
+                Komunikacja.Odbior(serialPort);
+
+                // Wyswietlenie drugiej zakładki
+                tabControlCzujniki.SelectedIndex = 1;
+
+                // Odblokowanie groupBoxów
+                foreach (GroupBox box in gBoxCzujnikiMEMS)
+                {
+                    box.Enabled = true;
+                }
+
+                // Odblokowywanie comboBoxów dostępnych czujników
+                foreach (ComboBox combo in wyczysc)
+                {
+                    combo.Enabled = false;
+                }
+
+                buttonStart.Enabled = false;
+                buttonStop.Enabled = true;
+
+                progressBarDane.Value = 100;
             }
-
-            Czujnik akcelerometr = new Czujnik("Akcelerometr", cBoxAkcelerometr.Text, gBoxAkcelerometr, serialPort);
-            Czujnik zyroskop = new Czujnik("Żyroskop", cBoxZyroskop.Text, gBoxZyroskop, serialPort);
-            Czujnik magnetometr = new Czujnik("Magnetometr", cBoxMagnetometr.Text, gBoxMagnetometr, serialPort);
-            Czujnik termometr = new Czujnik("Termometr", cBoxTermometr.Text, gBoxTermometr, serialPort);
-            Czujnik barometr = new Czujnik("Barometr", cBoxBarometr.Text, gBoxBarometr, serialPort);
-            Czujnik higrometr = new Czujnik("Higrometr", cBoxHigrometr.Text, gBoxHigrometr, serialPort);
-
-            czujniki.Add(akcelerometr);
-            czujniki.Add(zyroskop);
-            czujniki.Add(barometr);
-            czujniki.Add(termometr);
-            czujniki.Add(magnetometr);
-            czujniki.Add(higrometr);
-
-            // Rozpoczęcie pobierania danych
-            Komunikacja.Odbior(serialPort);
-
-            // Wyswietlenie drugiej zakładki
-            tabControlCzujniki.SelectedIndex = 1;
-
-            // Odblokowanie groupBoxów
-            foreach (GroupBox box in gBoxCzujnikiMEMS)
+            catch(Exception exc)
             {
-                box.Enabled = true;
+                // Wstrzymaj odbiór danych
+                Komunikacja.StopOdbior();
             }
-
-            // Odblokowywanie comboBoxów dostępnych czujników
-            foreach (ComboBox combo in wyczysc)
-            {
-                combo.Enabled = false;
-            }
-
-            buttonStart.Enabled = false;
-            buttonStop.Enabled = true;
-
-            progressBarDane.Value = 100;
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
+            // Wstrzymanie wysylania informacji przez płytkę
             serialPort.Write(Komunikacja.Zapytanie(0x09, 0x00, 0x00, 0x00), 0, 5);
+
             // Blokowanie groupBoxów
             foreach (GroupBox box in gBoxCzujnikiMEMS)
             {
@@ -427,6 +451,10 @@ namespace Aplikacja_MEMS
             {
                 combo.Enabled = true;
             }
+
+            // Wstrzymaj odbiór danych
+            Komunikacja.StopOdbior();
+
             buttonStart.Enabled = true;
             buttonStop.Enabled = false;
 
@@ -435,50 +463,97 @@ namespace Aplikacja_MEMS
 
         private void chBoxWlaczonyAkc_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxWlaczonyAkc.Checked == true)
-                czujniki[0].SendMessage(Komunikacja.Zapytanie(0x08, 0x10, 0x00, 0x00));
-            else
-                czujniki[0].SendMessage(Komunikacja.Zapytanie(0x08, 0x00, 0x00, 0x00));
+           
         }
 
         private void chBoxZyroWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxWlaczonyAkc.Checked == true)
-                czujniki[1].SendMessage(Komunikacja.Zapytanie(0x08, 0x20, 0x00, 0x00));
+            if (chBoxAkcWlaczony.Checked == true)
+            {
+                czujnik += 0x20;
+            }
             else
-                czujniki[1].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
+            {
+                czujnik -= 0x20;
+            }
+            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00), serialPort);
+
+            zyroskop.wlaczony = chBoxZyroWlaczony.Checked;
         }
 
         private void chBoxMagWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxWlaczonyAkc.Checked == true)
-                czujniki[2].SendMessage(Komunikacja.Zapytanie(0x08, 0x40, 0x00, 0x00));
+            if (chBoxAkcWlaczony.Checked == true)
+            {
+                czujnik += 0x40;
+            }
             else
-                czujniki[2].SendMessage(Komunikacja.Zapytanie(0x08, 0x07, 0x00, 0x00));
+            {
+                czujnik -= 0x40;
+            }
+            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00), serialPort);
+
+            magnetometr.wlaczony = chBoxMagWlaczony.Checked;
         }
 
         private void chBoxTermWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxWlaczonyAkc.Checked == true)
-                czujniki[3].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
+            if (chBoxAkcWlaczony.Checked == true)
+            {
+                czujnik += 0x02;
+            }
             else
-                czujniki[3].SendMessage(Komunikacja.Zapytanie(0x08, 0x00, 0x00, 0x00));
+            {
+                czujnik -= 0x02;
+            }
+            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00), serialPort);
+
+            termometr.wlaczony = chBoxTermWlaczony.Checked;
         }
 
         private void chBoxBarWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxWlaczonyAkc.Checked == true)
-                czujniki[4].SendMessage(Komunikacja.Zapytanie(0x08, 0x01, 0x00, 0x00));
+            if (chBoxAkcWlaczony.Checked == true)
+            {
+                czujnik += 0x01;
+            }
             else
-                czujniki[4].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
+            {
+                czujnik -= 0x01;
+            }
+            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00), serialPort);
+
+            barometr.wlaczony = chBoxBarWlaczony.Checked;
         }
 
         private void chBoxHigWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxWlaczonyAkc.Checked == true)
-                czujniki[5].SendMessage(Komunikacja.Zapytanie(0x08, 0x04, 0x00, 0x00));
+            if (chBoxAkcWlaczony.Checked == true)
+            {
+                czujnik += 0x04;
+            }
             else
-                czujniki[5].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
+            {
+                czujnik -= 0x04;
+            }
+            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00), serialPort);
+
+            higrometr.wlaczony = chBoxHigWlaczony.Checked;
+        }
+
+        private void chBoxAkcWlaczony_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxAkcWlaczony.Checked == true)
+            {
+                czujnik += 0x10;
+            }
+            else
+            {
+                czujnik -= 0x10;
+            }
+            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00), serialPort);
+
+            akcelerometr.wlaczony = chBoxAkcWlaczony.Checked;
         }
     }
 }

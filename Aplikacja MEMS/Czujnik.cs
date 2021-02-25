@@ -14,10 +14,10 @@ namespace Aplikacja_MEMS
     {
         private string nazwa;
         private string model;
-        private bool wlaczony = false;
+        public bool wlaczony = true;
         private GroupBox informacje;
         private SerialPort port;
-        private byte[] wiadomosc;
+        private static byte[] wiadomosc;
 
         public Czujnik(string n, string m, GroupBox i, SerialPort p)
         {
@@ -29,16 +29,17 @@ namespace Aplikacja_MEMS
             informacje.Controls[0].Text = "Nazwa czujnika: " + model;
         }
 
-        public void SendMessage(byte[] doWyslania)
+        public static void SendMessage(byte[] doWyslania, SerialPort port)
         {
             wiadomosc = doWyslania;
             BackgroundWorker bgWorkWyslij = new BackgroundWorker();
-            bgWorkWyslij.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorkWyslij_DoWork);
-            bgWorkWyslij.RunWorkerAsync();
+            bgWorkWyslij.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWyslij_DoWork);
+            bgWorkWyslij.RunWorkerAsync(argument: port);
         }
 
-        private void bgWorkWyslij_DoWork(object sender, DoWorkEventArgs e)
+        private static void bgWorkWyslij_DoWork(object sender, DoWorkEventArgs e)
         {
+            SerialPort port = (SerialPort)e.Argument;
             port.Write(wiadomosc, 0, wiadomosc.Length);
         }
     }

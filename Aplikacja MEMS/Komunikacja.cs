@@ -12,6 +12,7 @@ namespace Aplikacja_MEMS
 {
     class Komunikacja
     {
+        static BackgroundWorker bgWorkOdbierz;
 
         public static byte[] Zapytanie(byte komenda, byte czujnik, byte czynnosc, byte indeks)
         {
@@ -27,9 +28,9 @@ namespace Aplikacja_MEMS
                 case 0x0C:
                     byte[] czas = ObecnyCzas();
 
-                    for(int i = 0; i <3; i++)
+                    for (int i = 0; i < 3; i++)
                     {
-                        zapytanie[i+3] = czas[i];
+                        zapytanie[i + 3] = czas[i];
                     }
 
                     zapytanie[6] = 0x15;
@@ -58,7 +59,7 @@ namespace Aplikacja_MEMS
                     }
                     break;
 
-                case 0x08:
+                case 0x08: // Zmien stan czujnika
                     zapytanie[3] = czujnik;
                     zapytanie[4] = 0x00;
                     zapytanie[5] = 0x00;
@@ -81,7 +82,7 @@ namespace Aplikacja_MEMS
 
             return zwroc;
         }
-        
+
         public static byte[] OdbierzListyCzujnikow(byte[] dane, SerialPort port, ProgressBar pb)
         {
             int licznik = 0;
@@ -106,7 +107,7 @@ namespace Aplikacja_MEMS
         {
             // Obliczanie sumy kontrolnej (przedostatni bajt ramki)
             byte wartosc = 0xFF;
-            for(int i =0; i< dlugosc; i++)
+            for (int i = 0; i < dlugosc; i++)
             {
                 wartosc -= dane[i];
             }
@@ -131,19 +132,29 @@ namespace Aplikacja_MEMS
 
         public static void Odbior(SerialPort port)
         {
-            BackgroundWorker bgWorkOdbierz = new BackgroundWorker();
+            bgWorkOdbierz = new BackgroundWorker();
+            bgWorkOdbierz.WorkerSupportsCancellation = true;
             bgWorkOdbierz.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkOdbierz_DoWork);
             bgWorkOdbierz.RunWorkerAsync(argument: port);
         }
 
+        public static void StopOdbior()
+        {
+            if(bgWorkOdbierz.IsBusy)
+            bgWorkOdbierz.CancelAsync();
+        }
         private static void bgWorkOdbierz_DoWork(object sender, DoWorkEventArgs e)
         {
             SerialPort port = (SerialPort)e.Argument;
             byte[] dane = new byte[4096];
 
-            while(true)
+            while (true)
             {
-                port.Read(dane, 0, 4096);
+                try
+                {
+                    port.Read(dane, 0, 4096);
+                }
+                catch (Exception exc) { }
             }
         }
 
