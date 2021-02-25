@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
     class Komunikacja
     {
 
-        public static byte[] Zapytanie(byte komenda, UserForm panel, byte czujnik, byte czynnosc, byte indeks)
+        public static byte[] Zapytanie(byte komenda, byte czujnik, byte czynnosc, byte indeks)
         {
-            byte[] zapytanie = new byte[panel.serialPort.WriteBufferSize];
+            byte[] zapytanie = new byte[2048];
             int dopelnienie = 0;
 
             zapytanie[0] = 0x32;
@@ -40,34 +42,46 @@ namespace Aplikacja_MEMS
                     }
                     break;
 
-
+                case 0x08:
+                    zapytanie[3] = czujnik;
+                    zapytanie[4] = 0x00;
+                    zapytanie[5] = 0x00;
+                    zapytanie[6] = 0x00;
+                    zapytanie[7] = 0xF4;
+                    zapytanie[8] = 0x01;
+                    zapytanie[9] = 0x00;
+                    zapytanie[10] = 0x00;
+                    dopelnienie = 11;
+                    break;
             }
 
+            // Dodawanie sumy kontrolnej
             zapytanie[dopelnienie] = SumaKontrolna(zapytanie, dopelnienie);
             zapytanie[dopelnienie + 1] = 0xf0;
 
+            // Wstawianie danych do tablicy zwrotnej
             byte[] zwroc = new byte[dopelnienie + 2];
             Array.Copy(zapytanie, zwroc, dopelnienie + 2);
 
             return zwroc;
         }
         
-        public static byte[] OdbierzListyCzujnikow(byte[] dane, UserForm panel)
+        public static byte[] OdbierzListyCzujnikow(byte[] dane, SerialPort port, ProgressBar pb)
         {
             int licznik = 0;
-            byte[] odp = new byte[panel.serialPort.ReadBufferSize];
+            byte[] odp = new byte[port.ReadBufferSize];
 
             // Wyslanie zapytania o dostępne czujniki
-            panel.serialPort.Write(dane, 0, 7);
+            port.Write(dane, 0, 7);
             Thread.Sleep(100); // Uśpienie wątku, aby płytka zdążyła odpowiedzieć
             // Odebranie listy czujników (w bajtach)
-            licznik = panel.serialPort.Read(odp, 0, panel.serialPort.ReadBufferSize);
+            licznik = port.Read(odp, 0, port.ReadBufferSize);
 
             // Przekopiowanie do tablicy o dopasowanym rozmiarze
             byte[] odpowiedz = new byte[licznik];
             Array.Copy(odp, odpowiedz, licznik);
 
-            panel.progressBarCOM.Value += 10;
+            pb.Value += 10;
 
             return odpowiedz;
         }

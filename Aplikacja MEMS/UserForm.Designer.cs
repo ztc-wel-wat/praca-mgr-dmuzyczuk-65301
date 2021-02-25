@@ -593,10 +593,10 @@ namespace Aplikacja_MEMS
             // gBoxHigrometr
             // 
             this.gBoxHigrometr.Controls.Add(this.labHigNazwaCzujnika);
+            this.gBoxHigrometr.Controls.Add(this.cBoxHigODR);
             this.gBoxHigrometr.Controls.Add(this.labHigODR);
             this.gBoxHigrometr.Controls.Add(this.gBoxHigRejestr);
             this.gBoxHigrometr.Controls.Add(this.buttonHigRysujWykres);
-            this.gBoxHigrometr.Controls.Add(this.cBoxHigODR);
             this.gBoxHigrometr.Controls.Add(this.chBoxHigWlaczony);
             this.gBoxHigrometr.Enabled = false;
             this.gBoxHigrometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -756,11 +756,11 @@ namespace Aplikacja_MEMS
             // gBoxMagnetometr
             // 
             this.gBoxMagnetometr.Controls.Add(this.labMagNazwaCzujnika);
+            this.gBoxMagnetometr.Controls.Add(this.cBoxMagODR);
+            this.gBoxMagnetometr.Controls.Add(this.cBoxMagSkala);
             this.gBoxMagnetometr.Controls.Add(this.gBoxMagRejestr);
             this.gBoxMagnetometr.Controls.Add(this.buttonMagRysujWykres);
-            this.gBoxMagnetometr.Controls.Add(this.cBoxMagODR);
             this.gBoxMagnetometr.Controls.Add(this.labMagODR);
-            this.gBoxMagnetometr.Controls.Add(this.cBoxMagSkala);
             this.gBoxMagnetometr.Controls.Add(this.labMagSkala);
             this.gBoxMagnetometr.Controls.Add(this.chBoxMagWlaczony);
             this.gBoxMagnetometr.Enabled = false;
@@ -945,10 +945,10 @@ namespace Aplikacja_MEMS
             // gBoxBarometr
             // 
             this.gBoxBarometr.Controls.Add(this.labBarNazwaCzujnika);
+            this.gBoxBarometr.Controls.Add(this.cBoxBarODR);
             this.gBoxBarometr.Controls.Add(this.labBarODR);
             this.gBoxBarometr.Controls.Add(this.gBoxBarRejestr);
             this.gBoxBarometr.Controls.Add(this.buttonBarRysujWykres);
-            this.gBoxBarometr.Controls.Add(this.cBoxBarODR);
             this.gBoxBarometr.Controls.Add(this.chBoxBarWlaczony);
             this.gBoxBarometr.Enabled = false;
             this.gBoxBarometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -1108,11 +1108,11 @@ namespace Aplikacja_MEMS
             // gBoxZyroskop
             // 
             this.gBoxZyroskop.Controls.Add(this.LabZyroNazwaCzujnika);
+            this.gBoxZyroskop.Controls.Add(this.cBoxZyroODR);
+            this.gBoxZyroskop.Controls.Add(this.cBoxZyroSkala);
             this.gBoxZyroskop.Controls.Add(this.gBoxZyroRejestr);
             this.gBoxZyroskop.Controls.Add(this.buttonZyroRysujWykres);
-            this.gBoxZyroskop.Controls.Add(this.cBoxZyroODR);
             this.gBoxZyroskop.Controls.Add(this.labZyroODR);
-            this.gBoxZyroskop.Controls.Add(this.cBoxZyroSkala);
             this.gBoxZyroskop.Controls.Add(this.labZyroSkala);
             this.gBoxZyroskop.Controls.Add(this.chBoxZyroWlaczony);
             this.gBoxZyroskop.Enabled = false;
@@ -1307,10 +1307,10 @@ namespace Aplikacja_MEMS
             // gBoxTermometr
             // 
             this.gBoxTermometr.Controls.Add(this.labTermNazwaCzujnika);
+            this.gBoxTermometr.Controls.Add(this.cBoxTermODR);
             this.gBoxTermometr.Controls.Add(this.labTermODR);
             this.gBoxTermometr.Controls.Add(this.gBoxTermRejestr);
             this.gBoxTermometr.Controls.Add(this.buttonTermRysujWYkres);
-            this.gBoxTermometr.Controls.Add(this.cBoxTermODR);
             this.gBoxTermometr.Controls.Add(this.chBoxTermWlaczony);
             this.gBoxTermometr.Enabled = false;
             this.gBoxTermometr.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -1472,11 +1472,11 @@ namespace Aplikacja_MEMS
             // gBoxAkcelerometr
             // 
             this.gBoxAkcelerometr.Controls.Add(this.labAkcNazwa);
+            this.gBoxAkcelerometr.Controls.Add(this.cBoxAkcODR);
+            this.gBoxAkcelerometr.Controls.Add(this.cBoxAkcSkala);
             this.gBoxAkcelerometr.Controls.Add(this.gBoxAkcRejestr);
             this.gBoxAkcelerometr.Controls.Add(this.buttonAkcRysujWykres);
-            this.gBoxAkcelerometr.Controls.Add(this.cBoxAkcODR);
             this.gBoxAkcelerometr.Controls.Add(this.labAkcLiczbaProbek);
-            this.gBoxAkcelerometr.Controls.Add(this.cBoxAkcSkala);
             this.gBoxAkcelerometr.Controls.Add(this.labAkcSkala);
             this.gBoxAkcelerometr.Controls.Add(this.chBoxWlaczonyAkc);
             this.gBoxAkcelerometr.Enabled = false;
@@ -1807,6 +1807,16 @@ namespace Aplikacja_MEMS
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            cBoxAkcODR.Text = cBoxAkcODR.Items[0].ToString();
+            cBoxBarODR.Text = cBoxBarODR.Items[0].ToString();
+            cBoxMagODR.Text = cBoxMagODR.Items[0].ToString();
+            cBoxZyroODR.Text = cBoxZyroODR.Items[0].ToString();
+            cBoxTermODR.Text = cBoxTermODR.Items[0].ToString();
+            cBoxHigODR.Text = cBoxHigODR.Items[0].ToString();
+
+            cBoxAkcSkala.Text = cBoxAkcSkala.Items[0].ToString();
+            cBoxMagSkala.Text = cBoxMagSkala.Items[0].ToString();
+            cBoxZyroSkala.Text = cBoxZyroSkala.Items[0].ToString();
         }
 
         #endregion

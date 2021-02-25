@@ -99,7 +99,7 @@ namespace Aplikacja_MEMS
                     serialPort.Open();
 
                     // Wysłanie zapytania do urządzenia 
-                    serialPort.Write(Komunikacja.Zapytanie(0x02, this, 0x00, 0x00, 0x00), 0, 5);
+                    serialPort.Write(Komunikacja.Zapytanie(0x02, 0x00, 0x00, 0x00), 0, 5);
 
                     // Pobranie odpowiedzi z bufora COM
                     byte[] odp = new byte[serialPort.ReadBufferSize];
@@ -191,12 +191,12 @@ namespace Aplikacja_MEMS
                 cBoxPorty.Enabled = false;
 
                 // Pobranie list czujnikow
-                byte[] listaAkcelerometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x01, 0x14, 0x00), this); // Akcelerometry
-                byte[] listaZyroskopow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x02, 0x14, 0x00), this); // Żyroskopy
-                byte[] listaMagnetometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x03, 0x14, 0x00), this); // Magnetometry
-                byte[] listaTermometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x04, 0x14, 0x00), this); // Termometry
-                byte[] listaHigrometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x05, 0x14, 0x00), this); // Higrometry
-                byte[] listaBarometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, this, 0x06, 0x14, 0x00), this); // Barometry
+                byte[] listaAkcelerometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x01, 0x14, 0x00), serialPort, progressBarCOM); // Akcelerometry
+                byte[] listaZyroskopow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x02, 0x14, 0x00), serialPort, progressBarCOM); // Żyroskopy
+                byte[] listaMagnetometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x03, 0x14, 0x00), serialPort, progressBarCOM); // Magnetometry
+                byte[] listaTermometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x04, 0x14, 0x00), serialPort, progressBarCOM); // Termometry
+                byte[] listaHigrometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x05, 0x14, 0x00), serialPort, progressBarCOM); // Higrometry
+                byte[] listaBarometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x06, 0x14, 0x00), serialPort, progressBarCOM); // Barometry
 
                 // Wypisanie list do combo boxów
                 ZaladujListeUrzadzen("Akcelerometr", listaAkcelerometrow);
@@ -353,16 +353,16 @@ namespace Aplikacja_MEMS
             foreach (ComboBox combo in wyczysc)
             {
                 combo.Enabled = false;
-                serialPort.Write(Komunikacja.Zapytanie(0x50, this, (byte)(i + 1), 0x15, (byte)combo.Items.IndexOf(combo.Text)), 0, 8);
+                serialPort.Write(Komunikacja.Zapytanie(0x50, (byte)(i + 1), 0x15, (byte)combo.Items.IndexOf(combo.Text)), 0, 8);
                 i++;
             }
 
-            Czujnik akcelerometr = new Czujnik("Akcelerometr", cBoxAkcelerometr.Text, gBoxAkcelerometr);
-            Czujnik zyroskop = new Czujnik("Żyroskop", cBoxZyroskop.Text, gBoxZyroskop);
-            Czujnik magnetometr = new Czujnik("Magnetometr", cBoxMagnetometr.Text, gBoxMagnetometr);
-            Czujnik termometr = new Czujnik("Termometr", cBoxTermometr.Text, gBoxTermometr);
-            Czujnik barometr = new Czujnik("Barometr", cBoxBarometr.Text, gBoxBarometr);
-            Czujnik higrometr = new Czujnik("Higrometr", cBoxHigrometr.Text, gBoxHigrometr);
+            Czujnik akcelerometr = new Czujnik("Akcelerometr", cBoxAkcelerometr.Text, gBoxAkcelerometr, serialPort);
+            Czujnik zyroskop = new Czujnik("Żyroskop", cBoxZyroskop.Text, gBoxZyroskop, serialPort);
+            Czujnik magnetometr = new Czujnik("Magnetometr", cBoxMagnetometr.Text, gBoxMagnetometr, serialPort);
+            Czujnik termometr = new Czujnik("Termometr", cBoxTermometr.Text, gBoxTermometr, serialPort);
+            Czujnik barometr = new Czujnik("Barometr", cBoxBarometr.Text, gBoxBarometr, serialPort);
+            Czujnik higrometr = new Czujnik("Higrometr", cBoxHigrometr.Text, gBoxHigrometr, serialPort);
 
             czujniki.Add(akcelerometr);
             czujniki.Add(zyroskop);
@@ -394,7 +394,7 @@ namespace Aplikacja_MEMS
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            serialPort.Write(Komunikacja.Zapytanie(0x09, this, 0x00, 0x00, 0x00), 0, 5);
+            serialPort.Write(Komunikacja.Zapytanie(0x09, 0x00, 0x00, 0x00), 0, 5);
             // Blokowanie groupBoxów
             foreach (GroupBox box in gBoxCzujnikiMEMS)
             {
@@ -410,6 +410,14 @@ namespace Aplikacja_MEMS
             buttonStop.Enabled = false;
 
             progressBarDane.Value = 0;
+        }
+
+        private void chBoxWlaczonyAkc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxWlaczonyAkc.Checked == true)
+                czujniki[0].SendMessage(Komunikacja.Zapytanie(0x08, 0x10, 0x00, 0x00));
+            else
+                czujniki[0].SendMessage(Komunikacja.Zapytanie(0x08, 0x00, 0x00, 0x00));
         }
     }
 }
