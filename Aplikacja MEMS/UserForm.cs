@@ -62,6 +62,17 @@ namespace Aplikacja_MEMS
             gBoxCzujnikiMEMS.Add(gBoxTermometr);
             gBoxCzujnikiMEMS.Add(gBoxZyroskop);
 
+            // Parametry poczatkowe w listach wybieranych zakładki "Czujniki MEMS"
+            cBoxAkcODR.Text = cBoxAkcODR.Items[0].ToString();
+            cBoxBarODR.Text = cBoxBarODR.Items[0].ToString();
+            cBoxMagODR.Text = cBoxMagODR.Items[0].ToString();
+            cBoxZyroODR.Text = cBoxZyroODR.Items[0].ToString();
+            cBoxTermODR.Text = cBoxTermODR.Items[0].ToString();
+            cBoxHigODR.Text = cBoxHigODR.Items[0].ToString();
+
+            cBoxAkcSkala.Text = cBoxAkcSkala.Items[0].ToString();
+            cBoxMagSkala.Text = cBoxMagSkala.Items[0].ToString();
+            cBoxZyroSkala.Text = cBoxZyroSkala.Items[0].ToString();
 
             // Włączenie paska łądowania dostępnych urządzeń
             ladowaniePaska = new ThreadStart(StartPaska);
@@ -186,6 +197,13 @@ namespace Aplikacja_MEMS
                 {
                     cBox.Items.Clear();
                 }
+
+                // Wysłanie ustawień początkowych aplikacji
+                byte czujnik = 0x00;
+                if (chBoxBarWlaczony.Checked == true) ;
+
+                serialPort.Write(Komunikacja.Zapytanie(0x0C, 0x00, 0x00, 0x00), 0, 12);
+
 
                 buttonOtworz.Enabled = false;
                 cBoxPorty.Enabled = false;
@@ -371,6 +389,9 @@ namespace Aplikacja_MEMS
             czujniki.Add(magnetometr);
             czujniki.Add(higrometr);
 
+            // Rozpoczęcie pobierania danych
+            Komunikacja.Odbior(serialPort);
+
             // Wyswietlenie drugiej zakładki
             tabControlCzujniki.SelectedIndex = 1;
 
@@ -418,6 +439,46 @@ namespace Aplikacja_MEMS
                 czujniki[0].SendMessage(Komunikacja.Zapytanie(0x08, 0x10, 0x00, 0x00));
             else
                 czujniki[0].SendMessage(Komunikacja.Zapytanie(0x08, 0x00, 0x00, 0x00));
+        }
+
+        private void chBoxZyroWlaczony_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxWlaczonyAkc.Checked == true)
+                czujniki[1].SendMessage(Komunikacja.Zapytanie(0x08, 0x20, 0x00, 0x00));
+            else
+                czujniki[1].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
+        }
+
+        private void chBoxMagWlaczony_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxWlaczonyAkc.Checked == true)
+                czujniki[2].SendMessage(Komunikacja.Zapytanie(0x08, 0x40, 0x00, 0x00));
+            else
+                czujniki[2].SendMessage(Komunikacja.Zapytanie(0x08, 0x07, 0x00, 0x00));
+        }
+
+        private void chBoxTermWlaczony_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxWlaczonyAkc.Checked == true)
+                czujniki[3].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
+            else
+                czujniki[3].SendMessage(Komunikacja.Zapytanie(0x08, 0x00, 0x00, 0x00));
+        }
+
+        private void chBoxBarWlaczony_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxWlaczonyAkc.Checked == true)
+                czujniki[4].SendMessage(Komunikacja.Zapytanie(0x08, 0x01, 0x00, 0x00));
+            else
+                czujniki[4].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
+        }
+
+        private void chBoxHigWlaczony_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chBoxWlaczonyAkc.Checked == true)
+                czujniki[5].SendMessage(Komunikacja.Zapytanie(0x08, 0x04, 0x00, 0x00));
+            else
+                czujniki[5].SendMessage(Komunikacja.Zapytanie(0x08, 0x02, 0x00, 0x00));
         }
     }
 }

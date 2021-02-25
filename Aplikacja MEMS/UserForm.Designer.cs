@@ -67,6 +67,7 @@ namespace Aplikacja_MEMS
             this.tabPageCzujniki = new System.Windows.Forms.TabPage();
             this.gBoxHigrometr = new System.Windows.Forms.GroupBox();
             this.labHigNazwaCzujnika = new System.Windows.Forms.Label();
+            this.cBoxHigODR = new System.Windows.Forms.ComboBox();
             this.labHigODR = new System.Windows.Forms.Label();
             this.gBoxHigRejestr = new System.Windows.Forms.GroupBox();
             this.buttonHigWczytaj = new System.Windows.Forms.Button();
@@ -77,10 +78,11 @@ namespace Aplikacja_MEMS
             this.labHigAdres = new System.Windows.Forms.Label();
             this.buttonHigOtworz = new System.Windows.Forms.Button();
             this.buttonHigRysujWykres = new System.Windows.Forms.Button();
-            this.cBoxHigODR = new System.Windows.Forms.ComboBox();
             this.chBoxHigWlaczony = new System.Windows.Forms.CheckBox();
             this.gBoxMagnetometr = new System.Windows.Forms.GroupBox();
             this.labMagNazwaCzujnika = new System.Windows.Forms.Label();
+            this.cBoxMagODR = new System.Windows.Forms.ComboBox();
+            this.cBoxMagSkala = new System.Windows.Forms.ComboBox();
             this.gBoxMagRejestr = new System.Windows.Forms.GroupBox();
             this.buttonMagWczytaj = new System.Windows.Forms.Button();
             this.buttonMagUstaw = new System.Windows.Forms.Button();
@@ -90,13 +92,12 @@ namespace Aplikacja_MEMS
             this.labMagAdres = new System.Windows.Forms.Label();
             this.buttonMagOtworz = new System.Windows.Forms.Button();
             this.buttonMagRysujWykres = new System.Windows.Forms.Button();
-            this.cBoxMagODR = new System.Windows.Forms.ComboBox();
             this.labMagODR = new System.Windows.Forms.Label();
-            this.cBoxMagSkala = new System.Windows.Forms.ComboBox();
             this.labMagSkala = new System.Windows.Forms.Label();
             this.chBoxMagWlaczony = new System.Windows.Forms.CheckBox();
             this.gBoxBarometr = new System.Windows.Forms.GroupBox();
             this.labBarNazwaCzujnika = new System.Windows.Forms.Label();
+            this.cBoxBarODR = new System.Windows.Forms.ComboBox();
             this.labBarODR = new System.Windows.Forms.Label();
             this.gBoxBarRejestr = new System.Windows.Forms.GroupBox();
             this.buttonBarWczytaj = new System.Windows.Forms.Button();
@@ -107,10 +108,11 @@ namespace Aplikacja_MEMS
             this.labBarAdres = new System.Windows.Forms.Label();
             this.buttonBarOtworz = new System.Windows.Forms.Button();
             this.buttonBarRysujWykres = new System.Windows.Forms.Button();
-            this.cBoxBarODR = new System.Windows.Forms.ComboBox();
             this.chBoxBarWlaczony = new System.Windows.Forms.CheckBox();
             this.gBoxZyroskop = new System.Windows.Forms.GroupBox();
             this.LabZyroNazwaCzujnika = new System.Windows.Forms.Label();
+            this.cBoxZyroODR = new System.Windows.Forms.ComboBox();
+            this.cBoxZyroSkala = new System.Windows.Forms.ComboBox();
             this.gBoxZyroRejestr = new System.Windows.Forms.GroupBox();
             this.buttonZyroWczytaj = new System.Windows.Forms.Button();
             this.buttonZyroUstaw = new System.Windows.Forms.Button();
@@ -120,13 +122,12 @@ namespace Aplikacja_MEMS
             this.labZyroAdres = new System.Windows.Forms.Label();
             this.buttonZyroOtworz = new System.Windows.Forms.Button();
             this.buttonZyroRysujWykres = new System.Windows.Forms.Button();
-            this.cBoxZyroODR = new System.Windows.Forms.ComboBox();
             this.labZyroODR = new System.Windows.Forms.Label();
-            this.cBoxZyroSkala = new System.Windows.Forms.ComboBox();
             this.labZyroSkala = new System.Windows.Forms.Label();
             this.chBoxZyroWlaczony = new System.Windows.Forms.CheckBox();
             this.gBoxTermometr = new System.Windows.Forms.GroupBox();
             this.labTermNazwaCzujnika = new System.Windows.Forms.Label();
+            this.cBoxTermODR = new System.Windows.Forms.ComboBox();
             this.labTermODR = new System.Windows.Forms.Label();
             this.gBoxTermRejestr = new System.Windows.Forms.GroupBox();
             this.buttonTermWczytaj = new System.Windows.Forms.Button();
@@ -137,10 +138,11 @@ namespace Aplikacja_MEMS
             this.labTermAdres = new System.Windows.Forms.Label();
             this.buttonTermOtworz = new System.Windows.Forms.Button();
             this.buttonTermRysujWYkres = new System.Windows.Forms.Button();
-            this.cBoxTermODR = new System.Windows.Forms.ComboBox();
             this.chBoxTermWlaczony = new System.Windows.Forms.CheckBox();
             this.gBoxAkcelerometr = new System.Windows.Forms.GroupBox();
             this.labAkcNazwa = new System.Windows.Forms.Label();
+            this.cBoxAkcODR = new System.Windows.Forms.ComboBox();
+            this.cBoxAkcSkala = new System.Windows.Forms.ComboBox();
             this.gBoxAkcRejestr = new System.Windows.Forms.GroupBox();
             this.buttonAkcWczytaj = new System.Windows.Forms.Button();
             this.buttonAkcUstaw = new System.Windows.Forms.Button();
@@ -150,9 +152,7 @@ namespace Aplikacja_MEMS
             this.labAkcAdres = new System.Windows.Forms.Label();
             this.buttonAkcOtworz = new System.Windows.Forms.Button();
             this.buttonAkcRysujWykres = new System.Windows.Forms.Button();
-            this.cBoxAkcODR = new System.Windows.Forms.ComboBox();
             this.labAkcLiczbaProbek = new System.Windows.Forms.Label();
-            this.cBoxAkcSkala = new System.Windows.Forms.ComboBox();
             this.labAkcSkala = new System.Windows.Forms.Label();
             this.chBoxWlaczonyAkc = new System.Windows.Forms.CheckBox();
             this.tabPageDane = new System.Windows.Forms.TabPage();
@@ -617,6 +617,21 @@ namespace Aplikacja_MEMS
             this.labHigNazwaCzujnika.TabIndex = 18;
             this.labHigNazwaCzujnika.Text = "Nazwa czujnika: ";
             // 
+            // cBoxHigODR
+            // 
+            this.cBoxHigODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxHigODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxHigODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxHigODR.FormattingEnabled = true;
+            this.cBoxHigODR.Items.AddRange(new object[] {
+            "1",
+            "7",
+            "12,5"});
+            this.cBoxHigODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxHigODR.Name = "cBoxHigODR";
+            this.cBoxHigODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxHigODR.TabIndex = 20;
+            // 
             // labHigODR
             // 
             this.labHigODR.AutoSize = true;
@@ -726,24 +741,11 @@ namespace Aplikacja_MEMS
             this.buttonHigRysujWykres.Text = "Rysuj wykres";
             this.buttonHigRysujWykres.UseVisualStyleBackColor = true;
             // 
-            // cBoxHigODR
-            // 
-            this.cBoxHigODR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxHigODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxHigODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxHigODR.FormattingEnabled = true;
-            this.cBoxHigODR.Items.AddRange(new object[] {
-            "1",
-            "7",
-            "12,5"});
-            this.cBoxHigODR.Location = new System.Drawing.Point(9, 77);
-            this.cBoxHigODR.Name = "cBoxHigODR";
-            this.cBoxHigODR.Size = new System.Drawing.Size(121, 21);
-            this.cBoxHigODR.TabIndex = 20;
-            // 
             // chBoxHigWlaczony
             // 
             this.chBoxHigWlaczony.AutoSize = true;
+            this.chBoxHigWlaczony.Checked = true;
+            this.chBoxHigWlaczony.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxHigWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxHigWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxHigWlaczony.Location = new System.Drawing.Point(9, 37);
@@ -752,6 +754,7 @@ namespace Aplikacja_MEMS
             this.chBoxHigWlaczony.TabIndex = 19;
             this.chBoxHigWlaczony.Text = "Włączony";
             this.chBoxHigWlaczony.UseVisualStyleBackColor = true;
+            this.chBoxHigWlaczony.CheckedChanged += new System.EventHandler(this.chBoxHigWlaczony_CheckedChanged);
             // 
             // gBoxMagnetometr
             // 
@@ -781,6 +784,35 @@ namespace Aplikacja_MEMS
             this.labMagNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
             this.labMagNazwaCzujnika.TabIndex = 9;
             this.labMagNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // cBoxMagODR
+            // 
+            this.cBoxMagODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxMagODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxMagODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxMagODR.FormattingEnabled = true;
+            this.cBoxMagODR.Items.AddRange(new object[] {
+            "10",
+            "20",
+            "50",
+            "100"});
+            this.cBoxMagODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxMagODR.Name = "cBoxMagODR";
+            this.cBoxMagODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagODR.TabIndex = 14;
+            // 
+            // cBoxMagSkala
+            // 
+            this.cBoxMagSkala.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxMagSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxMagSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxMagSkala.FormattingEnabled = true;
+            this.cBoxMagSkala.Items.AddRange(new object[] {
+            "50"});
+            this.cBoxMagSkala.Location = new System.Drawing.Point(9, 77);
+            this.cBoxMagSkala.Name = "cBoxMagSkala";
+            this.cBoxMagSkala.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagSkala.TabIndex = 12;
             // 
             // gBoxMagRejestr
             // 
@@ -881,22 +913,6 @@ namespace Aplikacja_MEMS
             this.buttonMagRysujWykres.Text = "Rysuj wykres";
             this.buttonMagRysujWykres.UseVisualStyleBackColor = true;
             // 
-            // cBoxMagODR
-            // 
-            this.cBoxMagODR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxMagODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxMagODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxMagODR.FormattingEnabled = true;
-            this.cBoxMagODR.Items.AddRange(new object[] {
-            "10",
-            "20",
-            "50",
-            "100"});
-            this.cBoxMagODR.Location = new System.Drawing.Point(9, 119);
-            this.cBoxMagODR.Name = "cBoxMagODR";
-            this.cBoxMagODR.Size = new System.Drawing.Size(121, 21);
-            this.cBoxMagODR.TabIndex = 14;
-            // 
             // labMagODR
             // 
             this.labMagODR.AutoSize = true;
@@ -906,19 +922,6 @@ namespace Aplikacja_MEMS
             this.labMagODR.Size = new System.Drawing.Size(37, 15);
             this.labMagODR.TabIndex = 13;
             this.labMagODR.Text = "ODR:";
-            // 
-            // cBoxMagSkala
-            // 
-            this.cBoxMagSkala.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxMagSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxMagSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxMagSkala.FormattingEnabled = true;
-            this.cBoxMagSkala.Items.AddRange(new object[] {
-            "50"});
-            this.cBoxMagSkala.Location = new System.Drawing.Point(9, 77);
-            this.cBoxMagSkala.Name = "cBoxMagSkala";
-            this.cBoxMagSkala.Size = new System.Drawing.Size(121, 21);
-            this.cBoxMagSkala.TabIndex = 12;
             // 
             // labMagSkala
             // 
@@ -933,6 +936,8 @@ namespace Aplikacja_MEMS
             // chBoxMagWlaczony
             // 
             this.chBoxMagWlaczony.AutoSize = true;
+            this.chBoxMagWlaczony.Checked = true;
+            this.chBoxMagWlaczony.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxMagWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxMagWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxMagWlaczony.Location = new System.Drawing.Point(9, 37);
@@ -941,6 +946,7 @@ namespace Aplikacja_MEMS
             this.chBoxMagWlaczony.TabIndex = 10;
             this.chBoxMagWlaczony.Text = "Włączony";
             this.chBoxMagWlaczony.UseVisualStyleBackColor = true;
+            this.chBoxMagWlaczony.CheckedChanged += new System.EventHandler(this.chBoxMagWlaczony_CheckedChanged);
             // 
             // gBoxBarometr
             // 
@@ -968,6 +974,21 @@ namespace Aplikacja_MEMS
             this.labBarNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
             this.labBarNazwaCzujnika.TabIndex = 18;
             this.labBarNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // cBoxBarODR
+            // 
+            this.cBoxBarODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxBarODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxBarODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxBarODR.FormattingEnabled = true;
+            this.cBoxBarODR.Items.AddRange(new object[] {
+            "1",
+            "7",
+            "12,5"});
+            this.cBoxBarODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxBarODR.Name = "cBoxBarODR";
+            this.cBoxBarODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxBarODR.TabIndex = 20;
             // 
             // labBarODR
             // 
@@ -1078,24 +1099,11 @@ namespace Aplikacja_MEMS
             this.buttonBarRysujWykres.Text = "Rysuj wykres";
             this.buttonBarRysujWykres.UseVisualStyleBackColor = true;
             // 
-            // cBoxBarODR
-            // 
-            this.cBoxBarODR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxBarODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxBarODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxBarODR.FormattingEnabled = true;
-            this.cBoxBarODR.Items.AddRange(new object[] {
-            "1",
-            "7",
-            "12,5"});
-            this.cBoxBarODR.Location = new System.Drawing.Point(9, 77);
-            this.cBoxBarODR.Name = "cBoxBarODR";
-            this.cBoxBarODR.Size = new System.Drawing.Size(121, 21);
-            this.cBoxBarODR.TabIndex = 20;
-            // 
             // chBoxBarWlaczony
             // 
             this.chBoxBarWlaczony.AutoSize = true;
+            this.chBoxBarWlaczony.Checked = true;
+            this.chBoxBarWlaczony.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxBarWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxBarWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxBarWlaczony.Location = new System.Drawing.Point(9, 37);
@@ -1104,6 +1112,7 @@ namespace Aplikacja_MEMS
             this.chBoxBarWlaczony.TabIndex = 19;
             this.chBoxBarWlaczony.Text = "Włączony";
             this.chBoxBarWlaczony.UseVisualStyleBackColor = true;
+            this.chBoxBarWlaczony.CheckedChanged += new System.EventHandler(this.chBoxBarWlaczony_CheckedChanged);
             // 
             // gBoxZyroskop
             // 
@@ -1133,6 +1142,45 @@ namespace Aplikacja_MEMS
             this.LabZyroNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
             this.LabZyroNazwaCzujnika.TabIndex = 9;
             this.LabZyroNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // cBoxZyroODR
+            // 
+            this.cBoxZyroODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxZyroODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxZyroODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxZyroODR.FormattingEnabled = true;
+            this.cBoxZyroODR.Items.AddRange(new object[] {
+            "12.5",
+            "26",
+            "52",
+            "104",
+            "208",
+            "416",
+            "833",
+            "1660",
+            "3330",
+            "6660"});
+            this.cBoxZyroODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxZyroODR.Name = "cBoxZyroODR";
+            this.cBoxZyroODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxZyroODR.TabIndex = 14;
+            // 
+            // cBoxZyroSkala
+            // 
+            this.cBoxZyroSkala.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxZyroSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxZyroSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxZyroSkala.FormattingEnabled = true;
+            this.cBoxZyroSkala.Items.AddRange(new object[] {
+            "125",
+            "250",
+            "500",
+            "1000",
+            "2000"});
+            this.cBoxZyroSkala.Location = new System.Drawing.Point(9, 77);
+            this.cBoxZyroSkala.Name = "cBoxZyroSkala";
+            this.cBoxZyroSkala.Size = new System.Drawing.Size(121, 21);
+            this.cBoxZyroSkala.TabIndex = 12;
             // 
             // gBoxZyroRejestr
             // 
@@ -1233,28 +1281,6 @@ namespace Aplikacja_MEMS
             this.buttonZyroRysujWykres.Text = "Rysuj wykres";
             this.buttonZyroRysujWykres.UseVisualStyleBackColor = true;
             // 
-            // cBoxZyroODR
-            // 
-            this.cBoxZyroODR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxZyroODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxZyroODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxZyroODR.FormattingEnabled = true;
-            this.cBoxZyroODR.Items.AddRange(new object[] {
-            "12.5",
-            "26",
-            "52",
-            "104",
-            "208",
-            "416",
-            "833",
-            "1660",
-            "3330",
-            "6660"});
-            this.cBoxZyroODR.Location = new System.Drawing.Point(9, 119);
-            this.cBoxZyroODR.Name = "cBoxZyroODR";
-            this.cBoxZyroODR.Size = new System.Drawing.Size(121, 21);
-            this.cBoxZyroODR.TabIndex = 14;
-            // 
             // labZyroODR
             // 
             this.labZyroODR.AutoSize = true;
@@ -1264,23 +1290,6 @@ namespace Aplikacja_MEMS
             this.labZyroODR.Size = new System.Drawing.Size(37, 15);
             this.labZyroODR.TabIndex = 13;
             this.labZyroODR.Text = "ODR:";
-            // 
-            // cBoxZyroSkala
-            // 
-            this.cBoxZyroSkala.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxZyroSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxZyroSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxZyroSkala.FormattingEnabled = true;
-            this.cBoxZyroSkala.Items.AddRange(new object[] {
-            "125",
-            "250",
-            "500",
-            "1000",
-            "2000"});
-            this.cBoxZyroSkala.Location = new System.Drawing.Point(9, 77);
-            this.cBoxZyroSkala.Name = "cBoxZyroSkala";
-            this.cBoxZyroSkala.Size = new System.Drawing.Size(121, 21);
-            this.cBoxZyroSkala.TabIndex = 12;
             // 
             // labZyroSkala
             // 
@@ -1295,6 +1304,8 @@ namespace Aplikacja_MEMS
             // chBoxZyroWlaczony
             // 
             this.chBoxZyroWlaczony.AutoSize = true;
+            this.chBoxZyroWlaczony.Checked = true;
+            this.chBoxZyroWlaczony.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxZyroWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxZyroWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxZyroWlaczony.Location = new System.Drawing.Point(9, 37);
@@ -1303,6 +1314,7 @@ namespace Aplikacja_MEMS
             this.chBoxZyroWlaczony.TabIndex = 10;
             this.chBoxZyroWlaczony.Text = "Włączony";
             this.chBoxZyroWlaczony.UseVisualStyleBackColor = true;
+            this.chBoxZyroWlaczony.CheckedChanged += new System.EventHandler(this.chBoxZyroWlaczony_CheckedChanged);
             // 
             // gBoxTermometr
             // 
@@ -1330,6 +1342,23 @@ namespace Aplikacja_MEMS
             this.labTermNazwaCzujnika.Size = new System.Drawing.Size(99, 15);
             this.labTermNazwaCzujnika.TabIndex = 9;
             this.labTermNazwaCzujnika.Text = "Nazwa czujnika: ";
+            // 
+            // cBoxTermODR
+            // 
+            this.cBoxTermODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxTermODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxTermODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxTermODR.FormattingEnabled = true;
+            this.cBoxTermODR.Items.AddRange(new object[] {
+            "1",
+            "10",
+            "25",
+            "50",
+            "75"});
+            this.cBoxTermODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxTermODR.Name = "cBoxTermODR";
+            this.cBoxTermODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxTermODR.TabIndex = 12;
             // 
             // labTermODR
             // 
@@ -1440,26 +1469,11 @@ namespace Aplikacja_MEMS
             this.buttonTermRysujWYkres.Text = "Rysuj wykres";
             this.buttonTermRysujWYkres.UseVisualStyleBackColor = true;
             // 
-            // cBoxTermODR
-            // 
-            this.cBoxTermODR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxTermODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxTermODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxTermODR.FormattingEnabled = true;
-            this.cBoxTermODR.Items.AddRange(new object[] {
-            "1",
-            "10",
-            "25",
-            "50",
-            "75"});
-            this.cBoxTermODR.Location = new System.Drawing.Point(9, 77);
-            this.cBoxTermODR.Name = "cBoxTermODR";
-            this.cBoxTermODR.Size = new System.Drawing.Size(121, 21);
-            this.cBoxTermODR.TabIndex = 12;
-            // 
             // chBoxTermWlaczony
             // 
             this.chBoxTermWlaczony.AutoSize = true;
+            this.chBoxTermWlaczony.Checked = true;
+            this.chBoxTermWlaczony.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxTermWlaczony.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxTermWlaczony.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxTermWlaczony.Location = new System.Drawing.Point(9, 37);
@@ -1468,6 +1482,7 @@ namespace Aplikacja_MEMS
             this.chBoxTermWlaczony.TabIndex = 10;
             this.chBoxTermWlaczony.Text = "Włączony";
             this.chBoxTermWlaczony.UseVisualStyleBackColor = true;
+            this.chBoxTermWlaczony.CheckedChanged += new System.EventHandler(this.chBoxTermWlaczony_CheckedChanged);
             // 
             // gBoxAkcelerometr
             // 
@@ -1498,6 +1513,44 @@ namespace Aplikacja_MEMS
             this.labAkcNazwa.Size = new System.Drawing.Size(99, 15);
             this.labAkcNazwa.TabIndex = 0;
             this.labAkcNazwa.Text = "Nazwa czujnika: ";
+            // 
+            // cBoxAkcODR
+            // 
+            this.cBoxAkcODR.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxAkcODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxAkcODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxAkcODR.FormattingEnabled = true;
+            this.cBoxAkcODR.Items.AddRange(new object[] {
+            "12.5",
+            "26",
+            "52",
+            "104",
+            "208",
+            "416",
+            "833",
+            "1660",
+            "3330",
+            "6660"});
+            this.cBoxAkcODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxAkcODR.Name = "cBoxAkcODR";
+            this.cBoxAkcODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAkcODR.TabIndex = 5;
+            // 
+            // cBoxAkcSkala
+            // 
+            this.cBoxAkcSkala.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxAkcSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cBoxAkcSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.cBoxAkcSkala.FormattingEnabled = true;
+            this.cBoxAkcSkala.Items.AddRange(new object[] {
+            "2",
+            "4",
+            "8",
+            "16"});
+            this.cBoxAkcSkala.Location = new System.Drawing.Point(9, 77);
+            this.cBoxAkcSkala.Name = "cBoxAkcSkala";
+            this.cBoxAkcSkala.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAkcSkala.TabIndex = 3;
             // 
             // gBoxAkcRejestr
             // 
@@ -1598,28 +1651,6 @@ namespace Aplikacja_MEMS
             this.buttonAkcRysujWykres.Text = "Rysuj wykres";
             this.buttonAkcRysujWykres.UseVisualStyleBackColor = true;
             // 
-            // cBoxAkcODR
-            // 
-            this.cBoxAkcODR.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxAkcODR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxAkcODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxAkcODR.FormattingEnabled = true;
-            this.cBoxAkcODR.Items.AddRange(new object[] {
-            "12.5",
-            "26",
-            "52",
-            "104",
-            "208",
-            "416",
-            "833",
-            "1660",
-            "3330",
-            "6660"});
-            this.cBoxAkcODR.Location = new System.Drawing.Point(9, 119);
-            this.cBoxAkcODR.Name = "cBoxAkcODR";
-            this.cBoxAkcODR.Size = new System.Drawing.Size(121, 21);
-            this.cBoxAkcODR.TabIndex = 5;
-            // 
             // labAkcLiczbaProbek
             // 
             this.labAkcLiczbaProbek.AutoSize = true;
@@ -1629,22 +1660,6 @@ namespace Aplikacja_MEMS
             this.labAkcLiczbaProbek.Size = new System.Drawing.Size(37, 15);
             this.labAkcLiczbaProbek.TabIndex = 4;
             this.labAkcLiczbaProbek.Text = "ODR:";
-            // 
-            // cBoxAkcSkala
-            // 
-            this.cBoxAkcSkala.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cBoxAkcSkala.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cBoxAkcSkala.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cBoxAkcSkala.FormattingEnabled = true;
-            this.cBoxAkcSkala.Items.AddRange(new object[] {
-            "2",
-            "4",
-            "8",
-            "16"});
-            this.cBoxAkcSkala.Location = new System.Drawing.Point(9, 77);
-            this.cBoxAkcSkala.Name = "cBoxAkcSkala";
-            this.cBoxAkcSkala.Size = new System.Drawing.Size(121, 21);
-            this.cBoxAkcSkala.TabIndex = 3;
             // 
             // labAkcSkala
             // 
@@ -1659,6 +1674,8 @@ namespace Aplikacja_MEMS
             // chBoxWlaczonyAkc
             // 
             this.chBoxWlaczonyAkc.AutoSize = true;
+            this.chBoxWlaczonyAkc.Checked = true;
+            this.chBoxWlaczonyAkc.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxWlaczonyAkc.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxWlaczonyAkc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxWlaczonyAkc.Location = new System.Drawing.Point(9, 37);
@@ -1807,16 +1824,6 @@ namespace Aplikacja_MEMS
             this.ResumeLayout(false);
             this.PerformLayout();
 
-            cBoxAkcODR.Text = cBoxAkcODR.Items[0].ToString();
-            cBoxBarODR.Text = cBoxBarODR.Items[0].ToString();
-            cBoxMagODR.Text = cBoxMagODR.Items[0].ToString();
-            cBoxZyroODR.Text = cBoxZyroODR.Items[0].ToString();
-            cBoxTermODR.Text = cBoxTermODR.Items[0].ToString();
-            cBoxHigODR.Text = cBoxHigODR.Items[0].ToString();
-
-            cBoxAkcSkala.Text = cBoxAkcSkala.Items[0].ToString();
-            cBoxMagSkala.Text = cBoxMagSkala.Items[0].ToString();
-            cBoxZyroSkala.Text = cBoxZyroSkala.Items[0].ToString();
         }
 
         #endregion

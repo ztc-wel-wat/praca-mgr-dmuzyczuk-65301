@@ -18,10 +18,6 @@ namespace Aplikacja_MEMS
         private GroupBox informacje;
         private SerialPort port;
         private byte[] wiadomosc;
-        private int dlugosc = 0;
-
-        private ThreadStart wyslijStart;
-        private Thread wyslij;
 
         public Czujnik(string n, string m, GroupBox i, SerialPort p)
         {
@@ -36,16 +32,14 @@ namespace Aplikacja_MEMS
         public void SendMessage(byte[] doWyslania)
         {
             wiadomosc = doWyslania;
-            BackgroundWorker bgWorkSend = new BackgroundWorker();
-            bgWorkSend.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorkSend_DoWork);
-            bgWorkSend.RunWorkerAsync();
+            BackgroundWorker bgWorkWyslij = new BackgroundWorker();
+            bgWorkWyslij.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgWorkWyslij_DoWork);
+            bgWorkWyslij.RunWorkerAsync();
         }
 
-        private void bgWorkSend_DoWork(object sender, DoWorkEventArgs e)
+        private void bgWorkWyslij_DoWork(object sender, DoWorkEventArgs e)
         {
             port.Write(wiadomosc, 0, wiadomosc.Length);
         }
-
-
     }
 }

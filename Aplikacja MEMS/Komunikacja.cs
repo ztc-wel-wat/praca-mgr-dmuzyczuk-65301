@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,21 @@ namespace Aplikacja_MEMS
             dopelnienie = 3;
             switch (komenda)
             {
+                case 0x0C:
+                    byte[] czas = ObecnyCzas();
+
+                    for(int i = 0; i <3; i++)
+                    {
+                        zapytanie[i+3] = czas[i];
+                    }
+
+                    zapytanie[6] = 0x15;
+                    zapytanie[7] = 0x02;
+                    zapytanie[8] = 0x19;
+                    zapytanie[9] = 0x04;
+                    dopelnienie = 10;
+                    break;
+
                 case 0x02: // Poszukiwanie dostępnych urządzeń STM
                     dopelnienie = 3;
                     break;
@@ -99,6 +115,36 @@ namespace Aplikacja_MEMS
             wartosc += 0x01;
 
             return wartosc;
+        }
+
+        private static byte[] ObecnyCzas()
+        {
+            byte[] czas = new byte[3];
+
+            DateTime obecnyCzas = DateTime.Now;
+            czas[0] = (byte)obecnyCzas.Hour;
+            czas[1] = (byte)obecnyCzas.Minute;
+            czas[2] = (byte)obecnyCzas.Second;
+
+            return czas;
+        }
+
+        public static void Odbior(SerialPort port)
+        {
+            BackgroundWorker bgWorkOdbierz = new BackgroundWorker();
+            bgWorkOdbierz.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkOdbierz_DoWork);
+            bgWorkOdbierz.RunWorkerAsync(argument: port);
+        }
+
+        private static void bgWorkOdbierz_DoWork(object sender, DoWorkEventArgs e)
+        {
+            SerialPort port = (SerialPort)e.Argument;
+            byte[] dane = new byte[4096];
+
+            while(true)
+            {
+                port.Read(dane, 0, 4096);
+            }
         }
 
     }
