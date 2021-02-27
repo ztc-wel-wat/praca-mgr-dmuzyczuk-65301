@@ -461,14 +461,9 @@ namespace Aplikacja_MEMS
             progressBarDane.Value = 0;
         }
 
-        private void chBoxWlaczonyAkc_CheckedChanged(object sender, EventArgs e)
-        {
-           
-        }
-
         private void chBoxZyroWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxAkcWlaczony.Checked == true)
+            if (chBoxZyroWlaczony.Checked == true)
             {
                 czujnik += 0x20;
             }
@@ -483,7 +478,7 @@ namespace Aplikacja_MEMS
 
         private void chBoxMagWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxAkcWlaczony.Checked == true)
+            if (chBoxMagWlaczony.Checked == true)
             {
                 czujnik += 0x40;
             }
@@ -498,7 +493,7 @@ namespace Aplikacja_MEMS
 
         private void chBoxTermWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxAkcWlaczony.Checked == true)
+            if (chBoxTermWlaczony.Checked == true)
             {
                 czujnik += 0x02;
             }
@@ -513,7 +508,7 @@ namespace Aplikacja_MEMS
 
         private void chBoxBarWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxAkcWlaczony.Checked == true)
+            if (chBoxBarWlaczony.Checked == true)
             {
                 czujnik += 0x01;
             }
@@ -528,7 +523,7 @@ namespace Aplikacja_MEMS
 
         private void chBoxHigWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxAkcWlaczony.Checked == true)
+            if (chBoxHigWlaczony.Checked == true)
             {
                 czujnik += 0x04;
             }
