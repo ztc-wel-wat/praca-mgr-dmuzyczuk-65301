@@ -580,6 +580,7 @@ namespace Aplikacja_MEMS
            rTBoxDane.Invoke(updateAction, 32);
         }
 
+        // Ustawianie ODR akcelerometru w comboBoxie
         private void cBoxAkcODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
@@ -678,6 +679,7 @@ namespace Aplikacja_MEMS
             }
         }
 
+        // Ustawianie ODR żyroskopu w comboBoxie
         private void cBoxZyroODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
@@ -758,6 +760,7 @@ namespace Aplikacja_MEMS
             }
         }
 
+        // Ustawianie ODR magnetometru w comboBoxie
         private void cBoxMagODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
@@ -805,6 +808,7 @@ namespace Aplikacja_MEMS
         {
             ZmianaODR(cBoxHigODR.SelectedIndex);
         }
+        // Ustawianie ODR termometru i higrometru w comboBoxie
         private void ZmianaODR(int indeks)
         {
             cBoxTermODR.SelectedIndex = cBoxHigODR.SelectedIndex = indeks;
@@ -822,20 +826,126 @@ namespace Aplikacja_MEMS
                     case 1:
                         parametry[0] = 0x00;
                         parametry[1] = 0x00;
-                        parametry[2] = 0xA0;
-                        parametry[3] = 0x41;
+                        parametry[2] = 0xE0;
+                        parametry[3] = 0x40;
                         break;
 
                     case 2:
                         parametry[0] = 0x00;
                         parametry[1] = 0x00;
                         parametry[2] = 0x48;
-                        parametry[3] = 0x42;
+                        parametry[3] = 0x41;
                         break;
                 }
+                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x04, 0x07, 0x00, parametry), 0, 11);
                 serialPort.Write(Komunikacja.Zapytanie(0x50, 0x05, 0x07, 0x00, parametry), 0, 11);
             }
         }
 
+        // Ustawianie ODR barometru w comboBoxie
+        private void cBoxBarODR_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                switch (cBoxBarODR.SelectedIndex)
+                {
+                    case 0:
+                        parametry[0] = 0x00;
+                        parametry[1] = 0x00;
+                        parametry[2] = 0x80;
+                        parametry[3] = 0x3F;
+                        break;
+
+                    case 1:
+                        parametry[0] = 0x00;
+                        parametry[1] = 0x00;
+                        parametry[2] = 0x20;
+                        parametry[3] = 0x41;
+                        break;
+
+                    case 2:
+                        parametry[0] = 0x00;
+                        parametry[1] = 0x00;
+                        parametry[2] = 0xC8;
+                        parametry[3] = 0x41;
+                        break;
+
+                    case 3:
+                        parametry[0] = 0x00;
+                        parametry[1] = 0x00;
+                        parametry[2] = 0x48;
+                        parametry[3] = 0x42;
+                        break;
+
+                    case 4:
+                        parametry[0] = 0x00;
+                        parametry[1] = 0x00;
+                        parametry[2] = 0x96;
+                        parametry[3] = 0x42;
+                        break;
+                }
+                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x06, 0x07, 0x00, parametry), 0, 11);
+            }
+        }
+
+        // Ustawianie skali Akcelerometru w comboBoxie
+        private void cBoxAkcSkala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                switch (cBoxAkcSkala.SelectedIndex)
+                {
+                    case 0:
+                        parametry[0] = 0x02;
+                        parametry[0] = 0x00;
+                        break;
+                    case 1:
+                        parametry[0] = 0x04;
+                        parametry[0] = 0x00;
+                        break;
+                    case 2:
+                        parametry[0] = 0x08;
+                        parametry[0] = 0x00;
+                        break;
+                    case 3:
+                        parametry[0] = 0x10;
+                        parametry[0] = 0x00;
+                        break;
+                }
+                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x01, 0x05, 0x00, parametry), 0, 11);
+            }
+        }
+
+        // Ustawianie skali żyroskopu w comboBoxie
+        private void cBoxZyroSkala_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                switch (cBoxZyroSkala.SelectedIndex)
+                {
+                    case 0:
+                        parametry[0] = 0x7D;
+                        parametry[0] = 0x00;
+                        break;
+                    case 1:
+                        parametry[0] = 0xFA;
+                        parametry[0] = 0x00;
+                        break;
+                    case 2:
+                        parametry[0] = 0xF4;
+                        parametry[0] = 0x01;
+                        break;
+                    case 3:
+                        parametry[0] = 0xE8;
+                        parametry[0] = 0x03;
+                        break;
+                    case 4:
+                        parametry[0] = 0xD0;
+                        parametry[0] = 0x07;
+                        break;
+                }
+                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x02, 0x05, 0x00, parametry), 0, 11);
+            }
+        }
     }
 }

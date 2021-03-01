@@ -989,12 +989,15 @@ namespace Aplikacja_MEMS
             this.cBoxBarODR.FormattingEnabled = true;
             this.cBoxBarODR.Items.AddRange(new object[] {
             "1",
-            "7",
-            "12,5"});
+            "10",
+            "25",
+            "50",
+            "75"});
             this.cBoxBarODR.Location = new System.Drawing.Point(9, 77);
             this.cBoxBarODR.Name = "cBoxBarODR";
             this.cBoxBarODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxBarODR.TabIndex = 20;
+            this.cBoxBarODR.SelectedIndexChanged += new System.EventHandler(this.cBoxBarODR_SelectedIndexChanged);
             // 
             // labBarODR
             // 
@@ -1188,6 +1191,7 @@ namespace Aplikacja_MEMS
             this.cBoxZyroSkala.Name = "cBoxZyroSkala";
             this.cBoxZyroSkala.Size = new System.Drawing.Size(121, 21);
             this.cBoxZyroSkala.TabIndex = 12;
+            this.cBoxZyroSkala.SelectedIndexChanged += new System.EventHandler(this.cBoxZyroSkala_SelectedIndexChanged);
             // 
             // gBoxZyroRejestr
             // 
@@ -1358,10 +1362,8 @@ namespace Aplikacja_MEMS
             this.cBoxTermODR.FormattingEnabled = true;
             this.cBoxTermODR.Items.AddRange(new object[] {
             "1",
-            "10",
-            "25",
-            "50",
-            "75"});
+            "7",
+            "12.5"});
             this.cBoxTermODR.Location = new System.Drawing.Point(9, 77);
             this.cBoxTermODR.Name = "cBoxTermODR";
             this.cBoxTermODR.Size = new System.Drawing.Size(121, 21);
@@ -1560,6 +1562,7 @@ namespace Aplikacja_MEMS
             this.cBoxAkcSkala.Name = "cBoxAkcSkala";
             this.cBoxAkcSkala.Size = new System.Drawing.Size(121, 21);
             this.cBoxAkcSkala.TabIndex = 3;
+            this.cBoxAkcSkala.SelectedIndexChanged += new System.EventHandler(this.cBoxAkcSkala_SelectedIndexChanged);
             // 
             // gBoxAkcRejestr
             // 

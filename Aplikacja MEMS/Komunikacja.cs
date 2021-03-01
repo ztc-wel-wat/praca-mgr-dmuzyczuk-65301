@@ -70,6 +70,12 @@ namespace Aplikacja_MEMS
                             zapytanie[8] = parametry[3];
                             dopelnienie = 9;
                             break;
+                        case 0x05: // Ustaw skalę wybranego czujnika
+                            zapytanie[5] = parametry[0];
+                            zapytanie[6] = parametry[1];
+                            zapytanie[7] = zapytanie[8] = 0x00;
+                            dopelnienie = 9;
+                            break;
                     }
                     break;
 
