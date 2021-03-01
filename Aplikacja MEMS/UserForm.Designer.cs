@@ -156,12 +156,15 @@ namespace Aplikacja_MEMS
             this.labAkcSkala = new System.Windows.Forms.Label();
             this.chBoxAkcWlaczony = new System.Windows.Forms.CheckBox();
             this.tabPageDane = new System.Windows.Forms.TabPage();
+            this.rTBoxDane = new System.Windows.Forms.RichTextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.edytujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otworzPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.włączWszystkieCzujnikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyłączWszystkieCzujnikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,6 +190,7 @@ namespace Aplikacja_MEMS
             this.gBoxTermRejestr.SuspendLayout();
             this.gBoxAkcelerometr.SuspendLayout();
             this.gBoxAkcRejestr.SuspendLayout();
+            this.tabPageDane.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -631,6 +635,7 @@ namespace Aplikacja_MEMS
             this.cBoxHigODR.Name = "cBoxHigODR";
             this.cBoxHigODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxHigODR.TabIndex = 20;
+            this.cBoxHigODR.SelectedIndexChanged += new System.EventHandler(this.cBoxHigODR_SelectedIndexChanged);
             // 
             // labHigODR
             // 
@@ -800,6 +805,7 @@ namespace Aplikacja_MEMS
             this.cBoxMagODR.Name = "cBoxMagODR";
             this.cBoxMagODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxMagODR.TabIndex = 14;
+            this.cBoxMagODR.SelectedIndexChanged += new System.EventHandler(this.cBoxMagODR_SelectedIndexChanged);
             // 
             // cBoxMagSkala
             // 
@@ -1164,6 +1170,7 @@ namespace Aplikacja_MEMS
             this.cBoxZyroODR.Name = "cBoxZyroODR";
             this.cBoxZyroODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxZyroODR.TabIndex = 14;
+            this.cBoxZyroODR.SelectedIndexChanged += new System.EventHandler(this.cBoxZyroODR_SelectedIndexChanged);
             // 
             // cBoxZyroSkala
             // 
@@ -1359,6 +1366,7 @@ namespace Aplikacja_MEMS
             this.cBoxTermODR.Name = "cBoxTermODR";
             this.cBoxTermODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxTermODR.TabIndex = 12;
+            this.cBoxTermODR.SelectedIndexChanged += new System.EventHandler(this.cBoxTermODR_SelectedIndexChanged);
             // 
             // labTermODR
             // 
@@ -1535,6 +1543,7 @@ namespace Aplikacja_MEMS
             this.cBoxAkcODR.Name = "cBoxAkcODR";
             this.cBoxAkcODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxAkcODR.TabIndex = 5;
+            this.cBoxAkcODR.SelectedIndexChanged += new System.EventHandler(this.cBoxAkcODR_SelectedIndexChanged);
             // 
             // cBoxAkcSkala
             // 
@@ -1688,12 +1697,23 @@ namespace Aplikacja_MEMS
             // 
             // tabPageDane
             // 
+            this.tabPageDane.Controls.Add(this.rTBoxDane);
             this.tabPageDane.Location = new System.Drawing.Point(4, 22);
             this.tabPageDane.Name = "tabPageDane";
             this.tabPageDane.Size = new System.Drawing.Size(734, 474);
             this.tabPageDane.TabIndex = 2;
             this.tabPageDane.Text = "Dane";
             this.tabPageDane.UseVisualStyleBackColor = true;
+            // 
+            // rTBoxDane
+            // 
+            this.rTBoxDane.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rTBoxDane.Location = new System.Drawing.Point(0, 0);
+            this.rTBoxDane.Name = "rTBoxDane";
+            this.rTBoxDane.ReadOnly = true;
+            this.rTBoxDane.Size = new System.Drawing.Size(734, 474);
+            this.rTBoxDane.TabIndex = 0;
+            this.rTBoxDane.Text = "";
             // 
             // menuStrip
             // 
@@ -1731,7 +1751,9 @@ namespace Aplikacja_MEMS
             // opcjeToolStripMenuItem
             // 
             this.opcjeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.otworzPortToolStripMenuItem});
+            this.otworzPortToolStripMenuItem,
+            this.włączWszystkieCzujnikiToolStripMenuItem,
+            this.wyłączWszystkieCzujnikiToolStripMenuItem});
             this.opcjeToolStripMenuItem.Name = "opcjeToolStripMenuItem";
             this.opcjeToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.opcjeToolStripMenuItem.Text = "Opcje";
@@ -1739,8 +1761,24 @@ namespace Aplikacja_MEMS
             // otworzPortToolStripMenuItem
             // 
             this.otworzPortToolStripMenuItem.Name = "otworzPortToolStripMenuItem";
-            this.otworzPortToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.otworzPortToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.otworzPortToolStripMenuItem.Text = "Otworz port";
+            // 
+            // włączWszystkieCzujnikiToolStripMenuItem
+            // 
+            this.włączWszystkieCzujnikiToolStripMenuItem.Enabled = false;
+            this.włączWszystkieCzujnikiToolStripMenuItem.Name = "włączWszystkieCzujnikiToolStripMenuItem";
+            this.włączWszystkieCzujnikiToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.włączWszystkieCzujnikiToolStripMenuItem.Text = "Włącz wszystkie czujniki";
+            this.włączWszystkieCzujnikiToolStripMenuItem.Click += new System.EventHandler(this.włączWszystkieCzujnikiToolStripMenuItem_Click);
+            // 
+            // wyłączWszystkieCzujnikiToolStripMenuItem
+            // 
+            this.wyłączWszystkieCzujnikiToolStripMenuItem.Enabled = false;
+            this.wyłączWszystkieCzujnikiToolStripMenuItem.Name = "wyłączWszystkieCzujnikiToolStripMenuItem";
+            this.wyłączWszystkieCzujnikiToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.wyłączWszystkieCzujnikiToolStripMenuItem.Text = "Wyłącz wszystkie czujniki";
+            this.wyłączWszystkieCzujnikiToolStripMenuItem.Click += new System.EventHandler(this.wyłączWszystkieCzujnikiToolStripMenuItem_Click);
             // 
             // pomocToolStripMenuItem
             // 
@@ -1820,6 +1858,7 @@ namespace Aplikacja_MEMS
             this.gBoxAkcelerometr.PerformLayout();
             this.gBoxAkcRejestr.ResumeLayout(false);
             this.gBoxAkcRejestr.PerformLayout();
+            this.tabPageDane.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -1966,6 +2005,9 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.CheckBox chBoxBarWlaczony;
         private System.Windows.Forms.Label labBarNazwaCzujnika;
         private System.Windows.Forms.Label labTermODR;
+        public System.Windows.Forms.RichTextBox rTBoxDane;
+        private System.Windows.Forms.ToolStripMenuItem włączWszystkieCzujnikiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wyłączWszystkieCzujnikiToolStripMenuItem;
     }
 }
 

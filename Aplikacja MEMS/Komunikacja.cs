@@ -13,8 +13,15 @@ namespace Aplikacja_MEMS
     class Komunikacja
     {
         static BackgroundWorker bgWorkOdbierz;
+        static BackgroundWorker bgWorkWypisz;
+        UserForm user;
 
-        public static byte[] Zapytanie(byte komenda, byte czujnik, byte czynnosc, byte indeks)
+        public Komunikacja(UserForm u)
+        {
+            user = u;
+        }
+
+        public static byte[] Zapytanie(byte komenda, byte czujnik, byte czynnosc, byte indeks, byte[] parametry)
         {
             byte[] zapytanie = new byte[2048];
             int dopelnienie = 0;
@@ -55,6 +62,13 @@ namespace Aplikacja_MEMS
                         case 0x15:  // Załaduj czujniki o indeksie...
                             zapytanie[5] = indeks;
                             dopelnienie = 6;
+                            break;
+                        case 0x07: // Ustaw ODR wybranego czujnika
+                            zapytanie[5] = parametry[0];
+                            zapytanie[6] = parametry[1];
+                            zapytanie[7] = parametry[2];
+                            zapytanie[8] = parametry[3];
+                            dopelnienie = 9;
                             break;
                     }
                     break;
@@ -130,7 +144,7 @@ namespace Aplikacja_MEMS
             return czas;
         }
 
-        public static void Odbior(SerialPort port)
+        public void Odbior(SerialPort port)
         {
             bgWorkOdbierz = new BackgroundWorker();
             bgWorkOdbierz.WorkerSupportsCancellation = true;
@@ -138,21 +152,31 @@ namespace Aplikacja_MEMS
             bgWorkOdbierz.RunWorkerAsync(argument: port);
         }
 
-        public static void StopOdbior()
+        public void StopOdbior()
         {
             if(bgWorkOdbierz.IsBusy)
             bgWorkOdbierz.CancelAsync();
         }
-        private static void bgWorkOdbierz_DoWork(object sender, DoWorkEventArgs e)
+        private void bgWorkOdbierz_DoWork(object sender, DoWorkEventArgs e)
         {
             SerialPort port = (SerialPort)e.Argument;
             byte[] dane = new byte[4096];
+            string doWyswietlenia = string.Empty;
 
             while (true)
             {
                 try
                 {
-                    port.Read(dane, 0, 4096);
+                    int liczbaBajtow = port.Read(dane, 0, 4096);
+                    byte[] daneOdebrane = new byte[liczbaBajtow];
+                    Array.Copy(dane, daneOdebrane, liczbaBajtow);
+
+                    foreach (byte b in daneOdebrane)
+                    {
+                        doWyswietlenia += b.ToString();
+                    }
+
+                    user.WyswietlDane(doWyswietlenia);
                 }
                 catch (Exception exc) { }
             }
