@@ -1,7 +1,7 @@
 ﻿
 namespace Aplikacja_MEMS
 {
-    partial class Ladowanie
+    partial class Loading
     {
         /// <summary>
         /// Required designer variable.

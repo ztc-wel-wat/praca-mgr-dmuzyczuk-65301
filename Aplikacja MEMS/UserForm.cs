@@ -14,97 +14,97 @@ namespace Aplikacja_MEMS
 {
     public partial class UserForm : Form
     {
-        List<Control> wlaczWylacz = new List<Control>();
-        List<ComboBox> wyczysc = new List<ComboBox>();
-        List<GroupBox> gBoxCzujnikiMEMS = new List<GroupBox>();
-        List<Czujnik> czujniki = new List<Czujnik>();
-        List<CheckBox> wlaczniki = new List<CheckBox>();
+        List<Control> enableDisable = new List<Control>();
+        List<ComboBox> clear = new List<ComboBox>();
+        List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
+        List<Sensor> sensors = new List<Sensor>();
+        List<CheckBox> checks = new List<CheckBox>();
 
-        string[] portyCOM;
-        Ladowanie ladowanie = new Ladowanie();
-        ThreadStart ladowaniePaska;
-        Thread pasek;
+        string[] comPorts;
+        Loading loading = new Loading();
+        ThreadStart loadingBar;
+        Thread bar;
 
-        Komunikacja komunikacja;
-        BackgroundWorker bgWorkWypisz;
+        Communication communication;
+        BackgroundWorker bgWorkWrite;
 
-        Czujnik akcelerometr;
-        Czujnik zyroskop;
-        Czujnik magnetometr;
-        Czujnik termometr;
-        Czujnik barometr;
-        Czujnik higrometr;
+        Sensor accelerometer;
+        Sensor gyroscope;
+        Sensor magnetometer;
+        Sensor thermometer;
+        Sensor pressure;
+        Sensor humidity;
 
-        byte czujnik = 0x77;
-        byte[] parametry = new byte[10];
+        byte sensor = 0x77;
+        byte[] parameters = new byte[10];
 
-        int odpowiedz = 0;
-        byte[] odp = new byte[4096];
+        int response = 0;
+        byte[] resp = new byte[4096];
 
         public UserForm()
         {
             InitializeComponent();
 
-            komunikacja = new Komunikacja(this);
+            communication = new Communication(this);
 
             // Ustawienie rozmiaru groupBoxów
-            gBoxInfo.Height = tabPageOgolne.Height / 3;
-            gBoxPolaczenie.Height = tabPageOgolne.Height / 3;
-            gBoxCzujniki.Height = tabPageOgolne.Height / 3;
+            gBoxInfo.Height = tabPageGeneral.Height / 3;
+            gBoxConnection.Height = tabPageGeneral.Height / 3;
+            gBoxSensors.Height = tabPageGeneral.Height / 3;
 
             // Tworzenie listy kontrolek aktywowanych/dezaktywowanych podczas otwierania portu
-            wlaczWylacz.Add(cBoxAkcelerometr);
-            wlaczWylacz.Add(cBoxBarometr);
-            wlaczWylacz.Add(cBoxHigrometr);
-            wlaczWylacz.Add(cBoxMagnetometr);
-            wlaczWylacz.Add(cBoxTermometr);
-            wlaczWylacz.Add(cBoxZyroskop);
-            wlaczWylacz.Add(buttonStart);
-            wlaczWylacz.Add(buttonZamknij);
-            wlaczWylacz.Add(cBoxPorty);
-            wlaczWylacz.Add(buttonStart);
-            wlaczWylacz.Add(buttonStop);
+            enableDisable.Add(cBoxAccelerometer);
+            enableDisable.Add(cBoxPressure);
+            enableDisable.Add(cBoxHumidity);
+            enableDisable.Add(cBoxMagnetometer);
+            enableDisable.Add(cBoxThermometer);
+            enableDisable.Add(cBoxGyroscope);
+            enableDisable.Add(buttonStart);
+            enableDisable.Add(buttonClose);
+            enableDisable.Add(cBoxPorts);
+            enableDisable.Add(buttonStart);
+            enableDisable.Add(buttonStop);
 
             // Lista comboboxów do wyczyszczenia po ponownym załądowaniu portu COM
-            wyczysc.Add(cBoxAkcelerometr);
-            wyczysc.Add(cBoxBarometr);
-            wyczysc.Add(cBoxHigrometr);
-            wyczysc.Add(cBoxMagnetometr);
-            wyczysc.Add(cBoxTermometr);
-            wyczysc.Add(cBoxZyroskop);
+            clear.Add(cBoxAccelerometer);
+            clear.Add(cBoxPressure);
+            clear.Add(cBoxHumidity);
+            clear.Add(cBoxMagnetometer);
+            clear.Add(cBoxThermometer);
+            clear.Add(cBoxGyroscope);
 
             // Lista groupBoxów do włączania/wyłączania podczas przesyłu danych
-            gBoxCzujnikiMEMS.Add(gBoxAkcelerometr);
-            gBoxCzujnikiMEMS.Add(gBoxBarometr);
-            gBoxCzujnikiMEMS.Add(gBoxHigrometr);
-            gBoxCzujnikiMEMS.Add(gBoxMagnetometr);
-            gBoxCzujnikiMEMS.Add(gBoxTermometr);
-            gBoxCzujnikiMEMS.Add(gBoxZyroskop);
+            gBoxMEMSSensors.Add(gBoxAccelerometer);
+            gBoxMEMSSensors.Add(gBoxPressure);
+            gBoxMEMSSensors.Add(gBoxHumidity);
+            gBoxMEMSSensors.Add(gBoxMagnetometer);
+            gBoxMEMSSensors.Add(gBoxTermometer);
+            gBoxMEMSSensors.Add(gBoxGyroscope);
 
             // Parametry poczatkowe w listach wybieranych zakładki "Czujniki MEMS"
-            cBoxAkcODR.Text = cBoxAkcODR.Items[0].ToString();
-            cBoxBarODR.Text = cBoxBarODR.Items[0].ToString();
+            cBoxAccODR.Text = cBoxAccODR.Items[0].ToString();
+            cBoxPreODR.Text = cBoxPreODR.Items[0].ToString();
             cBoxMagODR.Text = cBoxMagODR.Items[0].ToString();
-            cBoxZyroODR.Text = cBoxZyroODR.Items[0].ToString();
+            cBoxGyroODR.Text = cBoxGyroODR.Items[0].ToString();
             cBoxTermODR.Text = cBoxTermODR.Items[0].ToString();
-            cBoxHigODR.Text = cBoxHigODR.Items[0].ToString();
+            cBoxHumODR.Text = cBoxHumODR.Items[0].ToString();
 
-            cBoxAkcSkala.Text = cBoxAkcSkala.Items[0].ToString();
-            cBoxMagSkala.Text = cBoxMagSkala.Items[0].ToString();
-            cBoxZyroSkala.Text = cBoxZyroSkala.Items[0].ToString();
+            cBoxAccScale.Text = cBoxAccScale.Items[0].ToString();
+            cBoxMagScale.Text = cBoxMagScale.Items[0].ToString();
+            cBoxGyroScale.Text = cBoxGyroScale.Items[0].ToString();
 
             // Włączenie paska ładowania dostępnych urządzeń
-            ladowaniePaska = new ThreadStart(StartPaska);
-            pasek = new Thread(ladowaniePaska);
-            pasek.Start();
+            loadingBar = new ThreadStart(StartPaska);
+            bar = new Thread(loadingBar);
+            bar.Start();
 
             // Ustalenie listy checkBoxów
-            wlaczniki.Add(chBoxAkcWlaczony);
-            wlaczniki.Add(chBoxZyroWlaczony);
-            wlaczniki.Add(chBoxMagWlaczony);
-            wlaczniki.Add(chBoxTermWlaczony);
-            wlaczniki.Add(chBoxHigWlaczony);
-            wlaczniki.Add(chBoxBarWlaczony);
+            checks.Add(chBoxAccEnabled);
+            checks.Add(chBoxGyroEnabled);
+            checks.Add(chBoxMagEnabled);
+            checks.Add(chBoxTermEnabled);
+            checks.Add(chBoxHumEnabled);
+            checks.Add(chBoxPreEnabled);
         }
 
         private void UserForm_Load(object sender, EventArgs e)
@@ -112,12 +112,12 @@ namespace Aplikacja_MEMS
             BackgroundWorker bgW = new BackgroundWorker();
 
             // Załądowanie listy wszystkich dostępnych portów COM
-            portyCOM = SerialPort.GetPortNames();
-            List<string> portyMEMS = new List<string>();
+            comPorts = SerialPort.GetPortNames();
+            List<string> MEMSPorts = new List<string>();
 
             int licznik = 0;
-            // Tworzenie listy portów COM z podpiętym urządzeniem MEMS
-            foreach (string port in portyCOM)
+            // Tworzenie listy portów COM z prespiętym urządzeniem MEMS
+            foreach (string port in comPorts)
             {
                 bgW = new BackgroundWorker();
 
@@ -128,16 +128,16 @@ namespace Aplikacja_MEMS
                     serialPort.Open();
 
                     // Wysłanie zapytania do urządzenia 
-                    serialPort.Write(Komunikacja.Zapytanie(0x02, 0x00, 0x00, 0x00, parametry), 0, 5);
+                    serialPort.Write(Communication.Query(0x02, 0x00, 0x00, 0x00, parameters), 0, 5);
 
-                    // Pobranie odpowiedzi z bufora COM
-                    Task oczekiwanie = Oczekuj();
-                    oczekiwanie.Wait(2000);
+                    // Pobranie responsei z bufora COM
+                    Task awaiting = Await();
+                    awaiting.Wait(2000);
 
                     // Dodawanie spisu dostępnych urządzeń (napis w boxie "Informacje")
-                    if (odpowiedz > 0)
+                    if (response > 0)
                     {
-                        labelBrakPlytek.Visible = false; // Ukrycie informacji o braku urządzeń
+                        labelNoBoards.Visible = false; // Ukrycie informacji o braku urządzeń
 
                         labelCOM = new Label();
                         labelCOM.AutoSize = true;
@@ -145,10 +145,10 @@ namespace Aplikacja_MEMS
                         labelCOM.Location = new System.Drawing.Point(20, 85 + (licznik * 15));
                         labelCOM.Name = "label" + port;
                         labelCOM.Size = new System.Drawing.Size(146, 17);
-                        labelCOM.Text = port + ": " + Encoding.UTF8.GetString(odp, 3, odpowiedz - 5);
+                        labelCOM.Text = port + ": " + Encoding.UTF8.GetString(resp, 3, response - 5);
                         labelCOM.Visible = true;
                         gBoxInfo.Controls.Add(this.labelCOM);
-                        portyMEMS.Add(port);
+                        MEMSPorts.Add(port);
 
                     }
                     serialPort.Close();
@@ -164,15 +164,15 @@ namespace Aplikacja_MEMS
                 Thread.Sleep(300);
             }
 
-            async Task Oczekuj()
+            async Task Await()
             {
-                odpowiedz = serialPort.Read(odp, 0, serialPort.ReadBufferSize);
+                response = serialPort.Read(resp, 0, serialPort.ReadBufferSize);
             }
 
             // Przypisanie listy dostępnych portów COM z podłączonymi urządzeniami MEMS do okna wybory (comboBox)
-            foreach (string port in portyMEMS)
+            foreach (string port in MEMSPorts)
             {
-                cBoxPorty.Items.Add(port);
+                cBoxPorts.Items.Add(port);
             }
 
             bgW = new BackgroundWorker();
@@ -181,23 +181,23 @@ namespace Aplikacja_MEMS
             Thread.Sleep(500);
 
             // Zamknięcie okna ładowania aplikacji
-            Action<int> updateAction1 = new Action<int>((value) => ladowanie.Close());
-            ladowanie.Invoke(updateAction1, 32);
+            Action<int> updateAction1 = new Action<int>((value) => loading.Close());
+            loading.Invoke(updateAction1, 32);
         }
         private System.Windows.Forms.Label labelCOM;
 
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Ładowanie progressBar podczas włączania aplikacji
-            if (ladowanie.progressBar.Value < 90)
+            if (loading.progressBar.Value < 90)
             {
-                Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value += 90 / portyCOM.Length);
-                ladowanie.progressBar.Invoke(updateAction, 32);
+                Action<int> updateAction = new Action<int>((value) => loading.progressBar.Value += 90 / comPorts.Length);
+                loading.progressBar.Invoke(updateAction, 32);
             }
             else
             {
-                Action<int> updateAction = new Action<int>((value) => ladowanie.progressBar.Value = 100);
-                ladowanie.progressBar.Invoke(updateAction, 32);
+                Action<int> updateAction = new Action<int>((value) => loading.progressBar.Value = 100);
+                loading.progressBar.Invoke(updateAction, 32);
             }
         }
 
@@ -210,75 +210,75 @@ namespace Aplikacja_MEMS
         {
             try
             {
-                byte[] odp = new byte[serialPort.ReadBufferSize];
+                byte[] resp = new byte[serialPort.ReadBufferSize];
 
-                serialPort.PortName = cBoxPorty.Text;
+                serialPort.PortName = cBoxPorts.Text;
                 serialPort.Open();
 
                 // Czyszczenie listy poprzednich urzadzen
-                foreach (ComboBox cBox in wyczysc)
+                foreach (ComboBox cBox in clear)
                 {
                     cBox.Items.Clear();
                 }
 
                 // Wysłanie ustawień początkowych aplikacji
-                serialPort.Write(Komunikacja.Zapytanie(0x0C, 0x00, 0x00, 0x00, parametry), 0, 12);
+                serialPort.Write(Communication.Query(0x0C, 0x00, 0x00, 0x00, parameters), 0, 12);
 
-                buttonOtworz.Enabled = false;
-                cBoxPorty.Enabled = false;
+                buttonOpen.Enabled = false;
+                cBoxPorts.Enabled = false;
 
-                // Pobranie list czujnikow
-                byte[] listaAkcelerometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x01, 0x14, 0x00, parametry), serialPort, progressBarCOM); // Akcelerometry
-                byte[] listaZyroskopow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x02, 0x14, 0x00, parametry), serialPort, progressBarCOM); // Żyroskopy
-                byte[] listaMagnetometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x03, 0x14, 0x00, parametry), serialPort, progressBarCOM); // Magnetometry
-                byte[] listaTermometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x04, 0x14, 0x00, parametry), serialPort, progressBarCOM); // Termometry
-                byte[] listaHigrometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x05, 0x14, 0x00, parametry), serialPort, progressBarCOM); // Higrometry
-                byte[] listaBarometrow = Komunikacja.OdbierzListyCzujnikow(Komunikacja.Zapytanie(0x50, 0x06, 0x14, 0x00, parametry), serialPort, progressBarCOM); // Barometry
+                // Pobranie list sensorow
+                byte[] accList = Communication.readSensorList(Communication.Query(0x50, 0x01, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Akcelerometry
+                byte[] gyroList = Communication.readSensorList(Communication.Query(0x50, 0x02, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Żyroskopy
+                byte[] magLsit = Communication.readSensorList(Communication.Query(0x50, 0x03, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Magnetometry
+                byte[] thermList = Communication.readSensorList(Communication.Query(0x50, 0x04, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Termometry
+                byte[] humList = Communication.readSensorList(Communication.Query(0x50, 0x05, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Higrometry
+                byte[] presList = Communication.readSensorList(Communication.Query(0x50, 0x06, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Barometry
 
                 // Wypisanie list do combo boxów
-                ZaladujListeUrzadzen("Akcelerometr", listaAkcelerometrow);
-                ZaladujListeUrzadzen("Żyroskop", listaZyroskopow);
-                ZaladujListeUrzadzen("Magnetometr", listaMagnetometrow);
-                ZaladujListeUrzadzen("Termometr", listaTermometrow);
-                ZaladujListeUrzadzen("Higrometr", listaHigrometrow);
-                ZaladujListeUrzadzen("Barometr", listaBarometrow);
+                loadDeviceList("Akcelerometr", accList);
+                loadDeviceList("Żyroskop", gyroList);
+                loadDeviceList("Magnetometr", magLsit);
+                loadDeviceList("Termometr", thermList);
+                loadDeviceList("Higrometr", humList);
+                loadDeviceList("Barometr", presList);
 
                 progressBarCOM.Value = 90;
                 // Włączanie/wyłączanie przycisków
-                foreach (Control control in wlaczWylacz)
+                foreach (Control control in enableDisable)
                 {
                     control.Enabled = true;
                 }
 
-                buttonOtworz.Enabled = false;
+                buttonOpen.Enabled = false;
                 buttonStop.Enabled = false;
-                cBoxPorty.Enabled = false;
+                cBoxPorts.Enabled = false;
 
                 progressBarCOM.Value = 100;
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Wystąpił błąd podczas połączenia z portem szeregowym. Sprawdź parametry połączenia.", "Błąd");
+                MessageBox.Show("Wystąpił błąd podczas połączenia z portem szeregowym. Sprawdź parameters połączenia.", "Błąd");
                 if (serialPort.IsOpen)
                     serialPort.Close();
 
                 progressBarCOM.Value = 0;
 
                 // Włączanie/wyłączanie przycisków
-                foreach (Control control in wlaczWylacz)
+                foreach (Control control in enableDisable)
                 {
                     control.Enabled = false;
                 }
 
-                buttonOtworz.Enabled = true;
-                cBoxPorty.Enabled = true;
+                buttonOpen.Enabled = true;
+                cBoxPorts.Enabled = true;
             }
         }
         private void buttonZamknij_Click(object sender, EventArgs e)
         {
             // Wstrzymanie wysylania informacji przez płytkę
-            byte[] parametry = new byte[1];
-            serialPort.Write(Komunikacja.Zapytanie(0x09, 0x00, 0x00, 0x00, parametry), 0, 5);
+            byte[] parameters = new byte[1];
+            serialPort.Write(Communication.Query(0x09, 0x00, 0x00, 0x00, parameters), 0, 5);
 
             if (serialPort.IsOpen)
                 serialPort.Close();
@@ -286,26 +286,26 @@ namespace Aplikacja_MEMS
             progressBarCOM.Value = 0;
 
             // Włączanie/wyłączanie przycisków
-            foreach (Control control in wlaczWylacz)
+            foreach (Control control in enableDisable)
             {
                 control.Enabled = false;
             }
 
             // Blokowanie groupBoxów
-            foreach (GroupBox box in gBoxCzujnikiMEMS)
+            foreach (GroupBox box in gBoxMEMSSensors)
             {
                 box.Enabled = false;
             }
 
-            progressBarDane.Value = 0;
+            progressBarData.Value = 0;
 
-            buttonOtworz.Enabled = true;
-            cBoxPorty.Enabled = true;
+            buttonOpen.Enabled = true;
+            cBoxPorts.Enabled = true;
         }
 
-        private void ZaladujListeUrzadzen(string urzadzenie, byte[] dane)
+        private void loadDeviceList(string urzadzenie, byte[] dane)
         {
-            List<string> czujniki = new List<string>();
+            List<string> sensors = new List<string>();
             ASCIIEncoding ascii = new ASCIIEncoding();
             string bufor = string.Empty;
             int poczatek = 5;
@@ -317,66 +317,66 @@ namespace Aplikacja_MEMS
                 {
                     case 0x2C:
                         bufor = ascii.GetString(dane, poczatek, i - poczatek);
-                        czujniki.Add(bufor);
-                        bufor = string.Empty; 
+                        sensors.Add(bufor);
+                        bufor = string.Empty;
                         poczatek = i + 1;
                         break;
                 }
             }
 
-            // Dodawanie ostatniego czujnika (po nim nie ma znaku przecinka
+            // Dodawanie ostatniego sensora (po nim nie ma znaku przecinka
             bufor = ascii.GetString(dane, poczatek, (dane.Length - 2) - poczatek);
-            czujniki.Add(bufor);
+            sensors.Add(bufor);
 
-            // Aktualizowanie comboboxów wyboru czujnika
+            // Aktualizowanie comboboxów wyboru sensora
             switch (urzadzenie)
             {
                 case "Akcelerometr":
-                    foreach (string czujnik in czujniki)
+                    foreach (string sensor in sensors)
                     {
-                        cBoxAkcelerometr.Items.Add(czujnik);
+                        cBoxAccelerometer.Items.Add(sensor);
                     }
-                    cBoxAkcelerometr.Text = cBoxAkcelerometr.Items[0].ToString();
+                    cBoxAccelerometer.Text = cBoxAccelerometer.Items[0].ToString();
                     break;
 
                 case "Żyroskop":
-                    foreach (string czujnik in czujniki)
+                    foreach (string sensor in sensors)
                     {
-                        cBoxZyroskop.Items.Add(czujnik);
+                        cBoxGyroscope.Items.Add(sensor);
                     }
-                    cBoxZyroskop.Text = cBoxZyroskop.Items[0].ToString();
+                    cBoxGyroscope.Text = cBoxGyroscope.Items[0].ToString();
                     break;
 
                 case "Magnetometr":
-                    foreach (string czujnik in czujniki)
+                    foreach (string sensor in sensors)
                     {
-                        cBoxMagnetometr.Items.Add(czujnik);
+                        cBoxMagnetometer.Items.Add(sensor);
                     }
-                    cBoxMagnetometr.Text = cBoxMagnetometr.Items[0].ToString();
+                    cBoxMagnetometer.Text = cBoxMagnetometer.Items[0].ToString();
                     break;
 
                 case "Termometr":
-                    foreach (string czujnik in czujniki)
+                    foreach (string sensor in sensors)
                     {
-                        cBoxTermometr.Items.Add(czujnik);
+                        cBoxThermometer.Items.Add(sensor);
                     }
-                    cBoxTermometr.Text = cBoxTermometr.Items[0].ToString();
+                    cBoxThermometer.Text = cBoxThermometer.Items[0].ToString();
                     break;
 
                 case "Higrometr":
-                    foreach (string czujnik in czujniki)
+                    foreach (string sensor in sensors)
                     {
-                        cBoxHigrometr.Items.Add(czujnik);
+                        cBoxHumidity.Items.Add(sensor);
                     }
-                    cBoxHigrometr.Text = cBoxHigrometr.Items[0].ToString();
+                    cBoxHumidity.Text = cBoxHumidity.Items[0].ToString();
                     break;
 
                 case "Barometr":
-                    foreach (string czujnik in czujniki)
+                    foreach (string sensor in sensors)
                     {
-                        cBoxBarometr.Items.Add(czujnik);
+                        cBoxPressure.Items.Add(sensor);
                     }
-                    cBoxBarometr.Text = cBoxBarometr.Items[0].ToString();
+                    cBoxPressure.Text = cBoxPressure.Items[0].ToString();
                     break;
             }
             progressBarCOM.Value += 5;
@@ -385,7 +385,7 @@ namespace Aplikacja_MEMS
         // Włączenie okna ładowania aplikacji
         private void StartPaska()
         {
-            Application.Run(ladowanie);
+            Application.Run(loading);
         }
         private void buttonStart_Click(object sender, EventArgs e)
         {
@@ -393,278 +393,278 @@ namespace Aplikacja_MEMS
             {
                 int i = 0;
 
-                // Blokowanie comboBoxów oraz wysyłanie informacji o wybranym czujniku
-                foreach (ComboBox combo in wyczysc)
+                // Blokowanie comboBoxów oraz wysyłanie informacji o wybranym sensoru
+                foreach (ComboBox combo in clear)
                 {
                     combo.Enabled = false;
-                    serialPort.Write(Komunikacja.Zapytanie(0x50, (byte)(i + 1), 0x15, (byte)combo.Items.IndexOf(combo.Text), parametry), 0, 8);
+                    serialPort.Write(Communication.Query(0x50, (byte)(i + 1), 0x15, (byte)combo.Items.IndexOf(combo.Text), parameters), 0, 8);
                     i++;
                 }
 
                 // Wysłanie listy włączonych urządzeń
-                serialPort.Write(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00, parametry), 0, 13);
+                serialPort.Write(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), 0, 13);
 
-                akcelerometr = new Czujnik("Akcelerometr", cBoxAkcelerometr.Text, gBoxAkcelerometr, serialPort);
-                zyroskop = new Czujnik("Żyroskop", cBoxZyroskop.Text, gBoxZyroskop, serialPort);
-                magnetometr = new Czujnik("Magnetometr", cBoxMagnetometr.Text, gBoxMagnetometr, serialPort);
-                termometr = new Czujnik("Termometr", cBoxTermometr.Text, gBoxTermometr, serialPort);
-                barometr = new Czujnik("Barometr", cBoxBarometr.Text, gBoxBarometr, serialPort);
-                higrometr = new Czujnik("Higrometr", cBoxHigrometr.Text, gBoxHigrometr, serialPort);
+                accelerometer = new Sensor("Akcelerometr", cBoxAccelerometer.Text, gBoxAccelerometer, serialPort);
+                gyroscope = new Sensor("Żyroskop", cBoxGyroscope.Text, gBoxGyroscope, serialPort);
+                magnetometer = new Sensor("Magnetometr", cBoxMagnetometer.Text, gBoxMagnetometer, serialPort);
+                thermometer = new Sensor("Termometr", cBoxThermometer.Text, gBoxTermometer, serialPort);
+                pressure = new Sensor("Barometr", cBoxPressure.Text, gBoxPressure, serialPort);
+                humidity = new Sensor("Higrometr", cBoxHumidity.Text, gBoxHumidity, serialPort);
 
-                czujniki.Add(akcelerometr);
-                czujniki.Add(zyroskop);
-                czujniki.Add(barometr);
-                czujniki.Add(termometr);
-                czujniki.Add(magnetometr);
-                czujniki.Add(higrometr);
+                sensors.Add(accelerometer);
+                sensors.Add(gyroscope);
+                sensors.Add(pressure);
+                sensors.Add(thermometer);
+                sensors.Add(magnetometer);
+                sensors.Add(humidity);
 
                 // Rozpoczęcie pobierania danych
-                komunikacja.Odbior(serialPort);
+                communication.Odbior(serialPort);
 
                 // Wyswietlenie drugiej zakładki
-                tabControlCzujniki.SelectedIndex = 1;
+                tabControlMain.SelectedIndex = 1;
 
                 // Odblokowanie groupBoxów
-                foreach (GroupBox box in gBoxCzujnikiMEMS)
+                foreach (GroupBox box in gBoxMEMSSensors)
                 {
                     box.Enabled = true;
                 }
 
-                // Odblokowywanie comboBoxów dostępnych czujników
-                foreach (ComboBox combo in wyczysc)
+                // Odblokowywanie comboBoxów dostępnych sensorów
+                foreach (ComboBox combo in clear)
                 {
                     combo.Enabled = false;
                 }
 
                 buttonStart.Enabled = false;
                 buttonStop.Enabled = true;
-                włączWszystkieCzujnikiToolStripMenuItem.Enabled = true;
-                wyłączWszystkieCzujnikiToolStripMenuItem.Enabled = true;
+                EnableAllToolStripMenuItem.Enabled = true;
+                DisableAllToolStripMenuItem.Enabled = true;
 
-                progressBarDane.Value = 100;
+                progressBarData.Value = 100;
             }
             catch (Exception exc)
             {
                 // Wstrzymaj odbiór danych
-                komunikacja.StopOdbior();
+                communication.StopRecieve();
             }
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
             // Wstrzymanie wysylania informacji przez płytkę
-            serialPort.Write(Komunikacja.Zapytanie(0x09, 0x00, 0x00, 0x00, parametry), 0, 5);
+            serialPort.Write(Communication.Query(0x09, 0x00, 0x00, 0x00, parameters), 0, 5);
 
             // Blokowanie groupBoxów
-            foreach (GroupBox box in gBoxCzujnikiMEMS)
+            foreach (GroupBox box in gBoxMEMSSensors)
             {
                 box.Enabled = false;
             }
 
-            // Odblokowywanie comboBoxów dostepnych czujników
-            foreach (ComboBox combo in wyczysc)
+            // Odblokowywanie comboBoxów dostepnych sensorów
+            foreach (ComboBox combo in clear)
             {
                 combo.Enabled = true;
             }
 
             // Wstrzymaj odbiór danych
-            komunikacja.StopOdbior();
+            communication.StopRecieve();
 
-            włączWszystkieCzujnikiToolStripMenuItem.Enabled = false;
-            wyłączWszystkieCzujnikiToolStripMenuItem.Enabled = false;
+            EnableAllToolStripMenuItem.Enabled = false;
+            DisableAllToolStripMenuItem.Enabled = false;
             buttonStart.Enabled = true;
             buttonStop.Enabled = false;
 
-            progressBarDane.Value = 0;
+            progressBarData.Value = 0;
         }
 
         private void chBoxZyroWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxZyroWlaczony.Checked == true)
+            if (chBoxGyroEnabled.Checked == true)
             {
-                czujnik += 0x20;
+                sensor += 0x20;
             }
             else
             {
-                czujnik -= 0x20;
+                sensor -= 0x20;
             }
-            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00, parametry), serialPort);
+            Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
 
-            zyroskop.wlaczony = chBoxZyroWlaczony.Checked;
+            gyroscope.enabled = chBoxGyroEnabled.Checked;
         }
 
         private void chBoxMagWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxMagWlaczony.Checked == true)
+            if (chBoxMagEnabled.Checked == true)
             {
-                czujnik += 0x40;
+                sensor += 0x40;
             }
             else
             {
-                czujnik -= 0x40;
+                sensor -= 0x40;
             }
-            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00, parametry), serialPort);
+            Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
 
-            magnetometr.wlaczony = chBoxMagWlaczony.Checked;
+            magnetometer.enabled = chBoxMagEnabled.Checked;
         }
 
         private void chBoxTermWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxTermWlaczony.Checked == true)
+            if (chBoxTermEnabled.Checked == true)
             {
-                czujnik += 0x02;
+                sensor += 0x02;
             }
             else
             {
-                czujnik -= 0x02;
+                sensor -= 0x02;
             }
-            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00, parametry), serialPort);
+            Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
 
-            termometr.wlaczony = chBoxTermWlaczony.Checked;
+            thermometer.enabled = chBoxTermEnabled.Checked;
         }
 
         private void chBoxBarWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxBarWlaczony.Checked == true)
+            if (chBoxPreEnabled.Checked == true)
             {
-                czujnik += 0x01;
+                sensor += 0x01;
             }
             else
             {
-                czujnik -= 0x01;
+                sensor -= 0x01;
             }
-            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00, parametry), serialPort);
+            Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
 
-            barometr.wlaczony = chBoxBarWlaczony.Checked;
+            pressure.enabled = chBoxPreEnabled.Checked;
         }
 
         private void chBoxHigWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxHigWlaczony.Checked == true)
+            if (chBoxHumEnabled.Checked == true)
             {
-                czujnik += 0x04;
+                sensor += 0x04;
             }
             else
             {
-                czujnik -= 0x04;
+                sensor -= 0x04;
             }
-            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00, parametry), serialPort);
+            Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
 
-            higrometr.wlaczony = chBoxHigWlaczony.Checked;
+            humidity.enabled = chBoxHumEnabled.Checked;
         }
 
         private void chBoxAkcWlaczony_CheckedChanged(object sender, EventArgs e)
         {
-            if (chBoxAkcWlaczony.Checked == true)
+            if (chBoxAccEnabled.Checked == true)
             {
-                czujnik += 0x10;
+                sensor += 0x10;
             }
             else
             {
-                czujnik -= 0x10;
+                sensor -= 0x10;
             }
-            Czujnik.SendMessage(Komunikacja.Zapytanie(0x08, czujnik, 0x00, 0x00, parametry), serialPort);
+            Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
 
-            akcelerometr.wlaczony = chBoxAkcWlaczony.Checked;
+            accelerometer.enabled = chBoxAccEnabled.Checked;
         }
 
         public void WyswietlDane(string doWyswietlenia)
         {
-            bgWorkWypisz = new BackgroundWorker();
-            bgWorkWypisz.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWypisz_DoWork);
-            bgWorkWypisz.RunWorkerAsync(argument: doWyswietlenia);
+            bgWorkWrite = new BackgroundWorker();
+            bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+            bgWorkWrite.RunWorkerAsync(argument: doWyswietlenia);
         }
-        private void bgWorkWypisz_DoWork(object sender, DoWorkEventArgs e)
+        private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)
         {
-           Action<int> updateAction = new Action<int>((value) => rTBoxDane.Text += "Odebrano dane \n");
-           rTBoxDane.Invoke(updateAction, 32);
+            Action<int> updateAction = new Action<int>((value) => rTBoxData.Text += "Odebrano dane \n");
+            rTBoxData.Invoke(updateAction, 32);
         }
 
-        // Ustawianie ODR akcelerometru w comboBoxie
+        // Ustawianie ODR accelerometeru w comboBoxie
         private void cBoxAkcODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
             {
-                switch (cBoxAkcODR.SelectedIndex)
+                switch (cBoxAccODR.SelectedIndex)
                 {
                     case 0:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x48;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x48;
+                        parameters[3] = 0x41;
                         break;
 
                     case 1:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x41;
                         break;
 
                     case 2:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x42;
                         break;
 
                     case 3:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x42;
                         break;
 
                     case 4:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x43;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x43;
                         break;
 
                     case 5:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x43;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x43;
                         break;
 
                     case 6:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x40;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x44;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x40;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x44;
                         break;
 
                     case 7:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x80;
-                        parametry[2] = 0xCF;
-                        parametry[3] = 0x44;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x80;
+                        parameters[2] = 0xCF;
+                        parameters[3] = 0x44;
                         break;
 
                     case 8:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x20;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x45;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x20;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x45;
                         break;
 
                     case 9:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x20;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x45;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x20;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x45;
                         break;
                 }
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x01, 0x07, 0x00, parametry), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x01, 0x07, 0x00, parameters), 0, 11);
             }
         }
 
         private void włączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            serialPort.Write(Komunikacja.Zapytanie(0x08, 0x77, 0x00, 0x00, parametry), 0, 11);
-            foreach (CheckBox ch in wlaczniki)
+            serialPort.Write(Communication.Query(0x08, 0x77, 0x00, 0x00, parameters), 0, 11);
+            foreach (CheckBox ch in checks)
             {
                 ch.Checked = true;
             }
@@ -672,8 +672,8 @@ namespace Aplikacja_MEMS
 
         private void wyłączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            serialPort.Write(Komunikacja.Zapytanie(0x08, 0x00, 0x00, 0x00, parametry), 0, 11);
-            foreach (CheckBox ch in wlaczniki)
+            serialPort.Write(Communication.Query(0x08, 0x00, 0x00, 0x00, parameters), 0, 11);
+            foreach (CheckBox ch in checks)
             {
                 ch.Checked = false;
             }
@@ -684,83 +684,83 @@ namespace Aplikacja_MEMS
         {
             if (serialPort.IsOpen)
             {
-                switch (cBoxZyroODR.SelectedIndex)
+                switch (cBoxGyroODR.SelectedIndex)
                 {
                     case 0:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x48;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x48;
+                        parameters[3] = 0x41;
                         break;
 
                     case 1:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x41;
                         break;
 
                     case 2:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x42;
                         break;
 
                     case 3:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x42;
                         break;
 
                     case 4:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x43;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x43;
                         break;
 
                     case 5:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x43;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x43;
                         break;
 
                     case 6:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x40;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x44;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x40;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x44;
                         break;
 
                     case 7:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x80;
-                        parametry[2] = 0xCF;
-                        parametry[3] = 0x44;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x80;
+                        parameters[2] = 0xCF;
+                        parameters[3] = 0x44;
                         break;
 
                     case 8:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x20;
-                        parametry[2] = 0x50;
-                        parametry[3] = 0x45;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x20;
+                        parameters[2] = 0x50;
+                        parameters[3] = 0x45;
                         break;
 
                     case 9:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x20;
-                        parametry[2] = 0xD0;
-                        parametry[3] = 0x45;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x20;
+                        parameters[2] = 0xD0;
+                        parameters[3] = 0x45;
                         break;
                 }
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x02, 0x07, 0x00, parametry), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x02, 0x07, 0x00, parameters), 0, 11);
             }
         }
 
-        // Ustawianie ODR magnetometru w comboBoxie
+        // Ustawianie ODR magnetometeru w comboBoxie
         private void cBoxMagODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
@@ -768,34 +768,34 @@ namespace Aplikacja_MEMS
                 switch (cBoxMagODR.SelectedIndex)
                 {
                     case 0:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x20;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x20;
+                        parameters[3] = 0x41;
                         break;
 
                     case 1:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xA0;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xA0;
+                        parameters[3] = 0x41;
                         break;
 
                     case 2:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x48;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x48;
+                        parameters[3] = 0x42;
                         break;
 
                     case 3:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xC8;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xC8;
+                        parameters[3] = 0x42;
                         break;
                 }
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x03, 0x07, 0x00, parametry), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x03, 0x07, 0x00, parameters), 0, 11);
             }
         }
 
@@ -806,85 +806,85 @@ namespace Aplikacja_MEMS
 
         private void cBoxHigODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ZmianaODR(cBoxHigODR.SelectedIndex);
+            ZmianaODR(cBoxHumODR.SelectedIndex);
         }
-        // Ustawianie ODR termometru i higrometru w comboBoxie
+        // Ustawianie ODR thermometeru i humidityu w comboBoxie
         private void ZmianaODR(int indeks)
         {
-            cBoxTermODR.SelectedIndex = cBoxHigODR.SelectedIndex = indeks;
+            cBoxTermODR.SelectedIndex = cBoxHumODR.SelectedIndex = indeks;
             if (serialPort.IsOpen)
             {
                 switch (indeks)
                 {
                     case 0:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x80;
-                        parametry[3] = 0x3F;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x80;
+                        parameters[3] = 0x3F;
                         break;
 
                     case 1:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xE0;
-                        parametry[3] = 0x40;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xE0;
+                        parameters[3] = 0x40;
                         break;
 
                     case 2:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x48;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x48;
+                        parameters[3] = 0x41;
                         break;
                 }
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x04, 0x07, 0x00, parametry), 0, 11);
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x05, 0x07, 0x00, parametry), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x04, 0x07, 0x00, parameters), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x05, 0x07, 0x00, parameters), 0, 11);
             }
         }
 
-        // Ustawianie ODR barometru w comboBoxie
+        // Ustawianie ODR pressureu w comboBoxie
         private void cBoxBarODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (serialPort.IsOpen)
             {
-                switch (cBoxBarODR.SelectedIndex)
+                switch (cBoxPreODR.SelectedIndex)
                 {
                     case 0:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x80;
-                        parametry[3] = 0x3F;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x80;
+                        parameters[3] = 0x3F;
                         break;
 
                     case 1:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x20;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x20;
+                        parameters[3] = 0x41;
                         break;
 
                     case 2:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0xC8;
-                        parametry[3] = 0x41;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0xC8;
+                        parameters[3] = 0x41;
                         break;
 
                     case 3:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x48;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x48;
+                        parameters[3] = 0x42;
                         break;
 
                     case 4:
-                        parametry[0] = 0x00;
-                        parametry[1] = 0x00;
-                        parametry[2] = 0x96;
-                        parametry[3] = 0x42;
+                        parameters[0] = 0x00;
+                        parameters[1] = 0x00;
+                        parameters[2] = 0x96;
+                        parameters[3] = 0x42;
                         break;
                 }
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x06, 0x07, 0x00, parametry), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x06, 0x07, 0x00, parameters), 0, 11);
             }
         }
 
@@ -893,26 +893,26 @@ namespace Aplikacja_MEMS
         {
             if (serialPort.IsOpen)
             {
-                switch (cBoxAkcSkala.SelectedIndex)
+                switch (cBoxAccScale.SelectedIndex)
                 {
                     case 0:
-                        parametry[0] = 0x02;
-                        parametry[0] = 0x00;
+                        parameters[0] = 0x02;
+                        parameters[0] = 0x00;
                         break;
                     case 1:
-                        parametry[0] = 0x04;
-                        parametry[0] = 0x00;
+                        parameters[0] = 0x04;
+                        parameters[0] = 0x00;
                         break;
                     case 2:
-                        parametry[0] = 0x08;
-                        parametry[0] = 0x00;
+                        parameters[0] = 0x08;
+                        parameters[0] = 0x00;
                         break;
                     case 3:
-                        parametry[0] = 0x10;
-                        parametry[0] = 0x00;
+                        parameters[0] = 0x10;
+                        parameters[0] = 0x00;
                         break;
                 }
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x01, 0x05, 0x00, parametry), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x01, 0x05, 0x00, parameters), 0, 11);
             }
         }
 
@@ -921,30 +921,30 @@ namespace Aplikacja_MEMS
         {
             if (serialPort.IsOpen)
             {
-                switch (cBoxZyroSkala.SelectedIndex)
+                switch (cBoxGyroScale.SelectedIndex)
                 {
                     case 0:
-                        parametry[0] = 0x7D;
-                        parametry[0] = 0x00;
+                        parameters[0] = 0x7D;
+                        parameters[0] = 0x00;
                         break;
                     case 1:
-                        parametry[0] = 0xFA;
-                        parametry[0] = 0x00;
+                        parameters[0] = 0xFA;
+                        parameters[0] = 0x00;
                         break;
                     case 2:
-                        parametry[0] = 0xF4;
-                        parametry[0] = 0x01;
+                        parameters[0] = 0xF4;
+                        parameters[0] = 0x01;
                         break;
                     case 3:
-                        parametry[0] = 0xE8;
-                        parametry[0] = 0x03;
+                        parameters[0] = 0xE8;
+                        parameters[0] = 0x03;
                         break;
                     case 4:
-                        parametry[0] = 0xD0;
-                        parametry[0] = 0x07;
+                        parameters[0] = 0xD0;
+                        parameters[0] = 0x07;
                         break;
                 }
-                serialPort.Write(Komunikacja.Zapytanie(0x50, 0x02, 0x05, 0x00, parametry), 0, 11);
+                serialPort.Write(Communication.Query(0x50, 0x02, 0x05, 0x00, parameters), 0, 11);
             }
         }
     }
