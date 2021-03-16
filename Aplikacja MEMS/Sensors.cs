@@ -10,12 +10,20 @@ namespace Aplikacja_MEMS
     {
         string sensorName;
         bool active;
-        byte sensorNr;
+        public static byte sensorNr;
         byte[] ODR;
+        string[] sensorList;
+        Communication communication;
 
         public abstract void DrawPlot();
         public abstract void Get();
         public abstract void Set();
         public abstract void OpenRegister();
+
+        public static byte[] GetSensorsList()
+        {
+            byte[] parameters = new byte[] { 0x14, sensorNr};
+            return parameters;
+        }
     }
 }

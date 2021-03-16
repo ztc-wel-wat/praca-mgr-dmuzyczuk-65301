@@ -36,7 +36,7 @@ namespace Aplikacja_MEMS
         Sensor humidity;
 
         byte sensor = 0x77;
-        byte[] parameters = new byte[10];
+        byte[] parameters;
 
         int response = 0;
         byte[] resp = new byte[4096];
@@ -45,7 +45,7 @@ namespace Aplikacja_MEMS
         {
             InitializeComponent();
 
-            communication = new Communication(this);
+            communication = new Communication(serialPort);
 
             // Ustawienie rozmiaru groupBoxów
             gBoxInfo.Height = tabPageGeneral.Height / 3;
@@ -128,7 +128,7 @@ namespace Aplikacja_MEMS
                     serialPort.Open();
 
                     // Wysłanie zapytania do urządzenia 
-                    serialPort.Write(Communication.Query(0x02, 0x00, 0x00, 0x00, parameters), 0, 5);
+                    communication.Query(0x14)
 
                     // Pobranie responsei z bufora COM
                     Task awaiting = Await();
@@ -225,13 +225,13 @@ namespace Aplikacja_MEMS
                 }
 
                 // Wysłanie ustawień początkowych aplikacji
-                serialPort.Write(Communication.Query(0x0C, 0x00, 0x00, 0x00, parameters), 0, 12);
+                serialPort.Write(Communication.Query(0x0C, null), 0, 12);
 
                 buttonOpen.Enabled = false;
                 cBoxPorts.Enabled = false;
 
                 // Pobranie list sensorow
-                byte[] accList = Communication.readSensorList(Communication.Query(0x50, 0x01, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Akcelerometry
+                byte[] accList = Communication.readSensorList(Communication.Query(0x50, {0x14, 0x01}), serialPort, progressBarCOM); // Akcelerometry
                 byte[] gyroList = Communication.readSensorList(Communication.Query(0x50, 0x02, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Żyroskopy
                 byte[] magLsit = Communication.readSensorList(Communication.Query(0x50, 0x03, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Magnetometry
                 byte[] thermList = Communication.readSensorList(Communication.Query(0x50, 0x04, 0x14, 0x00, parameters), serialPort, progressBarCOM); // Termometry

@@ -9,6 +9,11 @@ namespace Aplikacja_MEMS
 {
     class Accelerometer : Sensors
     {
+        public Accelerometer()
+        {
+            sensorNr = 0x01;
+
+        }
 
         public override void DrawPlot()
         {
