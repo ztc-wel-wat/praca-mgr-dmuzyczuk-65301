@@ -191,8 +191,11 @@ namespace Aplikacja_MEMS
             // Ładowanie progressBar podczas włączania aplikacji
             if (loading.progressBar.Value < 90)
             {
-                Action<int> updateAction = new Action<int>((value) => loading.progressBar.Value += 90 / comPorts.Length);
-                loading.progressBar.Invoke(updateAction, 32);
+                if (comPorts.Length != 0)
+                {
+                    Action<int> updateAction = new Action<int>((value) => loading.progressBar.Value += 90 / comPorts.Length);
+                    loading.progressBar.Invoke(updateAction, 32);
+                }
             }
             else
             {
@@ -946,6 +949,12 @@ namespace Aplikacja_MEMS
                 }
                 serialPort.Write(Communication.Query(0x50, 0x02, 0x05, 0x00, parameters), 0, 11);
             }
+        }
+
+        private void buttonAccDrawPlot_Click(object sender, EventArgs e)
+        {
+            Accelerometer acc = new Accelerometer();
+            acc.DrawPlot();
         }
     }
 }

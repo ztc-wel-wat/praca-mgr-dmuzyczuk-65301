@@ -35,15 +35,10 @@ namespace Aplikacja_MEMS
                 case 0x0C:
                     byte[] time = CurrentTime();
 
-                    for (int i = 0; i < 3; i++)
+                    for (int i = 0; i < 7; i++)
                     {
                         query[i + 3] = time[i];
                     }
-
-                    query[6] = 0x15;
-                    query[7] = 0x02;
-                    query[8] = 0x19;
-                    query[9] = 0x04;
                     complement = 10;
                     break;
 
@@ -75,6 +70,9 @@ namespace Aplikacja_MEMS
                             query[6] = parameters[1];
                             query[7] = query[8] = 0x00;
                             complement = 9;
+                            break;
+
+                        case 0x03: // ?
                             break;
                     }
                     break;
@@ -140,12 +138,16 @@ namespace Aplikacja_MEMS
 
         private static byte[] CurrentTime()
         {
-            byte[] time = new byte[3];
+            byte[] time = new byte[7];
 
             DateTime currentTime = DateTime.Now;
             time[0] = (byte)currentTime.Hour;
             time[1] = (byte)currentTime.Minute;
             time[2] = (byte)currentTime.Second;
+            time[3] = (byte)currentTime.Millisecond;
+            time[4] = (byte)currentTime.Month;
+            time[5] = (byte)currentTime.Day;
+            time[6] = (byte)currentTime.Year;
 
             return time;
         }

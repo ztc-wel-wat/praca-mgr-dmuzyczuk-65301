@@ -935,9 +935,9 @@ namespace Aplikacja_MEMS
             this.labMagScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labMagScale.Location = new System.Drawing.Point(6, 59);
             this.labMagScale.Name = "labMagScale";
-            this.labMagScale.Size = new System.Drawing.Size(75, 15);
+            this.labMagScale.Size = new System.Drawing.Size(47, 15);
             this.labMagScale.TabIndex = 11;
-            this.labMagScale.Text = "Skala (oś Y):";
+            this.labMagScale.Text = "Zakres:";
             // 
             // chBoxMagEnabled
             // 
@@ -1308,9 +1308,9 @@ namespace Aplikacja_MEMS
             this.labGyroScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labGyroScale.Location = new System.Drawing.Point(6, 59);
             this.labGyroScale.Name = "labGyroScale";
-            this.labGyroScale.Size = new System.Drawing.Size(75, 15);
+            this.labGyroScale.Size = new System.Drawing.Size(47, 15);
             this.labGyroScale.TabIndex = 11;
-            this.labGyroScale.Text = "Skala (oś Y):";
+            this.labGyroScale.Text = "Zakres:";
             // 
             // chBoxGyroEnabled
             // 
@@ -1662,6 +1662,7 @@ namespace Aplikacja_MEMS
             this.buttonAccDrawPlot.TabIndex = 8;
             this.buttonAccDrawPlot.Text = "Rysuj wykres";
             this.buttonAccDrawPlot.UseVisualStyleBackColor = true;
+            this.buttonAccDrawPlot.Click += new System.EventHandler(this.buttonAccDrawPlot_Click);
             // 
             // labAccODR
             // 
@@ -1679,9 +1680,9 @@ namespace Aplikacja_MEMS
             this.labAccScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labAccScale.Location = new System.Drawing.Point(6, 59);
             this.labAccScale.Name = "labAccScale";
-            this.labAccScale.Size = new System.Drawing.Size(75, 15);
+            this.labAccScale.Size = new System.Drawing.Size(47, 15);
             this.labAccScale.TabIndex = 2;
-            this.labAccScale.Text = "Skala (oś Y):";
+            this.labAccScale.Text = "Zakres:";
             // 
             // chBoxAccEnabled
             // 

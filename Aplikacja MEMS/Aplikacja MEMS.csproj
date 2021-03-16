@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accelerometer.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="Communication.cs" />
     <Compile Include="Loading.cs">
@@ -54,6 +55,7 @@
     <Compile Include="Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sensors.cs" />
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
