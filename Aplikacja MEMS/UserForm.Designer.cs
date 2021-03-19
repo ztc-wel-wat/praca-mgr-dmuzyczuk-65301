@@ -759,7 +759,6 @@ namespace Aplikacja_MEMS
             this.chBoxHumEnabled.TabIndex = 19;
             this.chBoxHumEnabled.Text = "Włączony";
             this.chBoxHumEnabled.UseVisualStyleBackColor = true;
-            this.chBoxHumEnabled.CheckedChanged += new System.EventHandler(this.chBoxHigWlaczony_CheckedChanged);
             // 
             // gBoxMagnetometer
             // 
@@ -952,7 +951,6 @@ namespace Aplikacja_MEMS
             this.chBoxMagEnabled.TabIndex = 10;
             this.chBoxMagEnabled.Text = "Włączony";
             this.chBoxMagEnabled.UseVisualStyleBackColor = true;
-            this.chBoxMagEnabled.CheckedChanged += new System.EventHandler(this.chBoxMagWlaczony_CheckedChanged);
             // 
             // gBoxPressure
             // 
@@ -1121,7 +1119,6 @@ namespace Aplikacja_MEMS
             this.chBoxPreEnabled.TabIndex = 19;
             this.chBoxPreEnabled.Text = "Włączony";
             this.chBoxPreEnabled.UseVisualStyleBackColor = true;
-            this.chBoxPreEnabled.CheckedChanged += new System.EventHandler(this.chBoxBarWlaczony_CheckedChanged);
             // 
             // gBoxGyroscope
             // 
@@ -1325,7 +1322,6 @@ namespace Aplikacja_MEMS
             this.chBoxGyroEnabled.TabIndex = 10;
             this.chBoxGyroEnabled.Text = "Włączony";
             this.chBoxGyroEnabled.UseVisualStyleBackColor = true;
-            this.chBoxGyroEnabled.CheckedChanged += new System.EventHandler(this.chBoxZyroWlaczony_CheckedChanged);
             // 
             // gBoxTermometer
             // 
@@ -1492,7 +1488,6 @@ namespace Aplikacja_MEMS
             this.chBoxTermEnabled.TabIndex = 10;
             this.chBoxTermEnabled.Text = "Włączony";
             this.chBoxTermEnabled.UseVisualStyleBackColor = true;
-            this.chBoxTermEnabled.CheckedChanged += new System.EventHandler(this.chBoxTermWlaczony_CheckedChanged);
             // 
             // gBoxAccelerometer
             // 
@@ -1662,7 +1657,6 @@ namespace Aplikacja_MEMS
             this.buttonAccDrawPlot.TabIndex = 8;
             this.buttonAccDrawPlot.Text = "Rysuj wykres";
             this.buttonAccDrawPlot.UseVisualStyleBackColor = true;
-            this.buttonAccDrawPlot.Click += new System.EventHandler(this.buttonAccDrawPlot_Click);
             // 
             // labAccODR
             // 
@@ -1697,7 +1691,7 @@ namespace Aplikacja_MEMS
             this.chBoxAccEnabled.TabIndex = 1;
             this.chBoxAccEnabled.Text = "Włączony";
             this.chBoxAccEnabled.UseVisualStyleBackColor = true;
-            this.chBoxAccEnabled.CheckedChanged += new System.EventHandler(this.chBoxAkcWlaczony_CheckedChanged);
+            this.chBoxAccEnabled.Click += new System.EventHandler(this.chBoxAkcWlaczony_CheckedChanged);
             // 
             // tabPageData
             // 

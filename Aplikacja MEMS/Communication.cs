@@ -14,19 +14,12 @@ namespace Aplikacja_MEMS
     {
         static BackgroundWorker bgWorkReceive;
         static BackgroundWorker bgWorkWrite;
-        SerialPort serialPort;
 
-        public Communication(SerialPort sp)
-        {
-            serialPort = sp;
-        }
-
-        public void Query(byte command, byte[] parameters)
+        public static byte[] Query(byte command, byte[] parameters)
         {
             byte[] query = new byte[13];
             Array.Clear(query, 0, query.Length);
-            MessageBox.Show(query[0].ToString() + query[1].ToString() + query[2].ToString() + query[3].ToString() + query[4].ToString() + query[5].ToString() + query[6].ToString() + query[7].ToString() + query[8].ToString() + query[9].ToString() + query[10].ToString() + query[11].ToString() + query[12].ToString());
-
+           
             int complement = 0;
 
             query[0] = 0x32;
@@ -92,14 +85,13 @@ namespace Aplikacja_MEMS
 
             // Dodawanie sumy kontrolnej
             query[complement] = CheckSum(query, complement);
-            query[complement + 1] = 0xf0;
+            query[complement + 1] = 0xF0;
 
             // Wstawianie danych do tablicy zwrotnej
             byte[] dataSend = new byte[complement + 2];
             Array.Copy(query, dataSend, complement + 2);
 
-            bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-            bgWorkWrite.RunWorkerAsync(argument: dataSend);
+            return dataSend;
         }
 
         public static byte[] readSensorList(byte[] data, SerialPort port, ProgressBar pb)
@@ -153,7 +145,7 @@ namespace Aplikacja_MEMS
             return time;
         }
 
-        public void Odbior(SerialPort port)
+        public static void Odbior(SerialPort port)
         {
             bgWorkReceive = new BackgroundWorker();
             bgWorkReceive.WorkerSupportsCancellation = true;
@@ -166,7 +158,7 @@ namespace Aplikacja_MEMS
             if (bgWorkReceive.IsBusy)
                 bgWorkReceive.CancelAsync();
         }
-        private void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
+        private static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
         {
             SerialPort port = (SerialPort)e.Argument;
             byte[] data = new byte[4096];
@@ -192,10 +184,10 @@ namespace Aplikacja_MEMS
             }
         }
 
-        private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)
-        {
-            byte[] message = (byte[])e.Argument;
-            serialPort.Write(message, 0, message.Length);
-        }
+        //private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    byte[] message = (byte[])e.Argument;
+        //    serialPort.Write(message, 0, message.Length);
+        //}
     }
 }
