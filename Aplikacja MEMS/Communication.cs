@@ -155,9 +155,8 @@ namespace Aplikacja_MEMS
         }
 
         // Wyłączenie odbioru danycdh z buffora systemowego
-        public void StopRecieve()
+        public static void StopRecieve()
         {
-            if (bgWorkReceive.IsBusy)
                 bgWorkReceive.CancelAsync();
         }
 

@@ -252,7 +252,7 @@ namespace Aplikacja_MEMS
                 {
                     cBox.Items.Clear();
                 }
-
+                
                 // Wysłanie ustawień początkowych aplikacji
                 serialPort.Write(Communication.Query(0x0C, null), 0, 12);
 
@@ -276,6 +276,9 @@ namespace Aplikacja_MEMS
                 buttonOpen.Enabled = false;
                 buttonStop.Enabled = false;
                 cBoxPorts.Enabled = false;
+
+                // Rozpoczęcie pobierania danych
+                Communication.Read(serialPort);
 
                 progressBarCOM.Value = 100;
             }
@@ -304,6 +307,8 @@ namespace Aplikacja_MEMS
 
             if (serialPort.IsOpen)
                 serialPort.Close();
+
+            Communication.StopRecieve();
 
             progressBarCOM.Value = 0;
 
@@ -350,9 +355,6 @@ namespace Aplikacja_MEMS
 
                 serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
 
-                // Rozpoczęcie pobierania danych
-                Communication.Read(serialPort);
-
                 // Wyswietlenie drugiej zakładki
                 tabControlMain.SelectedIndex = 1;
 
@@ -391,7 +393,6 @@ namespace Aplikacja_MEMS
         {
             // Wstrzymanie wysylania informacji przez płytkę
             serialPort.Write(Communication.Query(0x09, null), 0, 5);
-            Communication.bgWorkReceive.CancelAsync();
 
             // Blokowanie groupBoxów
             foreach (GroupBox box in gBoxMEMSSensors)
@@ -417,7 +418,7 @@ namespace Aplikacja_MEMS
         private void włączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             parameters[0] = Sensor.enableByte = 0x77;
-            parameters[1] = 0x01;
+            parameters[1] = Sensor.enableInterruptByte;
             serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
             foreach (CheckBox ch in checks)
             {
@@ -428,7 +429,7 @@ namespace Aplikacja_MEMS
         private void wyłączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             parameters[0] = Sensor.enableByte = 0x00;
-            parameters[1] = 0x00;
+            parameters[1] = Sensor.enableInterruptByte;
             serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
             foreach (CheckBox ch in checks)
             {
