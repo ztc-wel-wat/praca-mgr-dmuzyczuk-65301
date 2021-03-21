@@ -12,10 +12,10 @@ namespace Aplikacja_MEMS
 {
     public abstract class Sensors
     {
-        string sensorName;
+        public Label sensorName;
         public byte active;
-        public static byte sensorNr;
-        byte[] ODR;
+        public byte sensorNr;
+        public byte[,] ODR;
         string[] sensorList;
         public SerialPort serialPort;
         public ComboBox cBoxDeviceList;
@@ -27,7 +27,6 @@ namespace Aplikacja_MEMS
 
         public void GetSensorsList()
         {
-            List<string> sensors = new List<string>();
             byte[] response = new byte[serialPort.ReadBufferSize];
             byte[] parameters = new byte[] { 0x14, sensorNr };
             serialPort.Write(Communication.Query(0x50, parameters), 0, 7);
@@ -38,7 +37,13 @@ namespace Aplikacja_MEMS
 
             ASCIIEncoding ascii = new ASCIIEncoding();
             string bufor = string.Empty;
-            int begin = 10;
+
+            int begin = 0;
+            for (int i = 0; response[i] != 0x14; i++)
+            {
+                begin = i + 3;
+            }
+
 
             // Wyszukiwanie znaku przecinka, tlumaczenie oraz tworzenie listy urządzen na string
             for (int i = 5; i < (response.Length - 2); i++)
@@ -47,7 +52,7 @@ namespace Aplikacja_MEMS
                 {
                     case 0x2C:
                         bufor = ascii.GetString(response, begin, i - begin);
-                        sensors.Add(bufor);
+                        cBoxDeviceList.Items.Add(bufor);
                         bufor = string.Empty;
                         begin = i + 1;
                         break;
@@ -56,13 +61,7 @@ namespace Aplikacja_MEMS
 
             // Dodawanie ostatniego sensora (po nim nie ma znaku przecinka
             bufor = ascii.GetString(response, begin, (response.Length - 2) - begin);
-            sensors.Add(bufor);
-
-            // Aktualizowanie comboboxów wyboru sensora
-            foreach (string sensor in sensors)
-            {
-                cBoxDeviceList.Items.Add(sensor);
-            }
+            cBoxDeviceList.Items.Add(bufor);
 
             cBoxDeviceList.Text = cBoxDeviceList.Items[0].ToString();
         }
@@ -101,6 +100,20 @@ namespace Aplikacja_MEMS
             BackgroundWorker bgWorkWrite = new BackgroundWorker();
             bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
             bgWorkWrite.RunWorkerAsync(argument: query);
+        }
+
+        public void SetODR(int index)
+        {
+            if (serialPort.IsOpen)
+            {
+                byte[] parameters = new byte[] { 0x07, sensorNr, ODR[index, 0], ODR[index, 1], ODR[index, 2], ODR[index, 3] }; 
+                
+                byte[] query = Communication.Query(0x50, parameters);
+
+                BackgroundWorker bgWorkWrite = new BackgroundWorker();
+                bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+                bgWorkWrite.RunWorkerAsync(argument: query);
+            }
         }
 
         private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)

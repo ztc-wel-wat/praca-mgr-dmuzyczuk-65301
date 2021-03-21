@@ -12,8 +12,7 @@ namespace Aplikacja_MEMS
 {
     class Communication
     {
-        static BackgroundWorker bgWorkReceive;
-        static BackgroundWorker bgWorkWrite;
+        public static BackgroundWorker bgWorkReceive;
 
         public static byte[] Query(byte command, byte[] parameters)
         {
@@ -158,7 +157,7 @@ namespace Aplikacja_MEMS
             if (bgWorkReceive.IsBusy)
                 bgWorkReceive.CancelAsync();
         }
-        private static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
+        public static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
         {
             SerialPort port = (SerialPort)e.Argument;
             byte[] data = new byte[4096];

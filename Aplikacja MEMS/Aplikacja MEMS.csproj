@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accelerometer.cs" />
+    <Compile Include="Gyroscope.cs" />
+    <Compile Include="Magnetometer.cs" />
+    <Compile Include="Motion.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="Communication.cs" />
     <Compile Include="Loading.cs">

@@ -165,11 +165,15 @@ namespace Aplikacja_MEMS
             this.portOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EnableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.włączWyłączPrzerwaniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.bgWorkerOtworz = new System.ComponentModel.BackgroundWorker();
+            this.accNameLab = new System.Windows.Forms.Label();
+            this.gyroNameLab = new System.Windows.Forms.Label();
+            this.magNameLab = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
@@ -762,6 +766,7 @@ namespace Aplikacja_MEMS
             // 
             // gBoxMagnetometer
             // 
+            this.gBoxMagnetometer.Controls.Add(this.magNameLab);
             this.gBoxMagnetometer.Controls.Add(this.labMagName);
             this.gBoxMagnetometer.Controls.Add(this.cBoxMagODR);
             this.gBoxMagnetometer.Controls.Add(this.cBoxMagScale);
@@ -951,6 +956,7 @@ namespace Aplikacja_MEMS
             this.chBoxMagEnabled.TabIndex = 10;
             this.chBoxMagEnabled.Text = "Włączony";
             this.chBoxMagEnabled.UseVisualStyleBackColor = true;
+            this.chBoxMagEnabled.Click += new System.EventHandler(this.chBoxMagEnabled_Click);
             // 
             // gBoxPressure
             // 
@@ -1122,6 +1128,7 @@ namespace Aplikacja_MEMS
             // 
             // gBoxGyroscope
             // 
+            this.gBoxGyroscope.Controls.Add(this.gyroNameLab);
             this.gBoxGyroscope.Controls.Add(this.LabGyroName);
             this.gBoxGyroscope.Controls.Add(this.cBoxGyroODR);
             this.gBoxGyroscope.Controls.Add(this.cBoxGyroScale);
@@ -1322,6 +1329,7 @@ namespace Aplikacja_MEMS
             this.chBoxGyroEnabled.TabIndex = 10;
             this.chBoxGyroEnabled.Text = "Włączony";
             this.chBoxGyroEnabled.UseVisualStyleBackColor = true;
+            this.chBoxGyroEnabled.Click += new System.EventHandler(this.chBoxGyroEnabled_Click);
             // 
             // gBoxTermometer
             // 
@@ -1491,6 +1499,7 @@ namespace Aplikacja_MEMS
             // 
             // gBoxAccelerometer
             // 
+            this.gBoxAccelerometer.Controls.Add(this.accNameLab);
             this.gBoxAccelerometer.Controls.Add(this.labAccName);
             this.gBoxAccelerometer.Controls.Add(this.cBoxAccODR);
             this.gBoxAccelerometer.Controls.Add(this.cBoxAccScale);
@@ -1751,7 +1760,8 @@ namespace Aplikacja_MEMS
             this.opcjeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.portOpenToolStripMenuItem,
             this.EnableAllToolStripMenuItem,
-            this.DisableAllToolStripMenuItem});
+            this.DisableAllToolStripMenuItem,
+            this.włączWyłączPrzerwaniaToolStripMenuItem});
             this.opcjeToolStripMenuItem.Name = "opcjeToolStripMenuItem";
             this.opcjeToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.opcjeToolStripMenuItem.Text = "Opcje";
@@ -1759,14 +1769,14 @@ namespace Aplikacja_MEMS
             // portOpenToolStripMenuItem
             // 
             this.portOpenToolStripMenuItem.Name = "portOpenToolStripMenuItem";
-            this.portOpenToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.portOpenToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.portOpenToolStripMenuItem.Text = "Otworz port";
             // 
             // EnableAllToolStripMenuItem
             // 
             this.EnableAllToolStripMenuItem.Enabled = false;
             this.EnableAllToolStripMenuItem.Name = "EnableAllToolStripMenuItem";
-            this.EnableAllToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.EnableAllToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.EnableAllToolStripMenuItem.Text = "Włącz wszystkie czujniki";
             this.EnableAllToolStripMenuItem.Click += new System.EventHandler(this.włączWszystkieCzujnikiToolStripMenuItem_Click);
             // 
@@ -1774,9 +1784,16 @@ namespace Aplikacja_MEMS
             // 
             this.DisableAllToolStripMenuItem.Enabled = false;
             this.DisableAllToolStripMenuItem.Name = "DisableAllToolStripMenuItem";
-            this.DisableAllToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.DisableAllToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.DisableAllToolStripMenuItem.Text = "Wyłącz wszystkie czujniki";
             this.DisableAllToolStripMenuItem.Click += new System.EventHandler(this.wyłączWszystkieCzujnikiToolStripMenuItem_Click);
+            // 
+            // włączWyłączPrzerwaniaToolStripMenuItem
+            // 
+            this.włączWyłączPrzerwaniaToolStripMenuItem.Name = "włączWyłączPrzerwaniaToolStripMenuItem";
+            this.włączWyłączPrzerwaniaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.włączWyłączPrzerwaniaToolStripMenuItem.Text = "Włącz/Wyłącz przerwania";
+            this.włączWyłączPrzerwaniaToolStripMenuItem.Click += new System.EventHandler(this.włączWyłączPrzerwaniaToolStripMenuItem_Click);
             // 
             // pomocToolStripMenuItem
             // 
@@ -1806,6 +1823,33 @@ namespace Aplikacja_MEMS
             // bgWorkerOtworz
             // 
             this.bgWorkerOtworz.WorkerSupportsCancellation = true;
+            // 
+            // accNameLab
+            // 
+            this.accNameLab.AutoSize = true;
+            this.accNameLab.Location = new System.Drawing.Point(102, 19);
+            this.accNameLab.Name = "accNameLab";
+            this.accNameLab.Size = new System.Drawing.Size(16, 17);
+            this.accNameLab.TabIndex = 9;
+            this.accNameLab.Text = "?";
+            // 
+            // gyroNameLab
+            // 
+            this.gyroNameLab.AutoSize = true;
+            this.gyroNameLab.Location = new System.Drawing.Point(102, 19);
+            this.gyroNameLab.Name = "gyroNameLab";
+            this.gyroNameLab.Size = new System.Drawing.Size(16, 17);
+            this.gyroNameLab.TabIndex = 10;
+            this.gyroNameLab.Text = "?";
+            // 
+            // magNameLab
+            // 
+            this.magNameLab.AutoSize = true;
+            this.magNameLab.Location = new System.Drawing.Point(100, 19);
+            this.magNameLab.Name = "magNameLab";
+            this.magNameLab.Size = new System.Drawing.Size(16, 17);
+            this.magNameLab.TabIndex = 17;
+            this.magNameLab.Text = "?";
             // 
             // UserForm
             // 
@@ -2006,6 +2050,10 @@ namespace Aplikacja_MEMS
         public System.Windows.Forms.RichTextBox rTBoxData;
         private System.Windows.Forms.ToolStripMenuItem EnableAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DisableAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem włączWyłączPrzerwaniaToolStripMenuItem;
+        private System.Windows.Forms.Label magNameLab;
+        private System.Windows.Forms.Label gyroNameLab;
+        private System.Windows.Forms.Label accNameLab;
     }
 }
 
