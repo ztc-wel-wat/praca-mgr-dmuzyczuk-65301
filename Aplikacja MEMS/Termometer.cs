@@ -8,17 +8,17 @@ using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
-    class Magnetometer : Motion
+    class Termometer : Sensor
     {
-        public Magnetometer(SerialPort sp, ComboBox cbDeviceList, Label n)
+        public Termometer(SerialPort sp, ComboBox cbDeviceList, Label n)
         {
             sensorName = n;
-            sensorNr = 0x03;
+            sensorNr = 0x04;
             serialPort = sp;
             cBoxDeviceList = cbDeviceList;
-            active = 0x40;
+            active = 0x02;
 
-            ODR = new byte[,] { { 0x00, 0x00, 0x20, 0x41 }, { 0x00, 0x00, 0xA0, 0x41 }, { 0x00, 0x00, 0x48, 0x42 }, { 0x00, 0x00, 0xC8, 0x42 } };
+            ODR = new byte[,] { { 0x00, 0x00, 0x80, 0x3F }, { 0x00, 0x00, 0xE0, 0x40 }, { 0x00, 0x00, 0x48, 0x41 } };
 
         }
         public override void DrawPlot()

@@ -80,6 +80,7 @@ namespace Aplikacja_MEMS
             this.buttonHumDrawPlot = new System.Windows.Forms.Button();
             this.chBoxHumEnabled = new System.Windows.Forms.CheckBox();
             this.gBoxMagnetometer = new System.Windows.Forms.GroupBox();
+            this.magNameLab = new System.Windows.Forms.Label();
             this.labMagName = new System.Windows.Forms.Label();
             this.cBoxMagODR = new System.Windows.Forms.ComboBox();
             this.cBoxMagScale = new System.Windows.Forms.ComboBox();
@@ -110,6 +111,7 @@ namespace Aplikacja_MEMS
             this.buttonPreDrawPlot = new System.Windows.Forms.Button();
             this.chBoxPreEnabled = new System.Windows.Forms.CheckBox();
             this.gBoxGyroscope = new System.Windows.Forms.GroupBox();
+            this.gyroNameLab = new System.Windows.Forms.Label();
             this.LabGyroName = new System.Windows.Forms.Label();
             this.cBoxGyroODR = new System.Windows.Forms.ComboBox();
             this.cBoxGyroScale = new System.Windows.Forms.ComboBox();
@@ -126,6 +128,7 @@ namespace Aplikacja_MEMS
             this.labGyroScale = new System.Windows.Forms.Label();
             this.chBoxGyroEnabled = new System.Windows.Forms.CheckBox();
             this.gBoxTermometer = new System.Windows.Forms.GroupBox();
+            this.terNameLab = new System.Windows.Forms.Label();
             this.labTermName = new System.Windows.Forms.Label();
             this.cBoxTermODR = new System.Windows.Forms.ComboBox();
             this.labTermODR = new System.Windows.Forms.Label();
@@ -140,6 +143,7 @@ namespace Aplikacja_MEMS
             this.buttonTermDrawPlot = new System.Windows.Forms.Button();
             this.chBoxTermEnabled = new System.Windows.Forms.CheckBox();
             this.gBoxAccelerometer = new System.Windows.Forms.GroupBox();
+            this.accNameLab = new System.Windows.Forms.Label();
             this.labAccName = new System.Windows.Forms.Label();
             this.cBoxAccODR = new System.Windows.Forms.ComboBox();
             this.cBoxAccScale = new System.Windows.Forms.ComboBox();
@@ -171,9 +175,8 @@ namespace Aplikacja_MEMS
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.bgWorkerOtworz = new System.ComponentModel.BackgroundWorker();
-            this.accNameLab = new System.Windows.Forms.Label();
-            this.gyroNameLab = new System.Windows.Forms.Label();
-            this.magNameLab = new System.Windows.Forms.Label();
+            this.barNameLab = new System.Windows.Forms.Label();
+            this.higNameLab = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
@@ -600,6 +603,7 @@ namespace Aplikacja_MEMS
             // 
             // gBoxHumidity
             // 
+            this.gBoxHumidity.Controls.Add(this.higNameLab);
             this.gBoxHumidity.Controls.Add(this.labHumName);
             this.gBoxHumidity.Controls.Add(this.cBoxHumODR);
             this.gBoxHumidity.Controls.Add(this.labHumODR);
@@ -763,6 +767,7 @@ namespace Aplikacja_MEMS
             this.chBoxHumEnabled.TabIndex = 19;
             this.chBoxHumEnabled.Text = "Włączony";
             this.chBoxHumEnabled.UseVisualStyleBackColor = true;
+            this.chBoxHumEnabled.Click += new System.EventHandler(this.chBoxHumEnabled_Click);
             // 
             // gBoxMagnetometer
             // 
@@ -783,6 +788,15 @@ namespace Aplikacja_MEMS
             this.gBoxMagnetometer.TabIndex = 1;
             this.gBoxMagnetometer.TabStop = false;
             this.gBoxMagnetometer.Text = "Magnetometr";
+            // 
+            // magNameLab
+            // 
+            this.magNameLab.AutoSize = true;
+            this.magNameLab.Location = new System.Drawing.Point(100, 19);
+            this.magNameLab.Name = "magNameLab";
+            this.magNameLab.Size = new System.Drawing.Size(16, 17);
+            this.magNameLab.TabIndex = 17;
+            this.magNameLab.Text = "?";
             // 
             // labMagName
             // 
@@ -960,6 +974,7 @@ namespace Aplikacja_MEMS
             // 
             // gBoxPressure
             // 
+            this.gBoxPressure.Controls.Add(this.barNameLab);
             this.gBoxPressure.Controls.Add(this.labPreName);
             this.gBoxPressure.Controls.Add(this.cBoxPreODR);
             this.gBoxPressure.Controls.Add(this.labPreODR);
@@ -1125,6 +1140,7 @@ namespace Aplikacja_MEMS
             this.chBoxPreEnabled.TabIndex = 19;
             this.chBoxPreEnabled.Text = "Włączony";
             this.chBoxPreEnabled.UseVisualStyleBackColor = true;
+            this.chBoxPreEnabled.Click += new System.EventHandler(this.chBoxPreEnabled_Click);
             // 
             // gBoxGyroscope
             // 
@@ -1145,6 +1161,15 @@ namespace Aplikacja_MEMS
             this.gBoxGyroscope.TabIndex = 1;
             this.gBoxGyroscope.TabStop = false;
             this.gBoxGyroscope.Text = "Żyroskop";
+            // 
+            // gyroNameLab
+            // 
+            this.gyroNameLab.AutoSize = true;
+            this.gyroNameLab.Location = new System.Drawing.Point(102, 19);
+            this.gyroNameLab.Name = "gyroNameLab";
+            this.gyroNameLab.Size = new System.Drawing.Size(16, 17);
+            this.gyroNameLab.TabIndex = 10;
+            this.gyroNameLab.Text = "?";
             // 
             // LabGyroName
             // 
@@ -1333,6 +1358,7 @@ namespace Aplikacja_MEMS
             // 
             // gBoxTermometer
             // 
+            this.gBoxTermometer.Controls.Add(this.terNameLab);
             this.gBoxTermometer.Controls.Add(this.labTermName);
             this.gBoxTermometer.Controls.Add(this.cBoxTermODR);
             this.gBoxTermometer.Controls.Add(this.labTermODR);
@@ -1347,6 +1373,15 @@ namespace Aplikacja_MEMS
             this.gBoxTermometer.TabIndex = 2;
             this.gBoxTermometer.TabStop = false;
             this.gBoxTermometer.Text = "Termometr";
+            // 
+            // terNameLab
+            // 
+            this.terNameLab.AutoSize = true;
+            this.terNameLab.Location = new System.Drawing.Point(102, 19);
+            this.terNameLab.Name = "terNameLab";
+            this.terNameLab.Size = new System.Drawing.Size(16, 17);
+            this.terNameLab.TabIndex = 18;
+            this.terNameLab.Text = "?";
             // 
             // labTermName
             // 
@@ -1496,6 +1531,7 @@ namespace Aplikacja_MEMS
             this.chBoxTermEnabled.TabIndex = 10;
             this.chBoxTermEnabled.Text = "Włączony";
             this.chBoxTermEnabled.UseVisualStyleBackColor = true;
+            this.chBoxTermEnabled.Click += new System.EventHandler(this.chBoxTermEnabled_Click);
             // 
             // gBoxAccelerometer
             // 
@@ -1517,6 +1553,15 @@ namespace Aplikacja_MEMS
             this.gBoxAccelerometer.TabIndex = 0;
             this.gBoxAccelerometer.TabStop = false;
             this.gBoxAccelerometer.Text = "Akcelerometr";
+            // 
+            // accNameLab
+            // 
+            this.accNameLab.AutoSize = true;
+            this.accNameLab.Location = new System.Drawing.Point(102, 19);
+            this.accNameLab.Name = "accNameLab";
+            this.accNameLab.Size = new System.Drawing.Size(16, 17);
+            this.accNameLab.TabIndex = 9;
+            this.accNameLab.Text = "?";
             // 
             // labAccName
             // 
@@ -1824,32 +1869,23 @@ namespace Aplikacja_MEMS
             // 
             this.bgWorkerOtworz.WorkerSupportsCancellation = true;
             // 
-            // accNameLab
+            // barNameLab
             // 
-            this.accNameLab.AutoSize = true;
-            this.accNameLab.Location = new System.Drawing.Point(102, 19);
-            this.accNameLab.Name = "accNameLab";
-            this.accNameLab.Size = new System.Drawing.Size(16, 17);
-            this.accNameLab.TabIndex = 9;
-            this.accNameLab.Text = "?";
+            this.barNameLab.AutoSize = true;
+            this.barNameLab.Location = new System.Drawing.Point(102, 19);
+            this.barNameLab.Name = "barNameLab";
+            this.barNameLab.Size = new System.Drawing.Size(16, 17);
+            this.barNameLab.TabIndex = 24;
+            this.barNameLab.Text = "?";
             // 
-            // gyroNameLab
+            // higNameLab
             // 
-            this.gyroNameLab.AutoSize = true;
-            this.gyroNameLab.Location = new System.Drawing.Point(102, 19);
-            this.gyroNameLab.Name = "gyroNameLab";
-            this.gyroNameLab.Size = new System.Drawing.Size(16, 17);
-            this.gyroNameLab.TabIndex = 10;
-            this.gyroNameLab.Text = "?";
-            // 
-            // magNameLab
-            // 
-            this.magNameLab.AutoSize = true;
-            this.magNameLab.Location = new System.Drawing.Point(100, 19);
-            this.magNameLab.Name = "magNameLab";
-            this.magNameLab.Size = new System.Drawing.Size(16, 17);
-            this.magNameLab.TabIndex = 17;
-            this.magNameLab.Text = "?";
+            this.higNameLab.AutoSize = true;
+            this.higNameLab.Location = new System.Drawing.Point(100, 19);
+            this.higNameLab.Name = "higNameLab";
+            this.higNameLab.Size = new System.Drawing.Size(16, 17);
+            this.higNameLab.TabIndex = 24;
+            this.higNameLab.Text = "?";
             // 
             // UserForm
             // 
@@ -2054,6 +2090,9 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Label magNameLab;
         private System.Windows.Forms.Label gyroNameLab;
         private System.Windows.Forms.Label accNameLab;
+        private System.Windows.Forms.Label terNameLab;
+        private System.Windows.Forms.Label higNameLab;
+        private System.Windows.Forms.Label barNameLab;
     }
 }
 

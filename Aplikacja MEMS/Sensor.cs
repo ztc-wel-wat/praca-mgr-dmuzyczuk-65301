@@ -10,37 +10,117 @@ using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
-    class Sensor
+    public abstract class Sensor
     {
-        private string name;
-        private string model;
-        public bool enabled = true;
-        private GroupBox info;
-        private SerialPort port;
-        private static byte[] message;
+        public static byte enableByte = 0x77;
+        public static byte enableInterruptByte = 0x01;
+        public Label sensorName;
+        public byte active;
+        public byte sensorNr;
+        public byte[,] ODR;
+        public SerialPort serialPort;
+        public ComboBox cBoxDeviceList;
 
-        public Sensor(string n, string m, GroupBox i, SerialPort p)
+        public abstract void DrawPlot();
+        public abstract void Get();
+        public abstract void Set();
+        public abstract void OpenRegister();
+
+        public void GetSensorsList()
         {
-            name = n;
-            model = m;
-            info = i;
-            port = p;
+            byte[] response = new byte[serialPort.ReadBufferSize];
+            byte[] parameters = new byte[] { 0x14, sensorNr };
+            serialPort.Write(Communication.Query(0x50, parameters), 0, 7);
 
-            info.Controls[0].Text = "Nazwa czujnika: " + model;
+            Thread.Sleep(100);
+
+            serialPort.Read(response, 0, serialPort.ReadBufferSize);
+
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            string bufor = string.Empty;
+
+            int begin = 0;
+            for (int i = 0; response[i] != 0x14; i++)
+            {
+                begin = i + 3;
+            }
+
+
+            // Wyszukiwanie znaku przecinka, tlumaczenie oraz tworzenie listy urządzen na string
+            for (int i = 5; i < (response.Length - 2); i++)
+            {
+                switch (response[i])
+                {
+                    case 0x2C:
+                        bufor = ascii.GetString(response, begin, i - begin);
+                        cBoxDeviceList.Items.Add(bufor);
+                        bufor = string.Empty;
+                        begin = i + 1;
+                        break;
+                }
+            }
+
+            // Dodawanie ostatniego sensora (po nim nie ma znaku przecinka
+            bufor = ascii.GetString(response, begin, (response.Length - 4) - begin);
+            cBoxDeviceList.Items.Add(bufor);
+
+            cBoxDeviceList.Text = cBoxDeviceList.Items[0].ToString();
         }
 
-        public static void SendMessage(byte[] toSend, SerialPort port)
+        public void SetSensor()
         {
-            message = toSend;
-            BackgroundWorker bgWorkSend = new BackgroundWorker();
-            bgWorkSend.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkSend_DoWork);
-            bgWorkSend.RunWorkerAsync(argument: port);
+            BackgroundWorker bgWorkWrite = new BackgroundWorker();
+            bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+
+            byte[] parameters = new byte[3];
+            parameters[0] = 0x15;
+            parameters[1] = sensorNr;
+            parameters[2] = (byte)cBoxDeviceList.SelectedIndex;
+
+            byte[] query = Communication.Query(0x50, parameters);
+
+            bgWorkWrite.RunWorkerAsync(argument: query);
+
+            cBoxDeviceList.Enabled = false;
         }
 
-        private static void bgWorkSend_DoWork(object sender, DoWorkEventArgs e)
+        public void SetEnable(bool enabled)
         {
-            SerialPort port = (SerialPort)e.Argument;
-            port.Write(message, 0, message.Length);
+            if (enabled)
+                enableByte += active;
+            else
+                enableByte -= active;
+
+            byte[] parameters = new byte[8];
+            parameters[0] = enableByte;
+            parameters[1] = enableInterruptByte;
+            parameters[2] = parameters[3] = parameters[4] = parameters[5] = parameters[6] = parameters[7] = 0x00;
+
+            byte[] query = Communication.Query(0x08, parameters);
+
+            BackgroundWorker bgWorkWrite = new BackgroundWorker();
+            bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+            bgWorkWrite.RunWorkerAsync(argument: query);
+        }
+
+        public void SetODR(int index)
+        {
+            if (serialPort.IsOpen)
+            {
+                byte[] parameters = new byte[] { 0x07, sensorNr, ODR[index, 0], ODR[index, 1], ODR[index, 2], ODR[index, 3] }; 
+                
+                byte[] query = Communication.Query(0x50, parameters);
+
+                BackgroundWorker bgWorkWrite = new BackgroundWorker();
+                bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+                bgWorkWrite.RunWorkerAsync(argument: query);
+            }
+        }
+
+        private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)
+        {
+            byte[] query = (byte[])e.Argument;
+            serialPort.Write(query, 0, query.Length);
         }
     }
 }

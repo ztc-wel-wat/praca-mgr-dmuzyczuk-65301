@@ -47,10 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accelerometer.cs" />
+    <Compile Include="Pressure.cs" />
     <Compile Include="Gyroscope.cs" />
+    <Compile Include="Humidity.cs" />
     <Compile Include="Magnetometer.cs" />
     <Compile Include="Motion.cs" />
-    <Compile Include="Sensor.cs" />
     <Compile Include="Communication.cs" />
     <Compile Include="Loading.cs">
       <SubType>Form</SubType>
@@ -58,7 +59,8 @@
     <Compile Include="Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sensors.cs" />
+    <Compile Include="Sensor.cs" />
+    <Compile Include="Termometer.cs" />
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
     </Compile>

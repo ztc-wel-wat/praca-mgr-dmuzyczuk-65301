@@ -169,24 +169,9 @@ namespace Aplikacja_MEMS
                     int byteCount = port.Read(data, 0, 4096);
                     byte[] dataReceive = new byte[byteCount];
                     Array.Copy(data, dataReceive, byteCount);
-
                 }
                 catch (Exception exc) { }
             }
         }
-
-        private void MsgAnalise(byte[] received)
-        {
-            switch (received[0])
-            {
-                //case 0x
-            }
-        }
-
-        //private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)
-        //{
-        //    byte[] message = (byte[])e.Argument;
-        //    serialPort.Write(message, 0, message.Length);
-        //}
     }
 }

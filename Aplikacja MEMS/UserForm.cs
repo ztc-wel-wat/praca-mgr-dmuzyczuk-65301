@@ -20,12 +20,11 @@ namespace Aplikacja_MEMS
         List<Control> enableDisable = new List<Control>();
         List<ComboBox> clear = new List<ComboBox>();
         List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
-        List<Sensors> sensors = new List<Sensors>();
+        List<Sensor> sensors = new List<Sensor>();
         List<CheckBox> checks = new List<CheckBox>();
 
         string[] comPorts;
 
-        public static byte sensor = 0x77;
         Loading loading = new Loading();
         ThreadStart loadingBar;
         Thread bar;
@@ -33,6 +32,9 @@ namespace Aplikacja_MEMS
         Accelerometer acc;
         Gyroscope gyr;
         Magnetometer mag;
+        Termometer ter;
+        Humidity hig;
+        Pressure pre;
 
         BackgroundWorker bgWorkWrite;
 
@@ -44,19 +46,27 @@ namespace Aplikacja_MEMS
         public UserForm()
         {
             InitializeComponent();
+            Sensor.enableByte = 0x77;
+            Sensor.enableInterruptByte = 0x01;
 
-            acc = new Accelerometer(serialPort, cBoxAccelerometer, 0x10, accNameLab);
-            gyr = new Gyroscope(serialPort, cBoxGyroscope, 0x20, gyroNameLab);
-            mag = new Magnetometer(serialPort, cBoxMagnetometer, 0x40, magNameLab);
+             acc = new Accelerometer(serialPort, cBoxAccelerometer, accNameLab);
+            gyr = new Gyroscope(serialPort, cBoxGyroscope,  gyroNameLab);
+            mag = new Magnetometer(serialPort, cBoxMagnetometer,  magNameLab);
+            ter = new Termometer(serialPort, cBoxThermometer,  terNameLab);
+            hig = new Humidity(serialPort, cBoxHumidity, higNameLab);
+            pre = new Pressure(serialPort, cBoxPressure, barNameLab);
 
             // Tworzenie listy sensorów
             sensors.Add(acc);
             sensors.Add(gyr);
             sensors.Add(mag);
+            sensors.Add(ter);
+            sensors.Add(hig);
+            sensors.Add(pre);
 
             parameters = new byte[8];
-            parameters[0] = 0x77;
-            parameters[1] = 0x01;
+            parameters[0] = Sensor.enableByte;
+            parameters[1] = Sensor.enableInterruptByte;
             parameters[2] = parameters[3] = parameters[4] = parameters[5] = parameters[6] = parameters[7] = 0x00;
 
             // Ustawienie rozmiaru groupBoxów
@@ -246,9 +256,11 @@ namespace Aplikacja_MEMS
                 buttonOpen.Enabled = false;
                 cBoxPorts.Enabled = false;
 
-                acc.GetSensorsList();
-                mag.GetSensorsList();
-                gyr.GetSensorsList();
+                
+                foreach(Sensor s in sensors)
+                {
+                    s.GetSensorsList();
+                }
 
                 progressBarCOM.Value = 90;
 
@@ -320,6 +332,13 @@ namespace Aplikacja_MEMS
         {
             try
             {
+                // Ustawienie indeksów wybranych sensorów
+                foreach(Sensor s in sensors)
+                {
+                    s.SetSensor();
+                }
+
+
                 // Wysłanie listy włączonych urządzeń
                 byte[] parameters = new byte[8];
                 parameters[0] = 0x77;
@@ -335,7 +354,7 @@ namespace Aplikacja_MEMS
                 tabControlMain.SelectedIndex = 1;
 
                 // Wstawianie nazwy sensora
-                foreach(Sensors s in sensors)
+                foreach(Sensor s in sensors)
                 {
                     s.sensorName.Text = s.cBoxDeviceList.Items[s.cBoxDeviceList.SelectedIndex].ToString();
                 }
@@ -391,81 +410,7 @@ namespace Aplikacja_MEMS
             progressBarData.Value = 0;
         }
 
-        //private void chBoxZyroWlaczony_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (chBoxGyroEnabled.Checked == true)
-        //    {
-        //        parameters[0] += 0x20;
-        //    }
-        //    else
-        //    {
-        //        parameters[0] -= 0x20;
-        //    }
-
-        //    serialPort.Write(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
-
-        //    gyroscope.enabled = chBoxGyroEnabled.Checked;
-        //}
-
-        //private void chBoxMagWlaczony_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (chBoxMagEnabled.Checked == true)
-        //    {
-        //        sensor += 0x40;
-        //    }
-        //    else
-        //    {
-        //        sensor -= 0x40;
-        //    }
-        //    Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
-
-        //    magnetometer.enabled = chBoxMagEnabled.Checked;
-        //}
-
-        //private void chBoxTermWlaczony_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (chBoxTermEnabled.Checked == true)
-        //    {
-        //        sensor += 0x02;
-        //    }
-        //    else
-        //    {
-        //        sensor -= 0x02;
-        //    }
-        //    Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
-
-        //    thermometer.enabled = chBoxTermEnabled.Checked;
-        //}
-
-        //private void chBoxBarWlaczony_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (chBoxPreEnabled.Checked == true)
-        //    {
-        //        sensor += 0x01;
-        //    }
-        //    else
-        //    {
-        //        sensor -= 0x01;
-        //    }
-        //    Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
-
-        //    pressure.enabled = chBoxPreEnabled.Checked;
-        //}
-
-        //private void chBoxHigWlaczony_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (chBoxHumEnabled.Checked == true)
-        //    {
-        //        sensor += 0x04;
-        //    }
-        //    else
-        //    {
-        //        sensor -= 0x04;
-        //    }
-        //    Sensor.SendMessage(Communication.Query(0x08, sensor, 0x00, 0x00, parameters), serialPort);
-
-        //    humidity.enabled = chBoxHumEnabled.Checked;
-        //}
+       
 
         private void chBoxAkcWlaczony_CheckedChanged(object sender, EventArgs e)
         {
@@ -492,9 +437,8 @@ namespace Aplikacja_MEMS
 
         private void włączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            parameters[0] = 0x77;
+            parameters[0] = Sensor.enableByte = 0x77;
             parameters[1] = 0x01;
-            sensor = 0x77;
             serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
             foreach (CheckBox ch in checks)
             {
@@ -504,7 +448,7 @@ namespace Aplikacja_MEMS
 
         private void wyłączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            parameters[0] = sensor = 0x00; 
+            parameters[0] = Sensor.enableByte = 0x00; 
             parameters[1] = 0x00;
             serialPort.Write(Communication.Query(0x08, parameters), 0, 13); 
             foreach (CheckBox ch in checks)
@@ -527,57 +471,25 @@ namespace Aplikacja_MEMS
 
         private void cBoxTermODR_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ter.SetODR(cBoxTermODR.SelectedIndex);
+            hig.SetODR(cBoxHumODR.SelectedIndex);
+
+            cBoxHumODR.SelectedIndex = cBoxTermODR.SelectedIndex;
         }
 
         private void cBoxHigODR_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ter.SetODR(cBoxTermODR.SelectedIndex); 
+            hig.SetODR(cBoxHumODR.SelectedIndex);
+
+            cBoxTermODR.SelectedIndex = cBoxHumODR.SelectedIndex;
         }
 
 
         // Ustawianie ODR pressureu w comboBoxie
         private void cBoxBarODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (serialPort.IsOpen)
-            {
-                switch (cBoxPreODR.SelectedIndex)
-                {
-                    case 0:
-                        parameters[0] = 0x00;
-                        parameters[1] = 0x00;
-                        parameters[2] = 0x80;
-                        parameters[3] = 0x3F;
-                        break;
-
-                    case 1:
-                        parameters[0] = 0x00;
-                        parameters[1] = 0x00;
-                        parameters[2] = 0x20;
-                        parameters[3] = 0x41;
-                        break;
-
-                    case 2:
-                        parameters[0] = 0x00;
-                        parameters[1] = 0x00;
-                        parameters[2] = 0xC8;
-                        parameters[3] = 0x41;
-                        break;
-
-                    case 3:
-                        parameters[0] = 0x00;
-                        parameters[1] = 0x00;
-                        parameters[2] = 0x48;
-                        parameters[3] = 0x42;
-                        break;
-
-                    case 4:
-                        parameters[0] = 0x00;
-                        parameters[1] = 0x00;
-                        parameters[2] = 0x96;
-                        parameters[3] = 0x42;
-                        break;
-                }
-            //    serialPort.Write(Communication.Query(0x50, 0x06, 0x07, 0x00, parameters), 0, 11);
-            }
+            pre.SetODR(cBoxPreODR.SelectedIndex);
         }
 
         // Ustawianie zakresu Akcelerometru w comboBoxie
@@ -604,11 +516,26 @@ namespace Aplikacja_MEMS
 
         private void włączWyłączPrzerwaniaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (parameters[1] == 0x00) parameters[1] = 0x01;
-            else parameters[1] = 0x00;
+            if (Sensor.enableInterruptByte == 0x00) parameters[1] = Sensor.enableInterruptByte = 0x01;
+            else parameters[1] = Sensor.enableInterruptByte  = 0x00;
 
             serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
 
+        }
+
+        private void chBoxHumEnabled_Click(object sender, EventArgs e)
+        {
+            hig.SetEnable(chBoxHumEnabled.Checked);
+        }
+
+        private void chBoxPreEnabled_Click(object sender, EventArgs e)
+        {
+            pre.SetEnable(chBoxPreEnabled.Checked);
+        }
+
+        private void chBoxTermEnabled_Click(object sender, EventArgs e)
+        {
+            ter.SetEnable(chBoxTermEnabled.Checked);
         }
     }
 }
