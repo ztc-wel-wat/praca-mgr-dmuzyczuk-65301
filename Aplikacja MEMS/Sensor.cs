@@ -26,16 +26,23 @@ namespace Aplikacja_MEMS
         public abstract void Set();
         public abstract void OpenRegister();
 
+        // Pobieranie listy dostępnych sensrów na płytce
         public void GetSensorsList()
         {
             byte[] response = new byte[serialPort.ReadBufferSize];
+
+            // Wysłanie zapytanie o sensory
             byte[] parameters = new byte[] { 0x14, sensorNr };
             serialPort.Write(Communication.Query(0x50, parameters), 0, 7);
 
+            // Oczekiwanie, aby płytka zdążyła odpowiedzieć
             Thread.Sleep(100);
 
+            // Odbiór odpowiedzi
             serialPort.Read(response, 0, serialPort.ReadBufferSize);
 
+
+            // Dekodowanie odpowiedzi
             ASCIIEncoding ascii = new ASCIIEncoding();
             string bufor = string.Empty;
 
@@ -44,7 +51,6 @@ namespace Aplikacja_MEMS
             {
                 begin = i + 3;
             }
-
 
             // Wyszukiwanie znaku przecinka, tlumaczenie oraz tworzenie listy urządzen na string
             for (int i = 5; i < (response.Length - 2); i++)
@@ -67,11 +73,13 @@ namespace Aplikacja_MEMS
             cBoxDeviceList.Text = cBoxDeviceList.Items[0].ToString();
         }
 
+        // Ustawianie wybranego sensora do pracy
         public void SetSensor()
         {
             BackgroundWorker bgWorkWrite = new BackgroundWorker();
             bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
 
+            // Tworzenie ramki
             byte[] parameters = new byte[3];
             parameters[0] = 0x15;
             parameters[1] = sensorNr;
@@ -84,13 +92,16 @@ namespace Aplikacja_MEMS
             cBoxDeviceList.Enabled = false;
         }
 
+        // Włączanie/wyłączanie sensora
         public void SetEnable(bool enabled)
         {
+            // Podnoszenie/opuszczanie flagi włączenia sensora
             if (enabled)
                 enableByte += active;
             else
                 enableByte -= active;
 
+            // Tworzenie ramki
             byte[] parameters = new byte[8];
             parameters[0] = enableByte;
             parameters[1] = enableInterruptByte;
@@ -103,6 +114,7 @@ namespace Aplikacja_MEMS
             bgWorkWrite.RunWorkerAsync(argument: query);
         }
 
+        // Ustawianie ODR
         public void SetODR(int index)
         {
             if (serialPort.IsOpen)
@@ -117,6 +129,7 @@ namespace Aplikacja_MEMS
             }
         }
 
+        // Dodatkowy wątek do wysyłania danych przez dany czujnik (obiekt)
         private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)
         {
             byte[] query = (byte[])e.Argument;

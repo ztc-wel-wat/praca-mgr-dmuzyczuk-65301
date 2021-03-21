@@ -66,6 +66,7 @@ namespace Aplikacja_MEMS
             this.labelTitle = new System.Windows.Forms.Label();
             this.tabPageSensors = new System.Windows.Forms.TabPage();
             this.gBoxHumidity = new System.Windows.Forms.GroupBox();
+            this.higNameLab = new System.Windows.Forms.Label();
             this.labHumName = new System.Windows.Forms.Label();
             this.cBoxHumODR = new System.Windows.Forms.ComboBox();
             this.labHumODR = new System.Windows.Forms.Label();
@@ -97,6 +98,7 @@ namespace Aplikacja_MEMS
             this.labMagScale = new System.Windows.Forms.Label();
             this.chBoxMagEnabled = new System.Windows.Forms.CheckBox();
             this.gBoxPressure = new System.Windows.Forms.GroupBox();
+            this.barNameLab = new System.Windows.Forms.Label();
             this.labPreName = new System.Windows.Forms.Label();
             this.cBoxPreODR = new System.Windows.Forms.ComboBox();
             this.labPreODR = new System.Windows.Forms.Label();
@@ -175,8 +177,6 @@ namespace Aplikacja_MEMS
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serialPort = new System.IO.Ports.SerialPort(this.components);
             this.bgWorkerOtworz = new System.ComponentModel.BackgroundWorker();
-            this.barNameLab = new System.Windows.Forms.Label();
-            this.higNameLab = new System.Windows.Forms.Label();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
@@ -619,6 +619,15 @@ namespace Aplikacja_MEMS
             this.gBoxHumidity.TabStop = false;
             this.gBoxHumidity.Text = "Higrometr";
             // 
+            // higNameLab
+            // 
+            this.higNameLab.AutoSize = true;
+            this.higNameLab.Location = new System.Drawing.Point(100, 19);
+            this.higNameLab.Name = "higNameLab";
+            this.higNameLab.Size = new System.Drawing.Size(16, 17);
+            this.higNameLab.TabIndex = 24;
+            this.higNameLab.Text = "?";
+            // 
             // labHumName
             // 
             this.labHumName.AutoSize = true;
@@ -837,6 +846,7 @@ namespace Aplikacja_MEMS
             this.cBoxMagScale.Name = "cBoxMagScale";
             this.cBoxMagScale.Size = new System.Drawing.Size(121, 21);
             this.cBoxMagScale.TabIndex = 12;
+            this.cBoxMagScale.SelectedIndexChanged += new System.EventHandler(this.cBoxMagScale_SelectedIndexChanged);
             // 
             // gBoxMagRegister
             // 
@@ -989,6 +999,15 @@ namespace Aplikacja_MEMS
             this.gBoxPressure.TabIndex = 3;
             this.gBoxPressure.TabStop = false;
             this.gBoxPressure.Text = "Barometr";
+            // 
+            // barNameLab
+            // 
+            this.barNameLab.AutoSize = true;
+            this.barNameLab.Location = new System.Drawing.Point(102, 19);
+            this.barNameLab.Name = "barNameLab";
+            this.barNameLab.Size = new System.Drawing.Size(16, 17);
+            this.barNameLab.TabIndex = 24;
+            this.barNameLab.Text = "?";
             // 
             // labPreName
             // 
@@ -1868,24 +1887,6 @@ namespace Aplikacja_MEMS
             // bgWorkerOtworz
             // 
             this.bgWorkerOtworz.WorkerSupportsCancellation = true;
-            // 
-            // barNameLab
-            // 
-            this.barNameLab.AutoSize = true;
-            this.barNameLab.Location = new System.Drawing.Point(102, 19);
-            this.barNameLab.Name = "barNameLab";
-            this.barNameLab.Size = new System.Drawing.Size(16, 17);
-            this.barNameLab.TabIndex = 24;
-            this.barNameLab.Text = "?";
-            // 
-            // higNameLab
-            // 
-            this.higNameLab.AutoSize = true;
-            this.higNameLab.Location = new System.Drawing.Point(100, 19);
-            this.higNameLab.Name = "higNameLab";
-            this.higNameLab.Size = new System.Drawing.Size(16, 17);
-            this.higNameLab.TabIndex = 24;
-            this.higNameLab.Text = "?";
             // 
             // UserForm
             // 

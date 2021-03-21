@@ -128,6 +128,7 @@ namespace Aplikacja_MEMS
             return value;
         }
 
+        // Funckja zwracająca tablicę z obecnym czasem
         private static byte[] CurrentTime()
         {
             byte[] time = new byte[7];
@@ -144,7 +145,8 @@ namespace Aplikacja_MEMS
             return time;
         }
 
-        public static void Odbior(SerialPort port)
+        // Odbiór danych w tle (do dokończenia)
+        public static void Read(SerialPort port)
         {
             bgWorkReceive = new BackgroundWorker();
             bgWorkReceive.WorkerSupportsCancellation = true;
@@ -152,11 +154,13 @@ namespace Aplikacja_MEMS
             bgWorkReceive.RunWorkerAsync(argument: port);
         }
 
+        // Wyłączenie odbioru danycdh z buffora systemowego
         public void StopRecieve()
         {
             if (bgWorkReceive.IsBusy)
                 bgWorkReceive.CancelAsync();
         }
+
         public static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
         {
             SerialPort port = (SerialPort)e.Argument;
