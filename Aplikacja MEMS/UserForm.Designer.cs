@@ -849,7 +849,6 @@ namespace Aplikacja_MEMS
             this.cBoxMagScale.Name = "cBoxMagScale";
             this.cBoxMagScale.Size = new System.Drawing.Size(121, 21);
             this.cBoxMagScale.TabIndex = 12;
-            this.cBoxMagScale.SelectedIndexChanged += new System.EventHandler(this.cBoxMagScale_SelectedIndexChanged);
             // 
             // gBoxMagRegister
             // 

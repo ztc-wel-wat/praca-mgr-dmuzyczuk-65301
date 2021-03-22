@@ -528,11 +528,6 @@ namespace Aplikacja_MEMS
             gyr.SetScale(cBoxGyroScale.SelectedIndex);
         }
 
-        private void cBoxMagScale_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            mag.SetScale(cBoxMagScale.SelectedIndex);
-        }
-
         // Ustawianie parametrów rejestru
         private void buttonAccSet_Click(object sender, EventArgs e)
         {
