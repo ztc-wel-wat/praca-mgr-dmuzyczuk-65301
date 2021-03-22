@@ -30,6 +30,7 @@ namespace Aplikacja_MEMS
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
             this.gBoxSensors = new System.Windows.Forms.GroupBox();
@@ -1914,6 +1915,7 @@ namespace Aplikacja_MEMS
             this.ClientSize = new System.Drawing.Size(742, 524);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "UserForm";
             this.Text = "Aplikacja MEMS";

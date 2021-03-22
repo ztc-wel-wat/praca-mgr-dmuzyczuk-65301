@@ -29,6 +29,7 @@ namespace Aplikacja_MEMS
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Loading));
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
@@ -40,7 +41,7 @@ namespace Aplikacja_MEMS
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 0;
             // 
-            // Ladowanie
+            // Loading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -48,8 +49,9 @@ namespace Aplikacja_MEMS
             this.ClientSize = new System.Drawing.Size(254, 51);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "Ladowanie";
+            this.Name = "Loading";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ładowanie Aplikacji MEMS";
             this.TopMost = true;
