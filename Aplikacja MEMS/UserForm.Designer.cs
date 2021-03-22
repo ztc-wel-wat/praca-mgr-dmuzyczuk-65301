@@ -153,7 +153,7 @@ namespace Aplikacja_MEMS
             this.buttonAccGet = new System.Windows.Forms.Button();
             this.buttonAccSet = new System.Windows.Forms.Button();
             this.tBoxAccValue = new System.Windows.Forms.TextBox();
-            this.tBoxAccAdsress = new System.Windows.Forms.TextBox();
+            this.tBoxAccAddress = new System.Windows.Forms.TextBox();
             this.labAccValue = new System.Windows.Forms.Label();
             this.labAccAddress = new System.Windows.Forms.Label();
             this.buttonAccOpen = new System.Windows.Forms.Button();
@@ -691,6 +691,7 @@ namespace Aplikacja_MEMS
             this.buttonHumGet.TabIndex = 20;
             this.buttonHumGet.Text = "Wczytaj";
             this.buttonHumGet.UseVisualStyleBackColor = true;
+            this.buttonHumGet.Click += new System.EventHandler(this.buttonHumGet_Click);
             // 
             // buttonHumSet
             // 
@@ -702,6 +703,7 @@ namespace Aplikacja_MEMS
             this.buttonHumSet.TabIndex = 19;
             this.buttonHumSet.Text = "Ustaw";
             this.buttonHumSet.UseVisualStyleBackColor = true;
+            this.buttonHumSet.Click += new System.EventHandler(this.buttonHumSet_Click);
             // 
             // tBoxHumValue
             // 
@@ -749,6 +751,7 @@ namespace Aplikacja_MEMS
             this.buttonHumOpen.TabIndex = 14;
             this.buttonHumOpen.Text = "Otwórz rejestr";
             this.buttonHumOpen.UseVisualStyleBackColor = true;
+            this.buttonHumOpen.Click += new System.EventHandler(this.buttonHumOpen_Click);
             // 
             // buttonHumDrawPlot
             // 
@@ -875,6 +878,7 @@ namespace Aplikacja_MEMS
             this.buttonMagGet.TabIndex = 20;
             this.buttonMagGet.Text = "Wczytaj";
             this.buttonMagGet.UseVisualStyleBackColor = true;
+            this.buttonMagGet.Click += new System.EventHandler(this.buttonMagGet_Click);
             // 
             // buttonMagSet
             // 
@@ -886,6 +890,7 @@ namespace Aplikacja_MEMS
             this.buttonMagSet.TabIndex = 19;
             this.buttonMagSet.Text = "Ustaw";
             this.buttonMagSet.UseVisualStyleBackColor = true;
+            this.buttonMagSet.Click += new System.EventHandler(this.buttonMagSet_Click);
             // 
             // tBoxMagValue
             // 
@@ -933,6 +938,7 @@ namespace Aplikacja_MEMS
             this.buttonMagOpen.TabIndex = 14;
             this.buttonMagOpen.Text = "Otwórz rejestr";
             this.buttonMagOpen.UseVisualStyleBackColor = true;
+            this.buttonMagOpen.Click += new System.EventHandler(this.buttonMagOpen_Click);
             // 
             // buttonMagDrawPlot
             // 
@@ -1074,6 +1080,7 @@ namespace Aplikacja_MEMS
             this.buttonPreGet.TabIndex = 20;
             this.buttonPreGet.Text = "Wczytaj";
             this.buttonPreGet.UseVisualStyleBackColor = true;
+            this.buttonPreGet.Click += new System.EventHandler(this.buttonPreGet_Click);
             // 
             // buttonPreSet
             // 
@@ -1085,6 +1092,7 @@ namespace Aplikacja_MEMS
             this.buttonPreSet.TabIndex = 19;
             this.buttonPreSet.Text = "Ustaw";
             this.buttonPreSet.UseVisualStyleBackColor = true;
+            this.buttonPreSet.Click += new System.EventHandler(this.buttonPreSet_Click);
             // 
             // tBoxPreValue
             // 
@@ -1132,6 +1140,7 @@ namespace Aplikacja_MEMS
             this.buttonPreOpen.TabIndex = 14;
             this.buttonPreOpen.Text = "Otwórz rejestr";
             this.buttonPreOpen.UseVisualStyleBackColor = true;
+            this.buttonPreOpen.Click += new System.EventHandler(this.buttonPreOpen_Click);
             // 
             // buttonPreDrawPlot
             // 
@@ -1268,6 +1277,7 @@ namespace Aplikacja_MEMS
             this.buttonGyroGet.TabIndex = 20;
             this.buttonGyroGet.Text = "Wczytaj";
             this.buttonGyroGet.UseVisualStyleBackColor = true;
+            this.buttonGyroGet.Click += new System.EventHandler(this.buttonGyroGet_Click);
             // 
             // buttonGyroSet
             // 
@@ -1279,6 +1289,7 @@ namespace Aplikacja_MEMS
             this.buttonGyroSet.TabIndex = 19;
             this.buttonGyroSet.Text = "Ustaw";
             this.buttonGyroSet.UseVisualStyleBackColor = true;
+            this.buttonGyroSet.Click += new System.EventHandler(this.buttonGyroSet_Click);
             // 
             // tBoxGyroValue
             // 
@@ -1326,6 +1337,7 @@ namespace Aplikacja_MEMS
             this.buttonGyroOpen.TabIndex = 14;
             this.buttonGyroOpen.Text = "Otwórz rejestr";
             this.buttonGyroOpen.UseVisualStyleBackColor = true;
+            this.buttonGyroOpen.Click += new System.EventHandler(this.buttonGyroOpen_Click);
             // 
             // buttonGyroDrawPlot
             // 
@@ -1465,6 +1477,7 @@ namespace Aplikacja_MEMS
             this.buttonTermGet.TabIndex = 20;
             this.buttonTermGet.Text = "Wczytaj";
             this.buttonTermGet.UseVisualStyleBackColor = true;
+            this.buttonTermGet.Click += new System.EventHandler(this.buttonTermGet_Click);
             // 
             // buttonTermSet
             // 
@@ -1476,6 +1489,7 @@ namespace Aplikacja_MEMS
             this.buttonTermSet.TabIndex = 19;
             this.buttonTermSet.Text = "Ustaw";
             this.buttonTermSet.UseVisualStyleBackColor = true;
+            this.buttonTermSet.Click += new System.EventHandler(this.buttonTermSet_Click);
             // 
             // tBoxTermValue
             // 
@@ -1523,6 +1537,7 @@ namespace Aplikacja_MEMS
             this.buttonTermOpen.TabIndex = 14;
             this.buttonTermOpen.Text = "Otwórz rejestr";
             this.buttonTermOpen.UseVisualStyleBackColor = true;
+            this.buttonTermOpen.Click += new System.EventHandler(this.buttonTermOpen_Click);
             // 
             // buttonTermDrawPlot
             // 
@@ -1637,7 +1652,7 @@ namespace Aplikacja_MEMS
             this.gBoxAccRegister.Controls.Add(this.buttonAccGet);
             this.gBoxAccRegister.Controls.Add(this.buttonAccSet);
             this.gBoxAccRegister.Controls.Add(this.tBoxAccValue);
-            this.gBoxAccRegister.Controls.Add(this.tBoxAccAdsress);
+            this.gBoxAccRegister.Controls.Add(this.tBoxAccAddress);
             this.gBoxAccRegister.Controls.Add(this.labAccValue);
             this.gBoxAccRegister.Controls.Add(this.labAccAddress);
             this.gBoxAccRegister.Controls.Add(this.buttonAccOpen);
@@ -1659,6 +1674,7 @@ namespace Aplikacja_MEMS
             this.buttonAccGet.TabIndex = 20;
             this.buttonAccGet.Text = "Wczytaj";
             this.buttonAccGet.UseVisualStyleBackColor = true;
+            this.buttonAccGet.Click += new System.EventHandler(this.buttonAccGet_Click);
             // 
             // buttonAccSet
             // 
@@ -1670,6 +1686,7 @@ namespace Aplikacja_MEMS
             this.buttonAccSet.TabIndex = 19;
             this.buttonAccSet.Text = "Ustaw";
             this.buttonAccSet.UseVisualStyleBackColor = true;
+            this.buttonAccSet.Click += new System.EventHandler(this.buttonAccSet_Click);
             // 
             // tBoxAccValue
             // 
@@ -1679,13 +1696,14 @@ namespace Aplikacja_MEMS
             this.tBoxAccValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxAccValue.TabIndex = 18;
             // 
-            // tBoxAccAdsress
+            // tBoxAccAddress
             // 
-            this.tBoxAccAdsress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxAccAdsress.Location = new System.Drawing.Point(30, 28);
-            this.tBoxAccAdsress.Name = "tBoxAccAdsress";
-            this.tBoxAccAdsress.Size = new System.Drawing.Size(66, 20);
-            this.tBoxAccAdsress.TabIndex = 17;
+            this.tBoxAccAddress.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tBoxAccAddress.Location = new System.Drawing.Point(30, 28);
+            this.tBoxAccAddress.MaxLength = 4;
+            this.tBoxAccAddress.Name = "tBoxAccAddress";
+            this.tBoxAccAddress.Size = new System.Drawing.Size(66, 20);
+            this.tBoxAccAddress.TabIndex = 17;
             // 
             // labAccValue
             // 
@@ -1717,6 +1735,7 @@ namespace Aplikacja_MEMS
             this.buttonAccOpen.TabIndex = 14;
             this.buttonAccOpen.Text = "Otwórz rejestr";
             this.buttonAccOpen.UseVisualStyleBackColor = true;
+            this.buttonAccOpen.Click += new System.EventHandler(this.buttonAccOpen_Click);
             // 
             // buttonAccDrawPlot
             // 
@@ -1900,6 +1919,7 @@ namespace Aplikacja_MEMS
             this.Name = "UserForm";
             this.Text = "Aplikacja MEMS";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
             this.Load += new System.EventHandler(this.UserForm_Load);
             this.Shown += new System.EventHandler(this.UserForm_Shown);
             this.tabControlMain.ResumeLayout(false);
@@ -2046,7 +2066,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Button buttonAccGet;
         private System.Windows.Forms.Button buttonAccSet;
         private System.Windows.Forms.TextBox tBoxAccValue;
-        private System.Windows.Forms.TextBox tBoxAccAdsress;
+        private System.Windows.Forms.TextBox tBoxAccAddress;
         private System.Windows.Forms.Label labAccValue;
         private System.Windows.Forms.Label labAccAddress;
         private System.Windows.Forms.Button buttonAccOpen;

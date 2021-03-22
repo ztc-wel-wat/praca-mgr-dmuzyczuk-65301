@@ -12,7 +12,7 @@ namespace Aplikacja_MEMS
 {
     class Communication
     {
-        public static BackgroundWorker bgWorkReceive;
+        public static BackgroundWorker bgWorkReceive = new BackgroundWorker();
 
         public static byte[] Query(byte command, byte[] parameters)
         {
@@ -57,16 +57,21 @@ namespace Aplikacja_MEMS
                             complement = 9;
                             break;
                         case 0x05:                                      // Ustaw zakres wybranego sensora
-                            query[5] = parameters[0];
-                            query[6] = parameters[1];
+                            query[5] = parameters[2];
+                            query[6] = parameters[3];
                             query[7] = query[8] = 0x00;
                             complement = 9;
                             break;
 
                         case 0x02:                                      // Pobierz parametr rejestru
+                            query[5] = parameters[2];
+                            complement = 6; 
                             break;
 
                         case 0x03:                                      // Ustaw parametr rejestru
+                            query[5] = parameters[2];
+                            query[6] = parameters[3];
+                            complement = 7;
                             break;
                     }
                     break;
@@ -148,33 +153,33 @@ namespace Aplikacja_MEMS
         // Odbiór danych w tle (do dokończenia)
         public static void Read(SerialPort port)
         {
-            bgWorkReceive = new BackgroundWorker();
-            bgWorkReceive.WorkerSupportsCancellation = true;
             bgWorkReceive.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkReceive_DoWork);
+            bgWorkReceive.WorkerSupportsCancellation = true;
+            bgWorkReceive.WorkerReportsProgress = true;
             bgWorkReceive.RunWorkerAsync(argument: port);
         }
 
         // Wyłączenie odbioru danycdh z buffora systemowego
-        public static void StopRecieve()
+        public static void StopReceive()
         {
+            if (bgWorkReceive != null && bgWorkReceive.IsBusy)
                 bgWorkReceive.CancelAsync();
         }
 
-        public static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
+        public static void  bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
         {
             SerialPort port = (SerialPort)e.Argument;
             byte[] data = new byte[4096];
 
-            while (true)
+            while (!UserForm.semafor)
             {
                 try
                 {
-                    int byteCount = port.Read(data, 0, 4096);
-                    byte[] dataReceive = new byte[byteCount];
-                    Array.Copy(data, dataReceive, byteCount);
+                    port.Read(data, 0, 4096);
                 }
                 catch (Exception exc) { }
             }
         }
+
     }
 }

@@ -20,11 +20,24 @@ namespace Aplikacja_MEMS
         public byte[,] ODR;
         public SerialPort serialPort;
         public ComboBox cBoxDeviceList;
+        public SensorRegister register;
 
         public abstract void DrawPlot();
         public abstract void Get();
-        public abstract void Set();
-        public abstract void OpenRegister();
+        public void OpenRegister(string name)
+        {
+            if (register.Visible == false)
+            {
+                register = new SensorRegister();
+                register.Text = "Rejestr " + name;
+                register.Visible = true;
+            }
+            else
+            {
+                register.TopMost = true;
+                register.TopMost = false;
+            }
+        }
 
         // Pobieranie listy dostępnych sensrów na płytce
         public void GetSensorsList()
@@ -36,7 +49,7 @@ namespace Aplikacja_MEMS
             serialPort.Write(Communication.Query(0x50, parameters), 0, 7);
 
             // Oczekiwanie, aby płytka zdążyła odpowiedzieć
-            Thread.Sleep(100);
+            Thread.Sleep(50);
 
             // Odbiór odpowiedzi
             serialPort.Read(response, 0, serialPort.ReadBufferSize);
@@ -128,6 +141,43 @@ namespace Aplikacja_MEMS
                 bgWorkWrite.RunWorkerAsync(argument: query);
             }
         }
+
+        public void SetParameter(string address, string value)
+        {
+            try
+            {
+            byte a = (byte)(Int32.Parse(address));
+            byte v = (byte)(Int32.Parse(value));
+
+            byte[] parameters = new byte[] { 0x03, sensorNr, a, v};
+
+            byte[] query = Communication.Query(0x50, parameters);
+
+            BackgroundWorker bgWorkWrite = new BackgroundWorker();
+            bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+            bgWorkWrite.RunWorkerAsync(argument: query);
+            }
+            catch (Exception exc) { };
+        }
+
+        public void ReadParameter(string address)
+        {
+            try
+            {
+                byte a = (byte)(Int32.Parse(address));
+
+                byte[] parameters = new byte[] { 0x02, sensorNr, a};
+
+                byte[] query = Communication.Query(0x50, parameters);
+
+                BackgroundWorker bgWorkWrite = new BackgroundWorker();
+                bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+                bgWorkWrite.RunWorkerAsync(argument: query);
+            }
+            catch (Exception exc) { };
+
+        }
+
 
         // Dodatkowy wątek do wysyłania danych przez dany czujnik (obiekt)
         private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)

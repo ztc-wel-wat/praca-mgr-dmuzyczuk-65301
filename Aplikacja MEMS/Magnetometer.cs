@@ -20,22 +20,13 @@ namespace Aplikacja_MEMS
 
             ODR = new byte[,] { { 0x00, 0x00, 0x20, 0x41 }, { 0x00, 0x00, 0xA0, 0x41 }, { 0x00, 0x00, 0x48, 0x42 }, { 0x00, 0x00, 0xC8, 0x42 } };
 
+            register = new SensorRegister();
         }
         public override void DrawPlot()
         {
             MessageBox.Show("Trwa rysowanie wykresu", "Magnetometr");
         }
         public override void Get()
-        {
-
-        }
-
-        public override void Set()
-        {
-
-        }
-
-        public override void OpenRegister()
         {
 
         }

@@ -60,6 +60,12 @@
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
     <Compile Include="Sensor.cs" />
+    <Compile Include="SensorRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SensorRegister.Designer.cs">
+      <DependentUpon>SensorRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="Termometer.cs" />
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
@@ -71,6 +77,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SensorRegister.resx">
+      <DependentUpon>SensorRegister.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

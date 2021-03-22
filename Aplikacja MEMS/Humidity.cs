@@ -19,6 +19,8 @@ namespace Aplikacja_MEMS
             active = 0x04;
 
             ODR = new byte[,] { { 0x00, 0x00, 0x80, 0x3F }, { 0x00, 0x00, 0xE0, 0x40 }, { 0x00, 0x00, 0x48, 0x41 } };
+
+            register = new SensorRegister();
         }
         public override void DrawPlot()
         {
@@ -29,14 +31,5 @@ namespace Aplikacja_MEMS
 
         }
 
-        public override void Set()
-        {
-
-        }
-
-        public override void OpenRegister()
-        {
-
-        }
     }
 }
