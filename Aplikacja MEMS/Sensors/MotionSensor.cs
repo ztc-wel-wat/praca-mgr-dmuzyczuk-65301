@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Aplikacja_MEMS
 {
-    abstract class Motion : Sensor
+    abstract class MotionSensor : Sensor
     {
         public byte[,] scale;
         public void SetScale(int index)

@@ -46,42 +46,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accelerometer.cs" />
-    <Compile Include="Pressure.cs" />
-    <Compile Include="Gyroscope.cs" />
-    <Compile Include="Humidity.cs" />
-    <Compile Include="Magnetometer.cs" />
-    <Compile Include="Motion.cs" />
-    <Compile Include="Communication.cs" />
-    <Compile Include="Loading.cs">
+    <Compile Include="Frame\Identificators.cs" />
+    <Compile Include="Sensors\Accelerometer.cs" />
+    <Compile Include="Frame\SubCmdType.cs" />
+    <Compile Include="Frame\CmdType.cs" />
+    <Compile Include="Sensors\PressureSensor.cs" />
+    <Compile Include="Sensors\Gyroscope.cs" />
+    <Compile Include="Sensors\HumiditySensor.cs" />
+    <Compile Include="Sensors\Magnetometer.cs" />
+    <Compile Include="Sensors\MotionSensor.cs" />
+    <Compile Include="Frame\Communication.cs" />
+    <Compile Include="Forms\Loading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Loading.Designer.cs">
+    <Compile Include="Forms\Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sensor.cs" />
-    <Compile Include="SensorRegister.cs">
+    <Compile Include="Sensors\Sensor.cs" />
+    <Compile Include="Forms\SensorRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SensorRegister.Designer.cs">
+    <Compile Include="Forms\SensorRegister.Designer.cs">
       <DependentUpon>SensorRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="Termometer.cs" />
-    <Compile Include="UserForm.cs">
+    <Compile Include="Sensors\Termometer.cs" />
+    <Compile Include="Forms\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserForm.Designer.cs">
+    <Compile Include="Forms\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="Sensors\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Loading.resx">
+    <Compile Include="Transmition\ComTransmition.cs" />
+    <EmbeddedResource Include="Forms\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SensorRegister.resx">
+    <EmbeddedResource Include="Forms\SensorRegister.resx">
       <DependentUpon>SensorRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserForm.resx">
+    <EmbeddedResource Include="Forms\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -113,5 +117,6 @@
   <ItemGroup>
     <None Include="Resources\WEL_WAT.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

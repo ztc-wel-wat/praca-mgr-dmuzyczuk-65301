@@ -1902,6 +1902,7 @@ namespace Aplikacja_MEMS
             // serialPort
             // 
             this.serialPort.BaudRate = 921600;
+            this.serialPort.ReadBufferSize = 16384;
             // 
             // bgWorkerOtworz
             // 

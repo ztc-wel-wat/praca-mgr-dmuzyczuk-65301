@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
-    class Magnetometer : Motion
+    class Magnetometer : MotionSensor
     {
         public Magnetometer(SerialPort sp, ComboBox cbDeviceList, Label n)
         {

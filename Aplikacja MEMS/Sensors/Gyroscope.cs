@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
-    class Gyroscope : Motion
+    class Gyroscope : MotionSensor
     {
         public Gyroscope(SerialPort sp, ComboBox cbDeviceList, Label n)
         {

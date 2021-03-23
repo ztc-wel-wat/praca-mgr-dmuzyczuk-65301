@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
-    class Accelerometer : Motion
+    class Accelerometer : MotionSensor
     {
         public Accelerometer(SerialPort sp, ComboBox cbDeviceList, Label n)
         {

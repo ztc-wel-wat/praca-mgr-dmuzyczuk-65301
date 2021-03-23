@@ -54,7 +54,6 @@ namespace Aplikacja_MEMS
             // Odbiór odpowiedzi
             serialPort.Read(response, 0, serialPort.ReadBufferSize);
 
-
             // Dekodowanie odpowiedzi
             ASCIIEncoding ascii = new ASCIIEncoding();
             string bufor = string.Empty;
@@ -83,7 +82,7 @@ namespace Aplikacja_MEMS
             bufor = ascii.GetString(response, begin, (response.Length - 4) - begin);
             cBoxDeviceList.Items.Add(bufor);
 
-            cBoxDeviceList.Text = cBoxDeviceList.Items[0].ToString();
+            cBoxDeviceList.SelectedIndex = 0;
         }
 
         // Ustawianie wybranego sensora do pracy
@@ -177,7 +176,6 @@ namespace Aplikacja_MEMS
             catch (Exception exc) { };
 
         }
-
 
         // Dodatkowy wątek do wysyłania danych przez dany czujnik (obiekt)
         private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)

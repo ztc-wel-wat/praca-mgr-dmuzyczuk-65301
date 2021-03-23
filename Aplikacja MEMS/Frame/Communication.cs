@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
-    class Communication
+    static class Communication
     {
         public static BackgroundWorker bgWorkReceive = new BackgroundWorker();
 
@@ -98,25 +98,25 @@ namespace Aplikacja_MEMS
             return dataSend;
         }
 
-        public static byte[] readSensorList(byte[] data, SerialPort port, ProgressBar pb)
-        {
-            int counter = 0;
-            byte[] response = new byte[port.ReadBufferSize];
+        //public static byte[] readSensorList(byte[] data, SerialPort port, ProgressBar pb)
+        //{
+        //    int counter = 0;
+        //    byte[] response = new byte[port.ReadBufferSize];
 
-            // Wyslanie zapytania o dostępne sensori
-            port.Write(data, 0, data.Length);
-            Thread.Sleep(100); // Uśpienie wątku, aby płytka zdążyła odpowiedzieć
-            // Odebranie listy sensorów (w bajtach)
-            counter = port.Read(response, 0, port.ReadBufferSize);
+        //    // Wyslanie zapytania o dostępne sensori
+        //    port.Write(data, 0, data.Length);
+        //    Thread.Sleep(100); // Uśpienie wątku, aby płytka zdążyła odpowiedzieć
+        //    // Odebranie listy sensorów (w bajtach)
+        //    counter = port.Read(response, 0, port.ReadBufferSize);
 
-            // Przekopiowanie do tablicy o dopasowanym rozmiarze
-            byte[] responseReturn = new byte[counter];
-            Array.Copy(response, responseReturn, counter);
+        //    // Przekopiowanie do tablicy o dopasowanym rozmiarze
+        //    byte[] responseReturn = new byte[counter];
+        //    Array.Copy(response, responseReturn, counter);
 
-            pb.Value += 10;
+        //    pb.Value += 10;
 
-            return responseReturn;
-        }
+        //    return responseReturn;
+        //}
 
         private static byte CheckSum(byte[] data, int dlugosc)
         {
@@ -150,6 +150,13 @@ namespace Aplikacja_MEMS
             return time;
         }
 
+        // Wyłączenie odbioru danycdh z buffora systemowego
+        public static void StopReceive()
+        {
+            if (bgWorkReceive != null && bgWorkReceive.IsBusy)
+                bgWorkReceive.CancelAsync();
+        }
+
         // Odbiór danych w tle (do dokończenia)
         public static void Read(SerialPort port)
         {
@@ -159,12 +166,6 @@ namespace Aplikacja_MEMS
             bgWorkReceive.RunWorkerAsync(argument: port);
         }
 
-        // Wyłączenie odbioru danycdh z buffora systemowego
-        public static void StopReceive()
-        {
-            if (bgWorkReceive != null && bgWorkReceive.IsBusy)
-                bgWorkReceive.CancelAsync();
-        }
 
         public static void  bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
         {
