@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Aplikacja_MEMS.Transmition;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -21,7 +24,6 @@ namespace Aplikacja_MEMS
         List<CheckBox> checks = new List<CheckBox>();
         public static bool semafor = false;
 
-        string[] comPorts;
 
         Loading loading = new Loading();
         ThreadStart loadingBar;
@@ -111,11 +113,6 @@ namespace Aplikacja_MEMS
             cBoxMagScale.Text = cBoxMagScale.Items[0].ToString();
             cBoxGyroScale.Text = cBoxGyroScale.Items[0].ToString();
 
-            // Włączenie paska ładowania dostępnych urządzeń
-            loadingBar = new ThreadStart(StartPaska);
-            bar = new Thread(loadingBar);
-            bar.Start();
-
             // Ustalenie listy checkBoxów
             checks.Add(chBoxAccEnabled);
             checks.Add(chBoxGyroEnabled);
@@ -127,111 +124,41 @@ namespace Aplikacja_MEMS
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-            BackgroundWorker bgW = new BackgroundWorker();
+            List<AvailablePort> memsPorts = new List<AvailablePort>();
 
-            // Załądowanie listy wszystkich dostępnych portów COM
-            comPorts = SerialPort.GetPortNames();
-            List<string> MEMSPorts = new List<string>();
+            // Pobieranie listyt dostępnych urządzeń MEMS
+            memsPorts = ComTransmition.CheckAvaliablePorts();
+            int counter = 0;
 
-            int licznik = 0;
-            // Tworzenie listy portów COM z prespiętym urządzeniem MEMS
-            foreach (string port in comPorts)
+            // Tworzenie listy etykiet z urządzeniami MEMS
+            foreach (AvailablePort port in memsPorts)
             {
-                bgW = new BackgroundWorker();
-
                 try
                 {
-                    // Otwarcie portu
-                    serialPort.PortName = port;
-                    serialPort.Open();
+                    labelNoBoards.Visible = false; // Ukrycie informacji o braku urządzeń
 
-                    // Czyszczenie bufora systemowego
-                    serialPort.ReadExisting();
+                    // Dodawanie etykiety urządzenia MEMS
+                    labelCOM = new Label();
+                    labelCOM.AutoSize = true;
+                    labelCOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+                    labelCOM.Location = new System.Drawing.Point(20, 85 + (counter * 15));
+                    labelCOM.Name = "label" + port;
+                    labelCOM.Size = new System.Drawing.Size(146, 17);
+                    labelCOM.Text = port.portNr + ": " + port.deviceName;
+                    labelCOM.Visible = true;
+                    gBoxInfo.Controls.Add(this.labelCOM);
 
-                    // Wysłanie zapytania do urządzenia 
-                    serialPort.Write(Communication.Query(0x02, null), 0, 5);
-
-                    // Pobranie odpowiedzi z bufora COM
-                    Task awaiting = Await();
-                    awaiting.Wait(2000);            // oczekiwanie 2 sek. na odpowiedź urządzenia
-
-                    // Dodawanie spisu dostępnych urządzeń (napis w boxie "Informacje")
-                    if (response > 0)
-                    {
-                        labelNoBoards.Visible = false; // Ukrycie informacji o braku urządzeń
-
-                        labelCOM = new Label();
-                        labelCOM.AutoSize = true;
-                        labelCOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-                        labelCOM.Location = new System.Drawing.Point(20, 85 + (licznik * 15));
-                        labelCOM.Name = "label" + port;
-                        labelCOM.Size = new System.Drawing.Size(146, 17);
-                        labelCOM.Text = port + ": " + Encoding.UTF8.GetString(resp, 3, response - 5);
-                        labelCOM.Visible = true;
-                        gBoxInfo.Controls.Add(this.labelCOM);
-                        MEMSPorts.Add(port);
-
-                    }
-                    serialPort.Close();
+                    // Dodawanie portu do listy dostępnych portów
+                    cBoxPorts.Items.Add(port.portNr);
                 }
                 catch (Exception exc)
                 {
-                    if (serialPort.IsOpen)
-                        serialPort.Close();
                 }
-
-                bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-                bgW.RunWorkerAsync();
-                Thread.Sleep(300);
             }
-
-
-            // Metoda oczekująca na odpowiedz urządzenia pod zadanym portem
-            async Task<byte[]> Await()
-            {
-                response = serialPort.Read(resp, 0, serialPort.ReadBufferSize);
-                return resp;
-            }
-
-            // Przypisanie listy dostępnych portów COM z podłączonymi urządzeniami MEMS do okna wybory (comboBox)
-            foreach (string port in MEMSPorts)
-            {
-                cBoxPorts.Items.Add(port);
-            }
-
-            bgW = new BackgroundWorker();
-            bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker_DoWork);
-            bgW.RunWorkerAsync();
-            Thread.Sleep(500);
-
-            // Zamknięcie okna ładowania aplikacji
-            Action<int> updateAction1 = new Action<int>((value) => loading.Close());
-            loading.Invoke(updateAction1, 32);
         }
         private System.Windows.Forms.Label labelCOM;
 
-        // Wyszukiwanie urządzeń (progress bar po włączeniu)
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // Ładowanie progressBar podczas włączania aplikacji
-            if (loading.progressBar.Value < 90)
-            {
-                if (comPorts.Length != 0)
-                {
-                    // Dodawanie paska progressbara
-                    Action<int> updateAction = new Action<int>((value) => loading.progressBar.Value += 90 / comPorts.Length);
-                    loading.progressBar.Invoke(updateAction, 32);
-                }
-            }
-            else
-            {
-                // 100% paska 
-                Action<int> updateAction = new Action<int>((value) => loading.progressBar.Value = 100);
-                loading.progressBar.Invoke(updateAction, 32);
-            }
-        }
-
-        // Wyświetlenie ap[likacji na wierzchu, po załadowaniu
+        // Wyświetlenie aplikacji na wierzchu, po załadowaniu
         private void UserForm_Shown(object sender, EventArgs e)
         {
             this.TopMost = false;
@@ -241,12 +168,6 @@ namespace Aplikacja_MEMS
         {
             try
             {
-                // Semafor do zapętlania funkcji odbioru danych z bufora (klasa Communication)
-                semafor = false;
-                byte[] resp = new byte[serialPort.ReadBufferSize];
-
-                serialPort.PortName = cBoxPorts.Text;
-                serialPort.Open();
 
                 // Czyszczenie listy poprzednich urzadzen
                 foreach (ComboBox cBox in clear)
@@ -255,16 +176,17 @@ namespace Aplikacja_MEMS
                 }
 
                 // Wysłanie ustawień początkowych aplikacji
-                serialPort.Write(Communication.Query(0x0C, null), 0, 12);
+                ComTransmition.OpenPort(cBoxPorts.Text);
+                Communication.Query((byte)CmdType.DataSet);
 
                 buttonOpen.Enabled = false;
                 cBoxPorts.Enabled = false;
 
-                foreach (Sensor s in sensors)
-                {
-                    s.GetSensorsList();
-                    progressBarCOM.Value += 15;
-                }
+                //foreach (Sensor s in sensors)
+                //{
+                //    s.GetSensorsList();
+                //    progressBarCOM.Value += 15;
+                //}
 
                 // Włączanie/wyłączanie przycisków
                 foreach (Control control in enableDisable)
@@ -277,7 +199,7 @@ namespace Aplikacja_MEMS
                 cBoxPorts.Enabled = false;
 
                 // Rozpoczęcie pobierania danych
-                Communication.Read(serialPort);
+                ComTransmition.Read();
 
                 progressBarCOM.Value = 100;
             }
@@ -387,6 +309,9 @@ namespace Aplikacja_MEMS
                 DisableAllToolStripMenuItem.Enabled = true;
 
                 progressBarData.Value = 100;
+
+
+
             }
             catch (Exception exc)
             {
@@ -484,6 +409,17 @@ namespace Aplikacja_MEMS
         private void cBoxAkcODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             acc.SetODR(cBoxAccODR.SelectedIndex);
+
+            if (serialPort.IsOpen)
+            {
+                try
+                {
+                    float a = float.Parse(cBoxAccODR.Text);
+                    byte[] par = BitConverter.GetBytes(a);
+                    MessageBox.Show(par[0].ToString() + par[1].ToString() + par[2].ToString() + par[3].ToString());
+                }
+                catch (Exception exc) { }
+            }
         }
 
         private void cBoxZyroODR_SelectedIndexChanged(object sender, EventArgs e)

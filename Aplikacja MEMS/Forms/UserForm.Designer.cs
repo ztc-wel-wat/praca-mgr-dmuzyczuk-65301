@@ -502,6 +502,7 @@ namespace Aplikacja_MEMS
             // cBoxPorts
             // 
             this.cBoxPorts.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cBoxPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxPorts.FormattingEnabled = true;
             this.cBoxPorts.Location = new System.Drawing.Point(208, 28);
             this.cBoxPorts.Name = "cBoxPorts";
@@ -1902,6 +1903,7 @@ namespace Aplikacja_MEMS
             // serialPort
             // 
             this.serialPort.BaudRate = 921600;
+            this.serialPort.PortName = "COM9";
             this.serialPort.ReadBufferSize = 16384;
             // 
             // bgWorkerOtworz

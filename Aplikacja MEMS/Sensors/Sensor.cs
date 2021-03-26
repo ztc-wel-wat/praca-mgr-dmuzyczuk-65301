@@ -12,6 +12,7 @@ namespace Aplikacja_MEMS
 {
     public abstract class Sensor
     {
+
         public static byte enableByte = 0x77;
         public static byte enableInterruptByte = 0x01;
         public Label sensorName;
@@ -131,8 +132,8 @@ namespace Aplikacja_MEMS
         {
             if (serialPort.IsOpen)
             {
-                byte[] parameters = new byte[] { 0x07, sensorNr, ODR[index, 0], ODR[index, 1], ODR[index, 2], ODR[index, 3] }; 
-                
+                byte[] parameters = new byte[] { 0x07, sensorNr, ODR[index, 0], ODR[index, 1], ODR[index, 2], ODR[index, 3] };
+
                 byte[] query = Communication.Query(0x50, parameters);
 
                 BackgroundWorker bgWorkWrite = new BackgroundWorker();
@@ -145,16 +146,16 @@ namespace Aplikacja_MEMS
         {
             try
             {
-            byte a = (byte)(Int32.Parse(address));
-            byte v = (byte)(Int32.Parse(value));
+                byte a = (byte)(Int32.Parse(address));
+                byte v = (byte)(Int32.Parse(value));
 
-            byte[] parameters = new byte[] { 0x03, sensorNr, a, v};
+                byte[] parameters = new byte[] { 0x03, sensorNr, a, v };
 
-            byte[] query = Communication.Query(0x50, parameters);
+                byte[] query = Communication.Query(0x50, parameters);
 
-            BackgroundWorker bgWorkWrite = new BackgroundWorker();
-            bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-            bgWorkWrite.RunWorkerAsync(argument: query);
+                BackgroundWorker bgWorkWrite = new BackgroundWorker();
+                bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
+                bgWorkWrite.RunWorkerAsync(argument: query);
             }
             catch (Exception exc) { };
         }
@@ -165,7 +166,7 @@ namespace Aplikacja_MEMS
             {
                 byte a = (byte)(Int32.Parse(address));
 
-                byte[] parameters = new byte[] { 0x02, sensorNr, a};
+                byte[] parameters = new byte[] { 0x02, sensorNr, a };
 
                 byte[] query = Communication.Query(0x50, parameters);
 

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvailablePort.cs" />
     <Compile Include="Frame\Identificators.cs" />
     <Compile Include="Sensors\Accelerometer.cs" />
     <Compile Include="Frame\SubCmdType.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Forms\Loading.Designer.cs">
       <DependentUpon>Loading.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sensors\SensId.cs" />
     <Compile Include="Sensors\Sensor.cs" />
     <Compile Include="Forms\SensorRegister.cs">
       <SubType>Form</SubType>
