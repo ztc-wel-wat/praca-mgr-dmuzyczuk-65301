@@ -22,6 +22,7 @@ namespace Aplikacja_MEMS
         public SerialPort serialPort;
         public ComboBox cBoxDeviceList;
         public SensorRegister register;
+        public int selectedDevideIndex;
 
         public abstract void DrawPlot();
         public abstract void Get();
@@ -47,7 +48,7 @@ namespace Aplikacja_MEMS
 
             // Wysłanie zapytanie o sensory
             byte[] parameters = new byte[] { 0x14, sensorNr };
-            serialPort.Write(Communication.Query(0x50, parameters), 0, 7);
+            //serialPort.Write(Communication.Query(0x50, parameters), 0, 7);
 
             // Oczekiwanie, aby płytka zdążyła odpowiedzieć
             Thread.Sleep(50);
@@ -98,9 +99,9 @@ namespace Aplikacja_MEMS
             parameters[1] = sensorNr;
             parameters[2] = (byte)cBoxDeviceList.SelectedIndex;
 
-            byte[] query = Communication.Query(0x50, parameters);
+           // byte[] query = Communication.Query(0x50, parameters);
 
-            bgWorkWrite.RunWorkerAsync(argument: query);
+            //bgWorkWrite.RunWorkerAsync(argument: query);
 
             cBoxDeviceList.Enabled = false;
         }
@@ -120,11 +121,11 @@ namespace Aplikacja_MEMS
             parameters[1] = enableInterruptByte;
             parameters[2] = parameters[3] = parameters[4] = parameters[5] = parameters[6] = parameters[7] = 0x00;
 
-            byte[] query = Communication.Query(0x08, parameters);
+            //byte[] query = Communication.Query(0x08, parameters);
 
             BackgroundWorker bgWorkWrite = new BackgroundWorker();
             bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-            bgWorkWrite.RunWorkerAsync(argument: query);
+           // bgWorkWrite.RunWorkerAsync(argument: query);
         }
 
         // Ustawianie ODR
@@ -134,11 +135,11 @@ namespace Aplikacja_MEMS
             {
                 byte[] parameters = new byte[] { 0x07, sensorNr, ODR[index, 0], ODR[index, 1], ODR[index, 2], ODR[index, 3] };
 
-                byte[] query = Communication.Query(0x50, parameters);
+               // byte[] query = Communication.Query(0x50, parameters);
 
                 BackgroundWorker bgWorkWrite = new BackgroundWorker();
                 bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-                bgWorkWrite.RunWorkerAsync(argument: query);
+                //bgWorkWrite.RunWorkerAsync(argument: query);
             }
         }
 
@@ -151,11 +152,11 @@ namespace Aplikacja_MEMS
 
                 byte[] parameters = new byte[] { 0x03, sensorNr, a, v };
 
-                byte[] query = Communication.Query(0x50, parameters);
+                //byte[] query = Communication.Query(0x50, parameters);
 
                 BackgroundWorker bgWorkWrite = new BackgroundWorker();
                 bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-                bgWorkWrite.RunWorkerAsync(argument: query);
+                //bgWorkWrite.RunWorkerAsync(argument: query);
             }
             catch (Exception exc) { };
         }
@@ -168,11 +169,11 @@ namespace Aplikacja_MEMS
 
                 byte[] parameters = new byte[] { 0x02, sensorNr, a };
 
-                byte[] query = Communication.Query(0x50, parameters);
+                //byte[] query = Communication.Query(0x50, parameters);
 
                 BackgroundWorker bgWorkWrite = new BackgroundWorker();
                 bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-                bgWorkWrite.RunWorkerAsync(argument: query);
+                //bgWorkWrite.RunWorkerAsync(argument: query);
             }
             catch (Exception exc) { };
 

@@ -16,11 +16,11 @@ namespace Aplikacja_MEMS
             {
                 byte[] parameters = new byte[] { 0x05, sensorNr, scale[index, 0], scale[index, 1], scale[index, 2], scale[index, 3] };
 
-                byte[] query = Communication.Query(0x50, parameters);
+                //byte[] query = Communication.Query(0x50, parameters);
 
                 BackgroundWorker bgWorkWrite = new BackgroundWorker();
                 bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-                bgWorkWrite.RunWorkerAsync(argument: query);
+                bgWorkWrite.RunWorkerAsync();
             }
         }
 

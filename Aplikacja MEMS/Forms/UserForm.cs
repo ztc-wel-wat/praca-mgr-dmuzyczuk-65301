@@ -22,12 +22,6 @@ namespace Aplikacja_MEMS
         List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
         List<Sensor> sensors = new List<Sensor>();
         List<CheckBox> checks = new List<CheckBox>();
-        public static bool semafor = false;
-
-
-        Loading loading = new Loading();
-        ThreadStart loadingBar;
-        Thread bar;
 
         Accelerometer acc;
         Gyroscope gyr;
@@ -36,13 +30,10 @@ namespace Aplikacja_MEMS
         Humidity hig;
         Pressure pre;
 
-        byte[] parameters;
-        int response = 0;
-        byte[] resp = new byte[4096];
-
         public UserForm()
         {
             InitializeComponent();
+
             Sensor.enableByte = 0x77;
             Sensor.enableInterruptByte = 0x01;
 
@@ -53,32 +44,12 @@ namespace Aplikacja_MEMS
             hig = new Humidity(serialPort, cBoxHumidity, higNameLab);
             pre = new Pressure(serialPort, cBoxPressure, barNameLab);
 
-            // Tworzenie listy sensorów
-            sensors.Add(acc);
-            sensors.Add(gyr);
-            sensors.Add(mag);
-            sensors.Add(ter);
-            sensors.Add(hig);
-            sensors.Add(pre);
-
-            // Tworezenie zmiennych pomocniczych
-            parameters = new byte[8];
-            parameters[0] = Sensor.enableByte;
-            parameters[1] = Sensor.enableInterruptByte;
-            parameters[2] = parameters[3] = parameters[4] = parameters[5] = parameters[6] = parameters[7] = 0x00;
-
             // Ustawienie rozmiaru groupBoxów
             gBoxInfo.Height = tabPageGeneral.Height / 3;
             gBoxConnection.Height = tabPageGeneral.Height / 3;
             gBoxSensors.Height = tabPageGeneral.Height / 3;
 
             // Tworzenie listy kontrolek aktywowanych/dezaktywowanych podczas otwierania portu
-            enableDisable.Add(cBoxAccelerometer);
-            enableDisable.Add(cBoxPressure);
-            enableDisable.Add(cBoxHumidity);
-            enableDisable.Add(cBoxMagnetometer);
-            enableDisable.Add(cBoxThermometer);
-            enableDisable.Add(cBoxGyroscope);
             enableDisable.Add(buttonStart);
             enableDisable.Add(buttonClose);
             enableDisable.Add(cBoxPorts);
@@ -92,14 +63,6 @@ namespace Aplikacja_MEMS
             clear.Add(cBoxMagnetometer);
             clear.Add(cBoxThermometer);
             clear.Add(cBoxGyroscope);
-
-            // Lista groupBoxów do włączania/wyłączania podczas przesyłu danych
-            gBoxMEMSSensors.Add(gBoxAccelerometer);
-            gBoxMEMSSensors.Add(gBoxPressure);
-            gBoxMEMSSensors.Add(gBoxHumidity);
-            gBoxMEMSSensors.Add(gBoxMagnetometer);
-            gBoxMEMSSensors.Add(gBoxTermometer);
-            gBoxMEMSSensors.Add(gBoxGyroscope);
 
             // Parametry poczatkowe w listach wybieranych zakładki "Czujniki MEMS"
             cBoxAccODR.Text = cBoxAccODR.Items[0].ToString();
@@ -176,17 +139,28 @@ namespace Aplikacja_MEMS
                 }
 
                 // Wysłanie ustawień początkowych aplikacji
-                ComTransmition.OpenPort(cBoxPorts.Text);
-                Communication.Query((byte)CmdType.DataSet);
+                Communication.Query((byte)CmdType.DataSet, cBoxPorts.Text);
+
+                List<string> sensorDevices;
+                sensorDevices = Communication.GetAvailableSensors((byte)SensId.Accelerometer);
+
+                if (sensorDevices != null)
+                {
+                    foreach (string s in sensorDevices)
+                    {
+                        cBoxAccelerometer.Items.Add(s);
+                    }
+                    cBoxAccelerometer.SelectedIndex = 0;
+
+                    // TUTAJ STWORZYĆ ACC!
+                    sensors.Add(acc);
+                    gBoxMEMSSensors.Add(gBoxAccelerometer);
+                    enableDisable.Add(cBoxAccelerometer);
+                }
 
                 buttonOpen.Enabled = false;
                 cBoxPorts.Enabled = false;
 
-                //foreach (Sensor s in sensors)
-                //{
-                //    s.GetSensorsList();
-                //    progressBarCOM.Value += 15;
-                //}
 
                 // Włączanie/wyłączanie przycisków
                 foreach (Control control in enableDisable)
@@ -197,9 +171,6 @@ namespace Aplikacja_MEMS
                 buttonOpen.Enabled = false;
                 buttonStop.Enabled = false;
                 cBoxPorts.Enabled = false;
-
-                // Rozpoczęcie pobierania danych
-                ComTransmition.Read();
 
                 progressBarCOM.Value = 100;
             }
@@ -223,12 +194,7 @@ namespace Aplikacja_MEMS
         }
         private void buttonZamknij_Click(object sender, EventArgs e)
         {
-            semafor = true;
-            serialPort.Write(Communication.Query(0x09, null), 0, 5);
-
-
-            // Wstrzymanie wstrzymania informacji przez płytkę
-            serialPort.Write(Communication.Query(0x09, null), 0, 5);
+            Communication.Query(0x09);
 
 
             if (serialPort.IsOpen)
@@ -256,12 +222,6 @@ namespace Aplikacja_MEMS
             cBoxPorts.Enabled = true;
         }
 
-
-        // Włączenie okna ładowania aplikacji
-        private void StartPaska()
-        {
-            Application.Run(loading);
-        }
         private void buttonStart_Click(object sender, EventArgs e)
         {
             try
@@ -269,17 +229,8 @@ namespace Aplikacja_MEMS
                 // Ustawienie indeksów wybranych sensorów
                 foreach (Sensor s in sensors)
                 {
-                    s.SetSensor();
+                    Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetWorkingSensor, s.sensorNr, (byte)s.selectedDevideIndex);
                 }
-
-
-                // Wysłanie listy włączonych urządzeń
-                byte[] parameters = new byte[8];
-                parameters[0] = 0x77;
-                parameters[1] = 0x01;
-                parameters[2] = parameters[3] = parameters[4] = parameters[5] = parameters[6] = parameters[7] = 0x00;
-
-                serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
 
                 // Wyswietlenie drugiej zakładki
                 tabControlMain.SelectedIndex = 1;
@@ -321,7 +272,7 @@ namespace Aplikacja_MEMS
         private void buttonStop_Click(object sender, EventArgs e)
         {
             // Wstrzymanie wysylania informacji przez płytkę
-            serialPort.Write(Communication.Query(0x09, null), 0, 5);
+            //serialPort.Write(Communication.Query(0x09, null), 0, 5);
 
             // Blokowanie groupBoxów
             foreach (GroupBox box in gBoxMEMSSensors)
@@ -346,9 +297,7 @@ namespace Aplikacja_MEMS
         // Włączanie/wyłączaqnie czujników
         private void włączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            parameters[0] = Sensor.enableByte = 0x77;
-            parameters[1] = Sensor.enableInterruptByte;
-            serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
+            //serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
             foreach (CheckBox ch in checks)
             {
                 ch.Checked = true;
@@ -357,9 +306,7 @@ namespace Aplikacja_MEMS
 
         private void wyłączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            parameters[0] = Sensor.enableByte = 0x00;
-            parameters[1] = Sensor.enableInterruptByte;
-            serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
+            //serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
             foreach (CheckBox ch in checks)
             {
                 ch.Checked = false;
@@ -399,10 +346,6 @@ namespace Aplikacja_MEMS
 
         private void włączWyłączPrzerwaniaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Sensor.enableInterruptByte == 0x00) parameters[1] = Sensor.enableInterruptByte = 0x01;
-            else parameters[1] = Sensor.enableInterruptByte = 0x00;
-
-            serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
         }
 
         // Ustawianie ODR czujników 
@@ -563,7 +506,7 @@ namespace Aplikacja_MEMS
             if (serialPort.IsOpen)
             {
                 // Wstrzymanie wstrzymania informacji przez płytkę
-                serialPort.Write(Communication.Query(0x09, null), 0, 5);
+                // serialPort.Write(Communication.Query(0x09, null), 0, 5);
                 serialPort.DiscardInBuffer();
                 serialPort.DiscardOutBuffer();
                 serialPort.Close();
