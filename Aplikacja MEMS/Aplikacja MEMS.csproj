@@ -51,6 +51,7 @@
     <Compile Include="Sensors\Accelerometer.cs" />
     <Compile Include="Frame\SubCmdType.cs" />
     <Compile Include="Frame\CmdType.cs" />
+    <Compile Include="Sensors\EnvSensor.cs" />
     <Compile Include="Sensors\PressureSensor.cs" />
     <Compile Include="Sensors\Gyroscope.cs" />
     <Compile Include="Sensors\HumiditySensor.cs" />

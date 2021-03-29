@@ -1,4 +1,5 @@
-﻿using Aplikacja_MEMS.Transmition;
+﻿using Aplikacja_MEMS.Sensors;
+using Aplikacja_MEMS.Transmition;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,12 +24,12 @@ namespace Aplikacja_MEMS
         List<Sensor> sensors = new List<Sensor>();
         List<CheckBox> checks = new List<CheckBox>();
 
-        Accelerometer acc;
-        Gyroscope gyr;
-        Magnetometer mag;
-        Termometer ter;
-        Humidity hig;
-        Pressure pre;
+        MotionSensor acc;
+        MotionSensor gyr;
+        MotionSensor mag;
+        EnvSensor ther;
+        EnvSensor hum;
+        EnvSensor pre;
 
         public UserForm()
         {
@@ -36,13 +37,6 @@ namespace Aplikacja_MEMS
 
             Sensor.enableByte = 0x77;
             Sensor.enableInterruptByte = 0x01;
-
-            acc = new Accelerometer(serialPort, cBoxAccelerometer, accNameLab);
-            gyr = new Gyroscope(serialPort, cBoxGyroscope, gyroNameLab);
-            mag = new Magnetometer(serialPort, cBoxMagnetometer, magNameLab);
-            ter = new Termometer(serialPort, cBoxThermometer, terNameLab);
-            hig = new Humidity(serialPort, cBoxHumidity, higNameLab);
-            pre = new Pressure(serialPort, cBoxPressure, barNameLab);
 
             // Ustawienie rozmiaru groupBoxów
             gBoxInfo.Height = tabPageGeneral.Height / 3;
@@ -68,19 +62,19 @@ namespace Aplikacja_MEMS
             cBoxAccODR.Text = cBoxAccODR.Items[0].ToString();
             cBoxPreODR.Text = cBoxPreODR.Items[0].ToString();
             cBoxMagODR.Text = cBoxMagODR.Items[0].ToString();
-            cBoxGyroODR.Text = cBoxGyroODR.Items[0].ToString();
-            cBoxTermODR.Text = cBoxTermODR.Items[0].ToString();
+            cBoxGyrODR.Text = cBoxGyrODR.Items[0].ToString();
+            cBoxTherODR.Text = cBoxTherODR.Items[0].ToString();
             cBoxHumODR.Text = cBoxHumODR.Items[0].ToString();
 
             cBoxAccScale.Text = cBoxAccScale.Items[0].ToString();
             cBoxMagScale.Text = cBoxMagScale.Items[0].ToString();
-            cBoxGyroScale.Text = cBoxGyroScale.Items[0].ToString();
+            cBoxGyrScale.Text = cBoxGyrScale.Items[0].ToString();
 
             // Ustalenie listy checkBoxów
             checks.Add(chBoxAccEnabled);
-            checks.Add(chBoxGyroEnabled);
+            checks.Add(chBoxGyrEnabled);
             checks.Add(chBoxMagEnabled);
-            checks.Add(chBoxTermEnabled);
+            checks.Add(chBoxTherEnabled);
             checks.Add(chBoxHumEnabled);
             checks.Add(chBoxPreEnabled);
         }
@@ -140,27 +134,47 @@ namespace Aplikacja_MEMS
 
                 // Wysłanie ustawień początkowych aplikacji
                 Communication.Query((byte)CmdType.DataSet, cBoxPorts.Text);
-
-                List<string> sensorDevices;
-                sensorDevices = Communication.GetAvailableSensors((byte)SensId.Accelerometer);
-
-                if (sensorDevices != null)
+                
+                if(ChceckDevices(cBoxAccelerometer, (byte)SensId.Accelerometer))
                 {
-                    foreach (string s in sensorDevices)
-                    {
-                        cBoxAccelerometer.Items.Add(s);
-                    }
-                    cBoxAccelerometer.SelectedIndex = 0;
-
-                    // TUTAJ STWORZYĆ ACC!
+                    acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SensId.AccEnable);
                     sensors.Add(acc);
                     gBoxMEMSSensors.Add(gBoxAccelerometer);
-                    enableDisable.Add(cBoxAccelerometer);
+                }
+                if (ChceckDevices(cBoxGyroscope, (byte)SensId.Gyroscope))
+                {
+                    gyr = new MotionSensor((byte)SensId.Gyroscope, (byte)SensId.GyrEnable);
+                    sensors.Add(gyr);
+                    gBoxMEMSSensors.Add(gBoxGyroscope);
+                }
+                if (ChceckDevices(cBoxMagnetometer, (byte)SensId.Magnetometer))
+                {
+                    mag = new MotionSensor((byte)SensId.Magnetometer, (byte)SensId.MagEnable);
+                    sensors.Add(mag);
+                    gBoxMEMSSensors.Add(gBoxMagnetometer);
+                }
+                if (ChceckDevices(cBoxThermometer, (byte)SensId.Thermometer))
+                {
+                    ther = new EnvSensor((byte)SensId.Thermometer, (byte)SensId.TherEnable);
+                    sensors.Add(ther);
+                    gBoxMEMSSensors.Add(gBoxThermometer);
+                }
+                if (ChceckDevices(cBoxHumidity, (byte)SensId.HumiditySensor))
+                {
+                    hum = new EnvSensor((byte)SensId.HumiditySensor, (byte)SensId.HumEnable);
+                    sensors.Add(hum);
+                    gBoxMEMSSensors.Add(gBoxHumidity);
+                }
+                if (ChceckDevices(cBoxPressure, (byte)SensId.PressureSensor))
+                {
+                    pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SensId.PresEnable);
+                    sensors.Add(pre);
+                    gBoxMEMSSensors.Add(gBoxPressure);
                 }
 
                 buttonOpen.Enabled = false;
                 cBoxPorts.Enabled = false;
-
+                portOpenToolStripMenuItem.Enabled = false;
 
                 // Włączanie/wyłączanie przycisków
                 foreach (Control control in enableDisable)
@@ -177,8 +191,7 @@ namespace Aplikacja_MEMS
             catch (Exception exc)
             {
                 MessageBox.Show("Wystąpił błąd podczas połączenia z portem szeregowym. Sprawdź parameters połączenia.", "Błąd");
-                if (serialPort.IsOpen)
-                    serialPort.Close();
+                ComTransmition.ClosePort();
 
                 progressBarCOM.Value = 0;
 
@@ -192,17 +205,33 @@ namespace Aplikacja_MEMS
                 cBoxPorts.Enabled = true;
             }
         }
+
+        private bool ChceckDevices(ComboBox deviceList, byte sensor)
+        {
+            List<string> sensorDevices;
+            sensorDevices = Communication.GetAvailableSensors(sensor);
+            progressBarCOM.Value += 100 / 6;
+            if (sensorDevices != null)
+            {
+                foreach (string s in sensorDevices)
+                {
+                    deviceList.Items.Add(s);
+                }
+                deviceList.SelectedIndex = 0;
+                enableDisable.Add(deviceList);
+
+                return true;
+            }
+
+            else return false;
+        }
+
+
         private void buttonZamknij_Click(object sender, EventArgs e)
         {
-            Communication.Query(0x09);
-
-
-            if (serialPort.IsOpen)
-            {
-                serialPort.DiscardInBuffer();
-                serialPort.DiscardOutBuffer();
-                serialPort.Close();
-            }
+            Communication.Query((byte)CmdType.StopTransmition);
+            ComTransmition.StopRead();
+            ComTransmition.ClosePort();
 
             // Włączanie/wyłączanie przycisków
             foreach (Control control in enableDisable)
@@ -216,10 +245,13 @@ namespace Aplikacja_MEMS
                 box.Enabled = false;
             }
 
+            sensors.Clear();
+
             progressBarCOM.Value = 0;
             progressBarData.Value = 0;
             buttonOpen.Enabled = true;
             cBoxPorts.Enabled = true;
+            portOpenToolStripMenuItem.Enabled = true;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -229,17 +261,28 @@ namespace Aplikacja_MEMS
                 // Ustawienie indeksów wybranych sensorów
                 foreach (Sensor s in sensors)
                 {
-                    Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetWorkingSensor, s.sensorNr, (byte)s.selectedDevideIndex);
+                    Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetWorkingSensor, s.sensorNr, (byte)s.selectedDeviceIndex);
+                    progressBarData.Value += 10;
+                }
+                
+                ComTransmition.Read();
+                Sensor.EnableAll();
+
+                foreach(Sensor s in sensors)
+                {
+                    s.isEnabled = true;
                 }
 
                 // Wyswietlenie drugiej zakładki
                 tabControlMain.SelectedIndex = 1;
 
                 // Wstawianie nazwy sensora
-                foreach (Sensor s in sensors)
-                {
-                    s.sensorName.Text = s.cBoxDeviceList.Items[s.cBoxDeviceList.SelectedIndex].ToString();
-                }
+                accNameLab.Text = cBoxAccelerometer.Text;
+                terNameLab.Text = cBoxThermometer.Text;
+                magNameLab.Text = cBoxAccelerometer.Text;
+                gyrNameLab.Text = cBoxGyroscope.Text;
+                humNameLab.Text = cBoxHumidity.Text;
+                presNameLab.Text = cBoxPressure.Text;
 
 
                 // Odblokowanie groupBoxów
@@ -260,19 +303,20 @@ namespace Aplikacja_MEMS
                 DisableAllToolStripMenuItem.Enabled = true;
 
                 progressBarData.Value = 100;
-
-
-
             }
             catch (Exception exc)
             {
+                buttonStop_Click(this, null);
+                MessageBox.Show("Wystąpił błąd podczas próby wymiany danych z płytką. Sprawdź parametry i spróbuj ponownie. \n\nBłąd:\n" + exc.Message,
+                    "Błąd!");
             }
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
             // Wstrzymanie wysylania informacji przez płytkę
-            //serialPort.Write(Communication.Query(0x09, null), 0, 5);
+            Communication.Query((byte)CmdType.StopTransmition);
+            ComTransmition.StopRead();
 
             // Blokowanie groupBoxów
             foreach (GroupBox box in gBoxMEMSSensors)
@@ -297,7 +341,7 @@ namespace Aplikacja_MEMS
         // Włączanie/wyłączaqnie czujników
         private void włączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
+            Sensor.EnableAll();
             foreach (CheckBox ch in checks)
             {
                 ch.Checked = true;
@@ -306,7 +350,7 @@ namespace Aplikacja_MEMS
 
         private void wyłączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //serialPort.Write(Communication.Query(0x08, parameters), 0, 13);
+            Sensor.DisableAll();
             foreach (CheckBox ch in checks)
             {
                 ch.Checked = false;
@@ -320,7 +364,7 @@ namespace Aplikacja_MEMS
 
         private void chBoxGyroEnabled_Click(object sender, EventArgs e)
         {
-            gyr.SetEnable(chBoxGyroEnabled.Checked);
+            gyr.SetEnable(chBoxGyrEnabled.Checked);
         }
 
         private void chBoxMagEnabled_Click(object sender, EventArgs e)
@@ -331,7 +375,7 @@ namespace Aplikacja_MEMS
 
         private void chBoxHumEnabled_Click(object sender, EventArgs e)
         {
-            hig.SetEnable(chBoxHumEnabled.Checked);
+            hum.SetEnable(chBoxHumEnabled.Checked);
         }
 
         private void chBoxPreEnabled_Click(object sender, EventArgs e)
@@ -341,176 +385,178 @@ namespace Aplikacja_MEMS
 
         private void chBoxTermEnabled_Click(object sender, EventArgs e)
         {
-            ter.SetEnable(chBoxTermEnabled.Checked);
+            ther.SetEnable(chBoxTherEnabled.Checked);
         }
 
         private void włączWyłączPrzerwaniaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        { 
+            Sensor.ChangeInterrupt();
         }
 
         // Ustawianie ODR czujników 
         private void cBoxAkcODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            acc.SetODR(cBoxAccODR.SelectedIndex);
-
-            if (serialPort.IsOpen)
-            {
-                try
-                {
-                    float a = float.Parse(cBoxAccODR.Text);
-                    byte[] par = BitConverter.GetBytes(a);
-                    MessageBox.Show(par[0].ToString() + par[1].ToString() + par[2].ToString() + par[3].ToString());
-                }
-                catch (Exception exc) { }
-            }
+            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxAccODR.Text));
+            if(acc != null)
+            acc.SetOdr(parameter);
         }
 
-        private void cBoxZyroODR_SelectedIndexChanged(object sender, EventArgs e)
+        private void cBoxGyrODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gyr.SetODR(cBoxGyroODR.SelectedIndex);
+            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxGyrODR.Text));
+            if (gyr != null)
+                gyr.SetOdr(parameter);
+
         }
 
         private void cBoxMagODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mag.SetODR(cBoxMagODR.SelectedIndex);
+            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxMagODR.Text));
+            if (mag != null)
+                mag.SetOdr(parameter);
         }
 
         private void cBoxTermODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ter.SetODR(cBoxTermODR.SelectedIndex);
-            hig.SetODR(cBoxHumODR.SelectedIndex);
-
-            cBoxHumODR.SelectedIndex = cBoxTermODR.SelectedIndex;
+            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxTherODR.Text));
+            if (ther != null)
+                ther.SetOdr(parameter);
         }
 
         private void cBoxHigODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ter.SetODR(cBoxTermODR.SelectedIndex);
-            hig.SetODR(cBoxHumODR.SelectedIndex);
-
-            cBoxTermODR.SelectedIndex = cBoxHumODR.SelectedIndex;
+            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxHumODR.Text));
+            if (hum != null)
+                hum.SetOdr(parameter);
         }
 
         private void cBoxBarODR_SelectedIndexChanged(object sender, EventArgs e)
         {
-            pre.SetODR(cBoxPreODR.SelectedIndex);
+            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxPreODR.Text));
+            if (pre != null)
+                pre.SetOdr(parameter);
         }
 
         // Ustawianie zakresów 
         private void cBoxAkcSkala_SelectedIndexChanged(object sender, EventArgs e)
         {
-            acc.SetScale(cBoxAccScale.SelectedIndex);
+            byte[] parameter = BitConverter.GetBytes(Int32.Parse(cBoxAccScale.Text));
+            if (acc != null)
+                acc.SetScale(parameter);
         }
 
-        private void cBoxZyroSkala_SelectedIndexChanged(object sender, EventArgs e)
+        private void cBoxGyrSkala_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gyr.SetScale(cBoxGyroScale.SelectedIndex);
+            byte[] parameter = BitConverter.GetBytes(Int32.Parse(cBoxGyrScale.Text));
+            if (gyr != null)
+                gyr.SetScale(parameter);
         }
 
         // Ustawianie parametrów rejestru
         private void buttonAccSet_Click(object sender, EventArgs e)
         {
-            acc.SetParameter(tBoxAccAddress.Text, tBoxAccValue.Text);
+            acc.SetRegisterParameter(tBoxAccAddress.Text, tBoxAccValue.Text);
         }
 
-        private void buttonGyroSet_Click(object sender, EventArgs e)
+        private void buttonGyrSet_Click(object sender, EventArgs e)
         {
-            gyr.SetParameter(tBoxGyroAddress.Text, tBoxGyroValue.Text);
+            gyr.SetRegisterParameter(tBoxGyrAddress.Text, tBoxGyrValue.Text);
         }
 
         private void buttonMagSet_Click(object sender, EventArgs e)
         {
-            mag.SetParameter(tBoxMagAddress.Text, tBoxMagValue.Text);
+            mag.SetRegisterParameter(tBoxMagAddress.Text, tBoxMagValue.Text);
         }
 
         private void buttonTermSet_Click(object sender, EventArgs e)
         {
-            ter.SetParameter(tBoxTermAddress.Text, tBoxTermValue.Text);
+            ther.SetRegisterParameter(tBoxTherAddress.Text, tBoxTherValue.Text);
         }
 
         private void buttonPreSet_Click(object sender, EventArgs e)
         {
-            pre.SetParameter(tBoxPreAddress.Text, tBoxPreValue.Text);
+            pre.SetRegisterParameter(tBoxPreAddress.Text, tBoxPreValue.Text);
         }
 
         private void buttonHumSet_Click(object sender, EventArgs e)
         {
-            hig.SetParameter(tBoxHumAddress.Text, tBoxHumValue.Text);
+            hum.SetRegisterParameter(tBoxHumAddress.Text, tBoxHumValue.Text);
         }
 
         // Pobieranie ustawień rejestrów    
         private void buttonAccGet_Click(object sender, EventArgs e)
         {
-            acc.ReadParameter(tBoxAccAddress.Text);
+            acc.GetRegisterParameter(tBoxAccAddress.Text);
         }
 
-        private void buttonGyroGet_Click(object sender, EventArgs e)
+        private void buttonGyrGet_Click(object sender, EventArgs e)
         {
-            gyr.ReadParameter(tBoxGyroAddress.Text);
+            gyr.GetRegisterParameter(tBoxGyrAddress.Text);
         }
 
         private void buttonMagGet_Click(object sender, EventArgs e)
         {
-            mag.ReadParameter(tBoxMagAddress.Text);
+            mag.GetRegisterParameter(tBoxMagAddress.Text);
         }
 
         private void buttonTermGet_Click(object sender, EventArgs e)
         {
-            ter.ReadParameter(tBoxTermAddress.Text);
+            ther.GetRegisterParameter(tBoxTherAddress.Text);
         }
 
         private void buttonPreGet_Click(object sender, EventArgs e)
         {
-            pre.ReadParameter(tBoxPreAddress.Text);
+            pre.GetRegisterParameter(tBoxPreAddress.Text);
         }
 
         private void buttonHumGet_Click(object sender, EventArgs e)
         {
-            hig.ReadParameter(tBoxHumAddress.Text);
+            hum.GetRegisterParameter(tBoxHumAddress.Text);
         }
 
         // Otwarcie okien rejestrtów
         private void buttonAccOpen_Click(object sender, EventArgs e)
         {
-            acc.OpenRegister("Akcelerometr");
+           
         }
 
         private void buttonGyroOpen_Click(object sender, EventArgs e)
         {
 
-            gyr.OpenRegister("Żyroskop");
+          
         }
 
         private void buttonMagOpen_Click(object sender, EventArgs e)
         {
-            mag.OpenRegister("Magnetometr");
+          
         }
 
         private void buttonTermOpen_Click(object sender, EventArgs e)
         {
-            ter.OpenRegister("Termometr");
+           
         }
 
         private void buttonPreOpen_Click(object sender, EventArgs e)
         {
-            pre.OpenRegister("Barometr");
+            
         }
 
         private void buttonHumOpen_Click(object sender, EventArgs e)
         {
-            hig.OpenRegister("Hogrometr");
+           
         }
-
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (serialPort.IsOpen)
             {
-                // Wstrzymanie wstrzymania informacji przez płytkę
-                // serialPort.Write(Communication.Query(0x09, null), 0, 5);
-                serialPort.DiscardInBuffer();
-                serialPort.DiscardOutBuffer();
-                serialPort.Close();
+                Communication.Query((byte)CmdType.StopTransmition);
+                ComTransmition.ClosePort();
             }
+        }
+
+        private void portOpenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            buttonOtworz_Click(this, null);
         }
     }
 }

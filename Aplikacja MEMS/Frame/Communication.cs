@@ -2,12 +2,8 @@
 using Aplikacja_MEMS.Transmition;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO.Ports;
-using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
 {
@@ -25,15 +21,6 @@ namespace Aplikacja_MEMS
             query[4] = (byte)Identificators.FrameEnd;
 
             ComTransmition.SendMessage(query);
-
-            switch (command)
-            {
-                case (byte)CmdType.StopTransmition:
-                    Thread.Sleep(200);
-                    ComTransmition.ReadMessage();
-                    ComTransmition.ClosePort();
-                    break;
-            }
         }
 
         public static void Query(byte command, string portName)
@@ -56,21 +43,44 @@ namespace Aplikacja_MEMS
         public static byte[] Query(byte command, byte subCommand, byte sensorNr)
         {
             byte[] response;
+            byte[] query;
 
-            byte[] query = new byte[7];
-            Array.Clear(query, 0, query.Length);
+            switch (command)
+            {
+                case (byte)CmdType.SensorCmd:
+                    query = new byte[7];
 
-            query[0] = (byte)Identificators.SensorBoardId;
-            query[1] = (byte)Identificators.ApplicationId;
-            query[2] = command;
-            query[3] = subCommand;
-            query[4] = sensorNr;
-            query[5] = CheckSum(query, 5);
-            query[6] = (byte)Identificators.FrameEnd;
+                    query[0] = (byte)Identificators.SensorBoardId;
+                    query[1] = (byte)Identificators.ApplicationId;
+                    query[2] = command;
+                    query[3] = subCommand;
+                    query[4] = sensorNr;
+                    query[5] = CheckSum(query, 5);
+                    query[6] = (byte)Identificators.FrameEnd;
+                    ComTransmition.SendMessage(query);
 
-            ComTransmition.SendMessage(query);
-            Thread.Sleep(200);
-            response = ComTransmition.ReadMessage();
+                    Thread.Sleep(50);
+                    response = ComTransmition.ReadMessage();
+                    break;
+                case (byte)CmdType.SensorEnable:
+                    query = new byte[13];
+
+                    query[0] = (byte)Identificators.SensorBoardId;
+                    query[1] = (byte)Identificators.ApplicationId;
+                    query[2] = command;
+                    query[3] = subCommand;
+                    query[4] = sensorNr;
+                    query[5] = query[6] = query[7] = query[8] = query[9] = query[10] = 0x0;
+                    query[11] = CheckSum(query, 5);
+                    query[12] = (byte)Identificators.FrameEnd;
+                    ComTransmition.SendMessage(query);
+
+                    response = null;
+                    break;
+                default:
+                    response = null;
+                    break;
+            }
 
             return response;
         }
@@ -89,11 +99,43 @@ namespace Aplikacja_MEMS
             query[7] = (byte)Identificators.FrameEnd;
 
             ComTransmition.SendMessage(query);
-            Thread.Sleep(200);
-            ComTransmition.ReadMessage();
         }
 
-            private static byte CheckSum(byte[] data, int dlugosc)
+        public static void Query(byte command, byte subCommand, byte sensorNr, byte[] parameter)
+        {
+            byte[] query = new byte[11];
+
+            query[0] = (byte)Identificators.SensorBoardId;
+            query[1] = (byte)Identificators.ApplicationId;
+            query[2] = command;
+            query[3] = subCommand;
+            query[4] = sensorNr;
+            query[5] = parameter[0];
+            query[6] = parameter[1];
+            query[7] = parameter[2];
+            query[8] = parameter[3];
+            query[9] = CheckSum(query, 9);
+            query[10] = (byte)Identificators.FrameEnd;
+
+            ComTransmition.SendMessage(query);
+        }
+        public static void Query(byte command, byte subCommand, byte sensorNr, byte parameterAddress, byte parameterValue)
+        {
+            byte[] query = new byte[9];
+
+            query[0] = (byte)Identificators.SensorBoardId;
+            query[1] = (byte)Identificators.ApplicationId;
+            query[2] = command;
+            query[3] = subCommand;
+            query[4] = sensorNr;
+            query[5] = parameterAddress;
+            query[6] = parameterValue;
+            query[7] = CheckSum(query, 7);
+            query[8] = (byte)Identificators.FrameEnd;
+
+            ComTransmition.SendMessage(query);
+        }
+        private static byte CheckSum(byte[] data, int dlugosc)
         {
             // Obliczanie sumy kontrolnej (przedostatni bajt ramki)
             byte value = 0xFF;
@@ -125,16 +167,21 @@ namespace Aplikacja_MEMS
             return time;
         }
 
+        // Pobieranie listy dostępnych czujników
         public static List<string> GetAvailableSensors(byte sensor)
         {
             List<string> availableSensors = new List<string>();
 
+            // Wysłanie zapytania o dostępne urządzenia
             byte[] response = Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetAvaliableSensorList, sensor);
 
+            // W przypadku braku odpowiedzi - brak urzadzen
             if (response != null)
             {
+                // Dekodowanie odpowiedz
                 string frame = Encoding.UTF8.GetString(response, 5, response.Length - 7);
 
+                // Wyodrębnianie nazw urządzeń spomiędzy przecinków i dodawanie do listy
                 while (frame.IndexOf(',') != -1)
                 {
                     string buffer = frame.Substring(0, frame.IndexOf(','));

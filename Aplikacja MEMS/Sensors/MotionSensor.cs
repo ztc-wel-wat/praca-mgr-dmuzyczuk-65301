@@ -1,33 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Aplikacja_MEMS
+﻿namespace Aplikacja_MEMS
 {
-    abstract class MotionSensor : Sensor
+    class MotionSensor : Sensor
     {
-        public byte[,] scale;
-        public void SetScale(int index)
+        byte[,,] data;
+
+        public MotionSensor (byte sensorNumber, byte sensorActivate)
         {
-            if (serialPort.IsOpen)
-            {
-                byte[] parameters = new byte[] { 0x05, sensorNr, scale[index, 0], scale[index, 1], scale[index, 2], scale[index, 3] };
-
-                //byte[] query = Communication.Query(0x50, parameters);
-
-                BackgroundWorker bgWorkWrite = new BackgroundWorker();
-                bgWorkWrite.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkWrite_DoWork);
-                bgWorkWrite.RunWorkerAsync();
-            }
+            activate = sensorActivate;
+            sensorNr = sensorNumber;
+            isEnabled = false;
         }
 
-        private void bgWorkWrite_DoWork(object sender, DoWorkEventArgs e)
+        public void SetScale(byte[] parameter)
         {
-            byte[] query = (byte[])e.Argument;
-            serialPort.Write(query, 0, query.Length);
+            Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetSensorScale, this.sensorNr, parameter);
         }
+
     }
 }
