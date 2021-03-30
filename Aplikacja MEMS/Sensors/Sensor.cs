@@ -1,4 +1,5 @@
 ﻿using System;
+using Aplikacja_MEMS.Registers;
 
 namespace Aplikacja_MEMS
 {
@@ -13,20 +14,6 @@ namespace Aplikacja_MEMS
         public SensorRegister register;
         public int selectedDeviceIndex;
 
-        public void OpenRegister(string name)
-        {
-            if (register.Visible == false)
-            {
-                register = new SensorRegister();
-                register.Text = "Rejestr " + name;
-                register.Visible = true;
-            }
-            else
-            {
-                register.TopMost = true;
-                register.TopMost = false;
-            }
-        }
 
         // Ustawianie wybranego sensora do pracy
         public void SetSensor(int index)
@@ -88,6 +75,18 @@ namespace Aplikacja_MEMS
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, (byte)Int32.Parse(address));
             }
             catch (Exception exc) { };
+        }
+
+        public void OpenRegister()
+        {
+            RegisterList.LSM6DSL();
+            if (register == null)
+            {
+                register = new SensorRegister(RegisterList.r_LSM6DSL);
+            }
+            register.Visible = true;
+            register.TopMost = true;
+            register.TopMost = false;
         }
 
     }

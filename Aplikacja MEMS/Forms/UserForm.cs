@@ -420,14 +420,20 @@ namespace Aplikacja_MEMS
         {
             byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxTherODR.Text));
             if (ther != null)
+            {
                 ther.SetOdr(parameter);
+                cBoxHumODR.SelectedIndex = cBoxTherODR.SelectedIndex;
+            }
         }
 
         private void cBoxHigODR_SelectedIndexChanged(object sender, EventArgs e)
         {
             byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxHumODR.Text));
             if (hum != null)
+            {
                 hum.SetOdr(parameter);
+                cBoxTherODR.SelectedIndex = cBoxHumODR.SelectedIndex;
+            }
         }
 
         private void cBoxBarODR_SelectedIndexChanged(object sender, EventArgs e)
@@ -517,7 +523,7 @@ namespace Aplikacja_MEMS
         // Otwarcie okien rejestrtów
         private void buttonAccOpen_Click(object sender, EventArgs e)
         {
-           
+            acc.OpenRegister();
         }
 
         private void buttonGyroOpen_Click(object sender, EventArgs e)
@@ -547,11 +553,8 @@ namespace Aplikacja_MEMS
         }
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (serialPort.IsOpen)
-            {
                 Communication.Query((byte)CmdType.StopTransmition);
                 ComTransmition.ClosePort();
-            }
         }
 
         private void portOpenToolStripMenuItem_Click(object sender, EventArgs e)

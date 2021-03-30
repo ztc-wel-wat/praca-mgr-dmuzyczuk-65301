@@ -80,10 +80,16 @@ namespace Aplikacja_MEMS.Transmition
 
         public static void OpenPort(string name)
         {
-            serialPort.PortName = name;
-            serialPort.BaudRate = 921600;
-            serialPort.ReadBufferSize = 16384;
-            serialPort.Open();
+            try
+            {
+                serialPort.PortName = name;
+                serialPort.BaudRate = 921600;
+                serialPort.ReadBufferSize = 16384;
+                serialPort.Open();
+            }
+            catch(Exception e)
+            {
+            }
         }
 
         public static void ClosePort()
@@ -108,8 +114,11 @@ namespace Aplikacja_MEMS.Transmition
 
         private static void bgWorkSend_DoWork(object sender, DoWorkEventArgs e)
         {
-            byte[] message = (byte[])e.Argument;
-            serialPort.Write(message, 0, message.Length);
+            if (serialPort.IsOpen)
+            {
+                byte[] message = (byte[])e.Argument;
+                serialPort.Write(message, 0, message.Length);
+            }
         }
 
         // Odbiór danych

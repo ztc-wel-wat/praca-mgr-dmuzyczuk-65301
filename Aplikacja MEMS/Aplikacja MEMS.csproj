@@ -48,6 +48,10 @@
   <ItemGroup>
     <Compile Include="AvailablePort.cs" />
     <Compile Include="Frame\Identificators.cs" />
+    <Compile Include="Registers\Parameter.cs" />
+    <Compile Include="Registers\Register.cs" />
+    <Compile Include="Registers\RegisterList.cs" />
+    <Compile Include="Registers\RegisterType.cs" />
     <Compile Include="Sensors\Accelerometer.cs" />
     <Compile Include="Frame\SubCmdType.cs" />
     <Compile Include="Frame\CmdType.cs" />

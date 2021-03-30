@@ -29,7 +29,6 @@ namespace Aplikacja_MEMS
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
@@ -167,7 +166,6 @@ namespace Aplikacja_MEMS
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.edytujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.portOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EnableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -176,8 +174,13 @@ namespace Aplikacja_MEMS
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serialPort = new System.IO.Ports.SerialPort(this.components);
-            this.bgWorkerOtworz = new System.ComponentModel.BackgroundWorker();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zapiszPomiaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otwórzPomiaryZPlikuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pokazujNaWspólnymWykresieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
@@ -1434,7 +1437,7 @@ namespace Aplikacja_MEMS
             this.cBoxTherODR.Items.AddRange(new object[] {
             "1",
             "7",
-            "12.5"});
+            "12,5"});
             this.cBoxTherODR.Location = new System.Drawing.Point(9, 77);
             this.cBoxTherODR.Name = "cBoxTherODR";
             this.cBoxTherODR.Size = new System.Drawing.Size(121, 21);
@@ -1810,7 +1813,6 @@ namespace Aplikacja_MEMS
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.plikToolStripMenuItem,
-            this.edytujToolStripMenuItem,
             this.opcjeToolStripMenuItem,
             this.pomocToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -1822,7 +1824,11 @@ namespace Aplikacja_MEMS
             // plikToolStripMenuItem
             // 
             this.plikToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asdToolStripMenuItem});
+            this.asdToolStripMenuItem,
+            this.zapiszPomiaryToolStripMenuItem,
+            this.otwórzPomiaryZPlikuToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.zamknijToolStripMenuItem});
             this.plikToolStripMenuItem.Name = "plikToolStripMenuItem";
             this.plikToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.plikToolStripMenuItem.Text = "Plik";
@@ -1830,22 +1836,19 @@ namespace Aplikacja_MEMS
             // asdToolStripMenuItem
             // 
             this.asdToolStripMenuItem.Name = "asdToolStripMenuItem";
-            this.asdToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
-            this.asdToolStripMenuItem.Text = "asd";
-            // 
-            // edytujToolStripMenuItem
-            // 
-            this.edytujToolStripMenuItem.Name = "edytujToolStripMenuItem";
-            this.edytujToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.edytujToolStripMenuItem.Text = "Edytuj";
+            this.asdToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.asdToolStripMenuItem.Text = "Nowe pomiary";
             // 
             // opcjeToolStripMenuItem
             // 
             this.opcjeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.portOpenToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.EnableAllToolStripMenuItem,
             this.DisableAllToolStripMenuItem,
-            this.włączWyłączPrzerwaniaToolStripMenuItem});
+            this.włączWyłączPrzerwaniaToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.pokazujNaWspólnymWykresieToolStripMenuItem});
             this.opcjeToolStripMenuItem.Name = "opcjeToolStripMenuItem";
             this.opcjeToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.opcjeToolStripMenuItem.Text = "Opcje";
@@ -1853,7 +1856,7 @@ namespace Aplikacja_MEMS
             // portOpenToolStripMenuItem
             // 
             this.portOpenToolStripMenuItem.Name = "portOpenToolStripMenuItem";
-            this.portOpenToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.portOpenToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.portOpenToolStripMenuItem.Text = "Otworz port";
             this.portOpenToolStripMenuItem.Click += new System.EventHandler(this.portOpenToolStripMenuItem_Click);
             // 
@@ -1861,7 +1864,7 @@ namespace Aplikacja_MEMS
             // 
             this.EnableAllToolStripMenuItem.Enabled = false;
             this.EnableAllToolStripMenuItem.Name = "EnableAllToolStripMenuItem";
-            this.EnableAllToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.EnableAllToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.EnableAllToolStripMenuItem.Text = "Włącz wszystkie czujniki";
             this.EnableAllToolStripMenuItem.Click += new System.EventHandler(this.włączWszystkieCzujnikiToolStripMenuItem_Click);
             // 
@@ -1869,14 +1872,14 @@ namespace Aplikacja_MEMS
             // 
             this.DisableAllToolStripMenuItem.Enabled = false;
             this.DisableAllToolStripMenuItem.Name = "DisableAllToolStripMenuItem";
-            this.DisableAllToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.DisableAllToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.DisableAllToolStripMenuItem.Text = "Wyłącz wszystkie czujniki";
             this.DisableAllToolStripMenuItem.Click += new System.EventHandler(this.wyłączWszystkieCzujnikiToolStripMenuItem_Click);
             // 
             // włączWyłączPrzerwaniaToolStripMenuItem
             // 
             this.włączWyłączPrzerwaniaToolStripMenuItem.Name = "włączWyłączPrzerwaniaToolStripMenuItem";
-            this.włączWyłączPrzerwaniaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.włączWyłączPrzerwaniaToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.włączWyłączPrzerwaniaToolStripMenuItem.Text = "Włącz/Wyłącz przerwania";
             this.włączWyłączPrzerwaniaToolStripMenuItem.Click += new System.EventHandler(this.włączWyłączPrzerwaniaToolStripMenuItem_Click);
             // 
@@ -1892,24 +1895,54 @@ namespace Aplikacja_MEMS
             // pomocToolStripMenuItem1
             // 
             this.pomocToolStripMenuItem1.Name = "pomocToolStripMenuItem1";
-            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.pomocToolStripMenuItem1.Text = "Pomoc";
             // 
             // oProgramieToolStripMenuItem
             // 
             this.oProgramieToolStripMenuItem.Name = "oProgramieToolStripMenuItem";
-            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.oProgramieToolStripMenuItem.Text = "O programie";
             // 
-            // serialPort
+            // toolStripMenuItem1
             // 
-            this.serialPort.BaudRate = 921600;
-            this.serialPort.PortName = "COM9";
-            this.serialPort.ReadBufferSize = 16384;
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
             // 
-            // bgWorkerOtworz
+            // zamknijToolStripMenuItem
             // 
-            this.bgWorkerOtworz.WorkerSupportsCancellation = true;
+            this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
+            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.zamknijToolStripMenuItem.Text = "Zamknij";
+            // 
+            // zapiszPomiaryToolStripMenuItem
+            // 
+            this.zapiszPomiaryToolStripMenuItem.Name = "zapiszPomiaryToolStripMenuItem";
+            this.zapiszPomiaryToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.zapiszPomiaryToolStripMenuItem.Text = "Zapisz pomiary";
+            // 
+            // otwórzPomiaryZPlikuToolStripMenuItem
+            // 
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Name = "otwórzPomiaryZPlikuToolStripMenuItem";
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Text = "Otwórz pomiary z pliku";
+            // 
+            // pokazujNaWspólnymWykresieToolStripMenuItem
+            // 
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.CheckOnClick = true;
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.Name = "pokazujNaWspólnymWykresieToolStripMenuItem";
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.Text = "Pokazuj na wspólnym wykresie";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(234, 6);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(234, 6);
             // 
             // UserForm
             // 
@@ -1978,7 +2011,6 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.GroupBox gBoxInfo;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem plikToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem edytujToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opcjeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pomocToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem;
@@ -1990,7 +2022,6 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.PictureBox pBoxBoard;
         private System.Windows.Forms.TabPage tabPageData;
-        public System.IO.Ports.SerialPort serialPort;
         private System.Windows.Forms.ComboBox cBoxPorts;
         private System.Windows.Forms.Label labelPortSelection;
         private System.Windows.Forms.Label labelGyroscope;
@@ -2018,7 +2049,6 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ComboBox cBoxGyroscope;
         private System.Windows.Forms.ComboBox cBoxAccelerometer;
         private System.Windows.Forms.PictureBox pBoxLogoWEL;
-        private System.ComponentModel.BackgroundWorker bgWorkerOtworz;
         private System.Windows.Forms.GroupBox gBoxHumidity;
         private System.Windows.Forms.GroupBox gBoxMagnetometer;
         private System.Windows.Forms.GroupBox gBoxPressure;
@@ -2119,6 +2149,13 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Label terNameLab;
         private System.Windows.Forms.Label humNameLab;
         private System.Windows.Forms.Label presNameLab;
+        private System.Windows.Forms.ToolStripMenuItem zapiszPomiaryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem otwórzPomiaryZPlikuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem zamknijToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pokazujNaWspólnymWykresieToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
     }
 }
 
