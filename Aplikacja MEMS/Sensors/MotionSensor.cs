@@ -2,10 +2,11 @@
 {
     class MotionSensor : Sensor
     {
-        byte[,,] data;
+        byte[] data;
 
-        public MotionSensor (byte sensorNumber, byte sensorActivate)
+        public MotionSensor (byte sensorNumber, byte sensorActivate, string name)
         {
+            sensorName = name;
             activate = sensorActivate;
             sensorNr = sensorNumber;
             isEnabled = false;

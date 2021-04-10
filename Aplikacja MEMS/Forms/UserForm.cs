@@ -1,5 +1,6 @@
 ﻿using Aplikacja_MEMS.Sensors;
 using Aplikacja_MEMS.Transmition;
+using Aplikacja_MEMS.Analysis;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,9 @@ namespace Aplikacja_MEMS
         EnvSensor ther;
         EnvSensor hum;
         EnvSensor pre;
+
+        static Queue<byte[]> addData = new Queue<byte[]>();
+        static Queue<byte[]> frames = new Queue<byte[]>();
 
         public UserForm()
         {
@@ -137,37 +141,42 @@ namespace Aplikacja_MEMS
                 
                 if(ChceckDevices(cBoxAccelerometer, (byte)SensId.Accelerometer))
                 {
-                    acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SensId.AccEnable);
+                    acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SetSensor.AccEnable, "Akcelerometr");
                     sensors.Add(acc);
                     gBoxMEMSSensors.Add(gBoxAccelerometer);
                 }
+
                 if (ChceckDevices(cBoxGyroscope, (byte)SensId.Gyroscope))
                 {
-                    gyr = new MotionSensor((byte)SensId.Gyroscope, (byte)SensId.GyrEnable);
+                    gyr = new MotionSensor((byte)SensId.Gyroscope, (byte)SetSensor.GyrEnable, "Żyroskop");
                     sensors.Add(gyr);
                     gBoxMEMSSensors.Add(gBoxGyroscope);
                 }
+
                 if (ChceckDevices(cBoxMagnetometer, (byte)SensId.Magnetometer))
                 {
-                    mag = new MotionSensor((byte)SensId.Magnetometer, (byte)SensId.MagEnable);
+                    mag = new MotionSensor((byte)SensId.Magnetometer, (byte)SetSensor.MagEnable, "Magnetometr");
                     sensors.Add(mag);
                     gBoxMEMSSensors.Add(gBoxMagnetometer);
                 }
+
                 if (ChceckDevices(cBoxThermometer, (byte)SensId.Thermometer))
                 {
-                    ther = new EnvSensor((byte)SensId.Thermometer, (byte)SensId.TherEnable);
+                    ther = new EnvSensor((byte)SensId.Thermometer, (byte)SetSensor.TherEnable, "Termometr");
                     sensors.Add(ther);
                     gBoxMEMSSensors.Add(gBoxThermometer);
                 }
+
                 if (ChceckDevices(cBoxHumidity, (byte)SensId.HumiditySensor))
                 {
-                    hum = new EnvSensor((byte)SensId.HumiditySensor, (byte)SensId.HumEnable);
+                    hum = new EnvSensor((byte)SensId.HumiditySensor, (byte)SetSensor.HumEnable, "Higrometr");
                     sensors.Add(hum);
                     gBoxMEMSSensors.Add(gBoxHumidity);
                 }
+
                 if (ChceckDevices(cBoxPressure, (byte)SensId.PressureSensor))
                 {
-                    pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SensId.PresEnable);
+                    pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SetSensor.PresEnable, "Barometr");
                     sensors.Add(pre);
                     gBoxMEMSSensors.Add(gBoxPressure);
                 }
@@ -254,7 +263,12 @@ namespace Aplikacja_MEMS
             portOpenToolStripMenuItem.Enabled = true;
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        public static void bgW_Analysis(object sender, DoWorkEventArgs e)
+        {
+            Analysis.FrameAnalysis.FrameAnalysis(addData, (RichTextBox)e.Argument);
+        }
+
+            private void buttonStart_Click(object sender, EventArgs e)
         {
             try
             {
@@ -265,7 +279,12 @@ namespace Aplikacja_MEMS
                     progressBarData.Value += 10;
                 }
                 
-                ComTransmition.Read();
+                ComTransmition.Read(addData);
+                BackgroundWorker bgW = new BackgroundWorker();
+                bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
+                bgW.WorkerSupportsCancellation = true;
+                bgW.WorkerReportsProgress = true;
+                bgW.RunWorkerAsync(argument: rTBoxData);
                 Sensor.EnableAll();
 
                 foreach(Sensor s in sensors)
@@ -357,35 +376,14 @@ namespace Aplikacja_MEMS
             }
         }
 
-        private void chBoxAkcWlaczony_CheckedChanged(object sender, EventArgs e)
+        // Włączanie/wyłączanie czujników
+        private void ChangeEnable(object sender, EventArgs e)
         {
-            acc.SetEnable(chBoxAccEnabled.Checked);
-        }
-
-        private void chBoxGyroEnabled_Click(object sender, EventArgs e)
-        {
-            gyr.SetEnable(chBoxGyrEnabled.Checked);
-        }
-
-        private void chBoxMagEnabled_Click(object sender, EventArgs e)
-        {
-            mag.SetEnable(chBoxMagEnabled.Checked);
-        }
-
-
-        private void chBoxHumEnabled_Click(object sender, EventArgs e)
-        {
-            hum.SetEnable(chBoxHumEnabled.Checked);
-        }
-
-        private void chBoxPreEnabled_Click(object sender, EventArgs e)
-        {
-            pre.SetEnable(chBoxPreEnabled.Checked);
-        }
-
-        private void chBoxTermEnabled_Click(object sender, EventArgs e)
-        {
-            ther.SetEnable(chBoxTherEnabled.Checked);
+            foreach(Sensor s in sensors)
+            {
+                if (s.sensorName == (string)((CheckBox)sender).Tag)
+                    s.SetEnable(((CheckBox)sender).Checked);
+            }
         }
 
         private void włączWyłączPrzerwaniaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -394,162 +392,72 @@ namespace Aplikacja_MEMS
         }
 
         // Ustawianie ODR czujników 
-        private void cBoxAkcODR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxAccODR.Text));
-            if(acc != null)
-            acc.SetOdr(parameter);
-        }
 
-        private void cBoxGyrODR_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetOdr(object sender, EventArgs e)
         {
-            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxGyrODR.Text));
-            if (gyr != null)
-                gyr.SetOdr(parameter);
-
-        }
-
-        private void cBoxMagODR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxMagODR.Text));
-            if (mag != null)
-                mag.SetOdr(parameter);
-        }
-
-        private void cBoxTermODR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxTherODR.Text));
-            if (ther != null)
+            foreach (Sensor s in sensors)
             {
-                ther.SetOdr(parameter);
-                cBoxHumODR.SelectedIndex = cBoxTherODR.SelectedIndex;
+                if (s.sensorName == (string)((ComboBox)sender).Tag)
+                    s.SetOdr(BitConverter.GetBytes(float.Parse(((ComboBox)sender).Text)));
             }
-        }
-
-        private void cBoxHigODR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxHumODR.Text));
-            if (hum != null)
-            {
-                hum.SetOdr(parameter);
-                cBoxTherODR.SelectedIndex = cBoxHumODR.SelectedIndex;
-            }
-        }
-
-        private void cBoxBarODR_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            byte[] parameter = BitConverter.GetBytes(float.Parse(cBoxPreODR.Text));
-            if (pre != null)
-                pre.SetOdr(parameter);
         }
 
         // Ustawianie zakresów 
-        private void cBoxAkcSkala_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetScale(object sender, EventArgs e)
         {
-            byte[] parameter = BitConverter.GetBytes(Int32.Parse(cBoxAccScale.Text));
-            if (acc != null)
-                acc.SetScale(parameter);
-        }
-
-        private void cBoxGyrSkala_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            byte[] parameter = BitConverter.GetBytes(Int32.Parse(cBoxGyrScale.Text));
-            if (gyr != null)
-                gyr.SetScale(parameter);
+            try
+            {
+                foreach (MotionSensor s in sensors)
+                {
+                    if (s.sensorName == (string)((ComboBox)sender).Tag)
+                        s.SetScale(BitConverter.GetBytes(Int32.Parse(((ComboBox)sender).Text)));
+                }
+            }
+            catch (Exception exc) { }
         }
 
         // Ustawianie parametrów rejestru
-        private void buttonAccSet_Click(object sender, EventArgs e)
+        private void SetRegParam(object sender, EventArgs e)
         {
-            acc.SetRegisterParameter(tBoxAccAddress.Text, tBoxAccValue.Text);
+            foreach (Sensor s in sensors)
+            {
+                if (s.sensorName == (string)((Button)sender).Tag)
+                {
+                    try
+                    {
+                        foreach (GroupBox g in tabPageSensors.Controls)
+                        {
+                            if (g.Tag == ((Button)sender).Tag)
+                            {
+                                s.SetRegisterParameter(g.Controls[4].Controls[3].Text, g.Controls[4].Controls[2].Text);
+                            }
+                        }
+                    }
+                    catch (InvalidCastException ice) {}
+                }
+            }
         }
-
-        private void buttonGyrSet_Click(object sender, EventArgs e)
-        {
-            gyr.SetRegisterParameter(tBoxGyrAddress.Text, tBoxGyrValue.Text);
-        }
-
-        private void buttonMagSet_Click(object sender, EventArgs e)
-        {
-            mag.SetRegisterParameter(tBoxMagAddress.Text, tBoxMagValue.Text);
-        }
-
-        private void buttonTermSet_Click(object sender, EventArgs e)
-        {
-            ther.SetRegisterParameter(tBoxTherAddress.Text, tBoxTherValue.Text);
-        }
-
-        private void buttonPreSet_Click(object sender, EventArgs e)
-        {
-            pre.SetRegisterParameter(tBoxPreAddress.Text, tBoxPreValue.Text);
-        }
-
-        private void buttonHumSet_Click(object sender, EventArgs e)
-        {
-            hum.SetRegisterParameter(tBoxHumAddress.Text, tBoxHumValue.Text);
-        }
-
+ 
         // Pobieranie ustawień rejestrów    
-        private void buttonAccGet_Click(object sender, EventArgs e)
+        private void GetRegParam(object sender, EventArgs e)
         {
-            acc.GetRegisterParameter(tBoxAccAddress.Text);
-        }
-
-        private void buttonGyrGet_Click(object sender, EventArgs e)
-        {
-            gyr.GetRegisterParameter(tBoxGyrAddress.Text);
-        }
-
-        private void buttonMagGet_Click(object sender, EventArgs e)
-        {
-            mag.GetRegisterParameter(tBoxMagAddress.Text);
-        }
-
-        private void buttonTermGet_Click(object sender, EventArgs e)
-        {
-            ther.GetRegisterParameter(tBoxTherAddress.Text);
-        }
-
-        private void buttonPreGet_Click(object sender, EventArgs e)
-        {
-            pre.GetRegisterParameter(tBoxPreAddress.Text);
-        }
-
-        private void buttonHumGet_Click(object sender, EventArgs e)
-        {
-            hum.GetRegisterParameter(tBoxHumAddress.Text);
-        }
-
-        // Otwarcie okien rejestrtów
-        private void buttonAccOpen_Click(object sender, EventArgs e)
-        {
-            acc.OpenRegister();
-        }
-
-        private void buttonGyroOpen_Click(object sender, EventArgs e)
-        {
-
-          
-        }
-
-        private void buttonMagOpen_Click(object sender, EventArgs e)
-        {
-          
-        }
-
-        private void buttonTermOpen_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void buttonPreOpen_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void buttonHumOpen_Click(object sender, EventArgs e)
-        {
-           
+            foreach (Sensor s in sensors)
+            {
+                if (s.sensorName == (string)((Button)sender).Tag)
+                {
+                    try
+                    {
+                        foreach (GroupBox g in tabPageSensors.Controls)
+                        {
+                            if (g.Tag == ((Button)sender).Tag)
+                            {
+                                s.GetRegisterParameter(g.Controls[4].Controls[3].Text);
+                            }
+                        }
+                    }
+                    catch (InvalidCastException ice) { }
+                }
+            }
         }
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -560,6 +468,16 @@ namespace Aplikacja_MEMS
         private void portOpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             buttonOtworz_Click(this, null);
+        }
+
+        private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            rTBoxData.Text = "";
         }
     }
 }

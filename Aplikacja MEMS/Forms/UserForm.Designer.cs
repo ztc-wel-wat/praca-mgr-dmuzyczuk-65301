@@ -162,25 +162,26 @@ namespace Aplikacja_MEMS
             this.labAccScale = new System.Windows.Forms.Label();
             this.chBoxAccEnabled = new System.Windows.Forms.CheckBox();
             this.tabPageData = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.rTBoxData = new System.Windows.Forms.RichTextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zapiszPomiaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.otwórzPomiaryZPlikuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.portOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.EnableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.włączWyłączPrzerwaniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.pokazujNaWspólnymWykresieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zapiszPomiaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.otwórzPomiaryZPlikuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pokazujNaWspólnymWykresieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
@@ -622,6 +623,7 @@ namespace Aplikacja_MEMS
             this.gBoxHumidity.Size = new System.Drawing.Size(355, 150);
             this.gBoxHumidity.TabIndex = 4;
             this.gBoxHumidity.TabStop = false;
+            this.gBoxHumidity.Tag = "Higrometr";
             this.gBoxHumidity.Text = "Higrometr";
             // 
             // humNameLab
@@ -657,7 +659,8 @@ namespace Aplikacja_MEMS
             this.cBoxHumODR.Name = "cBoxHumODR";
             this.cBoxHumODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxHumODR.TabIndex = 20;
-            this.cBoxHumODR.SelectedIndexChanged += new System.EventHandler(this.cBoxHigODR_SelectedIndexChanged);
+            this.cBoxHumODR.Tag = "Higrometr";
+            this.cBoxHumODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
             // 
             // labHumODR
             // 
@@ -694,9 +697,10 @@ namespace Aplikacja_MEMS
             this.buttonHumGet.Name = "buttonHumGet";
             this.buttonHumGet.Size = new System.Drawing.Size(66, 23);
             this.buttonHumGet.TabIndex = 20;
+            this.buttonHumGet.Tag = "Higrometr";
             this.buttonHumGet.Text = "Wczytaj";
             this.buttonHumGet.UseVisualStyleBackColor = true;
-            this.buttonHumGet.Click += new System.EventHandler(this.buttonHumGet_Click);
+            this.buttonHumGet.Click += new System.EventHandler(this.GetRegParam);
             // 
             // buttonHumSet
             // 
@@ -706,9 +710,10 @@ namespace Aplikacja_MEMS
             this.buttonHumSet.Name = "buttonHumSet";
             this.buttonHumSet.Size = new System.Drawing.Size(66, 23);
             this.buttonHumSet.TabIndex = 19;
+            this.buttonHumSet.Tag = "Higrometr";
             this.buttonHumSet.Text = "Ustaw";
             this.buttonHumSet.UseVisualStyleBackColor = true;
-            this.buttonHumSet.Click += new System.EventHandler(this.buttonHumSet_Click);
+            this.buttonHumSet.Click += new System.EventHandler(this.SetRegParam);
             // 
             // tBoxHumValue
             // 
@@ -717,6 +722,7 @@ namespace Aplikacja_MEMS
             this.tBoxHumValue.Name = "tBoxHumValue";
             this.tBoxHumValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxHumValue.TabIndex = 18;
+            this.tBoxHumValue.Tag = "Higrometr";
             // 
             // tBoxHumAddress
             // 
@@ -725,6 +731,7 @@ namespace Aplikacja_MEMS
             this.tBoxHumAddress.Name = "tBoxHumAddress";
             this.tBoxHumAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxHumAddress.TabIndex = 17;
+            this.tBoxHumAddress.Tag = "Higrometr";
             // 
             // labHumValue
             // 
@@ -754,9 +761,9 @@ namespace Aplikacja_MEMS
             this.buttonHumOpen.Name = "buttonHumOpen";
             this.buttonHumOpen.Size = new System.Drawing.Size(143, 23);
             this.buttonHumOpen.TabIndex = 14;
+            this.buttonHumOpen.Tag = "Higrometr";
             this.buttonHumOpen.Text = "Otwórz rejestr";
             this.buttonHumOpen.UseVisualStyleBackColor = true;
-            this.buttonHumOpen.Click += new System.EventHandler(this.buttonHumOpen_Click);
             // 
             // buttonHumDrawPlot
             // 
@@ -768,6 +775,7 @@ namespace Aplikacja_MEMS
             this.buttonHumDrawPlot.Name = "buttonHumDrawPlot";
             this.buttonHumDrawPlot.Size = new System.Drawing.Size(100, 23);
             this.buttonHumDrawPlot.TabIndex = 22;
+            this.buttonHumDrawPlot.Tag = "Higrometr";
             this.buttonHumDrawPlot.Text = "Rysuj wykres";
             this.buttonHumDrawPlot.UseVisualStyleBackColor = true;
             // 
@@ -782,9 +790,10 @@ namespace Aplikacja_MEMS
             this.chBoxHumEnabled.Name = "chBoxHumEnabled";
             this.chBoxHumEnabled.Size = new System.Drawing.Size(78, 19);
             this.chBoxHumEnabled.TabIndex = 19;
+            this.chBoxHumEnabled.Tag = "Higrometr";
             this.chBoxHumEnabled.Text = "Włączony";
             this.chBoxHumEnabled.UseVisualStyleBackColor = true;
-            this.chBoxHumEnabled.Click += new System.EventHandler(this.chBoxHumEnabled_Click);
+            this.chBoxHumEnabled.Click += new System.EventHandler(this.ChangeEnable);
             // 
             // gBoxMagnetometer
             // 
@@ -804,6 +813,7 @@ namespace Aplikacja_MEMS
             this.gBoxMagnetometer.Size = new System.Drawing.Size(355, 150);
             this.gBoxMagnetometer.TabIndex = 1;
             this.gBoxMagnetometer.TabStop = false;
+            this.gBoxMagnetometer.Tag = "Magnetometr";
             this.gBoxMagnetometer.Text = "Magnetometr";
             // 
             // magNameLab
@@ -840,7 +850,8 @@ namespace Aplikacja_MEMS
             this.cBoxMagODR.Name = "cBoxMagODR";
             this.cBoxMagODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxMagODR.TabIndex = 14;
-            this.cBoxMagODR.SelectedIndexChanged += new System.EventHandler(this.cBoxMagODR_SelectedIndexChanged);
+            this.cBoxMagODR.Tag = "Magnetometr";
+            this.cBoxMagODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
             // 
             // cBoxMagScale
             // 
@@ -854,6 +865,7 @@ namespace Aplikacja_MEMS
             this.cBoxMagScale.Name = "cBoxMagScale";
             this.cBoxMagScale.Size = new System.Drawing.Size(121, 21);
             this.cBoxMagScale.TabIndex = 12;
+            this.cBoxMagScale.Tag = "Magnetometr";
             // 
             // gBoxMagRegister
             // 
@@ -876,47 +888,51 @@ namespace Aplikacja_MEMS
             // 
             this.buttonMagGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonMagGet.Location = new System.Drawing.Point(107, 54);
+            this.buttonMagGet.Location = new System.Drawing.Point(105, 54);
             this.buttonMagGet.Name = "buttonMagGet";
             this.buttonMagGet.Size = new System.Drawing.Size(66, 23);
             this.buttonMagGet.TabIndex = 20;
+            this.buttonMagGet.Tag = "Magnetometr";
             this.buttonMagGet.Text = "Wczytaj";
             this.buttonMagGet.UseVisualStyleBackColor = true;
-            this.buttonMagGet.Click += new System.EventHandler(this.buttonMagGet_Click);
+            this.buttonMagGet.Click += new System.EventHandler(this.GetRegParam);
             // 
             // buttonMagSet
             // 
             this.buttonMagSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonMagSet.Location = new System.Drawing.Point(30, 54);
+            this.buttonMagSet.Location = new System.Drawing.Point(28, 54);
             this.buttonMagSet.Name = "buttonMagSet";
             this.buttonMagSet.Size = new System.Drawing.Size(66, 23);
             this.buttonMagSet.TabIndex = 19;
+            this.buttonMagSet.Tag = "Magnetometr";
             this.buttonMagSet.Text = "Ustaw";
             this.buttonMagSet.UseVisualStyleBackColor = true;
-            this.buttonMagSet.Click += new System.EventHandler(this.buttonMagSet_Click);
+            this.buttonMagSet.Click += new System.EventHandler(this.SetRegParam);
             // 
             // tBoxMagValue
             // 
             this.tBoxMagValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxMagValue.Location = new System.Drawing.Point(107, 28);
+            this.tBoxMagValue.Location = new System.Drawing.Point(105, 28);
             this.tBoxMagValue.Name = "tBoxMagValue";
             this.tBoxMagValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxMagValue.TabIndex = 18;
+            this.tBoxMagValue.Tag = "Magnetometr";
             // 
             // tBoxMagAddress
             // 
             this.tBoxMagAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxMagAddress.Location = new System.Drawing.Point(30, 28);
+            this.tBoxMagAddress.Location = new System.Drawing.Point(28, 28);
             this.tBoxMagAddress.Name = "tBoxMagAddress";
             this.tBoxMagAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxMagAddress.TabIndex = 17;
+            this.tBoxMagAddress.Tag = "Magnetometr";
             // 
             // labMagValue
             // 
             this.labMagValue.AutoSize = true;
             this.labMagValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMagValue.Location = new System.Drawing.Point(117, 10);
+            this.labMagValue.Location = new System.Drawing.Point(115, 10);
             this.labMagValue.Name = "labMagValue";
             this.labMagValue.Size = new System.Drawing.Size(54, 15);
             this.labMagValue.TabIndex = 16;
@@ -926,7 +942,7 @@ namespace Aplikacja_MEMS
             // 
             this.labMagAddress.AutoSize = true;
             this.labMagAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMagAddress.Location = new System.Drawing.Point(43, 10);
+            this.labMagAddress.Location = new System.Drawing.Point(41, 10);
             this.labMagAddress.Name = "labMagAddress";
             this.labMagAddress.Size = new System.Drawing.Size(41, 15);
             this.labMagAddress.TabIndex = 15;
@@ -936,13 +952,13 @@ namespace Aplikacja_MEMS
             // 
             this.buttonMagOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonMagOpen.Location = new System.Drawing.Point(30, 79);
+            this.buttonMagOpen.Location = new System.Drawing.Point(28, 79);
             this.buttonMagOpen.Name = "buttonMagOpen";
             this.buttonMagOpen.Size = new System.Drawing.Size(143, 23);
             this.buttonMagOpen.TabIndex = 14;
+            this.buttonMagOpen.Tag = "Magnetometr";
             this.buttonMagOpen.Text = "Otwórz rejestr";
             this.buttonMagOpen.UseVisualStyleBackColor = true;
-            this.buttonMagOpen.Click += new System.EventHandler(this.buttonMagOpen_Click);
             // 
             // buttonMagDrawPlot
             // 
@@ -954,6 +970,7 @@ namespace Aplikacja_MEMS
             this.buttonMagDrawPlot.Name = "buttonMagDrawPlot";
             this.buttonMagDrawPlot.Size = new System.Drawing.Size(100, 23);
             this.buttonMagDrawPlot.TabIndex = 16;
+            this.buttonMagDrawPlot.Tag = "Magnetometr";
             this.buttonMagDrawPlot.Text = "Rysuj wykres";
             this.buttonMagDrawPlot.UseVisualStyleBackColor = true;
             // 
@@ -988,9 +1005,10 @@ namespace Aplikacja_MEMS
             this.chBoxMagEnabled.Name = "chBoxMagEnabled";
             this.chBoxMagEnabled.Size = new System.Drawing.Size(78, 19);
             this.chBoxMagEnabled.TabIndex = 10;
+            this.chBoxMagEnabled.Tag = "Magnetometr";
             this.chBoxMagEnabled.Text = "Włączony";
             this.chBoxMagEnabled.UseVisualStyleBackColor = true;
-            this.chBoxMagEnabled.Click += new System.EventHandler(this.chBoxMagEnabled_Click);
+            this.chBoxMagEnabled.Click += new System.EventHandler(this.ChangeEnable);
             // 
             // gBoxPressure
             // 
@@ -1008,6 +1026,7 @@ namespace Aplikacja_MEMS
             this.gBoxPressure.Size = new System.Drawing.Size(355, 150);
             this.gBoxPressure.TabIndex = 3;
             this.gBoxPressure.TabStop = false;
+            this.gBoxPressure.Tag = "Barometr";
             this.gBoxPressure.Text = "Barometr";
             // 
             // presNameLab
@@ -1045,7 +1064,8 @@ namespace Aplikacja_MEMS
             this.cBoxPreODR.Name = "cBoxPreODR";
             this.cBoxPreODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxPreODR.TabIndex = 20;
-            this.cBoxPreODR.SelectedIndexChanged += new System.EventHandler(this.cBoxBarODR_SelectedIndexChanged);
+            this.cBoxPreODR.Tag = "Barometr";
+            this.cBoxPreODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
             // 
             // labPreODR
             // 
@@ -1082,9 +1102,10 @@ namespace Aplikacja_MEMS
             this.buttonPreGet.Name = "buttonPreGet";
             this.buttonPreGet.Size = new System.Drawing.Size(66, 23);
             this.buttonPreGet.TabIndex = 20;
+            this.buttonPreGet.Tag = "Barometr";
             this.buttonPreGet.Text = "Wczytaj";
             this.buttonPreGet.UseVisualStyleBackColor = true;
-            this.buttonPreGet.Click += new System.EventHandler(this.buttonPreGet_Click);
+            this.buttonPreGet.Click += new System.EventHandler(this.GetRegParam);
             // 
             // buttonPreSet
             // 
@@ -1094,9 +1115,10 @@ namespace Aplikacja_MEMS
             this.buttonPreSet.Name = "buttonPreSet";
             this.buttonPreSet.Size = new System.Drawing.Size(66, 23);
             this.buttonPreSet.TabIndex = 19;
+            this.buttonPreSet.Tag = "Barometr";
             this.buttonPreSet.Text = "Ustaw";
             this.buttonPreSet.UseVisualStyleBackColor = true;
-            this.buttonPreSet.Click += new System.EventHandler(this.buttonPreSet_Click);
+            this.buttonPreSet.Click += new System.EventHandler(this.SetRegParam);
             // 
             // tBoxPreValue
             // 
@@ -1105,6 +1127,7 @@ namespace Aplikacja_MEMS
             this.tBoxPreValue.Name = "tBoxPreValue";
             this.tBoxPreValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxPreValue.TabIndex = 18;
+            this.tBoxPreValue.Tag = "Barometr";
             // 
             // tBoxPreAddress
             // 
@@ -1113,6 +1136,7 @@ namespace Aplikacja_MEMS
             this.tBoxPreAddress.Name = "tBoxPreAddress";
             this.tBoxPreAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxPreAddress.TabIndex = 17;
+            this.tBoxPreAddress.Tag = "Barometr";
             // 
             // labPreValue
             // 
@@ -1142,9 +1166,9 @@ namespace Aplikacja_MEMS
             this.buttonPreOpen.Name = "buttonPreOpen";
             this.buttonPreOpen.Size = new System.Drawing.Size(143, 23);
             this.buttonPreOpen.TabIndex = 14;
+            this.buttonPreOpen.Tag = "Barometr";
             this.buttonPreOpen.Text = "Otwórz rejestr";
             this.buttonPreOpen.UseVisualStyleBackColor = true;
-            this.buttonPreOpen.Click += new System.EventHandler(this.buttonPreOpen_Click);
             // 
             // buttonPreDrawPlot
             // 
@@ -1156,6 +1180,7 @@ namespace Aplikacja_MEMS
             this.buttonPreDrawPlot.Name = "buttonPreDrawPlot";
             this.buttonPreDrawPlot.Size = new System.Drawing.Size(100, 23);
             this.buttonPreDrawPlot.TabIndex = 22;
+            this.buttonPreDrawPlot.Tag = "Barometr";
             this.buttonPreDrawPlot.Text = "Rysuj wykres";
             this.buttonPreDrawPlot.UseVisualStyleBackColor = true;
             // 
@@ -1170,9 +1195,10 @@ namespace Aplikacja_MEMS
             this.chBoxPreEnabled.Name = "chBoxPreEnabled";
             this.chBoxPreEnabled.Size = new System.Drawing.Size(78, 19);
             this.chBoxPreEnabled.TabIndex = 19;
+            this.chBoxPreEnabled.Tag = "Barometr";
             this.chBoxPreEnabled.Text = "Włączony";
             this.chBoxPreEnabled.UseVisualStyleBackColor = true;
-            this.chBoxPreEnabled.Click += new System.EventHandler(this.chBoxPreEnabled_Click);
+            this.chBoxPreEnabled.Click += new System.EventHandler(this.ChangeEnable);
             // 
             // gBoxGyroscope
             // 
@@ -1192,6 +1218,7 @@ namespace Aplikacja_MEMS
             this.gBoxGyroscope.Size = new System.Drawing.Size(355, 150);
             this.gBoxGyroscope.TabIndex = 1;
             this.gBoxGyroscope.TabStop = false;
+            this.gBoxGyroscope.Tag = "Żyroskop";
             this.gBoxGyroscope.Text = "Żyroskop";
             // 
             // gyrNameLab
@@ -1234,7 +1261,8 @@ namespace Aplikacja_MEMS
             this.cBoxGyrODR.Name = "cBoxGyrODR";
             this.cBoxGyrODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxGyrODR.TabIndex = 14;
-            this.cBoxGyrODR.SelectedIndexChanged += new System.EventHandler(this.cBoxGyrODR_SelectedIndexChanged);
+            this.cBoxGyrODR.Tag = "Żyroskop";
+            this.cBoxGyrODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
             // 
             // cBoxGyrScale
             // 
@@ -1252,7 +1280,8 @@ namespace Aplikacja_MEMS
             this.cBoxGyrScale.Name = "cBoxGyrScale";
             this.cBoxGyrScale.Size = new System.Drawing.Size(121, 21);
             this.cBoxGyrScale.TabIndex = 12;
-            this.cBoxGyrScale.SelectedIndexChanged += new System.EventHandler(this.cBoxGyrSkala_SelectedIndexChanged);
+            this.cBoxGyrScale.Tag = "Żyroskop";
+            this.cBoxGyrScale.SelectedIndexChanged += new System.EventHandler(this.SetScale);
             // 
             // gBoxGyrRegister
             // 
@@ -1279,9 +1308,10 @@ namespace Aplikacja_MEMS
             this.buttonGyrGet.Name = "buttonGyrGet";
             this.buttonGyrGet.Size = new System.Drawing.Size(66, 23);
             this.buttonGyrGet.TabIndex = 20;
+            this.buttonGyrGet.Tag = "Żyroskop";
             this.buttonGyrGet.Text = "Wczytaj";
             this.buttonGyrGet.UseVisualStyleBackColor = true;
-            this.buttonGyrGet.Click += new System.EventHandler(this.buttonGyrGet_Click);
+            this.buttonGyrGet.Click += new System.EventHandler(this.GetRegParam);
             // 
             // buttonGyrSet
             // 
@@ -1291,9 +1321,10 @@ namespace Aplikacja_MEMS
             this.buttonGyrSet.Name = "buttonGyrSet";
             this.buttonGyrSet.Size = new System.Drawing.Size(66, 23);
             this.buttonGyrSet.TabIndex = 19;
+            this.buttonGyrSet.Tag = "Żyroskop";
             this.buttonGyrSet.Text = "Ustaw";
             this.buttonGyrSet.UseVisualStyleBackColor = true;
-            this.buttonGyrSet.Click += new System.EventHandler(this.buttonGyrSet_Click);
+            this.buttonGyrSet.Click += new System.EventHandler(this.SetRegParam);
             // 
             // tBoxGyrValue
             // 
@@ -1302,6 +1333,7 @@ namespace Aplikacja_MEMS
             this.tBoxGyrValue.Name = "tBoxGyrValue";
             this.tBoxGyrValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxGyrValue.TabIndex = 18;
+            this.tBoxGyrValue.Tag = "Żyroskop";
             // 
             // tBoxGyrAddress
             // 
@@ -1310,6 +1342,7 @@ namespace Aplikacja_MEMS
             this.tBoxGyrAddress.Name = "tBoxGyrAddress";
             this.tBoxGyrAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxGyrAddress.TabIndex = 17;
+            this.tBoxGyrAddress.Tag = "Żyroskop";
             // 
             // labGyrValue
             // 
@@ -1339,9 +1372,9 @@ namespace Aplikacja_MEMS
             this.buttonGyrOpen.Name = "buttonGyrOpen";
             this.buttonGyrOpen.Size = new System.Drawing.Size(143, 23);
             this.buttonGyrOpen.TabIndex = 14;
+            this.buttonGyrOpen.Tag = "Żyroskop";
             this.buttonGyrOpen.Text = "Otwórz rejestr";
             this.buttonGyrOpen.UseVisualStyleBackColor = true;
-            this.buttonGyrOpen.Click += new System.EventHandler(this.buttonGyroOpen_Click);
             // 
             // buttonGyrDrawPlot
             // 
@@ -1353,6 +1386,7 @@ namespace Aplikacja_MEMS
             this.buttonGyrDrawPlot.Name = "buttonGyrDrawPlot";
             this.buttonGyrDrawPlot.Size = new System.Drawing.Size(100, 23);
             this.buttonGyrDrawPlot.TabIndex = 16;
+            this.buttonGyrDrawPlot.Tag = "Żyroskop";
             this.buttonGyrDrawPlot.Text = "Rysuj wykres";
             this.buttonGyrDrawPlot.UseVisualStyleBackColor = true;
             // 
@@ -1387,9 +1421,10 @@ namespace Aplikacja_MEMS
             this.chBoxGyrEnabled.Name = "chBoxGyrEnabled";
             this.chBoxGyrEnabled.Size = new System.Drawing.Size(78, 19);
             this.chBoxGyrEnabled.TabIndex = 10;
+            this.chBoxGyrEnabled.Tag = "Żyroskop";
             this.chBoxGyrEnabled.Text = "Włączony";
             this.chBoxGyrEnabled.UseVisualStyleBackColor = true;
-            this.chBoxGyrEnabled.Click += new System.EventHandler(this.chBoxGyroEnabled_Click);
+            this.chBoxGyrEnabled.Click += new System.EventHandler(this.ChangeEnable);
             // 
             // gBoxThermometer
             // 
@@ -1407,6 +1442,7 @@ namespace Aplikacja_MEMS
             this.gBoxThermometer.Size = new System.Drawing.Size(355, 150);
             this.gBoxThermometer.TabIndex = 2;
             this.gBoxThermometer.TabStop = false;
+            this.gBoxThermometer.Tag = "Termometr";
             this.gBoxThermometer.Text = "Termometr";
             // 
             // terNameLab
@@ -1442,7 +1478,8 @@ namespace Aplikacja_MEMS
             this.cBoxTherODR.Name = "cBoxTherODR";
             this.cBoxTherODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxTherODR.TabIndex = 12;
-            this.cBoxTherODR.SelectedIndexChanged += new System.EventHandler(this.cBoxTermODR_SelectedIndexChanged);
+            this.cBoxTherODR.Tag = "Termometr";
+            this.cBoxTherODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
             // 
             // labTherODR
             // 
@@ -1479,9 +1516,10 @@ namespace Aplikacja_MEMS
             this.buttonTherGet.Name = "buttonTherGet";
             this.buttonTherGet.Size = new System.Drawing.Size(66, 23);
             this.buttonTherGet.TabIndex = 20;
+            this.buttonTherGet.Tag = "Termometr";
             this.buttonTherGet.Text = "Wczytaj";
             this.buttonTherGet.UseVisualStyleBackColor = true;
-            this.buttonTherGet.Click += new System.EventHandler(this.buttonTermGet_Click);
+            this.buttonTherGet.Click += new System.EventHandler(this.GetRegParam);
             // 
             // buttonTherSet
             // 
@@ -1491,9 +1529,10 @@ namespace Aplikacja_MEMS
             this.buttonTherSet.Name = "buttonTherSet";
             this.buttonTherSet.Size = new System.Drawing.Size(66, 23);
             this.buttonTherSet.TabIndex = 19;
+            this.buttonTherSet.Tag = "Termometr";
             this.buttonTherSet.Text = "Ustaw";
             this.buttonTherSet.UseVisualStyleBackColor = true;
-            this.buttonTherSet.Click += new System.EventHandler(this.buttonTermSet_Click);
+            this.buttonTherSet.Click += new System.EventHandler(this.SetRegParam);
             // 
             // tBoxTherValue
             // 
@@ -1502,6 +1541,7 @@ namespace Aplikacja_MEMS
             this.tBoxTherValue.Name = "tBoxTherValue";
             this.tBoxTherValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxTherValue.TabIndex = 18;
+            this.tBoxTherValue.Tag = "Termometr";
             // 
             // tBoxTherAddress
             // 
@@ -1510,6 +1550,7 @@ namespace Aplikacja_MEMS
             this.tBoxTherAddress.Name = "tBoxTherAddress";
             this.tBoxTherAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxTherAddress.TabIndex = 17;
+            this.tBoxTherAddress.Tag = "Termometr";
             // 
             // labTherValue
             // 
@@ -1539,9 +1580,9 @@ namespace Aplikacja_MEMS
             this.buttonTherOpen.Name = "buttonTherOpen";
             this.buttonTherOpen.Size = new System.Drawing.Size(143, 23);
             this.buttonTherOpen.TabIndex = 14;
+            this.buttonTherOpen.Tag = "Termometr";
             this.buttonTherOpen.Text = "Otwórz rejestr";
             this.buttonTherOpen.UseVisualStyleBackColor = true;
-            this.buttonTherOpen.Click += new System.EventHandler(this.buttonTermOpen_Click);
             // 
             // buttonTherDrawPlot
             // 
@@ -1553,6 +1594,7 @@ namespace Aplikacja_MEMS
             this.buttonTherDrawPlot.Name = "buttonTherDrawPlot";
             this.buttonTherDrawPlot.Size = new System.Drawing.Size(100, 23);
             this.buttonTherDrawPlot.TabIndex = 16;
+            this.buttonTherDrawPlot.Tag = "Termometr";
             this.buttonTherDrawPlot.Text = "Rysuj wykres";
             this.buttonTherDrawPlot.UseVisualStyleBackColor = true;
             // 
@@ -1567,9 +1609,10 @@ namespace Aplikacja_MEMS
             this.chBoxTherEnabled.Name = "chBoxTherEnabled";
             this.chBoxTherEnabled.Size = new System.Drawing.Size(78, 19);
             this.chBoxTherEnabled.TabIndex = 10;
+            this.chBoxTherEnabled.Tag = "Termometr";
             this.chBoxTherEnabled.Text = "Włączony";
             this.chBoxTherEnabled.UseVisualStyleBackColor = true;
-            this.chBoxTherEnabled.Click += new System.EventHandler(this.chBoxTermEnabled_Click);
+            this.chBoxTherEnabled.Click += new System.EventHandler(this.ChangeEnable);
             // 
             // gBoxAccelerometer
             // 
@@ -1590,6 +1633,7 @@ namespace Aplikacja_MEMS
             this.gBoxAccelerometer.Size = new System.Drawing.Size(355, 150);
             this.gBoxAccelerometer.TabIndex = 0;
             this.gBoxAccelerometer.TabStop = false;
+            this.gBoxAccelerometer.Tag = "Akcelerometr";
             this.gBoxAccelerometer.Text = "Akcelerometr";
             // 
             // accNameLab
@@ -1632,7 +1676,8 @@ namespace Aplikacja_MEMS
             this.cBoxAccODR.Name = "cBoxAccODR";
             this.cBoxAccODR.Size = new System.Drawing.Size(121, 21);
             this.cBoxAccODR.TabIndex = 5;
-            this.cBoxAccODR.SelectedIndexChanged += new System.EventHandler(this.cBoxAkcODR_SelectedIndexChanged);
+            this.cBoxAccODR.Tag = "Akcelerometr";
+            this.cBoxAccODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
             // 
             // cBoxAccScale
             // 
@@ -1649,7 +1694,8 @@ namespace Aplikacja_MEMS
             this.cBoxAccScale.Name = "cBoxAccScale";
             this.cBoxAccScale.Size = new System.Drawing.Size(121, 21);
             this.cBoxAccScale.TabIndex = 3;
-            this.cBoxAccScale.SelectedIndexChanged += new System.EventHandler(this.cBoxAkcSkala_SelectedIndexChanged);
+            this.cBoxAccScale.Tag = "Akcelerometr";
+            this.cBoxAccScale.SelectedIndexChanged += new System.EventHandler(this.SetScale);
             // 
             // gBoxAccRegister
             // 
@@ -1676,9 +1722,10 @@ namespace Aplikacja_MEMS
             this.buttonAccGet.Name = "buttonAccGet";
             this.buttonAccGet.Size = new System.Drawing.Size(66, 23);
             this.buttonAccGet.TabIndex = 20;
+            this.buttonAccGet.Tag = "Akcelerometr";
             this.buttonAccGet.Text = "Wczytaj";
             this.buttonAccGet.UseVisualStyleBackColor = true;
-            this.buttonAccGet.Click += new System.EventHandler(this.buttonAccGet_Click);
+            this.buttonAccGet.Click += new System.EventHandler(this.GetRegParam);
             // 
             // buttonAccSet
             // 
@@ -1688,9 +1735,10 @@ namespace Aplikacja_MEMS
             this.buttonAccSet.Name = "buttonAccSet";
             this.buttonAccSet.Size = new System.Drawing.Size(66, 23);
             this.buttonAccSet.TabIndex = 19;
+            this.buttonAccSet.Tag = "Akcelerometr";
             this.buttonAccSet.Text = "Ustaw";
             this.buttonAccSet.UseVisualStyleBackColor = true;
-            this.buttonAccSet.Click += new System.EventHandler(this.buttonAccSet_Click);
+            this.buttonAccSet.Click += new System.EventHandler(this.SetRegParam);
             // 
             // tBoxAccValue
             // 
@@ -1699,6 +1747,7 @@ namespace Aplikacja_MEMS
             this.tBoxAccValue.Name = "tBoxAccValue";
             this.tBoxAccValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxAccValue.TabIndex = 18;
+            this.tBoxAccValue.Tag = "Akcelerometr";
             // 
             // tBoxAccAddress
             // 
@@ -1708,6 +1757,7 @@ namespace Aplikacja_MEMS
             this.tBoxAccAddress.Name = "tBoxAccAddress";
             this.tBoxAccAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxAccAddress.TabIndex = 17;
+            this.tBoxAccAddress.Tag = "Akcelerometr";
             // 
             // labAccValue
             // 
@@ -1737,9 +1787,9 @@ namespace Aplikacja_MEMS
             this.buttonAccOpen.Name = "buttonAccOpen";
             this.buttonAccOpen.Size = new System.Drawing.Size(143, 23);
             this.buttonAccOpen.TabIndex = 14;
+            this.buttonAccOpen.Tag = "Akcelerometr";
             this.buttonAccOpen.Text = "Otwórz rejestr";
             this.buttonAccOpen.UseVisualStyleBackColor = true;
-            this.buttonAccOpen.Click += new System.EventHandler(this.buttonAccOpen_Click);
             // 
             // buttonAccDrawPlot
             // 
@@ -1751,6 +1801,7 @@ namespace Aplikacja_MEMS
             this.buttonAccDrawPlot.Name = "buttonAccDrawPlot";
             this.buttonAccDrawPlot.Size = new System.Drawing.Size(100, 23);
             this.buttonAccDrawPlot.TabIndex = 8;
+            this.buttonAccDrawPlot.Tag = "Akcelerometr";
             this.buttonAccDrawPlot.Text = "Rysuj wykres";
             this.buttonAccDrawPlot.UseVisualStyleBackColor = true;
             // 
@@ -1785,12 +1836,14 @@ namespace Aplikacja_MEMS
             this.chBoxAccEnabled.Name = "chBoxAccEnabled";
             this.chBoxAccEnabled.Size = new System.Drawing.Size(78, 19);
             this.chBoxAccEnabled.TabIndex = 1;
+            this.chBoxAccEnabled.Tag = "Akcelerometr";
             this.chBoxAccEnabled.Text = "Włączony";
             this.chBoxAccEnabled.UseVisualStyleBackColor = true;
-            this.chBoxAccEnabled.Click += new System.EventHandler(this.chBoxAkcWlaczony_CheckedChanged);
+            this.chBoxAccEnabled.Click += new System.EventHandler(this.ChangeEnable);
             // 
             // tabPageData
             // 
+            this.tabPageData.Controls.Add(this.button1);
             this.tabPageData.Controls.Add(this.rTBoxData);
             this.tabPageData.Location = new System.Drawing.Point(4, 22);
             this.tabPageData.Name = "tabPageData";
@@ -1799,13 +1852,23 @@ namespace Aplikacja_MEMS
             this.tabPageData.Text = "Dane";
             this.tabPageData.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(651, 446);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Wyczyść";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // rTBoxData
             // 
-            this.rTBoxData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rTBoxData.Dock = System.Windows.Forms.DockStyle.Top;
             this.rTBoxData.Location = new System.Drawing.Point(0, 0);
             this.rTBoxData.Name = "rTBoxData";
             this.rTBoxData.ReadOnly = true;
-            this.rTBoxData.Size = new System.Drawing.Size(734, 474);
+            this.rTBoxData.Size = new System.Drawing.Size(734, 444);
             this.rTBoxData.TabIndex = 0;
             this.rTBoxData.Text = "";
             // 
@@ -1839,6 +1902,30 @@ namespace Aplikacja_MEMS
             this.asdToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.asdToolStripMenuItem.Text = "Nowe pomiary";
             // 
+            // zapiszPomiaryToolStripMenuItem
+            // 
+            this.zapiszPomiaryToolStripMenuItem.Name = "zapiszPomiaryToolStripMenuItem";
+            this.zapiszPomiaryToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.zapiszPomiaryToolStripMenuItem.Text = "Zapisz pomiary";
+            // 
+            // otwórzPomiaryZPlikuToolStripMenuItem
+            // 
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Name = "otwórzPomiaryZPlikuToolStripMenuItem";
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Text = "Otwórz pomiary z pliku";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
+            // 
+            // zamknijToolStripMenuItem
+            // 
+            this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
+            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.zamknijToolStripMenuItem.Text = "Zamknij";
+            this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
+            // 
             // opcjeToolStripMenuItem
             // 
             this.opcjeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1859,6 +1946,11 @@ namespace Aplikacja_MEMS
             this.portOpenToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.portOpenToolStripMenuItem.Text = "Otworz port";
             this.portOpenToolStripMenuItem.Click += new System.EventHandler(this.portOpenToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(234, 6);
             // 
             // EnableAllToolStripMenuItem
             // 
@@ -1883,6 +1975,18 @@ namespace Aplikacja_MEMS
             this.włączWyłączPrzerwaniaToolStripMenuItem.Text = "Włącz/Wyłącz przerwania";
             this.włączWyłączPrzerwaniaToolStripMenuItem.Click += new System.EventHandler(this.włączWyłączPrzerwaniaToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(234, 6);
+            // 
+            // pokazujNaWspólnymWykresieToolStripMenuItem
+            // 
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.CheckOnClick = true;
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.Name = "pokazujNaWspólnymWykresieToolStripMenuItem";
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.pokazujNaWspólnymWykresieToolStripMenuItem.Text = "Pokazuj na wspólnym wykresie";
+            // 
             // pomocToolStripMenuItem
             // 
             this.pomocToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1895,54 +1999,14 @@ namespace Aplikacja_MEMS
             // pomocToolStripMenuItem1
             // 
             this.pomocToolStripMenuItem1.Name = "pomocToolStripMenuItem1";
-            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.pomocToolStripMenuItem1.Text = "Pomoc";
             // 
             // oProgramieToolStripMenuItem
             // 
             this.oProgramieToolStripMenuItem.Name = "oProgramieToolStripMenuItem";
-            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.oProgramieToolStripMenuItem.Text = "O programie";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
-            // 
-            // zamknijToolStripMenuItem
-            // 
-            this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
-            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.zamknijToolStripMenuItem.Text = "Zamknij";
-            // 
-            // zapiszPomiaryToolStripMenuItem
-            // 
-            this.zapiszPomiaryToolStripMenuItem.Name = "zapiszPomiaryToolStripMenuItem";
-            this.zapiszPomiaryToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.zapiszPomiaryToolStripMenuItem.Text = "Zapisz pomiary";
-            // 
-            // otwórzPomiaryZPlikuToolStripMenuItem
-            // 
-            this.otwórzPomiaryZPlikuToolStripMenuItem.Name = "otwórzPomiaryZPlikuToolStripMenuItem";
-            this.otwórzPomiaryZPlikuToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.otwórzPomiaryZPlikuToolStripMenuItem.Text = "Otwórz pomiary z pliku";
-            // 
-            // pokazujNaWspólnymWykresieToolStripMenuItem
-            // 
-            this.pokazujNaWspólnymWykresieToolStripMenuItem.CheckOnClick = true;
-            this.pokazujNaWspólnymWykresieToolStripMenuItem.Name = "pokazujNaWspólnymWykresieToolStripMenuItem";
-            this.pokazujNaWspólnymWykresieToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.pokazujNaWspólnymWykresieToolStripMenuItem.Text = "Pokazuj na wspólnym wykresie";
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(234, 6);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(234, 6);
             // 
             // UserForm
             // 
@@ -2156,6 +2220,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ToolStripMenuItem pokazujNaWspólnymWykresieToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.Button button1;
     }
 }
 

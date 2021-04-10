@@ -8,7 +8,7 @@ namespace Aplikacja_MEMS.Registers
 {
     public class Register
     {
-        string name;
+        public string name;
         public List<RegisterType> registerType = new List<RegisterType>();
 
         public Register(string registerName)

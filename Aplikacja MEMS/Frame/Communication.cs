@@ -40,6 +40,7 @@ namespace Aplikacja_MEMS
             Thread.Sleep(200);
             ComTransmition.ReadMessage();
         }
+
         public static byte[] Query(byte command, byte subCommand, byte sensorNr)
         {
             byte[] response;
@@ -62,6 +63,7 @@ namespace Aplikacja_MEMS
                     Thread.Sleep(50);
                     response = ComTransmition.ReadMessage();
                     break;
+
                 case (byte)CmdType.SensorEnable:
                     query = new byte[13];
 

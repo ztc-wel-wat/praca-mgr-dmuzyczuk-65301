@@ -17,6 +17,8 @@ namespace Aplikacja_MEMS
         {
             InitializeComponent();
 
+            this.Text = register.name;
+
             foreach(RegisterType r in register.registerType)
             {
                 this.tabPage = new System.Windows.Forms.TabPage();

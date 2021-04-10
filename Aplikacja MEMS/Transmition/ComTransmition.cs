@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using Aplikacja_MEMS.Analysis;
 
 namespace Aplikacja_MEMS.Transmition
 {
@@ -58,7 +59,7 @@ namespace Aplikacja_MEMS.Transmition
                     // Dodawanie nr portu i nazwy urządzenia do listy
                     memsPorts.Add(memsPort);
                 }
-                catch (TimeoutException timeout)
+                catch (Exception exc)
                 {
                     serialPort.ReadTimeout = -1;
                 }
@@ -147,14 +148,14 @@ namespace Aplikacja_MEMS.Transmition
             }
         }
 
-        public static void Read()
+        public static void Read(Queue<byte[]> data)
         {
             receive = true;
 
             bgWorkReceive.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkReceive_DoWork);
             bgWorkReceive.WorkerSupportsCancellation = true;
             bgWorkReceive.WorkerReportsProgress = true;
-            bgWorkReceive.RunWorkerAsync();
+            bgWorkReceive.RunWorkerAsync(argument: data);
         }
 
         public static void StopRead()
@@ -166,12 +167,15 @@ namespace Aplikacja_MEMS.Transmition
 
         public static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
         {
-            byte[] data = new byte[serialPort.ReadBufferSize];
+            byte[] readData = new byte[serialPort.ReadBufferSize];
             while (receive)
             {
                 try
                 {
-                    serialPort.Read(data, 0, data.Length);
+                    int length = serialPort.Read(readData, 0, readData.Length);
+                    byte[] sendData = new byte[length];
+                    Array.Copy(readData, sendData, length);
+                    ((Queue<byte[]>)e.Argument).Enqueue(sendData);
                 }
                 catch (Exception exc) { }
             }

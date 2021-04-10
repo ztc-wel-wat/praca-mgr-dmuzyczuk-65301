@@ -17,6 +17,29 @@ namespace Aplikacja_MEMS.Registers
             {
                 r_LSM6DSL = new Register("LSM6DSL");
 
+                RegisterType basic = new RegisterType("Basic Register");
+
+                basic.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
+                basic.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
+                basic.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
+                basic.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
+                basic.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
+                basic.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
+                basic.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
+                basic.AddParameter(0x50, "A_WRIST_TILT_LAT", true);
+                basic.AddParameter(0x54, "A_WRIST_TILT_THS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+                basic.AddParameter(0x59, "FUNC_CFG_ACCESS", true);
+
+                r_LSM6DSL.AddType(basic);
                 RegisterType banka = new RegisterType("Bank A");
 
                 banka.AddParameter(0x01, "FUNC_CFG_ACCESS", false);
