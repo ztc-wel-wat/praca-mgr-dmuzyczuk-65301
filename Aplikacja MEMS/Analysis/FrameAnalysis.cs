@@ -12,41 +12,58 @@ namespace Aplikacja_MEMS.Analysis
     {
         public static void Analysis(Queue<byte[]> data, Queue<byte[]> frames)
         {
-            byte[] buffer = new byte[128];
+            byte[] buffer = new byte[16384];
             int counter = 0;
+            byte[] qData;
 
-            while (true)
+            NextItem:
+            try
             {
-                byte[] qData = data.Dequeue();
+                qData = data.Dequeue();
+            }
+            catch (Exception e)
+            {
+                goto NextItem;
+            }
 
+            while(qData == null)
+            {
+                qData = data.Dequeue();
+            }
+
+            SameItem:
+            for (int i = 0; qData[i] != (byte)Frame.Identificators.ApplicationId; i++) 
+                counter++;
+
+            int counterStop = counter;
+
+            for(int i = 0; qData[i] != (byte)Frame.Identificators.FrameEnd && counterStop < qData.Length; i++ )
+            {
+                buffer[i] = qData[counterStop];
+                counterStop++;
+            }
+            buffer[counterStop] = qData[counterStop - counter];
+
+
+            if(qData[counterStop] == (byte)Frame.Identificators.FrameEnd && counterStop + 1 == qData.Length)
+            {
+                byte[] addFrame = new byte[counterStop + 1];
+                Array.Copy(buffer, addFrame, counterStop + 1);
+                frames.Enqueue(addFrame);
                 counter = 0;
-
-                NotFrameEnd:
-                while (buffer[counter] != (byte)Frame.Identificators.ApplicationId)
-                    counter++;
-
-                
-                for(int i = 0;  buffer[counter] != (byte)Frame.Identificators.FrameEnd && counter < qData.Length; i++)
-                {
-                    buffer[i] = qData[counter];
-                    counter++;
-                }
-
-                if(qData[counter] == 0x0F && counter+1 == qData.Length)
-                {
-                    byte[] frameBuffer = new byte[counter + 1];
-                    Array.Copy(buffer, frameBuffer, counter + 1);
-                    frames.Enqueue(frameBuffer);
-                }
-                else if (qData[counter] == 0x0F && counter + 1 != qData.Length)
-                {
-                    byte[] frameBuffer = new byte[counter + 1];
-                    Array.Copy(buffer, frameBuffer, counter + 1);
-                    frames.Enqueue(frameBuffer);
-                    goto NotFrameEnd;
-                }
-
-
+                goto NextItem;
+            }
+            else if(qData[counterStop] == (byte)Frame.Identificators.FrameEnd && counterStop + 1 < qData.Length)
+            {
+                byte[] addFrame = new byte[counterStop + 1 - counter];
+                Array.Copy(buffer, addFrame, addFrame.Length);
+                frames.Enqueue(addFrame);
+                counter = counterStop + 1;
+                goto SameItem;
+            }
+            else if(qData[counterStop] != (byte)Frame.Identificators.FrameEnd)
+            {
+                goto NextItem;
             }
 
 

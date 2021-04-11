@@ -265,7 +265,7 @@ namespace Aplikacja_MEMS
 
         public static void bgW_Analysis(object sender, DoWorkEventArgs e)
         {
-            Analysis.FrameAnalysis.FrameAnalysis(addData, (RichTextBox)e.Argument);
+            Analysis.FrameAnalysis.Analysis(addData, frames);
         }
 
             private void buttonStart_Click(object sender, EventArgs e)
