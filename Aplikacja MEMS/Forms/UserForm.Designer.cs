@@ -782,8 +782,6 @@ namespace Aplikacja_MEMS
             // chBoxHumEnabled
             // 
             this.chBoxHumEnabled.AutoSize = true;
-            this.chBoxHumEnabled.Checked = true;
-            this.chBoxHumEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxHumEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxHumEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxHumEnabled.Location = new System.Drawing.Point(9, 37);
@@ -997,8 +995,6 @@ namespace Aplikacja_MEMS
             // chBoxMagEnabled
             // 
             this.chBoxMagEnabled.AutoSize = true;
-            this.chBoxMagEnabled.Checked = true;
-            this.chBoxMagEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxMagEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxMagEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxMagEnabled.Location = new System.Drawing.Point(9, 37);
@@ -1187,8 +1183,6 @@ namespace Aplikacja_MEMS
             // chBoxPreEnabled
             // 
             this.chBoxPreEnabled.AutoSize = true;
-            this.chBoxPreEnabled.Checked = true;
-            this.chBoxPreEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxPreEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxPreEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxPreEnabled.Location = new System.Drawing.Point(9, 37);
@@ -1413,8 +1407,6 @@ namespace Aplikacja_MEMS
             // chBoxGyrEnabled
             // 
             this.chBoxGyrEnabled.AutoSize = true;
-            this.chBoxGyrEnabled.Checked = true;
-            this.chBoxGyrEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxGyrEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxGyrEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxGyrEnabled.Location = new System.Drawing.Point(9, 37);
@@ -1601,8 +1593,6 @@ namespace Aplikacja_MEMS
             // chBoxTherEnabled
             // 
             this.chBoxTherEnabled.AutoSize = true;
-            this.chBoxTherEnabled.Checked = true;
-            this.chBoxTherEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxTherEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxTherEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxTherEnabled.Location = new System.Drawing.Point(9, 37);
@@ -1828,8 +1818,6 @@ namespace Aplikacja_MEMS
             // chBoxAccEnabled
             // 
             this.chBoxAccEnabled.AutoSize = true;
-            this.chBoxAccEnabled.Checked = true;
-            this.chBoxAccEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chBoxAccEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxAccEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxAccEnabled.Location = new System.Drawing.Point(9, 37);
@@ -1865,6 +1853,7 @@ namespace Aplikacja_MEMS
             // rTBoxData
             // 
             this.rTBoxData.Dock = System.Windows.Forms.DockStyle.Top;
+            this.rTBoxData.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.rTBoxData.Location = new System.Drawing.Point(0, 0);
             this.rTBoxData.Name = "rTBoxData";
             this.rTBoxData.ReadOnly = true;

@@ -138,8 +138,8 @@ namespace Aplikacja_MEMS
 
                 // Wysłanie ustawień początkowych aplikacji
                 Communication.Query((byte)CmdType.DataSet, cBoxPorts.Text);
-                
-                if(ChceckDevices(cBoxAccelerometer, (byte)SensId.Accelerometer))
+
+                if (ChceckDevices(cBoxAccelerometer, (byte)SensId.Accelerometer))
                 {
                     acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SetSensor.AccEnable, "Akcelerometr");
                     sensors.Add(acc);
@@ -268,7 +268,27 @@ namespace Aplikacja_MEMS
             Analysis.FrameAnalysis.Analysis(addData, frames);
         }
 
-            private void buttonStart_Click(object sender, EventArgs e)
+        public static void bgW_show(object sender, DoWorkEventArgs e)
+        {
+            RichTextBox rtBox = (RichTextBox)e.Argument;
+            while (true)
+            {
+                if(frames.Count > 0)
+                {
+                    byte[] fr = frames.Dequeue();
+                    string s = "";
+                    foreach (byte b in fr)
+                    {
+                        s += b.ToString("X2") + " ";
+                    }
+                    Action<int> updateAction = new Action<int>((value) => rtBox.Text += s + "\n");
+                    rtBox.Invoke(updateAction, 32);
+                }
+
+            }
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
         {
             try
             {
@@ -278,18 +298,25 @@ namespace Aplikacja_MEMS
                     Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetWorkingSensor, s.sensorNr, (byte)s.selectedDeviceIndex);
                     progressBarData.Value += 10;
                 }
-                
+
                 ComTransmition.Read(addData);
                 BackgroundWorker bgW = new BackgroundWorker();
                 bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
                 bgW.WorkerSupportsCancellation = true;
                 bgW.WorkerReportsProgress = true;
-                bgW.RunWorkerAsync(argument: rTBoxData);
-                Sensor.EnableAll();
+                bgW.RunWorkerAsync();
 
-                foreach(Sensor s in sensors)
+                BackgroundWorker bgWS = new BackgroundWorker();
+                bgWS.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_show);
+                bgWS.WorkerSupportsCancellation = true;
+                bgWS.WorkerReportsProgress = true;
+                bgWS.RunWorkerAsync(argument: rTBoxData);
+
+                Sensor.DisableAll();
+
+                foreach (Sensor s in sensors)
                 {
-                    s.isEnabled = true;
+                    s.isEnabled = false;
                 }
 
                 // Wyswietlenie drugiej zakładki
@@ -379,7 +406,7 @@ namespace Aplikacja_MEMS
         // Włączanie/wyłączanie czujników
         private void ChangeEnable(object sender, EventArgs e)
         {
-            foreach(Sensor s in sensors)
+            foreach (Sensor s in sensors)
             {
                 if (s.sensorName == (string)((CheckBox)sender).Tag)
                     s.SetEnable(((CheckBox)sender).Checked);
@@ -387,7 +414,7 @@ namespace Aplikacja_MEMS
         }
 
         private void włączWyłączPrzerwaniaToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
+        {
             Sensor.ChangeInterrupt();
         }
 
@@ -433,11 +460,11 @@ namespace Aplikacja_MEMS
                             }
                         }
                     }
-                    catch (InvalidCastException ice) {}
+                    catch (InvalidCastException ice) { }
                 }
             }
         }
- 
+
         // Pobieranie ustawień rejestrów    
         private void GetRegParam(object sender, EventArgs e)
         {
@@ -461,8 +488,8 @@ namespace Aplikacja_MEMS
         }
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-                Communication.Query((byte)CmdType.StopTransmition);
-                ComTransmition.ClosePort();
+            Communication.Query((byte)CmdType.StopTransmition);
+            ComTransmition.ClosePort();
         }
 
         private void portOpenToolStripMenuItem_Click(object sender, EventArgs e)
