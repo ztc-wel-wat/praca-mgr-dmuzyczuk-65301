@@ -1857,7 +1857,8 @@ namespace Aplikacja_MEMS
             this.rTBoxData.Location = new System.Drawing.Point(0, 0);
             this.rTBoxData.Name = "rTBoxData";
             this.rTBoxData.ReadOnly = true;
-            this.rTBoxData.Size = new System.Drawing.Size(734, 444);
+            this.rTBoxData.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
+            this.rTBoxData.Size = new System.Drawing.Size(734, 440);
             this.rTBoxData.TabIndex = 0;
             this.rTBoxData.Text = "";
             // 

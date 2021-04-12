@@ -85,7 +85,6 @@ namespace Aplikacja_MEMS.Transmition
             {
                 serialPort.PortName = name;
                 serialPort.BaudRate = 921600;
-                serialPort.ReceivedBytesThreshold = 5;
                 serialPort.ReadBufferSize = 16384;
                 serialPort.Open();
             }

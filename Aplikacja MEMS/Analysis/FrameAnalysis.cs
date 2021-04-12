@@ -16,20 +16,22 @@ namespace Aplikacja_MEMS.Analysis
             byte[] buffer = new byte[16384];
             byte[] qData;
 
-        NextItem:
+        NextItem: // Kolejna tablica z kolejki odebranych
             int counter = 0;
-           
-            while(data.Count == 0)
-            {
-                Thread.Sleep(200);
-            }
-               qData = data.Dequeue();
 
+            // Na wypadek pustej kolejki
+            while (data.Count == 0)
+            {
+            }
+            qData = data.Dequeue();
+
+            // Na wypadek pobrania pustej tablicy
             if (qData == null) goto NextItem;
 
+            // Poszukiwanie początku ramki
             try
             {
-                for (int i = 0; (qData[i] != (byte)Frame.Identificators.ApplicationId) && (qData[i + 1] != (byte)Frame.Identificators.SensorBoardId); i++)
+                for (int i = 0; (qData[i] != (byte)Frame.Identificators.ApplicationId); i++)
                     counter++;
             }
             catch (IndexOutOfRangeException indexOut)
@@ -37,17 +39,22 @@ namespace Aplikacja_MEMS.Analysis
                 goto NextItem;
             }
 
+            // Zmienne do ustawienia nr bajtu z początkiem ramki
             int counterStop = counter;
             buffer[0] = qData[counter];
 
-        SameItem:
-            for (int i = 1; ((++counterStop) < qData.Length) && ((qData[i] == (byte)Frame.Identificators.ApplicationId) && (qData[i + 1] == (byte)Frame.Identificators.SensorBoardId)); i++)
+        SameItem: // Ciąg dalszy ramki (w przypadku ramki w dwóch tablicach z kolejki)
+            // Przypisywanioe bajtów do buffora
+            for (int i = 1; ((++counterStop) < qData.Length) && ((qData[i] == (byte)Frame.Identificators.ApplicationId) &&
+                (qData[i + 1] == (byte)Frame.Identificators.SensorBoardId)); i++)
             {
                 buffer[i] = qData[counterStop];
             }
             counterStop--;
 
+            // Sprawdzanie czy...
         Check:
+            // Ramka kończy się razem z obecnie przetwarzaną tablicą tablicą
             if ((counterStop + 1 == qData.Length) && (qData[counterStop] == (byte)Frame.Identificators.FrameEnd))
             {
                 buffer[++counterStop] = 0x0F;
@@ -56,6 +63,7 @@ namespace Aplikacja_MEMS.Analysis
                 frames.Enqueue(addFrame);
                 goto NextItem;
             }
+            // Ramka kończy się, ale obecnie przetwarzana tablica wciąż zawiera dane
             else if (((counterStop) < qData.Length) && (qData[counterStop] == (byte)Frame.Identificators.FrameEnd))
             {
                 buffer[++counterStop - counter] = 0x0F;
@@ -65,36 +73,29 @@ namespace Aplikacja_MEMS.Analysis
                 counter = ++counterStop;
                 goto SameItem;
             }
+            // Ramka nie kończy się w obecnie przetwarzanej tablicy
             else
             {
-            TryRead:
-               while(data.Count == 0)
+            TryRead: // Próba pobrania kolejnej tablicy
+                while (data.Count == 0)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(500);
                 }
-                    qData = data.Dequeue();
+                qData = data.Dequeue();
+                if (qData == null) goto TryRead;
+
+                // Określenie od którego bajtu w bufforze należy przypisywać kolejne bajny z nowej tablicy
                 int startCount = ++counterStop - counter;
-
                 counter = counterStop = 0;
-
                 buffer[startCount] = qData[counter];
 
+                // Przypisywanie bajtów
                 for (int i = startCount + 1; ((++counterStop) < qData.Length) && ((qData[counterStop] != (byte)Frame.Identificators.FrameEnd)); i++)
                 {
                     buffer[i] = qData[counterStop];
                 }
-
-                goto Check;
+                goto Check; // Ponowne sprawdzenie
             }
-
-            // for (int i = 0; i < data.Length; i++)
-            // {
-            //     Action<int> updateAction = new Action<int>((value) => ritchTextBox.Text += data[i].ToString("X2") + " ");
-            //     ritchTextBox.Invoke(updateAction, 32);
-            // }
-
         }
-
-
     }
 }

@@ -35,6 +35,8 @@ namespace Aplikacja_MEMS
         static Queue<byte[]> addData = new Queue<byte[]>();
         static Queue<byte[]> frames = new Queue<byte[]>();
 
+        BackgroundWorker bgWAnalysis;
+
         public UserForm()
         {
             InitializeComponent();
@@ -263,11 +265,13 @@ namespace Aplikacja_MEMS
             portOpenToolStripMenuItem.Enabled = true;
         }
 
+        // Włączenie funkcji analizy danych
         public static void bgW_Analysis(object sender, DoWorkEventArgs e)
         {
             Analysis.FrameAnalysis.Analysis(addData, frames);
         }
 
+        // Funkcja wyświetlania danych
         public static void bgW_show(object sender, DoWorkEventArgs e)
         {
             RichTextBox rtBox = (RichTextBox)e.Argument;
@@ -299,19 +303,22 @@ namespace Aplikacja_MEMS
                     progressBarData.Value += 10;
                 }
 
+                // Wątek analizy danych
                 ComTransmition.Read(addData);
-                BackgroundWorker bgW = new BackgroundWorker();
-                bgW.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
-                bgW.WorkerSupportsCancellation = true;
-                bgW.WorkerReportsProgress = true;
-                bgW.RunWorkerAsync();
+                BackgroundWorker bgWAnalysis = new BackgroundWorker();
+                bgWAnalysis.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
+                bgWAnalysis.WorkerSupportsCancellation = true;
+                bgWAnalysis.WorkerReportsProgress = true;
+                bgWAnalysis.RunWorkerAsync();
 
+                // Wątek wyświetlania danych
                 BackgroundWorker bgWS = new BackgroundWorker();
                 bgWS.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_show);
                 bgWS.WorkerSupportsCancellation = true;
                 bgWS.WorkerReportsProgress = true;
                 bgWS.RunWorkerAsync(argument: rTBoxData);
 
+                // Ustawienie wszystkich sensorów jako wyłączone
                 Sensor.DisableAll();
 
                 foreach (Sensor s in sensors)
@@ -363,6 +370,9 @@ namespace Aplikacja_MEMS
             // Wstrzymanie wysylania informacji przez płytkę
             Communication.Query((byte)CmdType.StopTransmition);
             ComTransmition.StopRead();
+
+            if(bgWAnalysis != null)
+            bgWAnalysis.CancelAsync();
 
             // Blokowanie groupBoxów
             foreach (GroupBox box in gBoxMEMSSensors)
