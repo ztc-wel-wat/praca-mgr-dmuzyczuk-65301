@@ -162,7 +162,7 @@ namespace Aplikacja_MEMS
             this.labAccScale = new System.Windows.Forms.Label();
             this.chBoxAccEnabled = new System.Windows.Forms.CheckBox();
             this.tabPageData = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.rTBoxData = new System.Windows.Forms.RichTextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1831,7 +1831,7 @@ namespace Aplikacja_MEMS
             // 
             // tabPageData
             // 
-            this.tabPageData.Controls.Add(this.button1);
+            this.tabPageData.Controls.Add(this.btnClear);
             this.tabPageData.Controls.Add(this.rTBoxData);
             this.tabPageData.Location = new System.Drawing.Point(4, 22);
             this.tabPageData.Name = "tabPageData";
@@ -1840,27 +1840,27 @@ namespace Aplikacja_MEMS
             this.tabPageData.Text = "Dane";
             this.tabPageData.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnClear
             // 
-            this.button1.Location = new System.Drawing.Point(651, 446);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Wyczyść";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnClear.Location = new System.Drawing.Point(651, 446);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 1;
+            this.btnClear.Text = "Wyczyść";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.button1_Click);
             // 
             // rTBoxData
             // 
-            this.rTBoxData.Dock = System.Windows.Forms.DockStyle.Top;
             this.rTBoxData.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rTBoxData.HideSelection = false;
             this.rTBoxData.Location = new System.Drawing.Point(0, 0);
             this.rTBoxData.Name = "rTBoxData";
             this.rTBoxData.ReadOnly = true;
-            this.rTBoxData.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
             this.rTBoxData.Size = new System.Drawing.Size(734, 440);
             this.rTBoxData.TabIndex = 0;
             this.rTBoxData.Text = "";
+            this.rTBoxData.WordWrap = false;
             // 
             // menuStrip
             // 
@@ -2210,7 +2210,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ToolStripMenuItem pokazujNaWspólnymWykresieToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 

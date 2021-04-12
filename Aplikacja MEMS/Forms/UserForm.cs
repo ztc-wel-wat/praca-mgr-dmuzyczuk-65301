@@ -279,14 +279,20 @@ namespace Aplikacja_MEMS
             {
                 if(frames.Count > 0)
                 {
-                    byte[] fr = frames.Dequeue();
+                NextFrame:
+                    byte[] fr;
+                    while(frames.Count == 0) { Thread.Sleep(50); }
+
+                    fr = frames.Dequeue();
+
+                    if (fr == null) goto NextFrame;
                     string s = "";
                     foreach (byte b in fr)
                     {
                         s += b.ToString("X2") + " ";
                     }
-                    Action<int> updateAction = new Action<int>((value) => rtBox.Text += s + "\n");
-                    rtBox.Invoke(updateAction, 32);
+                    Action<int> updateText = new Action<int>((value) => rtBox.AppendText(s + "\n"));
+                    rtBox.Invoke(updateText, 32);
                 }
 
             }
@@ -319,7 +325,11 @@ namespace Aplikacja_MEMS
                 bgWS.RunWorkerAsync(argument: rTBoxData);
 
                 // Ustawienie wszystkich sensorów jako wyłączone
-                Sensor.DisableAll();
+                Sensor.DisableAll();       
+                foreach (CheckBox cBox in checks)
+                {
+                    cBox.Checked = false;
+                }
 
                 foreach (Sensor s in sensors)
                 {
@@ -370,9 +380,16 @@ namespace Aplikacja_MEMS
             // Wstrzymanie wysylania informacji przez płytkę
             Communication.Query((byte)CmdType.StopTransmition);
             ComTransmition.StopRead();
+            Sensor.DisableAll();
 
             if(bgWAnalysis != null)
             bgWAnalysis.CancelAsync();
+
+            // Odznaczanie checkboxów
+            foreach(CheckBox cBox in checks)
+            {
+                cBox.Checked = false;
+            }
 
             // Blokowanie groupBoxów
             foreach (GroupBox box in gBoxMEMSSensors)

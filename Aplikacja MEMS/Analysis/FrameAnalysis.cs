@@ -45,19 +45,19 @@ namespace Aplikacja_MEMS.Analysis
 
         SameItem: // Ciąg dalszy ramki (w przypadku ramki w dwóch tablicach z kolejki)
             // Przypisywanioe bajtów do buffora
-            for (int i = 1; ((++counterStop) < qData.Length) && ((qData[i] == (byte)Frame.Identificators.ApplicationId) &&
+            for (int i = 1; ((counterStop+1) < qData.Length) && ((qData[i] == (byte)Frame.Identificators.ApplicationId) &&
                 (qData[i + 1] == (byte)Frame.Identificators.SensorBoardId)); i++)
             {
+                counterStop++;
                 buffer[i] = qData[counterStop];
             }
-            counterStop--;
 
             // Sprawdzanie czy...
         Check:
             // Ramka kończy się razem z obecnie przetwarzaną tablicą tablicą
             if ((counterStop + 1 == qData.Length) && (qData[counterStop] == (byte)Frame.Identificators.FrameEnd))
             {
-                buffer[++counterStop] = 0x0F;
+                buffer[++counterStop] = (byte)Frame.Identificators.FrameEnd;
                 byte[] addFrame = new byte[counterStop + 1];
                 Array.Copy(buffer, addFrame, counterStop + 1);
                 frames.Enqueue(addFrame);
@@ -66,7 +66,7 @@ namespace Aplikacja_MEMS.Analysis
             // Ramka kończy się, ale obecnie przetwarzana tablica wciąż zawiera dane
             else if (((counterStop) < qData.Length) && (qData[counterStop] == (byte)Frame.Identificators.FrameEnd))
             {
-                buffer[++counterStop - counter] = 0x0F;
+                buffer[++counterStop - counter] = (byte)Frame.Identificators.FrameEnd;
                 byte[] addFrame = new byte[counterStop + 1 - counter];
                 Array.Copy(buffer, addFrame, addFrame.Length);
                 frames.Enqueue(addFrame);
@@ -85,13 +85,14 @@ namespace Aplikacja_MEMS.Analysis
                 if (qData == null) goto TryRead;
 
                 // Określenie od którego bajtu w bufforze należy przypisywać kolejne bajny z nowej tablicy
-                int startCount = ++counterStop - counter;
+                int startCount = counterStop + 1 - counter;
                 counter = counterStop = 0;
                 buffer[startCount] = qData[counter];
 
                 // Przypisywanie bajtów
-                for (int i = startCount + 1; ((++counterStop) < qData.Length) && ((qData[counterStop] != (byte)Frame.Identificators.FrameEnd)); i++)
+                for (int i = startCount + 1; ((counterStop+1) < qData.Length) && ((qData[counterStop] != (byte)Frame.Identificators.FrameEnd)); i++)
                 {
+                    counterStop++;
                     buffer[i] = qData[counterStop];
                 }
                 goto Check; // Ponowne sprawdzenie
