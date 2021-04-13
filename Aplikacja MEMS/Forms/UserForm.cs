@@ -37,6 +37,8 @@ namespace Aplikacja_MEMS
         static Queue<byte[]> checkedFrames = new Queue<byte[]>();
 
         BackgroundWorker bgWAnalysis;
+        BackgroundWorker bgWCheck;
+        BackgroundWorker bgWS;
 
         public UserForm()
         {
@@ -244,6 +246,13 @@ namespace Aplikacja_MEMS
             Communication.Query((byte)CmdType.StopTransmition);
             ComTransmition.StopRead();
             ComTransmition.ClosePort();
+            
+            if (bgWAnalysis != null)
+                bgWAnalysis.CancelAsync();
+            if (bgWCheck != null)
+                bgWCheck.CancelAsync();
+            if (bgWS != null)
+                bgWS.CancelAsync();
 
             // Włączanie/wyłączanie przycisków
             foreach (Control control in enableDisable)
@@ -312,6 +321,7 @@ namespace Aplikacja_MEMS
                         rtBox.Invoke((Action)delegate
                         {
                             rtBox.AppendText(s + "\n");
+                            rtBox.ScrollToCaret();
                         });
                     }
                     catch(Exception exc) { }
@@ -333,21 +343,21 @@ namespace Aplikacja_MEMS
                 ComTransmition.Read(addData);
 
                 // Wątek analizy danych
-                BackgroundWorker bgWAnalysis = new BackgroundWorker();
+                bgWAnalysis = new BackgroundWorker();
                 bgWAnalysis.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
                 bgWAnalysis.WorkerSupportsCancellation = true;
                 bgWAnalysis.WorkerReportsProgress = true;
                 bgWAnalysis.RunWorkerAsync();
 
                 // Wątek analizy danych
-                BackgroundWorker bgWCheck = new BackgroundWorker();
+                bgWCheck = new BackgroundWorker();
                 bgWCheck.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_bgWCheck);
                 bgWCheck.WorkerSupportsCancellation = true;
                 bgWCheck.WorkerReportsProgress = true;
                 bgWCheck.RunWorkerAsync();
 
                 // Wątek wyświetlania danych
-                BackgroundWorker bgWS = new BackgroundWorker();
+                bgWS = new BackgroundWorker();
                 bgWS.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_show);
                 bgWS.WorkerSupportsCancellation = true;
                 bgWS.WorkerReportsProgress = true;
@@ -415,10 +425,14 @@ namespace Aplikacja_MEMS
             Sensor.DisableAll();
 
             if(bgWAnalysis != null)
-            bgWAnalysis.CancelAsync();
+                bgWAnalysis.CancelAsync();
+            if (bgWCheck != null)
+                bgWCheck.CancelAsync();
+            if (bgWS != null)
+                bgWS.CancelAsync();
 
             // Odznaczanie checkboxów
-            foreach(CheckBox cBox in checks)
+            foreach (CheckBox cBox in checks)
             {
                 cBox.Checked = false;
             }
@@ -564,6 +578,11 @@ namespace Aplikacja_MEMS
         private void button1_Click(object sender, EventArgs e)
         {
             rTBoxData.Text = "";
+        }
+
+        private void rTBoxData_TextChanged(object sender, EventArgs e)
+        {
+            if (rTBoxData.TextLength == 2147483000) rTBoxData.Clear();
         }
     }
 }
