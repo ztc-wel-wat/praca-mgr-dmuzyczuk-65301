@@ -32,8 +32,9 @@ namespace Aplikacja_MEMS
         EnvSensor hum;
         EnvSensor pre;
 
-        static Queue<byte[]> addData = new Queue<byte[]>();
+        static Queue<byte> addData = new Queue<byte>();
         static Queue<byte[]> frames = new Queue<byte[]>();
+        static Queue<byte[]> checkedFrames = new Queue<byte[]>();
 
         BackgroundWorker bgWAnalysis;
 
@@ -271,6 +272,12 @@ namespace Aplikacja_MEMS
             Analysis.FrameAnalysis.Analysis(addData, frames);
         }
 
+        // Włączenie funkcji analizy danych
+        public static void bgW_bgWCheck(object sender, DoWorkEventArgs e)
+        {
+            Analysis.FrameAnalysis.CheckSum(frames, checkedFrames);
+        }
+
         // Funkcja wyświetlania danych
         public static void bgW_show(object sender, DoWorkEventArgs e)
         {
@@ -279,14 +286,15 @@ namespace Aplikacja_MEMS
 
             while (true)
             {
-                // Sprawdzanie czy kolejka nie jest pusta
-                while(frames.Count == 0) { Thread.Sleep(200); }
-                if(frames.Count > 0)
+                if(checkedFrames.Count > 0)
                 {
                 NextFrame:
-                    byte[] fr;
+                    byte[] fr; 
+                    
+                    // Sprawdzanie czy kolejka nie jest pusta
+                    while (checkedFrames.Count == 0) { Thread.Sleep(200); }
                     // Pobieranie tablicy z kolejki
-                    fr = frames.Dequeue();
+                    fr = checkedFrames.Dequeue();
 
                     // na wypadek pobrania "pustej" tablicy
                     if (fr == null) goto NextFrame;
@@ -299,10 +307,14 @@ namespace Aplikacja_MEMS
                     }
 
                     // wyświetlanie w textBoxie
-                    rtBox.Invoke((Action)delegate
+                    try
                     {
-                        rtBox.AppendText(s + "\n");
-                    });
+                        rtBox.Invoke((Action)delegate
+                        {
+                            rtBox.AppendText(s + "\n");
+                        });
+                    }
+                    catch(Exception exc) { }
                 }
             }
         }
@@ -318,13 +330,21 @@ namespace Aplikacja_MEMS
                     progressBarData.Value += 10;
                 }
 
-                // Wątek analizy danych
                 ComTransmition.Read(addData);
+
+                // Wątek analizy danych
                 BackgroundWorker bgWAnalysis = new BackgroundWorker();
                 bgWAnalysis.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
                 bgWAnalysis.WorkerSupportsCancellation = true;
                 bgWAnalysis.WorkerReportsProgress = true;
                 bgWAnalysis.RunWorkerAsync();
+
+                // Wątek analizy danych
+                BackgroundWorker bgWCheck = new BackgroundWorker();
+                bgWCheck.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_bgWCheck);
+                bgWCheck.WorkerSupportsCancellation = true;
+                bgWCheck.WorkerReportsProgress = true;
+                bgWCheck.RunWorkerAsync();
 
                 // Wątek wyświetlania danych
                 BackgroundWorker bgWS = new BackgroundWorker();

@@ -148,7 +148,7 @@ namespace Aplikacja_MEMS.Transmition
             }
         }
 
-        public static void Read(Queue<byte[]> data)
+        public static void Read(Queue<byte> data)
         {
             receive = true;
 
@@ -167,15 +167,13 @@ namespace Aplikacja_MEMS.Transmition
 
         public static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
         {
-            byte[] readData = new byte[serialPort.ReadBufferSize];
+            byte readData;
             while (receive)
             {
                 try
                 {
-                    int length = serialPort.Read(readData, 0, readData.Length);
-                    byte[] sendData = new byte[length];
-                    Array.Copy(readData, sendData, length);
-                    ((Queue<byte[]>)e.Argument).Enqueue(sendData);
+                    readData = (byte)serialPort.ReadByte();
+                    ((Queue<byte>)e.Argument).Enqueue(readData);
                 }
                 catch (Exception exc) { }
             }

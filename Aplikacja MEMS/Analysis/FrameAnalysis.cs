@@ -11,100 +11,55 @@ namespace Aplikacja_MEMS.Analysis
 {
     class FrameAnalysis
     {
-        public static void Analysis(Queue<byte[]> data, Queue<byte[]> frames)
+        public static void Analysis(Queue<byte> data, Queue<byte[]> frames)
         {
-            byte[] buffer = new byte[16384];
-            byte[] qData;
-
-        NextItem: // Kolejna tablica z kolejki odebranych
-            int counter = 0;
-            int bytes = 0;
-
-            // Na wypadek pustej kolejki
-            while (data.Count == 0)
+            while (true)
             {
-                Thread.Sleep(20);
-            }
-            qData = data.Dequeue();
+                byte[] buffer = new byte[16384];
+                int count = 0;
 
-            // Na wypadek pobrania pustej tablicy
-            if (qData == null) goto NextItem;
-
-            // Poszukiwanie początku ramki
-            try
-            {
-                for (int i = 0; (qData[i] != (byte)Frame.Identificators.ApplicationId); i++)
-                    counter++;
-            }
-            catch (IndexOutOfRangeException indexOut)
-            {
-                goto NextItem;
-            }
-
-            // Zmienne do ustawienia nr bajtu z początkiem ramki
-            int counterStop = counter;
-
-        SameItem: // Ciąg dalszy ramki (w przypadku ramki w dwóch tablicach z kolejki)
-            // Przypisywanioe bajtów do buffora
-            for (int i = 0; ((counterStop) < qData.Length) && (qData[counterStop] != (byte)Frame.Identificators.FrameEnd); i++)
-            {
-                buffer[i] = qData[counterStop];
-                counterStop++;
-                bytes++;
-            }
-
-        // Sprawdzanie czy...
-        Check:
-            // Ramka kończy się razem z obecnie przetwarzaną tablicą tablicą
-            if ((counterStop + 1 == qData.Length) && (qData[counterStop] == (byte)Frame.Identificators.FrameEnd))
-            {
-                AddData(buffer, bytes, frames);
-
-                bytes = 0;
-                goto NextItem;
-            }
-            // Ramka kończy się, ale obecnie przetwarzana tablica wciąż zawiera dane
-            else if ((counterStop + 1< qData.Length) && (qData[counterStop] == (byte)Frame.Identificators.FrameEnd))
-            {
-                AddData(buffer, bytes, frames);
-
-                counter = ++counterStop;
-                bytes = 0;
-                goto SameItem;
-            }
-            // Ramka nie kończy się w obecnie przetwarzanej tablicy
-            else
-            {
-            TryRead: // Próba pobrania kolejnej tablicy
+            NextByte: 
+                // Oczekiwanie na wypadek pustej kolejki
                 while (data.Count == 0)
                 {
-                    Thread.Sleep(200);
+                    Thread.Sleep(100);
                 }
-                qData = data.Dequeue();
-                if (qData == null) goto TryRead;
+                byte add = data.Dequeue();
 
-                // Określenie od którego bajtu w bufforze należy przypisywać kolejne bajny z nowej tablicy
-                int startCount = counterStop - counter;
-
-                int i = 0;
-                // Przypisywanie bajtów
-                for (i = 0; i < qData.Length && qData[i] != (byte)Frame.Identificators.FrameEnd; i++)
+                // Dodawanie kolejnych bajtów do buffora
+                while (add != (byte)Frame.Identificators.FrameEnd)
                 {
-                    buffer[startCount] = qData[i];
-                    startCount++;
-                    bytes++;
+                    buffer[count] = add; 
+                    count++;
+                    goto NextByte;
                 }
-                counterStop += i - 1;
-                goto Check; // Ponowne sprawdzenie
+
+
+                // Dodanie ramki do kolejki
+                byte[] frame = new byte[count];
+                Array.Copy(buffer, frame, frame.Length);
+                frames.Enqueue(frame);
             }
         }
 
-        private static void AddData(byte[] source, int length, Queue<byte[]> destination)
+        public static void CheckSum(Queue<byte[]> source, Queue<byte[]> destination)
         {
-            source[length] = (byte)Frame.Identificators.FrameEnd;
-            byte[] addFrame = new byte[length + 1];
-            Array.Copy(source, addFrame, addFrame.Length);
-            destination.Enqueue(addFrame);
+            while (true)
+            {
+                NextFrame:
+                while(source.Count == 0) { }
+                byte sum = 0x00;
+
+                byte[] toCheck = source.Dequeue();
+                if (toCheck == null) goto NextFrame;
+
+                foreach(byte b in toCheck)
+                {
+                    sum += b;
+                }
+
+                if (sum == 0x00) destination.Enqueue(toCheck);
+            }
         }
     }
 }

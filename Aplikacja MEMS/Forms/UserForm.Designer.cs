@@ -1852,8 +1852,11 @@ namespace Aplikacja_MEMS
             // 
             // rTBoxData
             // 
+            this.rTBoxData.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.rTBoxData.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.rTBoxData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.rTBoxData.HideSelection = false;
+            this.rTBoxData.ImeMode = System.Windows.Forms.ImeMode.On;
             this.rTBoxData.Location = new System.Drawing.Point(0, 0);
             this.rTBoxData.Name = "rTBoxData";
             this.rTBoxData.ReadOnly = true;
