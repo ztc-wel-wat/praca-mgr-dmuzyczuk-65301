@@ -274,27 +274,36 @@ namespace Aplikacja_MEMS
         // Funkcja wyświetlania danych
         public static void bgW_show(object sender, DoWorkEventArgs e)
         {
+            // Rzutowanie textBoxa
             RichTextBox rtBox = (RichTextBox)e.Argument;
+
             while (true)
             {
+                // Sprawdzanie czy kolejka nie jest pusta
+                while(frames.Count == 0) { Thread.Sleep(200); }
                 if(frames.Count > 0)
                 {
                 NextFrame:
                     byte[] fr;
-                    while(frames.Count == 0) { Thread.Sleep(50); }
-
+                    // Pobieranie tablicy z kolejki
                     fr = frames.Dequeue();
 
+                    // na wypadek pobrania "pustej" tablicy
                     if (fr == null) goto NextFrame;
                     string s = "";
+
+                    // tworzenie ciągu znaków
                     foreach (byte b in fr)
                     {
                         s += b.ToString("X2") + " ";
                     }
-                    Action<int> updateText = new Action<int>((value) => rtBox.AppendText(s + "\n"));
-                    rtBox.Invoke(updateText, 32);
-                }
 
+                    // wyświetlanie w textBoxie
+                    rtBox.Invoke((Action)delegate
+                    {
+                        rtBox.AppendText(s + "\n");
+                    });
+                }
             }
         }
 
@@ -325,11 +334,14 @@ namespace Aplikacja_MEMS
                 bgWS.RunWorkerAsync(argument: rTBoxData);
 
                 // Ustawienie wszystkich sensorów jako wyłączone
-                Sensor.DisableAll();       
+                Sensor.DisableAll();
+
+
                 foreach (CheckBox cBox in checks)
                 {
                     cBox.Checked = false;
                 }
+
 
                 foreach (Sensor s in sensors)
                 {
