@@ -4,15 +4,7 @@ using Aplikacja_MEMS.Analysis;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.IO.Ports;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Aplikacja_MEMS
@@ -32,9 +24,10 @@ namespace Aplikacja_MEMS
         EnvSensor hum;
         EnvSensor pre;
 
-        static Queue<byte> addData = new Queue<byte>();
-        static Queue<byte[]> frames = new Queue<byte[]>();
-        static Queue<byte[]> checkedFrames = new Queue<byte[]>();
+        static Queue<byte> addData; 
+        static Queue<byte[]> frames; 
+        static Queue<byte[]> checkedFrames;
+        static Data<byte[]> command;
 
         BackgroundWorker bgWAnalysis;
         BackgroundWorker bgWCheck;
@@ -190,6 +183,36 @@ namespace Aplikacja_MEMS
                 cBoxPorts.Enabled = false;
                 portOpenToolStripMenuItem.Enabled = false;
 
+                addData = new Queue<byte>();
+                frames = new Queue<byte[]>();
+                checkedFrames = new Queue<byte[]>();
+
+                ComTransmition.Read(addData);
+
+                // Wątek analizy danych
+                bgWAnalysis = new BackgroundWorker();
+                bgWAnalysis.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
+                bgWAnalysis.WorkerSupportsCancellation = true;
+                bgWAnalysis.WorkerReportsProgress = true;
+                bgWAnalysis.RunWorkerAsync();
+
+                // Wątek analizy danych
+                bgWCheck = new BackgroundWorker();
+                bgWCheck.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_bgWCheck);
+                bgWCheck.WorkerSupportsCancellation = true;
+                bgWCheck.WorkerReportsProgress = true;
+                bgWCheck.RunWorkerAsync();
+
+                // Wątek wyświetlania danych
+                bgWS = new BackgroundWorker();
+                bgWS.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_show);
+                bgWS.WorkerSupportsCancellation = true;
+                bgWS.WorkerReportsProgress = true;
+                bgWS.RunWorkerAsync(argument: rTBoxData);
+
+                command = new Data<byte[]>();
+                command.Changed += new EventHandler(this.NewCommandToShow);
+
                 // Włączanie/wyłączanie przycisków
                 foreach (Control control in enableDisable)
                 {
@@ -220,6 +243,32 @@ namespace Aplikacja_MEMS
             }
         }
 
+        private void NewCommandToShow(object sender, EventArgs e)
+        {
+            byte[] data = ((Data<byte[]>)sender).Dequeue();
+            foreach (Sensor s in sensors)
+            {
+                if (s.sensorNr == data[4])
+                {
+                    try
+                    {
+                        foreach (GroupBox g in tabPageSensors.Controls)
+                        {
+                            if ((string)g.Tag == s.sensorName)
+                            {
+                                TextBox tBox = (TextBox)(g.Controls[4].Controls[2]);
+                                tBox.Invoke((Action)delegate
+                                {
+                                    tBox.Text = data[6].ToString("X2");
+                                });
+                            }
+                        }
+                    }
+                    catch (InvalidCastException ice) { }
+                }
+            }
+        }
+
         private bool ChceckDevices(ComboBox deviceList, byte sensor)
         {
             List<string> sensorDevices;
@@ -246,7 +295,7 @@ namespace Aplikacja_MEMS
             Communication.Query((byte)CmdType.StopTransmition);
             ComTransmition.StopRead();
             ComTransmition.ClosePort();
-            
+
             if (bgWAnalysis != null)
                 bgWAnalysis.CancelAsync();
             if (bgWCheck != null)
@@ -295,18 +344,25 @@ namespace Aplikacja_MEMS
 
             while (true)
             {
-                if(checkedFrames.Count > 0)
+                if (checkedFrames.Count > 0)
                 {
                 NextFrame:
-                    byte[] fr; 
-                    
+                    byte[] fr;
+
                     // Sprawdzanie czy kolejka nie jest pusta
                     while (checkedFrames.Count == 0) { Thread.Sleep(200); }
                     // Pobieranie tablicy z kolejki
                     fr = checkedFrames.Dequeue();
 
                     // na wypadek pobrania "pustej" tablicy
-                    if (fr == null) goto NextFrame;
+                    if (fr == null || fr.Length < 5) goto NextFrame;
+
+                   if (fr[2] == 0xD0 && fr[3] == 0x02)
+                    { 
+                        command.Enqueue(fr);
+                        goto NextFrame;
+                    }
+
                     string s = "";
 
                     // tworzenie ciągu znaków
@@ -320,11 +376,10 @@ namespace Aplikacja_MEMS
                     {
                         rtBox.Invoke((Action)delegate
                         {
-                            rtBox.AppendText(s + "\n");
-                            rtBox.ScrollToCaret();
+                              rtBox.AppendText(s + "\n");
                         });
                     }
-                    catch(Exception exc) { }
+                    catch (Exception exc) { }
                 }
             }
         }
@@ -340,28 +395,6 @@ namespace Aplikacja_MEMS
                     progressBarData.Value += 10;
                 }
 
-                ComTransmition.Read(addData);
-
-                // Wątek analizy danych
-                bgWAnalysis = new BackgroundWorker();
-                bgWAnalysis.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
-                bgWAnalysis.WorkerSupportsCancellation = true;
-                bgWAnalysis.WorkerReportsProgress = true;
-                bgWAnalysis.RunWorkerAsync();
-
-                // Wątek analizy danych
-                bgWCheck = new BackgroundWorker();
-                bgWCheck.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_bgWCheck);
-                bgWCheck.WorkerSupportsCancellation = true;
-                bgWCheck.WorkerReportsProgress = true;
-                bgWCheck.RunWorkerAsync();
-
-                // Wątek wyświetlania danych
-                bgWS = new BackgroundWorker();
-                bgWS.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_show);
-                bgWS.WorkerSupportsCancellation = true;
-                bgWS.WorkerReportsProgress = true;
-                bgWS.RunWorkerAsync(argument: rTBoxData);
 
                 // Ustawienie wszystkich sensorów jako wyłączone
                 Sensor.DisableAll();
@@ -421,15 +454,7 @@ namespace Aplikacja_MEMS
         {
             // Wstrzymanie wysylania informacji przez płytkę
             Communication.Query((byte)CmdType.StopTransmition);
-            ComTransmition.StopRead();
             Sensor.DisableAll();
-
-            if(bgWAnalysis != null)
-                bgWAnalysis.CancelAsync();
-            if (bgWCheck != null)
-                bgWCheck.CancelAsync();
-            if (bgWS != null)
-                bgWS.CancelAsync();
 
             // Odznaczanie checkboxów
             foreach (CheckBox cBox in checks)
@@ -551,7 +576,8 @@ namespace Aplikacja_MEMS
                         {
                             if (g.Tag == ((Button)sender).Tag)
                             {
-                                s.GetRegisterParameter(g.Controls[4].Controls[3].Text);
+                                  s.GetRegisterParameter(g.Controls[4].Controls[3].Text);
+                              
                             }
                         }
                     }
@@ -559,6 +585,8 @@ namespace Aplikacja_MEMS
                 }
             }
         }
+
+
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Communication.Query((byte)CmdType.StopTransmition);
@@ -580,9 +608,5 @@ namespace Aplikacja_MEMS
             rTBoxData.Text = "";
         }
 
-        private void rTBoxData_TextChanged(object sender, EventArgs e)
-        {
-            if (rTBoxData.TextLength == 2147483000) rTBoxData.Clear();
-        }
     }
 }

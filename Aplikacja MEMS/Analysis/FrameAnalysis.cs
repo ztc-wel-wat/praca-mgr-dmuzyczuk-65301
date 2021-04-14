@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Aplikacja_MEMS.Frame;
 
 namespace Aplikacja_MEMS.Analysis
 {
@@ -13,7 +8,7 @@ namespace Aplikacja_MEMS.Analysis
     {
         public static void Analysis(Queue<byte> data, Queue<byte[]> frames)
         {
-            while (true)
+            while (data != null)
             {
                 byte[] buffer = new byte[16384];
                 int count = 0;
@@ -34,11 +29,18 @@ namespace Aplikacja_MEMS.Analysis
                     goto NextByte;
                 }
 
-
                 // Dodanie ramki do kolejki
                 byte[] frame = new byte[count];
                 Array.Copy(buffer, frame, frame.Length);
-                frames.Enqueue(frame);
+            TryAgain:
+                try
+                {
+                    frames.Enqueue(frame);
+                }
+                catch(ArgumentException argExc)
+                {
+                    goto TryAgain;
+                }
             }
         }
 
@@ -58,7 +60,11 @@ namespace Aplikacja_MEMS.Analysis
                     sum += b;
                 }
 
-                if (sum == 0x00) destination.Enqueue(toCheck);
+                try
+                {
+                    if (sum == 0x00) destination.Enqueue(toCheck);
+                }
+                catch (Exception exc) { };
             }
         }
     }

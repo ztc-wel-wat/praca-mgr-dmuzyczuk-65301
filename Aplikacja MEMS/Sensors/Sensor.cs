@@ -63,7 +63,7 @@ namespace Aplikacja_MEMS
         {
             try
             {
-                Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetRegisterValue, this.sensorNr, (byte)(Int32.Parse(address)), (byte)(Int32.Parse(value)));
+                Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address), Analysis.HexUtil.ToBytes(value));
             }
             catch (Exception exc) { };
         }
@@ -72,11 +72,13 @@ namespace Aplikacja_MEMS
         {
             try
             {
-                Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, (byte)Int32.Parse(address));
+                Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address));
             }
             catch (Exception exc) { };
-        }
 
+
+        }
+     
         public void OpenRegister()
         {
             RegisterList.LSM6DSL();

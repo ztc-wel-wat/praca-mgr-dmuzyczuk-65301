@@ -723,6 +723,7 @@ namespace Aplikacja_MEMS
             this.tBoxHumValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxHumValue.TabIndex = 18;
             this.tBoxHumValue.Tag = "Higrometr";
+            this.tBoxHumValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tBoxHumAddress
             // 
@@ -732,6 +733,7 @@ namespace Aplikacja_MEMS
             this.tBoxHumAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxHumAddress.TabIndex = 17;
             this.tBoxHumAddress.Tag = "Higrometr";
+            this.tBoxHumAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labHumValue
             // 
@@ -916,6 +918,7 @@ namespace Aplikacja_MEMS
             this.tBoxMagValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxMagValue.TabIndex = 18;
             this.tBoxMagValue.Tag = "Magnetometr";
+            this.tBoxMagValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tBoxMagAddress
             // 
@@ -925,6 +928,7 @@ namespace Aplikacja_MEMS
             this.tBoxMagAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxMagAddress.TabIndex = 17;
             this.tBoxMagAddress.Tag = "Magnetometr";
+            this.tBoxMagAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labMagValue
             // 
@@ -1124,6 +1128,7 @@ namespace Aplikacja_MEMS
             this.tBoxPreValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxPreValue.TabIndex = 18;
             this.tBoxPreValue.Tag = "Barometr";
+            this.tBoxPreValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tBoxPreAddress
             // 
@@ -1133,6 +1138,7 @@ namespace Aplikacja_MEMS
             this.tBoxPreAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxPreAddress.TabIndex = 17;
             this.tBoxPreAddress.Tag = "Barometr";
+            this.tBoxPreAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labPreValue
             // 
@@ -1328,6 +1334,7 @@ namespace Aplikacja_MEMS
             this.tBoxGyrValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxGyrValue.TabIndex = 18;
             this.tBoxGyrValue.Tag = "Żyroskop";
+            this.tBoxGyrValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tBoxGyrAddress
             // 
@@ -1337,6 +1344,7 @@ namespace Aplikacja_MEMS
             this.tBoxGyrAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxGyrAddress.TabIndex = 17;
             this.tBoxGyrAddress.Tag = "Żyroskop";
+            this.tBoxGyrAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labGyrValue
             // 
@@ -1534,6 +1542,7 @@ namespace Aplikacja_MEMS
             this.tBoxTherValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxTherValue.TabIndex = 18;
             this.tBoxTherValue.Tag = "Termometr";
+            this.tBoxTherValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tBoxTherAddress
             // 
@@ -1543,6 +1552,7 @@ namespace Aplikacja_MEMS
             this.tBoxTherAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxTherAddress.TabIndex = 17;
             this.tBoxTherAddress.Tag = "Termometr";
+            this.tBoxTherAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labTherValue
             // 
@@ -1738,6 +1748,7 @@ namespace Aplikacja_MEMS
             this.tBoxAccValue.Size = new System.Drawing.Size(66, 20);
             this.tBoxAccValue.TabIndex = 18;
             this.tBoxAccValue.Tag = "Akcelerometr";
+            this.tBoxAccValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tBoxAccAddress
             // 
@@ -1748,6 +1759,7 @@ namespace Aplikacja_MEMS
             this.tBoxAccAddress.Size = new System.Drawing.Size(66, 20);
             this.tBoxAccAddress.TabIndex = 17;
             this.tBoxAccAddress.Tag = "Akcelerometr";
+            this.tBoxAccAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labAccValue
             // 
@@ -1863,7 +1875,6 @@ namespace Aplikacja_MEMS
             this.rTBoxData.TabIndex = 0;
             this.rTBoxData.Text = "";
             this.rTBoxData.WordWrap = false;
-            this.rTBoxData.TextChanged += new System.EventHandler(this.rTBoxData_TextChanged);
             // 
             // menuStrip
             // 

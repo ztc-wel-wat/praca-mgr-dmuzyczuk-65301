@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analysis\Data.cs" />
     <Compile Include="Analysis\FrameAnalysis.cs" />
+    <Compile Include="Analysis\HexUtil.cs" />
     <Compile Include="Sensors\SetSensor.cs" />
     <Compile Include="Transmition\AvailablePort.cs" />
     <Compile Include="Frame\Identificators.cs" />

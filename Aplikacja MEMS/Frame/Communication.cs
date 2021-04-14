@@ -49,6 +49,8 @@ namespace Aplikacja_MEMS
             switch (command)
             {
                 case (byte)CmdType.SensorCmd:
+                    ComTransmition.ClearBuffer();
+
                     query = new byte[7];
 
                     query[0] = (byte)Identificators.SensorBoardId;

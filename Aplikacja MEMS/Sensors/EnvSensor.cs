@@ -1,5 +1,4 @@
-﻿using System;
-namespace Aplikacja_MEMS.Sensors
+﻿namespace Aplikacja_MEMS.Sensors
 {
     class EnvSensor : Sensor
     {

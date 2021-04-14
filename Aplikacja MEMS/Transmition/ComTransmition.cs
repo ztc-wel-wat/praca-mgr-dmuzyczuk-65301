@@ -5,7 +5,6 @@ using System.IO.Ports;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using Aplikacja_MEMS.Analysis;
 
 namespace Aplikacja_MEMS.Transmition
 {
@@ -42,6 +41,7 @@ namespace Aplikacja_MEMS.Transmition
             foreach (string name in comPorts)
             {
                 OpenPort(name);
+                ClearBuffer();
 
                 // Wysłanie zapytania
                 Communication.Query((byte)CmdType.WhoAreYou);
@@ -51,7 +51,6 @@ namespace Aplikacja_MEMS.Transmition
                     // Oczekiwanie do 2sek na odpowiedź
                     serialPort.ReadTimeout = 300;
                     Thread.Sleep(300);
-
                     // Pobieranie odpowiedzi od urządzenia
                     int length = serialPort.Read(response, 0, response.Length);
                     AvailablePort memsPort = new AvailablePort(name, Encoding.UTF8.GetString(response, 3, length - 5));
@@ -176,6 +175,17 @@ namespace Aplikacja_MEMS.Transmition
                     ((Queue<byte>)e.Argument).Enqueue(readData);
                 }
                 catch (Exception exc) { }
+            }
+        }
+
+        public static void ClearBuffer()
+        {
+            Communication.Query((byte)CmdType.StopTransmition);
+            Thread.Sleep(100);
+
+            while (serialPort.BytesToRead > 0)
+            {
+                string clear = serialPort.ReadExisting();
             }
         }
     }
