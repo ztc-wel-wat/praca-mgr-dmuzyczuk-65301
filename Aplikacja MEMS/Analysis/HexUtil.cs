@@ -22,6 +22,10 @@ namespace Aplikacja_MEMS.Analysis
 			if (hex.Length > 2)
 				hex = hex.Substring(hex.Length - 3, hex.Length - 1);
 			else if (hex.Length == 0) return 0x00;
+			else if (hex.Length == 1) 
+			{
+				hex = "0" + hex;
+			}
 
 			bool startsWithHexStart = hex.StartsWith("0x", StringComparison.OrdinalIgnoreCase);
 

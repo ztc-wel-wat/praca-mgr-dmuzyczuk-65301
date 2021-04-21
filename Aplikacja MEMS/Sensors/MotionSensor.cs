@@ -4,13 +4,15 @@
     {
         byte[] data;
 
-        public MotionSensor (byte sensorNumber, byte sensorActivate, string name)
+        public MotionSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth)
         {
             sensorName = name;
             activate = sensorActivate;
             sensorNr = sensorNumber;
             isEnabled = false;
-        }
+            type = "Motion";
+            width = sensWidth;
+    }
 
         public void SetScale(byte[] parameter)
         {

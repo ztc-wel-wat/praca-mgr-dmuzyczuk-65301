@@ -14,7 +14,7 @@ namespace Aplikacja_MEMS
         List<Control> enableDisable = new List<Control>();
         List<ComboBox> clear = new List<ComboBox>();
         List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
-        List<Sensor> sensors = new List<Sensor>();
+        static List<Sensor> sensors = new List<Sensor>();
         List<CheckBox> checks = new List<CheckBox>();
 
         MotionSensor acc;
@@ -24,21 +24,15 @@ namespace Aplikacja_MEMS
         EnvSensor hum;
         EnvSensor pre;
 
-        static Queue<byte> addData; 
-        static Queue<byte[]> frames; 
+        static Queue<byte> addData;
+        static Queue<byte[]> frames;
         static Queue<byte[]> checkedFrames;
+        static Queue<byte[]> sensorsData;
         static Data<byte[]> command;
-
-        BackgroundWorker bgWAnalysis;
-        BackgroundWorker bgWCheck;
-        BackgroundWorker bgWS;
 
         public UserForm()
         {
             InitializeComponent();
-
-            Sensor.enableByte = 0x77;
-            Sensor.enableInterruptByte = 0x01;
 
             // Ustawienie rozmiaru groupBoxów
             gBoxInfo.Height = tabPageGeneral.Height / 3;
@@ -81,192 +75,68 @@ namespace Aplikacja_MEMS
             checks.Add(chBoxPreEnabled);
         }
 
-        private void UserForm_Load(object sender, EventArgs e)
+        private void CheckPorts()
         {
-            List<AvailablePort> memsPorts = new List<AvailablePort>();
-
             // Pobieranie listyt dostępnych urządzeń MEMS
-            memsPorts = ComTransmition.CheckAvaliablePorts();
+            List<AvailablePort> memsPorts = ComTransmition.CheckAvaliablePorts();
             int counter = 0;
 
+            foreach (Control c in gBoxInfo.Controls)
+            {
+                if ((string)(c.Tag) == "port")
+                {
+                    gBoxInfo.Controls.Remove(c);
+                }
+
+            }
+            cBoxPorts.Items.Clear();
             // Tworzenie listy etykiet z urządzeniami MEMS
             foreach (AvailablePort port in memsPorts)
             {
-                try
+                // Dodawanie etykiety urządzenia MEMS
+                labelCOM = new Label
                 {
-                    labelNoBoards.Visible = false; // Ukrycie informacji o braku urządzeń
+                    AutoSize = true,
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238))),
+                    Location = new System.Drawing.Point(20, 89 + (counter * 15)),
+                    Name = "label" + port,
+                    Size = new System.Drawing.Size(146, 17),
+                    Text = port.portNr + ": " + port.deviceName,
+                    Tag = "port",
+                    Visible = true
+                };
+                gBoxInfo.Controls.Add(this.labelCOM);
 
-                    // Dodawanie etykiety urządzenia MEMS
-                    labelCOM = new Label();
-                    labelCOM.AutoSize = true;
-                    labelCOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-                    labelCOM.Location = new System.Drawing.Point(20, 85 + (counter * 15));
-                    labelCOM.Name = "label" + port;
-                    labelCOM.Size = new System.Drawing.Size(146, 17);
-                    labelCOM.Text = port.portNr + ": " + port.deviceName;
-                    labelCOM.Visible = true;
-                    gBoxInfo.Controls.Add(this.labelCOM);
-
-                    // Dodawanie portu do listy dostępnych portów
-                    cBoxPorts.Items.Add(port.portNr);
-                }
-                catch (Exception exc)
-                {
-                }
+                // Dodawanie portu do listy dostępnych portów
+                cBoxPorts.Items.Add(port.portNr);
             }
+
+            if (cBoxPorts.Items.Count > 0)
+                labelNoBoards.Visible = false; // Ukrycie informacji o braku urządzeń
+            else
+                labelNoBoards.Visible = true;
         }
         private System.Windows.Forms.Label labelCOM;
+
+        private void StartThread()
+        {
+            FrameAnalysis.SensorData(sensorsData, sensors, rTBoxData);
+        }
+
+        private void UserForm_Load(object sender, EventArgs e)
+        {
+            CheckPorts();
+            rtBoxHeader.AppendText("-----------------------------------------------------------------------------------------------------------------------------\n" +
+                                  "Czas przesłania| Ciśń. | Temp.| Wilg.|    Akcelerometr    |         Żyroskop         |     Magnetometr    |Przerwania| Nowe \n" +
+                                  "   [h:m:s.us]  | [hPa] | [°C] |  [%] | [mg] | [mg] | [mg] | [mdps] | [mdps] | [mdps] | [mG] | [mG] | [mG] |          | dane \n" +
+                                  "-----------------------------------------------------------------------------------------------------------------------------\n");
+
+        }
 
         // Wyświetlenie aplikacji na wierzchu, po załadowaniu
         private void UserForm_Shown(object sender, EventArgs e)
         {
             this.TopMost = false;
-        }
-
-        private void buttonOtworz_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                // Czyszczenie listy poprzednich urzadzen
-                foreach (ComboBox cBox in clear)
-                {
-                    cBox.Items.Clear();
-                }
-
-                // Wysłanie ustawień początkowych aplikacji
-                Communication.Query((byte)CmdType.DataSet, cBoxPorts.Text);
-
-                if (ChceckDevices(cBoxAccelerometer, (byte)SensId.Accelerometer))
-                {
-                    acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SetSensor.AccEnable, "Akcelerometr");
-                    sensors.Add(acc);
-                    gBoxMEMSSensors.Add(gBoxAccelerometer);
-                }
-
-                if (ChceckDevices(cBoxGyroscope, (byte)SensId.Gyroscope))
-                {
-                    gyr = new MotionSensor((byte)SensId.Gyroscope, (byte)SetSensor.GyrEnable, "Żyroskop");
-                    sensors.Add(gyr);
-                    gBoxMEMSSensors.Add(gBoxGyroscope);
-                }
-
-                if (ChceckDevices(cBoxMagnetometer, (byte)SensId.Magnetometer))
-                {
-                    mag = new MotionSensor((byte)SensId.Magnetometer, (byte)SetSensor.MagEnable, "Magnetometr");
-                    sensors.Add(mag);
-                    gBoxMEMSSensors.Add(gBoxMagnetometer);
-                }
-
-                if (ChceckDevices(cBoxThermometer, (byte)SensId.Thermometer))
-                {
-                    ther = new EnvSensor((byte)SensId.Thermometer, (byte)SetSensor.TherEnable, "Termometr");
-                    sensors.Add(ther);
-                    gBoxMEMSSensors.Add(gBoxThermometer);
-                }
-
-                if (ChceckDevices(cBoxHumidity, (byte)SensId.HumiditySensor))
-                {
-                    hum = new EnvSensor((byte)SensId.HumiditySensor, (byte)SetSensor.HumEnable, "Higrometr");
-                    sensors.Add(hum);
-                    gBoxMEMSSensors.Add(gBoxHumidity);
-                }
-
-                if (ChceckDevices(cBoxPressure, (byte)SensId.PressureSensor))
-                {
-                    pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SetSensor.PresEnable, "Barometr");
-                    sensors.Add(pre);
-                    gBoxMEMSSensors.Add(gBoxPressure);
-                }
-
-                buttonOpen.Enabled = false;
-                cBoxPorts.Enabled = false;
-                portOpenToolStripMenuItem.Enabled = false;
-
-                addData = new Queue<byte>();
-                frames = new Queue<byte[]>();
-                checkedFrames = new Queue<byte[]>();
-
-                ComTransmition.Read(addData);
-
-                // Wątek analizy danych
-                bgWAnalysis = new BackgroundWorker();
-                bgWAnalysis.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_Analysis);
-                bgWAnalysis.WorkerSupportsCancellation = true;
-                bgWAnalysis.WorkerReportsProgress = true;
-                bgWAnalysis.RunWorkerAsync();
-
-                // Wątek analizy danych
-                bgWCheck = new BackgroundWorker();
-                bgWCheck.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_bgWCheck);
-                bgWCheck.WorkerSupportsCancellation = true;
-                bgWCheck.WorkerReportsProgress = true;
-                bgWCheck.RunWorkerAsync();
-
-                // Wątek wyświetlania danych
-                bgWS = new BackgroundWorker();
-                bgWS.DoWork += new System.ComponentModel.DoWorkEventHandler(bgW_show);
-                bgWS.WorkerSupportsCancellation = true;
-                bgWS.WorkerReportsProgress = true;
-                bgWS.RunWorkerAsync(argument: rTBoxData);
-
-                command = new Data<byte[]>();
-                command.Changed += new EventHandler(this.NewCommandToShow);
-
-                // Włączanie/wyłączanie przycisków
-                foreach (Control control in enableDisable)
-                {
-                    control.Enabled = true;
-                }
-
-                buttonOpen.Enabled = false;
-                buttonStop.Enabled = false;
-                cBoxPorts.Enabled = false;
-
-                progressBarCOM.Value = 100;
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show("Wystąpił błąd podczas połączenia z portem szeregowym. Sprawdź parameters połączenia.", "Błąd");
-                ComTransmition.ClosePort();
-
-                progressBarCOM.Value = 0;
-
-                // Włączanie/wyłączanie przycisków
-                foreach (Control control in enableDisable)
-                {
-                    control.Enabled = false;
-                }
-
-                buttonOpen.Enabled = true;
-                cBoxPorts.Enabled = true;
-            }
-        }
-
-        private void NewCommandToShow(object sender, EventArgs e)
-        {
-            byte[] data = ((Data<byte[]>)sender).Dequeue();
-            foreach (Sensor s in sensors)
-            {
-                if (s.sensorNr == data[4])
-                {
-                    try
-                    {
-                        foreach (GroupBox g in tabPageSensors.Controls)
-                        {
-                            if ((string)g.Tag == s.sensorName)
-                            {
-                                TextBox tBox = (TextBox)(g.Controls[4].Controls[2]);
-                                tBox.Invoke((Action)delegate
-                                {
-                                    tBox.Text = data[6].ToString("X2");
-                                });
-                            }
-                        }
-                    }
-                    catch (InvalidCastException ice) { }
-                }
-            }
         }
 
         private bool ChceckDevices(ComboBox deviceList, byte sensor)
@@ -289,19 +159,172 @@ namespace Aplikacja_MEMS
             else return false;
         }
 
+        public void MakeFrames()
+        {
+            Analysis.FrameAnalysis.Analysis(addData, frames);
+        }
+
+        public void CheckSum()
+        {
+            Analysis.FrameAnalysis.CheckSum(frames, checkedFrames);
+        }
+
+        public void AssignFrames()
+        {
+            Analysis.FrameAnalysis.AssignFrames(checkedFrames, command, sensorsData);
+        }
+
+        private void NewCommandToShow(object sender, EventArgs e)
+        {
+            byte[] data = ((Data<byte[]>)sender).Dequeue();
+            foreach (Sensor s in sensors)
+            {
+                if (s.sensorNr == data[4])
+                {
+                    foreach (Control c in tabPageSensors.Controls)
+                    {
+                        if (c is GroupBox && (string)c.Tag == s.sensorName)
+                        {
+                            TextBox tBox = (TextBox)(c.Controls[4].Controls[2]);
+                            tBox.Invoke((Action)delegate
+                            {
+                                tBox.Text = data[6].ToString("X2");
+                            });
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void buttonOtworz_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Czyszczenie listy poprzednich urzadzen
+                foreach (ComboBox cBox in clear)
+                {
+                    cBox.Items.Clear();
+                }
+
+                // Wysłanie ustawień początkowych aplikacji
+                Communication.Query((byte)CmdType.DataSet, cBoxPorts.Text);
+
+                if (ChceckDevices(cBoxPressure, (byte)SensId.PressureSensor))
+                {
+                    pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SetSensor.PresEnable, "Barometr", 8);
+                    sensors.Add(pre);
+                    gBoxMEMSSensors.Add(gBoxPressure);
+                }
+
+                if (ChceckDevices(cBoxThermometer, (byte)SensId.Thermometer))
+                {
+                    ther = new EnvSensor((byte)SensId.Thermometer, (byte)SetSensor.TherEnable, "Termometr", 7);
+                    sensors.Add(ther);
+                    gBoxMEMSSensors.Add(gBoxThermometer);
+                }
+
+                if (ChceckDevices(cBoxHumidity, (byte)SensId.HumiditySensor))
+                {
+                    hum = new EnvSensor((byte)SensId.HumiditySensor, (byte)SetSensor.HumEnable, "Higrometr", 7);
+                    sensors.Add(hum);
+                    gBoxMEMSSensors.Add(gBoxHumidity);
+                }
+
+                if (ChceckDevices(cBoxAccelerometer, (byte)SensId.Accelerometer))
+                {
+                    acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SetSensor.AccEnable, "Akcelerometr", 7);
+                    sensors.Add(acc);
+                    gBoxMEMSSensors.Add(gBoxAccelerometer);
+                }
+
+                if (ChceckDevices(cBoxGyroscope, (byte)SensId.Gyroscope))
+                {
+                    gyr = new MotionSensor((byte)SensId.Gyroscope, (byte)SetSensor.GyrEnable, "Żyroskop", 9);
+                    sensors.Add(gyr);
+                    gBoxMEMSSensors.Add(gBoxGyroscope);
+                }
+
+                if (ChceckDevices(cBoxMagnetometer, (byte)SensId.Magnetometer))
+                {
+                    mag = new MotionSensor((byte)SensId.Magnetometer, (byte)SetSensor.MagEnable, "Magnetometr", 7);
+                    sensors.Add(mag);
+                    gBoxMEMSSensors.Add(gBoxMagnetometer);
+                }
+
+                addData = new Queue<byte>();
+                frames = new Queue<byte[]>();
+                checkedFrames = new Queue<byte[]>();
+                sensorsData = new Queue<byte[]>();
+
+                Analysis.FrameAnalysis.Enable();
+                ComTransmition.Read(addData);
+
+                ThreadStart makeFramesStart = new ThreadStart(MakeFrames);
+                Thread makeFrames = new Thread(makeFramesStart);
+                makeFrames.Start();
+
+                ThreadStart checkSumStart = new ThreadStart(CheckSum);
+                Thread checkSum = new Thread(checkSumStart);
+                checkSum.Start();
+
+                ThreadStart assignFrameStart = new ThreadStart(AssignFrames);
+                Thread assignFrame = new Thread(assignFrameStart);
+                assignFrame.Start();
+
+                ThreadStart start = new ThreadStart(StartThread);
+                Thread thread = new Thread(start);
+                thread.Start();
+
+                foreach (Sensor s in sensors)
+                {
+                    s.OpenPlot();
+                }
+
+                command = new Data<byte[]>();
+                command.Changed += new EventHandler(this.NewCommandToShow);
+
+                // Włączanie/wyłączanie przycisków
+                foreach (Control control in enableDisable)
+                {
+                    control.Enabled = true;
+                }
+
+                buttonOpen.Enabled = false;
+                buttonStop.Enabled = false;
+                cBoxPorts.Enabled = false;
+                btnRefresh.Enabled = false;
+                portOpenToolStripMenuItem.Enabled = false;
+
+                progressBarCOM.Value = 100;
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Wystąpił błąd podczas połączenia z portem szeregowym. Sprawdź parameters połączenia. \n" + exc.Message, "Błąd");
+                Communication.Query((byte)CmdType.StopTransmition);
+                ComTransmition.StopRead();
+                ComTransmition.ClosePort();
+                FrameAnalysis.Disable();
+
+                progressBarCOM.Value = 0;
+
+                // Włączanie/wyłączanie przycisków
+                foreach (Control control in enableDisable)
+                {
+                    control.Enabled = false;
+                }
+
+                buttonOpen.Enabled = true;
+                cBoxPorts.Enabled = true;
+            }
+        }
 
         private void buttonZamknij_Click(object sender, EventArgs e)
         {
-            Communication.Query((byte)CmdType.StopTransmition);
             ComTransmition.StopRead();
+            Communication.Query((byte)CmdType.StopTransmition);
             ComTransmition.ClosePort();
-
-            if (bgWAnalysis != null)
-                bgWAnalysis.CancelAsync();
-            if (bgWCheck != null)
-                bgWCheck.CancelAsync();
-            if (bgWS != null)
-                bgWS.CancelAsync();
+            FrameAnalysis.Disable();
 
             // Włączanie/wyłączanie przycisków
             foreach (Control control in enableDisable)
@@ -322,66 +345,7 @@ namespace Aplikacja_MEMS
             buttonOpen.Enabled = true;
             cBoxPorts.Enabled = true;
             portOpenToolStripMenuItem.Enabled = true;
-        }
-
-        // Włączenie funkcji analizy danych
-        public static void bgW_Analysis(object sender, DoWorkEventArgs e)
-        {
-            Analysis.FrameAnalysis.Analysis(addData, frames);
-        }
-
-        // Włączenie funkcji analizy danych
-        public static void bgW_bgWCheck(object sender, DoWorkEventArgs e)
-        {
-            Analysis.FrameAnalysis.CheckSum(frames, checkedFrames);
-        }
-
-        // Funkcja wyświetlania danych
-        public static void bgW_show(object sender, DoWorkEventArgs e)
-        {
-            // Rzutowanie textBoxa
-            RichTextBox rtBox = (RichTextBox)e.Argument;
-
-            while (true)
-            {
-                if (checkedFrames.Count > 0)
-                {
-                NextFrame:
-                    byte[] fr;
-
-                    // Sprawdzanie czy kolejka nie jest pusta
-                    while (checkedFrames.Count == 0) { Thread.Sleep(200); }
-                    // Pobieranie tablicy z kolejki
-                    fr = checkedFrames.Dequeue();
-
-                    // na wypadek pobrania "pustej" tablicy
-                    if (fr == null || fr.Length < 5) goto NextFrame;
-
-                   if (fr[2] == 0xD0 && fr[3] == 0x02)
-                    { 
-                        command.Enqueue(fr);
-                        goto NextFrame;
-                    }
-
-                    string s = "";
-
-                    // tworzenie ciągu znaków
-                    foreach (byte b in fr)
-                    {
-                        s += b.ToString("X2") + " ";
-                    }
-
-                    // wyświetlanie w textBoxie
-                    try
-                    {
-                        rtBox.Invoke((Action)delegate
-                        {
-                              rtBox.AppendText(s + "\n");
-                        });
-                    }
-                    catch (Exception exc) { }
-                }
-            }
+            btnRefresh.Enabled = true;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -530,15 +494,11 @@ namespace Aplikacja_MEMS
         // Ustawianie zakresów 
         private void SetScale(object sender, EventArgs e)
         {
-            try
+            foreach (Sensor s in sensors)
             {
-                foreach (MotionSensor s in sensors)
-                {
-                    if (s.sensorName == (string)((ComboBox)sender).Tag)
-                        s.SetScale(BitConverter.GetBytes(Int32.Parse(((ComboBox)sender).Text)));
-                }
+                if (s is MotionSensor ms && s.sensorName == (string)((ComboBox)sender).Tag)
+                    ms.SetScale(BitConverter.GetBytes(Int32.Parse(((ComboBox)sender).Text)));
             }
-            catch (Exception exc) { }
         }
 
         // Ustawianie parametrów rejestru
@@ -548,17 +508,14 @@ namespace Aplikacja_MEMS
             {
                 if (s.sensorName == (string)((Button)sender).Tag)
                 {
-                    try
+                    foreach (Control c in tabPageSensors.Controls)
                     {
-                        foreach (GroupBox g in tabPageSensors.Controls)
+                        if (c is GroupBox && c.Tag == ((Button)sender).Tag)
                         {
-                            if (g.Tag == ((Button)sender).Tag)
-                            {
-                                s.SetRegisterParameter(g.Controls[4].Controls[3].Text, g.Controls[4].Controls[2].Text);
-                            }
+                            s.SetRegisterParameter(c.Controls[4].Controls[3].Text, c.Controls[4].Controls[2].Text);
                         }
                     }
-                    catch (InvalidCastException ice) { }
+
                 }
             }
         }
@@ -570,26 +527,21 @@ namespace Aplikacja_MEMS
             {
                 if (s.sensorName == (string)((Button)sender).Tag)
                 {
-                    try
+                    foreach (Control c in tabPageSensors.Controls)
                     {
-                        foreach (GroupBox g in tabPageSensors.Controls)
+                        if (c is GroupBox && c.Tag == ((Button)sender).Tag)
                         {
-                            if (g.Tag == ((Button)sender).Tag)
-                            {
-                                  s.GetRegisterParameter(g.Controls[4].Controls[3].Text);
-                              
-                            }
+                            s.GetRegisterParameter(c.Controls[4].Controls[3].Text);
                         }
                     }
-                    catch (InvalidCastException ice) { }
                 }
             }
         }
 
-
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Communication.Query((byte)CmdType.StopTransmition);
+            FrameAnalysis.Disable();
             ComTransmition.ClosePort();
         }
 
@@ -608,5 +560,9 @@ namespace Aplikacja_MEMS
             rTBoxData.Text = "";
         }
 
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            CheckPorts();
+        }
     }
 }

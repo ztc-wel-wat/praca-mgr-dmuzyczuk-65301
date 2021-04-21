@@ -53,7 +53,7 @@ namespace Aplikacja_MEMS
             this.MaximizeBox = false;
             this.Name = "Loading";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ładowanie Aplikacji MEMS";
+            this.Text = "Ładowanie dostępnych portów COM";
             this.TopMost = true;
             this.ResumeLayout(false);
 

@@ -1,19 +1,24 @@
 ﻿using System;
+using System.Threading;
+using System.Windows.Forms;
+using Aplikacja_MEMS.Forms;
 using Aplikacja_MEMS.Registers;
 
 namespace Aplikacja_MEMS
 {
     public abstract class Sensor
     {
-        public static byte enableByte = 0x77;
-        public static byte enableInterruptByte = 0x01;
+        public static byte enableByte = (byte)Sensors.SetSensor.AllEnable;
+        public static byte enableInterruptByte = (byte)Sensors.SetSensor.Interupts;
         public byte activate;
         public byte sensorNr;
         public bool isEnabled;
         public string sensorName;
         public SensorRegister register;
         public int selectedDeviceIndex;
-
+        public string type;
+        public int width;
+        Plot plot;
 
         // Ustawianie wybranego sensora do pracy
         public void SetSensor(int index)
@@ -21,23 +26,35 @@ namespace Aplikacja_MEMS
             Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetWorkingSensor, this.sensorNr, (byte)index);
         }
 
+        public void OpenPlot()
+        {
+            ThreadStart openPlotStart = new ThreadStart(PlotShow);
+            Thread openPlot = new Thread(openPlotStart);
+            openPlot.Start();
+        }
+
+        private void PlotShow()
+        {
+            Application.Run(plot = new Plot());
+        }
+
         public static void EnableAll()
         {
-            enableByte = 0x77;
-            enableInterruptByte = 0x01;
+            enableByte = (byte)Sensors.SetSensor.AllEnable;
+            enableInterruptByte = (byte)Sensors.SetSensor.AllDisable;
             Communication.Query((byte)CmdType.SensorEnable, enableByte, enableInterruptByte);
         }
         public static void DisableAll()
         {
-            enableByte = 0x00;
-            enableInterruptByte = 0x00;
+            enableByte = (byte)Sensors.SetSensor.AllDisable;
+            enableInterruptByte = (byte)Sensors.SetSensor.AllDisable;
             Communication.Query((byte)CmdType.SensorEnable, enableByte, enableInterruptByte);
         }
 
         public static void ChangeInterrupt()
         {
-            if (enableInterruptByte == 0x01) enableInterruptByte = 0x00;
-            else enableInterruptByte = 0x01;
+            if (enableInterruptByte == (byte)Sensors.SetSensor.Interupts) enableInterruptByte = (byte)Sensors.SetSensor.AllDisable;
+            else enableInterruptByte = (byte)Sensors.SetSensor.Interupts;
             Communication.Query((byte)CmdType.SensorEnable, enableByte, enableInterruptByte);
         }
 
@@ -61,22 +78,12 @@ namespace Aplikacja_MEMS
         // Ustawianie parametru
         public void SetRegisterParameter(string address, string value)
         {
-            try
-            {
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address), Analysis.HexUtil.ToBytes(value));
-            }
-            catch (Exception exc) { };
         }
 
         public void GetRegisterParameter(string address)
         {
-            try
-            {
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address));
-            }
-            catch (Exception exc) { };
-
-
         }
      
         public void OpenRegister()

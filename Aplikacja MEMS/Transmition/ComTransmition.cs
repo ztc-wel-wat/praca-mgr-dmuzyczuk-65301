@@ -11,19 +11,22 @@ namespace Aplikacja_MEMS.Transmition
     static class ComTransmition
     {
         // Stałe paska ładowania
-        static ThreadStart startBar = new ThreadStart(StartProgressBar);
-        static Thread progressBar = new Thread(startBar);
         static Loading loading = new Loading();
+        static ThreadStart startBar = new ThreadStart(StartProgressBar);
 
         public static SerialPort serialPort = new SerialPort();
 
         // BGWorker odbioru danych
+        static ParameterizedThreadStart receiveByteStart;
+        static Thread receiveByte;
+
         public static BackgroundWorker bgWorkReceive = new BackgroundWorker();
         private static bool receive = false;
 
         // Uruchomienie wątku paska ładowania
         private static void StartProgressBar()
         {
+            loading = new Loading();
             Application.Run(loading);
         }
 
@@ -34,6 +37,7 @@ namespace Aplikacja_MEMS.Transmition
             string[] comPorts = SerialPort.GetPortNames();
 
             // Włączenie paska ładowania
+            Thread progressBar = new Thread(startBar);
             progressBar.Start();
             Thread.Sleep(100);
 
@@ -58,10 +62,13 @@ namespace Aplikacja_MEMS.Transmition
                     // Dodawanie nr portu i nazwy urządzenia do listy
                     memsPorts.Add(memsPort);
                 }
-                catch (Exception exc)
+                catch
                 {
                     serialPort.ReadTimeout = -1;
+                    serialPort.Close();
                 }
+
+                serialPort.ReadTimeout = -1;
                 serialPort.Close();
 
                 // Aktualizowanie paska ładowania
@@ -87,8 +94,9 @@ namespace Aplikacja_MEMS.Transmition
                 serialPort.ReadBufferSize = 16384;
                 serialPort.Open();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
+                throw e;
             }
         }
 
@@ -96,6 +104,7 @@ namespace Aplikacja_MEMS.Transmition
         {
             if (serialPort.IsOpen)
             {
+                StopRead();
                 serialPort.DiscardInBuffer();
                 serialPort.DiscardOutBuffer();
                 serialPort.Close();
@@ -124,24 +133,17 @@ namespace Aplikacja_MEMS.Transmition
         // Odbiór danych
         public static byte[] ReadMessage()
         {
-            try
+            byte[] message = new byte[serialPort.ReadBufferSize];
+            int length = serialPort.Read(message, 0, serialPort.ReadBufferSize);
+
+            if (length > 0)
             {
-                byte[] message = new byte[serialPort.ReadBufferSize];
-                int length = serialPort.Read(message, 0, serialPort.ReadBufferSize);
+                byte[] retMessage = new byte[length];
+                Array.Copy(message, retMessage, length);
 
-                if (length > 0)
-                {
-                    byte[] retMessage = new byte[length];
-                    Array.Copy(message, retMessage, length);
-
-                    return retMessage;
-                }
-                else
-                {
-                    return null;
-                }
+                return retMessage;
             }
-            catch (Exception exc)
+            else
             {
                 return null;
             }
@@ -150,31 +152,26 @@ namespace Aplikacja_MEMS.Transmition
         public static void Read(Queue<byte> data)
         {
             receive = true;
-
-            bgWorkReceive.DoWork += new System.ComponentModel.DoWorkEventHandler(bgWorkReceive_DoWork);
-            bgWorkReceive.WorkerSupportsCancellation = true;
-            bgWorkReceive.WorkerReportsProgress = true;
-            bgWorkReceive.RunWorkerAsync(argument: data);
+            receiveByteStart = new ParameterizedThreadStart(Receive);
+            receiveByte = new Thread(receiveByteStart);
+            receiveByte.Start(data);
         }
 
         public static void StopRead()
         {
             receive = false;
-            if (bgWorkReceive.IsBusy)
-                bgWorkReceive.CancelAsync();
         }
 
-        public static void bgWorkReceive_DoWork(object sender, DoWorkEventArgs e)
+        public static void Receive(object data)
         {
             byte readData;
-            while (receive)
+            while (serialPort.IsOpen && receive)
             {
                 try
                 {
-                    readData = (byte)serialPort.ReadByte();
-                    ((Queue<byte>)e.Argument).Enqueue(readData);
+                    ((Queue<byte>)data).Enqueue((byte)serialPort.ReadByte());
                 }
-                catch (Exception exc) { }
+                catch { }
             }
         }
 

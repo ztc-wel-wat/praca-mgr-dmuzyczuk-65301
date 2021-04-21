@@ -4,12 +4,14 @@
     {
         byte[] data;
 
-        public EnvSensor(byte sensorNumber, byte sensorActivate, string name)
+        public EnvSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth)
         {
             sensorName = name;
             activate = sensorActivate;
             sensorNr = sensorNumber;
-            isEnabled = false;
+            isEnabled = false; 
+            type = "Env";
+            width = sensWidth;
         }
     }
 }
