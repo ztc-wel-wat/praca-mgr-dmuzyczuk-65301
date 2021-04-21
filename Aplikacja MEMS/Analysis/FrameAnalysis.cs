@@ -36,8 +36,7 @@ namespace Aplikacja_MEMS.Analysis
                         buffer[count] = add;
                         count++;
 
-                        while (data.Count == 0)
-                            Thread.Sleep(100);
+                        while (data.Count == 0) { }
 
                         add = data.Dequeue();
                     }
@@ -66,14 +65,14 @@ namespace Aplikacja_MEMS.Analysis
                 if (toCheck != null)
                 {
                     foreach (byte b in toCheck)
-                    {
                         sum += b;
-                    }
 
-                    if (sum == 0x00) destination.Enqueue(toCheck);
+                    if (sum == 0x00) 
+                        destination.Enqueue(toCheck);
                 }
             }
         }
+
         public static void SensorData(Queue<byte[]> data, List<Sensor> sensors, RichTextBox rtBox) //Data<string> toShow
         {
             enabled = true;
@@ -94,7 +93,7 @@ namespace Aplikacja_MEMS.Analysis
 
                         foreach (Sensor s in sensors)
                         {
-                            showText += AddText(frame, sensorIndex, s.type, startIndex, s.width, s);
+                            showText += AddText(frame, sensorIndex, s, startIndex);
                             sensorIndex++;
                         }
 
@@ -146,10 +145,10 @@ namespace Aplikacja_MEMS.Analysis
 
             }
         }
-        private static string AddText(byte[] frame, int place, string type, int startIndex, int width, Sensor s)
+        private static string AddText(byte[] frame, int place, Sensor s, int startIndex)
         {
             string text = "";
-            if (type == "Env")
+            if (s.type == "Env")
             {
                 if ((frame[7] & (1 << place)) != 0)
                 {
@@ -157,22 +156,22 @@ namespace Aplikacja_MEMS.Analysis
                     string floated = toAdd.ToString("0.00");
 
                     floated += "|";
-                    floated = String.Format("{0," + width + "}", floated);
+                    floated = String.Format("{0," + s.width + "}", floated);
                     text += floated;
                     startIndex += 4;
 
-                    // s.AddData(toAdd);
+                     s.AddData(toAdd);
                 }
                 else
                 {
-                    for (int j = 0; j < width - 1; j++)
+                    for (int j = 0; j < s.width - 1; j++)
                     {
                         text += " ";
                     }
                     text += "|";
                 }
             }
-            else if (type == "Motion")
+            else if (s.type == "Motion")
             {
                 if ((frame[7] & (1 << place)) != 0)
                 {
@@ -184,17 +183,17 @@ namespace Aplikacja_MEMS.Analysis
 
 
                         string floated = inted.ToString() + "|";
-                        floated = String.Format("{0," + width + "}", floated);
+                        floated = String.Format("{0," + s.width + "}", floated);
                         text += floated;
                         startIndex += 4;
                     }
-                    // s.AddData(data);
+                    s.AddData(data);
                 }
                 else
                 {
                     for (int i = 0; i < 3; i++)
                     {
-                        for (int j = 0; j < width - 1; j++)
+                        for (int j = 0; j < s.width - 1; j++)
                         {
                             text += " ";
                         }

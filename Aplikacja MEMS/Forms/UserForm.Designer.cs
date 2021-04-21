@@ -764,6 +764,7 @@ namespace Aplikacja_MEMS
             this.buttonHumDrawPlot.Tag = "Higrometr";
             this.buttonHumDrawPlot.Text = "Rysuj wykres";
             this.buttonHumDrawPlot.UseVisualStyleBackColor = true;
+            this.buttonHumDrawPlot.Click += new System.EventHandler(this.ShowPlot);
             // 
             // chBoxHumEnabled
             // 
@@ -959,6 +960,7 @@ namespace Aplikacja_MEMS
             this.buttonMagDrawPlot.Tag = "Magnetometr";
             this.buttonMagDrawPlot.Text = "Rysuj wykres";
             this.buttonMagDrawPlot.UseVisualStyleBackColor = true;
+            this.buttonMagDrawPlot.Click += new System.EventHandler(this.ShowPlot);
             // 
             // labMagODR
             // 
@@ -1169,6 +1171,7 @@ namespace Aplikacja_MEMS
             this.buttonPreDrawPlot.Tag = "Barometr";
             this.buttonPreDrawPlot.Text = "Rysuj wykres";
             this.buttonPreDrawPlot.UseVisualStyleBackColor = true;
+            this.buttonPreDrawPlot.Click += new System.EventHandler(this.ShowPlot);
             // 
             // chBoxPreEnabled
             // 
@@ -1375,6 +1378,7 @@ namespace Aplikacja_MEMS
             this.buttonGyrDrawPlot.Tag = "Żyroskop";
             this.buttonGyrDrawPlot.Text = "Rysuj wykres";
             this.buttonGyrDrawPlot.UseVisualStyleBackColor = true;
+            this.buttonGyrDrawPlot.Click += new System.EventHandler(this.ShowPlot);
             // 
             // labGyrODR
             // 
@@ -1583,6 +1587,7 @@ namespace Aplikacja_MEMS
             this.buttonTherDrawPlot.Tag = "Termometr";
             this.buttonTherDrawPlot.Text = "Rysuj wykres";
             this.buttonTherDrawPlot.UseVisualStyleBackColor = true;
+            this.buttonTherDrawPlot.Click += new System.EventHandler(this.ShowPlot);
             // 
             // chBoxTherEnabled
             // 
@@ -1790,6 +1795,7 @@ namespace Aplikacja_MEMS
             this.buttonAccDrawPlot.Tag = "Akcelerometr";
             this.buttonAccDrawPlot.Text = "Rysuj wykres";
             this.buttonAccDrawPlot.UseVisualStyleBackColor = true;
+            this.buttonAccDrawPlot.Click += new System.EventHandler(this.ShowPlot);
             // 
             // labAccODR
             // 

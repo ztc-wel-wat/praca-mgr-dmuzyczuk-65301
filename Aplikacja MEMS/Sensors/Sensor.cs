@@ -18,7 +18,9 @@ namespace Aplikacja_MEMS
         public int selectedDeviceIndex;
         public string type;
         public int width;
-        Plot plot;
+        protected Plot plot;
+
+        public abstract void AddData(object data);
 
         // Ustawianie wybranego sensora do pracy
         public void SetSensor(int index)
@@ -28,14 +30,19 @@ namespace Aplikacja_MEMS
 
         public void OpenPlot()
         {
-            ThreadStart openPlotStart = new ThreadStart(PlotShow);
-            Thread openPlot = new Thread(openPlotStart);
-            openPlot.Start();
+            if (plot == null)
+            {
+                ThreadStart openPlotStart = new ThreadStart(PlotShow);
+                Thread openPlot = new Thread(openPlotStart);
+                openPlot.Start();
+            }
+            else
+                plot.ShowMe();
         }
 
         private void PlotShow()
         {
-            Application.Run(plot = new Plot());
+            Application.Run(plot = new Plot(this.sensorName));
         }
 
         public static void EnableAll()

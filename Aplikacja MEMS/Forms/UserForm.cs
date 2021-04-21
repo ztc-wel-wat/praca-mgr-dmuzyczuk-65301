@@ -277,9 +277,7 @@ namespace Aplikacja_MEMS
                 thread.Start();
 
                 foreach (Sensor s in sensors)
-                {
                     s.OpenPlot();
-                }
 
                 command = new Data<byte[]>();
                 command.Changed += new EventHandler(this.NewCommandToShow);
@@ -310,9 +308,7 @@ namespace Aplikacja_MEMS
 
                 // Włączanie/wyłączanie przycisków
                 foreach (Control control in enableDisable)
-                {
                     control.Enabled = false;
-                }
 
                 buttonOpen.Enabled = true;
                 cBoxPorts.Enabled = true;
@@ -563,6 +559,15 @@ namespace Aplikacja_MEMS
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             CheckPorts();
+        }
+
+        private void ShowPlot(object sender, EventArgs e)
+        {
+            foreach (Sensor s in sensors)
+            {
+                if ((string)((Button)sender).Tag == s.sensorName)
+                    s.OpenPlot();
+            }
         }
     }
 }
