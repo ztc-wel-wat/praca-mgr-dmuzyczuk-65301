@@ -46,6 +46,7 @@ namespace Aplikacja_MEMS
             this.labelGyroscope = new System.Windows.Forms.Label();
             this.labelAccelerometer = new System.Windows.Forms.Label();
             this.gBoxConnection = new System.Windows.Forms.GroupBox();
+            this.pBoxLogoWEL = new System.Windows.Forms.PictureBox();
             this.progressBarData = new System.Windows.Forms.ProgressBar();
             this.labelExchangeStatus = new System.Windows.Forms.Label();
             this.labelDataExchange = new System.Windows.Forms.Label();
@@ -58,7 +59,9 @@ namespace Aplikacja_MEMS
             this.cBoxPorts = new System.Windows.Forms.ComboBox();
             this.labelPortSelection = new System.Windows.Forms.Label();
             this.gBoxInfo = new System.Windows.Forms.GroupBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
+            this.pBoxBoard = new System.Windows.Forms.PictureBox();
             this.labelNoBoards = new System.Windows.Forms.Label();
             this.labelAvailablePorts = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
@@ -181,14 +184,13 @@ namespace Aplikacja_MEMS
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pBoxLogoWEL = new System.Windows.Forms.PictureBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.pBoxBoard = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
             this.gBoxConnection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).BeginInit();
             this.gBoxInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).BeginInit();
             this.tabPageSensors.SuspendLayout();
             this.gBoxHumidity.SuspendLayout();
             this.gBoxHumRegister.SuspendLayout();
@@ -204,8 +206,6 @@ namespace Aplikacja_MEMS
             this.gBoxAccRegister.SuspendLayout();
             this.tabPageData.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -403,6 +403,15 @@ namespace Aplikacja_MEMS
             this.gBoxConnection.TabStop = false;
             this.gBoxConnection.Text = "Połączenie";
             // 
+            // pBoxLogoWEL
+            // 
+            this.pBoxLogoWEL.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
+            this.pBoxLogoWEL.Location = new System.Drawing.Point(347, 38);
+            this.pBoxLogoWEL.Name = "pBoxLogoWEL";
+            this.pBoxLogoWEL.Size = new System.Drawing.Size(80, 80);
+            this.pBoxLogoWEL.TabIndex = 11;
+            this.pBoxLogoWEL.TabStop = false;
+            // 
             // progressBarData
             // 
             this.progressBarData.Location = new System.Drawing.Point(470, 104);
@@ -532,6 +541,18 @@ namespace Aplikacja_MEMS
             this.gBoxInfo.TabStop = false;
             this.gBoxInfo.Text = "Informacje";
             // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.refresh;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.Location = new System.Drawing.Point(115, 65);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(22, 22);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
             // labelTitle
             // 
             this.labelTitle.AutoSize = true;
@@ -542,6 +563,16 @@ namespace Aplikacja_MEMS
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Aplikacja MEMS czujnika IKS01A2";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pBoxBoard
+            // 
+            this.pBoxBoard.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
+            this.pBoxBoard.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
+            this.pBoxBoard.Location = new System.Drawing.Point(572, 10);
+            this.pBoxBoard.Name = "pBoxBoard";
+            this.pBoxBoard.Size = new System.Drawing.Size(185, 144);
+            this.pBoxBoard.TabIndex = 4;
+            this.pBoxBoard.TabStop = false;
             // 
             // labelNoBoards
             // 
@@ -2017,37 +2048,6 @@ namespace Aplikacja_MEMS
             this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.oProgramieToolStripMenuItem.Text = "O programie";
             // 
-            // pBoxLogoWEL
-            // 
-            this.pBoxLogoWEL.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
-            this.pBoxLogoWEL.Location = new System.Drawing.Point(347, 38);
-            this.pBoxLogoWEL.Name = "pBoxLogoWEL";
-            this.pBoxLogoWEL.Size = new System.Drawing.Size(80, 80);
-            this.pBoxLogoWEL.TabIndex = 11;
-            this.pBoxLogoWEL.TabStop = false;
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.refresh;
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.Location = new System.Drawing.Point(125, 64);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(22, 22);
-            this.btnRefresh.TabIndex = 5;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // pBoxBoard
-            // 
-            this.pBoxBoard.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
-            this.pBoxBoard.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
-            this.pBoxBoard.Location = new System.Drawing.Point(572, 10);
-            this.pBoxBoard.Name = "pBoxBoard";
-            this.pBoxBoard.Size = new System.Drawing.Size(185, 144);
-            this.pBoxBoard.TabIndex = 4;
-            this.pBoxBoard.TabStop = false;
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2070,8 +2070,10 @@ namespace Aplikacja_MEMS
             this.gBoxSensors.PerformLayout();
             this.gBoxConnection.ResumeLayout(false);
             this.gBoxConnection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).EndInit();
             this.gBoxInfo.ResumeLayout(false);
             this.gBoxInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).EndInit();
             this.tabPageSensors.ResumeLayout(false);
             this.gBoxHumidity.ResumeLayout(false);
             this.gBoxHumidity.PerformLayout();
@@ -2100,8 +2102,6 @@ namespace Aplikacja_MEMS
             this.tabPageData.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

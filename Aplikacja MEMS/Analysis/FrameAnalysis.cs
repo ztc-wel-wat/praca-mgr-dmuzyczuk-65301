@@ -36,7 +36,9 @@ namespace Aplikacja_MEMS.Analysis
                         buffer[count] = add;
                         count++;
 
-                        while (data.Count == 0) { }
+                        while (data.Count == 0)
+                            if (!enabled)
+                                return;
 
                         add = data.Dequeue();
                     }
@@ -67,19 +69,22 @@ namespace Aplikacja_MEMS.Analysis
                     foreach (byte b in toCheck)
                         sum += b;
 
-                    if (sum == 0x00) 
+                    if (sum == 0x00)
+                    {
                         destination.Enqueue(toCheck);
+                    }
                 }
             }
         }
 
-        public static void SensorData(Queue<byte[]> data, List<Sensor> sensors, RichTextBox rtBox) //Data<string> toShow
+        public static void SensorData(Queue<byte[]> data, List<Sensor> sensors, RichTextBox rtBox, bool show)
         {
             enabled = true;
             while (enabled)
             {
                 if (data.Count > 0)
                 {
+
                     byte[] frame = data.Dequeue();
                     if (frame != null)
                     {
@@ -104,14 +109,20 @@ namespace Aplikacja_MEMS.Analysis
                         }
                         else showText += "          |";
 
-                        rtBox.Invoke((Action)delegate
+                        if (UserForm.showText)
                         {
-                            rtBox.AppendText(showText + "0x" + frame[7].ToString("X2") + "\n");
-                        });
+                            rtBox.Invoke((Action)delegate
+                            {
+                                rtBox.Text += (showText + "0x" + frame[7].ToString("X2") + "\n");
+                            });
+
+                        }
+                           
                     }
-                    //toShow.Enqueue(showText + "0x" + frame[7].ToString("X2") + "\n");
                 }
             }
+
+
         }
         public static void AssignFrames(Queue<byte[]> checkedFrames, Data<byte[]> command, Queue<byte[]> sensorsData)
         {
@@ -123,7 +134,9 @@ namespace Aplikacja_MEMS.Analysis
                     byte[] fr;
 
                     // Sprawdzanie czy kolejka nie jest pusta
-                    while (checkedFrames.Count == 0) { }
+                    while (checkedFrames.Count == 0)
+                        if (!enabled)
+                            return;
 
                     // Pobieranie tablicy z kolejki
                     fr = checkedFrames.Dequeue();
@@ -160,7 +173,7 @@ namespace Aplikacja_MEMS.Analysis
                     text += floated;
                     startIndex += 4;
 
-                     s.AddData(toAdd);
+                    s.AddData(toAdd);
                 }
                 else
                 {

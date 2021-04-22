@@ -6,7 +6,7 @@ namespace Aplikacja_MEMS.Sensors
     {
         byte[] data;
 
-        public EnvSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth)
+        public EnvSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth, float sensOdr)
         {
             sensorName = name;
             activate = sensorActivate;
@@ -14,6 +14,7 @@ namespace Aplikacja_MEMS.Sensors
             isEnabled = false; 
             type = "Env";
             width = sensWidth;
+            odr = sensOdr;
         }
 
         public override void AddData(object data)

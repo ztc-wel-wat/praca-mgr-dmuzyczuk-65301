@@ -24,10 +24,13 @@ namespace Aplikacja_MEMS
         EnvSensor hum;
         EnvSensor pre;
 
+        public static bool showText = true;
+
         static Queue<byte> addData;
         static Queue<byte[]> frames;
         static Queue<byte[]> checkedFrames;
         static Queue<byte[]> sensorsData;
+        static Queue<string> toShow;
         static Data<byte[]> command;
 
         public UserForm()
@@ -87,7 +90,6 @@ namespace Aplikacja_MEMS
                 {
                     gBoxInfo.Controls.Remove(c);
                 }
-
             }
             cBoxPorts.Items.Clear();
             // Tworzenie listy etykiet z urządzeniami MEMS
@@ -118,11 +120,6 @@ namespace Aplikacja_MEMS
         }
         private System.Windows.Forms.Label labelCOM;
 
-        private void StartThread()
-        {
-            FrameAnalysis.SensorData(sensorsData, sensors, rTBoxData);
-        }
-
         private void UserForm_Load(object sender, EventArgs e)
         {
             CheckPorts();
@@ -131,12 +128,13 @@ namespace Aplikacja_MEMS
                                   "   [h:m:s.us]  | [hPa] | [°C] |  [%] | [mg] | [mg] | [mg] | [mdps] | [mdps] | [mdps] | [mG] | [mG] | [mG] |          | dane \n" +
                                   "-----------------------------------------------------------------------------------------------------------------------------\n");
 
+            BringToFront();
         }
 
         // Wyświetlenie aplikacji na wierzchu, po załadowaniu
         private void UserForm_Shown(object sender, EventArgs e)
         {
-            this.TopMost = false;
+            TopMost = false;
         }
 
         private bool ChceckDevices(ComboBox deviceList, byte sensor)
@@ -169,9 +167,14 @@ namespace Aplikacja_MEMS
             Analysis.FrameAnalysis.CheckSum(frames, checkedFrames);
         }
 
+
         public void AssignFrames()
         {
             Analysis.FrameAnalysis.AssignFrames(checkedFrames, command, sensorsData);
+        }
+        private void AddText()
+        {
+             FrameAnalysis.SensorData(sensorsData, sensors, rTBoxData, showText);
         }
 
         private void NewCommandToShow(object sender, EventArgs e)
@@ -196,7 +199,6 @@ namespace Aplikacja_MEMS
             }
         }
 
-
         private void buttonOtworz_Click(object sender, EventArgs e)
         {
             try
@@ -212,42 +214,42 @@ namespace Aplikacja_MEMS
 
                 if (ChceckDevices(cBoxPressure, (byte)SensId.PressureSensor))
                 {
-                    pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SetSensor.PresEnable, "Barometr", 8);
+                    pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SetSensor.PresEnable, "Barometr", 8, float.Parse(cBoxPreODR.Text));
                     sensors.Add(pre);
                     gBoxMEMSSensors.Add(gBoxPressure);
                 }
 
                 if (ChceckDevices(cBoxThermometer, (byte)SensId.Thermometer))
                 {
-                    ther = new EnvSensor((byte)SensId.Thermometer, (byte)SetSensor.TherEnable, "Termometr", 7);
+                    ther = new EnvSensor((byte)SensId.Thermometer, (byte)SetSensor.TherEnable, "Termometr", 7, float.Parse(cBoxTherODR.Text));
                     sensors.Add(ther);
                     gBoxMEMSSensors.Add(gBoxThermometer);
                 }
 
                 if (ChceckDevices(cBoxHumidity, (byte)SensId.HumiditySensor))
                 {
-                    hum = new EnvSensor((byte)SensId.HumiditySensor, (byte)SetSensor.HumEnable, "Higrometr", 7);
+                    hum = new EnvSensor((byte)SensId.HumiditySensor, (byte)SetSensor.HumEnable, "Higrometr", 7, float.Parse(cBoxHumODR.Text));
                     sensors.Add(hum);
                     gBoxMEMSSensors.Add(gBoxHumidity);
                 }
 
                 if (ChceckDevices(cBoxAccelerometer, (byte)SensId.Accelerometer))
                 {
-                    acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SetSensor.AccEnable, "Akcelerometr", 7);
+                    acc = new MotionSensor((byte)SensId.Accelerometer, (byte)SetSensor.AccEnable, "Akcelerometr", 7, float.Parse(cBoxAccODR.Text));
                     sensors.Add(acc);
                     gBoxMEMSSensors.Add(gBoxAccelerometer);
                 }
 
                 if (ChceckDevices(cBoxGyroscope, (byte)SensId.Gyroscope))
                 {
-                    gyr = new MotionSensor((byte)SensId.Gyroscope, (byte)SetSensor.GyrEnable, "Żyroskop", 9);
+                    gyr = new MotionSensor((byte)SensId.Gyroscope, (byte)SetSensor.GyrEnable, "Żyroskop", 9, float.Parse(cBoxGyrODR.Text));
                     sensors.Add(gyr);
                     gBoxMEMSSensors.Add(gBoxGyroscope);
                 }
 
                 if (ChceckDevices(cBoxMagnetometer, (byte)SensId.Magnetometer))
                 {
-                    mag = new MotionSensor((byte)SensId.Magnetometer, (byte)SetSensor.MagEnable, "Magnetometr", 7);
+                    mag = new MotionSensor((byte)SensId.Magnetometer, (byte)SetSensor.MagEnable, "Magnetometr", 7, float.Parse(cBoxMagODR.Text));
                     sensors.Add(mag);
                     gBoxMEMSSensors.Add(gBoxMagnetometer);
                 }
@@ -256,25 +258,29 @@ namespace Aplikacja_MEMS
                 frames = new Queue<byte[]>();
                 checkedFrames = new Queue<byte[]>();
                 sensorsData = new Queue<byte[]>();
+                toShow = new Queue<string>();
 
                 Analysis.FrameAnalysis.Enable();
                 ComTransmition.Read(addData);
 
                 ThreadStart makeFramesStart = new ThreadStart(MakeFrames);
                 Thread makeFrames = new Thread(makeFramesStart);
+                makeFrames.Priority = ThreadPriority.Highest;
                 makeFrames.Start();
 
                 ThreadStart checkSumStart = new ThreadStart(CheckSum);
                 Thread checkSum = new Thread(checkSumStart);
+                checkSum.Priority = ThreadPriority.Highest;
                 checkSum.Start();
 
                 ThreadStart assignFrameStart = new ThreadStart(AssignFrames);
                 Thread assignFrame = new Thread(assignFrameStart);
+                assignFrame.Priority = ThreadPriority.Highest;
                 assignFrame.Start();
 
-                ThreadStart start = new ThreadStart(StartThread);
-                Thread thread = new Thread(start);
-                thread.Start();
+                ThreadStart addTextStart = new ThreadStart(AddText);
+                Thread addText = new Thread(addTextStart);
+                addText.Start();
 
                 foreach (Sensor s in sensors)
                     s.OpenPlot();
@@ -287,6 +293,7 @@ namespace Aplikacja_MEMS
                 {
                     control.Enabled = true;
                 }
+
 
                 buttonOpen.Enabled = false;
                 buttonStop.Enabled = false;
@@ -322,6 +329,11 @@ namespace Aplikacja_MEMS
             ComTransmition.ClosePort();
             FrameAnalysis.Disable();
 
+            foreach (Sensor s in sensors)
+            {
+                s.ClosePlot();
+            }
+
             // Włączanie/wyłączanie przycisków
             foreach (Control control in enableDisable)
             {
@@ -338,10 +350,13 @@ namespace Aplikacja_MEMS
 
             progressBarCOM.Value = 0;
             progressBarData.Value = 0;
+
+
             buttonOpen.Enabled = true;
+            buttonStop.Enabled = true;
             cBoxPorts.Enabled = true;
-            portOpenToolStripMenuItem.Enabled = true;
             btnRefresh.Enabled = true;
+            portOpenToolStripMenuItem.Enabled = true;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -399,6 +414,17 @@ namespace Aplikacja_MEMS
                 buttonStop.Enabled = true;
                 EnableAllToolStripMenuItem.Enabled = true;
                 DisableAllToolStripMenuItem.Enabled = true;
+
+                foreach (Control c in tabPageSensors.Controls)
+                    if (c is GroupBox gBox)
+                        foreach (Control gBoxC in gBox.Controls)
+                        {
+                            if (gBoxC is ComboBox cBox && cBox.Name.Contains("ODR"))
+                                SetOdr(cBox, null);
+
+                            if (gBoxC is ComboBox cBoxScale && cBoxScale.Name.Contains("Scale"))
+                                SetScale(cBoxScale, null);
+                        }
 
                 progressBarData.Value = 100;
             }
@@ -467,7 +493,24 @@ namespace Aplikacja_MEMS
             foreach (Sensor s in sensors)
             {
                 if (s.sensorName == (string)((CheckBox)sender).Tag)
+                {
                     s.SetEnable(((CheckBox)sender).Checked);
+                    foreach (Control c in tabPageSensors.Controls)
+                        if (c is GroupBox)
+                        {
+                            foreach (Control g in c.Controls)
+                                if (g is ComboBox && g.Enabled && (string)g.Tag == s.sensorName && g.Name.Contains("ODR"))
+                                {
+                                    bool wasShown = showText;
+                                    showText = s.SumOdr(float.Parse(g.Text));
+
+                                    if (wasShown && !showText)
+                                        rTBoxData.AppendText("Ustawiono zbyt duży ODR, aby wyświetlić parametry!\n");
+                                }
+                        }
+
+                }
+
             }
         }
 
@@ -483,7 +526,10 @@ namespace Aplikacja_MEMS
             foreach (Sensor s in sensors)
             {
                 if (s.sensorName == (string)((ComboBox)sender).Tag)
+                {
                     s.SetOdr(BitConverter.GetBytes(float.Parse(((ComboBox)sender).Text)));
+                    s.SumOdr(float.Parse(((ComboBox)sender).Text));
+                }
             }
         }
 
@@ -511,7 +557,6 @@ namespace Aplikacja_MEMS
                             s.SetRegisterParameter(c.Controls[4].Controls[3].Text, c.Controls[4].Controls[2].Text);
                         }
                     }
-
                 }
             }
         }
@@ -536,9 +581,7 @@ namespace Aplikacja_MEMS
 
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Communication.Query((byte)CmdType.StopTransmition);
-            FrameAnalysis.Disable();
-            ComTransmition.ClosePort();
+            buttonZamknij_Click(this, null);
         }
 
         private void portOpenToolStripMenuItem_Click(object sender, EventArgs e)

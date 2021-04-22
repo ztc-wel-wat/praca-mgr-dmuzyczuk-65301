@@ -6,7 +6,7 @@ namespace Aplikacja_MEMS
     {
         byte[] data;
 
-        public MotionSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth)
+        public MotionSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth, float sensOdr)
         {
             sensorName = name;
             activate = sensorActivate;
@@ -14,7 +14,8 @@ namespace Aplikacja_MEMS
             isEnabled = false;
             type = "Motion";
             width = sensWidth;
-    }
+            odr = sensOdr;
+        }
 
         public override void AddData(object data)
         {

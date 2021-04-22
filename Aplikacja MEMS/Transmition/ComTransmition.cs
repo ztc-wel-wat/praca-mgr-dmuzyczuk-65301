@@ -154,6 +154,7 @@ namespace Aplikacja_MEMS.Transmition
             receive = true;
             receiveByteStart = new ParameterizedThreadStart(Receive);
             receiveByte = new Thread(receiveByteStart);
+            receiveByte.Priority = ThreadPriority.Highest;
             receiveByte.Start(data);
         }
 

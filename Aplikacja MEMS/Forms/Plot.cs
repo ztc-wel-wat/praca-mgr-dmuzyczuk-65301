@@ -27,6 +27,14 @@ namespace Aplikacja_MEMS.Forms
             });
         }
 
+        public void ExitPlot()
+        {
+            chart.Invoke((Action)delegate
+            {
+                Application.ExitThread();
+            });
+        }
+
         public void AddPoints(float x)
         {
             chart.Invoke((Action)delegate

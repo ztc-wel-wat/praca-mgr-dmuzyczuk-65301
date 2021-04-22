@@ -8,6 +8,9 @@ namespace Aplikacja_MEMS
 {
     public abstract class Sensor
     {
+        public static float odrSum = 32
+            ;
+        public float odr;
         public static byte enableByte = (byte)Sensors.SetSensor.AllEnable;
         public static byte enableInterruptByte = (byte)Sensors.SetSensor.Interupts;
         public byte activate;
@@ -26,6 +29,22 @@ namespace Aplikacja_MEMS
         public void SetSensor(int index)
         {
             Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetWorkingSensor, this.sensorNr, (byte)index);
+        }
+
+        public bool SumOdr(float newOdr)
+        {
+            if (isEnabled)
+            {
+                odrSum = odrSum - odr + newOdr;
+                odr = newOdr;
+            }
+
+            return (odrSum < 100);
+        }
+
+        public void ClosePlot()
+        {
+            plot.ExitPlot();
         }
 
         public void OpenPlot()
