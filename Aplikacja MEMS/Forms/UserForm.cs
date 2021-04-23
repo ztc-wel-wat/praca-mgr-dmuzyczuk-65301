@@ -18,10 +18,6 @@ namespace Aplikacja_MEMS
         static List<Sensor> sensors = new List<Sensor>();
         List<CheckBox> checks = new List<CheckBox>();
 
-
-        public static Stopwatch stopWatch = new Stopwatch();
-
-
         MotionSensor acc;
         MotionSensor gyr;
         MotionSensor mag;
@@ -267,24 +263,9 @@ namespace Aplikacja_MEMS
 
                 Analysis.FrameAnalysis.Enable();
 
-                ThreadStart makeFramesStart = new ThreadStart(MakeFrames);
-                Thread makeFrames = new Thread(makeFramesStart);
-                makeFrames.Priority = ThreadPriority.Highest;
-                makeFrames.Start();
+                object[] param = new object[] { command, sensors, rTBoxData };
+                ComTransmition.Read(param);
 
-                //ThreadStart checkSumStart = new ThreadStart(CheckSum);
-                //Thread checkSum = new Thread(checkSumStart);
-                //checkSum.Priority = ThreadPriority.Highest;
-                //checkSum.Start();
-
- //               ThreadStart assignFrameStart = new ThreadStart(AssignFrames);
-   //             Thread assignFrame = new Thread(assignFrameStart);
-     //           assignFrame.Priority = ThreadPriority.Highest;
-       //         assignFrame.Start();
-       //
-         //       ThreadStart addTextStart = new ThreadStart(AddText);
-           //     Thread addText = new Thread(addTextStart);
-             //   addText.Start();
 
                 foreach (Sensor s in sensors)
                     s.OpenPlot();
@@ -494,8 +475,6 @@ namespace Aplikacja_MEMS
         // Włączanie/wyłączanie czujników
         private void ChangeEnable(object sender, EventArgs e)
         {
-            object[] param = new object[] { command, sensors, rTBoxData };
-            ComTransmition.Read(param);
             foreach (Sensor s in sensors)
             {
                 if (s.sensorName == (string)((CheckBox)sender).Tag)

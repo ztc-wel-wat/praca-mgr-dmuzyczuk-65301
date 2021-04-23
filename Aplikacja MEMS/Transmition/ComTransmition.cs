@@ -172,9 +172,7 @@ namespace Aplikacja_MEMS.Transmition
             RichTextBox rtBox = (RichTextBox)(param[2]);
 
             byte readData;
-            int i = 0;
 
-            UserForm.stopWatch.Start();
             while (serialPort.IsOpen && receive)
             {
                 try
@@ -236,16 +234,6 @@ namespace Aplikacja_MEMS.Transmition
                                     {
                                         rtBox.Text += (showText + "0x" + frame[7].ToString("X2") + "\n");
                                     });
-                                    i++;
-                                    if(i == 1000)
-                                    {
-                                        UserForm.stopWatch.Stop();
-                                        TimeSpan ts = UserForm.stopWatch.Elapsed;
-
-                                        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-
-                                        MessageBox.Show("Czas pracy przy wykorzystaniu 4 kolejek (Queue<>) i oddzielnych wątków: " + elapsedTime, "Zegar");
-                                    }
                                 }
                             }
                         }

@@ -116,12 +116,7 @@ namespace Aplikacja_MEMS.Analysis
                             {
                                 rtBox.Text += (showText + "0x" + frame[7].ToString("X2") + "\n");
                             });
-                            UserForm.stopWatch.Stop();
-                            TimeSpan ts = UserForm.stopWatch.Elapsed;
-                           
-                            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
-
-                            MessageBox.Show("Czas pracy przy wykorzystaniu 4 kolejek (Queue<>) i oddzielnych wątków: " + elapsedTime, "Zegar");
+                            
                         }
 
                     }
