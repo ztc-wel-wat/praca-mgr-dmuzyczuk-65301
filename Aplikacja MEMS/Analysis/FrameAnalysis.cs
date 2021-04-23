@@ -77,8 +77,9 @@ namespace Aplikacja_MEMS.Analysis
             }
         }
 
-        public static void SensorData(Queue<byte[]> data, List<Sensor> sensors, RichTextBox rtBox, bool show)
+        public static void SensorData(Queue<byte[]> data, List<Sensor> sensors, RichTextBox rtBox, bool show, UserForm uf)
         {
+            int i = 0;
             enabled = true;
             while (enabled)
             {
@@ -115,14 +116,17 @@ namespace Aplikacja_MEMS.Analysis
                             {
                                 rtBox.Text += (showText + "0x" + frame[7].ToString("X2") + "\n");
                             });
-
-                        }
+                            UserForm.stopWatch.Stop();
+                            TimeSpan ts = UserForm.stopWatch.Elapsed;
                            
+                            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+
+                            MessageBox.Show("Czas pracy przy wykorzystaniu 4 kolejek (Queue<>) i oddzielnych wątków: " + elapsedTime, "Zegar");
+                        }
+
                     }
                 }
             }
-
-
         }
         public static void AssignFrames(Queue<byte[]> checkedFrames, Data<byte[]> command, Queue<byte[]> sensorsData)
         {
@@ -158,7 +162,7 @@ namespace Aplikacja_MEMS.Analysis
 
             }
         }
-        private static string AddText(byte[] frame, int place, Sensor s, int startIndex)
+        public static string AddText(byte[] frame, int place, Sensor s, int startIndex)
         {
             string text = "";
             if (s.type == "Env")

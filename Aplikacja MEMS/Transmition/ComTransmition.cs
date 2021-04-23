@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Aplikacja_MEMS.Analysis;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO.Ports;
@@ -149,7 +150,7 @@ namespace Aplikacja_MEMS.Transmition
             }
         }
 
-        public static void Read(Queue<byte> data)
+        public static void Read(object data)
         {
             receive = true;
             receiveByteStart = new ParameterizedThreadStart(Receive);
@@ -163,14 +164,92 @@ namespace Aplikacja_MEMS.Transmition
             receive = false;
         }
 
-        public static void Receive(object data)
+        public static void Receive(object parameters)
         {
+            object[] param = (object[])parameters;
+            Data<byte[]> command = (Data<byte[]>)(param[0]);
+            List<Sensor> sensors = (List<Sensor>)(param[1]);
+            RichTextBox rtBox = (RichTextBox)(param[2]);
+
             byte readData;
+            int i = 0;
+
+            UserForm.stopWatch.Start();
             while (serialPort.IsOpen && receive)
             {
                 try
                 {
-                    ((Queue<byte>)data).Enqueue((byte)serialPort.ReadByte());
+                    byte[] buffer = new byte[200];
+                    int counter = 0;
+                    byte chSum = 0x00;
+
+                    byte add = (byte)(serialPort.ReadByte());
+                    
+
+                    // Dodawanie kolejnych bajtów do buffora
+                    while (add != (byte)Frame.Identificators.FrameEnd)
+                    {
+                        buffer[counter] = add;
+                        counter++;
+                        chSum += add;
+
+                        add = (byte)(serialPort.ReadByte());
+                    }
+
+
+                    if(chSum == 0x00)
+                    {
+                        byte[] frame = new byte[counter-1];
+                        Array.Copy(buffer, frame, counter-1);
+
+
+                        if (frame[2] == (byte)CmdType.SensorResp && frame[3] == (byte)SubCmdType.GetRegisterValue)
+                            command.Enqueue(frame);
+                        else if (frame[2] == (byte)CmdType.ResponseData)
+                        {
+                            if (frame != null)
+                            {
+                                int sensorIndex = 0;
+                                int startIndex = 9;
+
+                                int floated = (System.BitConverter.ToInt32(frame, 3)) * 10;
+                                DateTime timestamp = new DateTime(floated);
+
+                                string showText = timestamp.ToString("H:mm:ss.ffffff") + " |";
+
+                                foreach (Sensor s in sensors)
+                                {
+                                    showText += Analysis.FrameAnalysis.AddText(frame, sensorIndex, s, startIndex);
+                                    sensorIndex++;
+                                }
+
+                                if ((frame[7] & (1 << 6)) != 0)
+                                {
+                                    showText += "   0x" + frame[9].ToString("X2") + "   |";
+                                    startIndex += 4;
+                                }
+                                else showText += "          |";
+
+                                if (UserForm.showText)
+                                {
+                                    rtBox.Invoke((Action)delegate
+                                    {
+                                        rtBox.Text += (showText + "0x" + frame[7].ToString("X2") + "\n");
+                                    });
+                                    i++;
+                                    if(i == 1000)
+                                    {
+                                        UserForm.stopWatch.Stop();
+                                        TimeSpan ts = UserForm.stopWatch.Elapsed;
+
+                                        string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+
+                                        MessageBox.Show("Czas pracy przy wykorzystaniu 4 kolejek (Queue<>) i oddzielnych wątków: " + elapsedTime, "Zegar");
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 catch { }
             }
