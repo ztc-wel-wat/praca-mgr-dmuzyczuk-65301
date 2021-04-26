@@ -167,23 +167,21 @@ namespace Aplikacja_MEMS.Transmition
         public static void Receive(object parameters)
         {
             object[] param = (object[])parameters;
-            Data<byte[]> command = (Data<byte[]>)(param[0]);
+
+            Command<byte[]> command = (Command<byte[]>)(param[0]);
             List<Sensor> sensors = (List<Sensor>)(param[1]);
             RichTextBox rtBox = (RichTextBox)(param[2]);
-
-            byte readData;
 
             while (serialPort.IsOpen && receive)
             {
                 try
                 {
-                    byte[] buffer = new byte[200];
+                    byte[] buffer = new byte[(int)Frame.FrameParameters.MaxFrameLength];
                     int counter = 0;
                     byte chSum = 0x00;
 
                     byte add = (byte)(serialPort.ReadByte());
                     
-
                     // Dodawanie kolejnych bajtów do buffora
                     while (add != (byte)Frame.Identificators.FrameEnd)
                     {
@@ -194,17 +192,19 @@ namespace Aplikacja_MEMS.Transmition
                         add = (byte)(serialPort.ReadByte());
                     }
 
-
+                    // Sprawdzanie sumy kontrolnej
                     if(chSum == 0x00)
                     {
                         byte[] frame = new byte[counter-1];
                         Array.Copy(buffer, frame, counter-1);
 
-
+                        // Przypisywanie ramki (dane / komenda)
                         if (frame[2] == (byte)CmdType.SensorResp && frame[3] == (byte)SubCmdType.GetRegisterValue)
                             command.Enqueue(frame);
+
                         else if (frame[2] == (byte)CmdType.ResponseData)
                         {
+                            // Wypisywanie danych
                             if (frame != null)
                             {
                                 int sensorIndex = 0;

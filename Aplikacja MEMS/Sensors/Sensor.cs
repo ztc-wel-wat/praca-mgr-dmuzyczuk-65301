@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using Aplikacja_MEMS.Forms;
@@ -8,8 +9,7 @@ namespace Aplikacja_MEMS
 {
     public abstract class Sensor
     {
-        public static float odrSum = 32
-            ;
+        public static float odrSum = 0;
         public float odr;
         public static byte enableByte = (byte)Sensors.SetSensor.AllEnable;
         public static byte enableInterruptByte = (byte)Sensors.SetSensor.Interupts;
@@ -24,6 +24,8 @@ namespace Aplikacja_MEMS
         protected Plot plot;
 
         public abstract void AddData(object data);
+        public abstract void ClearData();
+        public abstract string GetData();
 
         // Ustawianie wybranego sensora do pracy
         public void SetSensor(int index)
@@ -31,15 +33,49 @@ namespace Aplikacja_MEMS
             Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetWorkingSensor, this.sensorNr, (byte)index);
         }
 
-        public bool SumOdr(float newOdr)
+        public bool SumOdr(object sender, float newOdr)
         {
-            if (isEnabled)
+            if (sender is CheckBox)
             {
-                odrSum = odrSum - odr + newOdr;
-                odr = newOdr;
+                if(isEnabled)
+                {
+                    odrSum += newOdr;
+                    odr = newOdr;
+                }
+                else
+                    odrSum -= odr;
             }
+            else if (sender is ComboBox)
+                if (isEnabled)
+                {
+                    odrSum = odrSum - odr + newOdr;
+                    odr = newOdr;
+                }
 
             return (odrSum < 100);
+        }
+
+        public void OpenPlot(int scale)
+        {
+            if (plot == null)
+            {
+                ParameterizedThreadStart openPlotStart = new ParameterizedThreadStart(PlotShow);
+                Thread openPlot = new Thread(openPlotStart);
+                openPlot.Priority = ThreadPriority.AboveNormal;
+                openPlot.Start((object)scale);
+            }
+            else
+                plot.ShowMe();
+        }
+
+        private void PlotShow(object scale)
+        {
+            Application.Run(plot = new Plot(this.sensorName, (int)scale));
+        }
+
+        public void ClearPlot()
+        {
+            plot.ClearPlot();
         }
 
         public void ClosePlot()
@@ -47,21 +83,9 @@ namespace Aplikacja_MEMS
             plot.ExitPlot();
         }
 
-        public void OpenPlot()
+        public void SetPlotScale(int scale)
         {
-            if (plot == null)
-            {
-                ThreadStart openPlotStart = new ThreadStart(PlotShow);
-                Thread openPlot = new Thread(openPlotStart);
-                openPlot.Start();
-            }
-            else
-                plot.ShowMe();
-        }
-
-        private void PlotShow()
-        {
-            Application.Run(plot = new Plot(this.sensorName));
+            plot.SetScale(scale);
         }
 
         public static void EnableAll()
@@ -111,7 +135,13 @@ namespace Aplikacja_MEMS
         {
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address));
         }
-     
+
+
+        private void SaveParameters()
+        {
+            
+        }
+
         public void OpenRegister()
         {
             RegisterList.LSM6DSL();

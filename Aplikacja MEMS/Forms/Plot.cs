@@ -12,12 +12,35 @@ namespace Aplikacja_MEMS.Forms
 {
     public partial class Plot : Form
     {
-        public Plot(string name)
+        public Plot(string name, int scale)
         {
             InitializeComponent();
             Text = name;
+
+            if (scale != 0)
+            {
+                chart.ChartAreas[0].AxisY.Minimum = (-1) * scale * 1000;
+                chart.ChartAreas[0].AxisY.Maximum = scale * 1000;
+            }
         }
 
+        public void SetScale(int scale)
+        {
+            chart.Invoke((Action)delegate
+            {
+                chart.ChartAreas[0].AxisY.Minimum = (-1) * scale * 1000;
+                chart.ChartAreas[0].AxisY.Maximum = scale * 1000;
+            });
+        }
+        public void ClearPlot()
+        {
+            chart.Invoke((Action)delegate
+            {
+                chart.Series[0].Points.Clear();
+                chart.Series[1].Points.Clear();
+                chart.Series[2].Points.Clear();
+            });
+        }
         public void ShowMe()
         {
             Invoke((Action)delegate
@@ -42,7 +65,8 @@ namespace Aplikacja_MEMS.Forms
                 chart.Series[0].Points.InsertY(0, x);
             });
         }
-             public void AddPoints(int[] dane)
+
+        public void AddPoints(int[] dane)
         {
             chart.Invoke((Action)delegate
             {
@@ -52,7 +76,7 @@ namespace Aplikacja_MEMS.Forms
             });
         }
 
-        private void Plot_Load(object sender, EventArgs e)
+        public void Plot_Load(object sender, EventArgs e)
         {
             Hide();
         }

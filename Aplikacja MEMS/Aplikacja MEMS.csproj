@@ -47,7 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analysis\Data.cs" />
+    <Compile Include="Analysis\Command.cs" />
     <Compile Include="Analysis\FrameAnalysis.cs" />
     <Compile Include="Analysis\HexUtil.cs" />
     <Compile Include="Forms\Plot.cs">
@@ -56,6 +56,7 @@
     <Compile Include="Forms\Plot.Designer.cs">
       <DependentUpon>Plot.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frame\FrameParameters.cs" />
     <Compile Include="Sensors\SetSensor.cs" />
     <Compile Include="Transmition\AvailablePort.cs" />
     <Compile Include="Frame\Identificators.cs" />
@@ -88,7 +89,7 @@
     <Compile Include="Forms\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sensors\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transmition\ComTransmition.cs" />
     <EmbeddedResource Include="Forms\Loading.resx">

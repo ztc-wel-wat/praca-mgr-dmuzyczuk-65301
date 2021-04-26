@@ -4,7 +4,8 @@ namespace Aplikacja_MEMS
 {
     class MotionSensor : Sensor
     {
-        byte[] data;
+        int counter = 0;
+        int[,] data = new int[10000000, 3];
 
         public MotionSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth, float sensOdr)
         {
@@ -26,6 +27,10 @@ namespace Aplikacja_MEMS
 
         private void AddNewData(object data)
         {
+            for (int i = 0; i < 3; i++)
+                this.data[counter, i] = ((int[])data)[i];
+
+            counter++;
             this.plot.AddPoints((int[])data);
         }
         public void SetScale(byte[] parameter)
@@ -33,5 +38,24 @@ namespace Aplikacja_MEMS
             Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetSensorScale, this.sensorNr, parameter);
         }
 
+        public override void ClearData()
+        {
+            this.data = new int[10000000, 3];
+            counter = 0;
+        }
+        public override string GetData()
+        {
+            string toReturn = sensorName + "\n" + 3 + "\n";
+
+            for (int i = 0; i < counter; i++)
+            {
+                for(int j=0; j<3; j++)
+                toReturn += data[i,j].ToString() + "|";
+
+                toReturn += "\n";
+            }
+
+            return toReturn;
+        }
     }
 }

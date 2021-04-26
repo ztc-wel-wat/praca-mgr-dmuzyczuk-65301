@@ -77,15 +77,13 @@ namespace Aplikacja_MEMS.Analysis
             }
         }
 
-        public static void SensorData(Queue<byte[]> data, List<Sensor> sensors, RichTextBox rtBox, bool show, UserForm uf)
+        public static void SensorData(Queue<byte[]> data, List<Sensor> sensors, RichTextBox rtBox)
         {
-            int i = 0;
             enabled = true;
             while (enabled)
             {
                 if (data.Count > 0)
                 {
-
                     byte[] frame = data.Dequeue();
                     if (frame != null)
                     {
@@ -116,14 +114,12 @@ namespace Aplikacja_MEMS.Analysis
                             {
                                 rtBox.Text += (showText + "0x" + frame[7].ToString("X2") + "\n");
                             });
-                            
                         }
-
                     }
                 }
             }
         }
-        public static void AssignFrames(Queue<byte[]> checkedFrames, Data<byte[]> command, Queue<byte[]> sensorsData)
+        public static void AssignFrames(Queue<byte[]> checkedFrames, Command<byte[]> command, Queue<byte[]> sensorsData)
         {
             enabled = true;
             while (enabled)
@@ -152,9 +148,7 @@ namespace Aplikacja_MEMS.Analysis
                             sensorsData.Enqueue(fr);
                         }
                     }
-
                 }
-
             }
         }
         public static string AddText(byte[] frame, int place, Sensor s, int startIndex)

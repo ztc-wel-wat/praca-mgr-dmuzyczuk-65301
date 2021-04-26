@@ -11,7 +11,7 @@ namespace Aplikacja_MEMS
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
-        [STAThread]
+        [STAThreadAttribute]
         static void Main()
         {
         Application.EnableVisualStyles();

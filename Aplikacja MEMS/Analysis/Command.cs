@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Aplikacja_MEMS.Analysis
 {
-    class Data<T>
+    class Command<T>
     {
         private readonly Queue<T> queue = new Queue<T>();
         public event EventHandler Changed;

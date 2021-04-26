@@ -168,11 +168,32 @@ namespace Aplikacja_MEMS
             this.rTBoxData = new System.Windows.Forms.RichTextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zapiszPomiaryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.akcelerometrToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.żyroskopToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.magnetometrToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.termometrToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.barometrToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.higrometrToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.otwórzPomiaryZPlikuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.zamknijToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.edytujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyczyśćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.daneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.akcelerometrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.żyroskopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.magnetometrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.termometrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barometrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.higrometrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wykresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.akcelerometrToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.żyroskopToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.magnetometrToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.termometrToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.barometrToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.higrometrToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.portOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -1916,6 +1937,7 @@ namespace Aplikacja_MEMS
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.plikToolStripMenuItem,
+            this.edytujToolStripMenuItem,
             this.opcjeToolStripMenuItem,
             this.pomocToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -1927,7 +1949,6 @@ namespace Aplikacja_MEMS
             // plikToolStripMenuItem
             // 
             this.plikToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.asdToolStripMenuItem,
             this.zapiszPomiaryToolStripMenuItem,
             this.otwórzPomiaryZPlikuToolStripMenuItem,
             this.toolStripMenuItem1,
@@ -1936,23 +1957,73 @@ namespace Aplikacja_MEMS
             this.plikToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.plikToolStripMenuItem.Text = "Plik";
             // 
-            // asdToolStripMenuItem
-            // 
-            this.asdToolStripMenuItem.Name = "asdToolStripMenuItem";
-            this.asdToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
-            this.asdToolStripMenuItem.Text = "Nowe pomiary";
-            // 
             // zapiszPomiaryToolStripMenuItem
             // 
+            this.zapiszPomiaryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.akcelerometrToolStripMenuItem2,
+            this.żyroskopToolStripMenuItem2,
+            this.magnetometrToolStripMenuItem2,
+            this.termometrToolStripMenuItem2,
+            this.barometrToolStripMenuItem2,
+            this.higrometrToolStripMenuItem2});
             this.zapiszPomiaryToolStripMenuItem.Name = "zapiszPomiaryToolStripMenuItem";
             this.zapiszPomiaryToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.zapiszPomiaryToolStripMenuItem.Text = "Zapisz pomiary";
+            // 
+            // akcelerometrToolStripMenuItem2
+            // 
+            this.akcelerometrToolStripMenuItem2.Name = "akcelerometrToolStripMenuItem2";
+            this.akcelerometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.akcelerometrToolStripMenuItem2.Tag = "Akcelerometr";
+            this.akcelerometrToolStripMenuItem2.Text = "Akcelerometr";
+            this.akcelerometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
+            // 
+            // żyroskopToolStripMenuItem2
+            // 
+            this.żyroskopToolStripMenuItem2.Name = "żyroskopToolStripMenuItem2";
+            this.żyroskopToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.żyroskopToolStripMenuItem2.Tag = "Żyroskop";
+            this.żyroskopToolStripMenuItem2.Text = "Żyroskop";
+            this.żyroskopToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
+            // 
+            // magnetometrToolStripMenuItem2
+            // 
+            this.magnetometrToolStripMenuItem2.Name = "magnetometrToolStripMenuItem2";
+            this.magnetometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.magnetometrToolStripMenuItem2.Tag = "Magnetometr";
+            this.magnetometrToolStripMenuItem2.Text = "Magnetometr";
+            this.magnetometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
+            // 
+            // termometrToolStripMenuItem2
+            // 
+            this.termometrToolStripMenuItem2.Name = "termometrToolStripMenuItem2";
+            this.termometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.termometrToolStripMenuItem2.Tag = "Termometr";
+            this.termometrToolStripMenuItem2.Text = "Termometr";
+            this.termometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
+            // 
+            // barometrToolStripMenuItem2
+            // 
+            this.barometrToolStripMenuItem2.Name = "barometrToolStripMenuItem2";
+            this.barometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.barometrToolStripMenuItem2.Tag = "Barometr";
+            this.barometrToolStripMenuItem2.Text = "Barometr";
+            this.barometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
+            // 
+            // higrometrToolStripMenuItem2
+            // 
+            this.higrometrToolStripMenuItem2.Name = "higrometrToolStripMenuItem2";
+            this.higrometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.higrometrToolStripMenuItem2.Tag = "Higrometr";
+            this.higrometrToolStripMenuItem2.Text = "Higrometr";
+            this.higrometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
             // 
             // otwórzPomiaryZPlikuToolStripMenuItem
             // 
             this.otwórzPomiaryZPlikuToolStripMenuItem.Name = "otwórzPomiaryZPlikuToolStripMenuItem";
             this.otwórzPomiaryZPlikuToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.otwórzPomiaryZPlikuToolStripMenuItem.Text = "Otwórz pomiary z pliku";
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Click += new System.EventHandler(this.otwórzPomiaryZPlikuToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -1965,6 +2036,145 @@ namespace Aplikacja_MEMS
             this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.zamknijToolStripMenuItem.Text = "Zamknij";
             this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
+            // 
+            // edytujToolStripMenuItem
+            // 
+            this.edytujToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wyczyśćToolStripMenuItem});
+            this.edytujToolStripMenuItem.Name = "edytujToolStripMenuItem";
+            this.edytujToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.edytujToolStripMenuItem.Text = "Edytuj";
+            // 
+            // wyczyśćToolStripMenuItem
+            // 
+            this.wyczyśćToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.daneToolStripMenuItem,
+            this.wykresToolStripMenuItem});
+            this.wyczyśćToolStripMenuItem.Name = "wyczyśćToolStripMenuItem";
+            this.wyczyśćToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.wyczyśćToolStripMenuItem.Text = "Wyczyść";
+            // 
+            // daneToolStripMenuItem
+            // 
+            this.daneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.akcelerometrToolStripMenuItem,
+            this.żyroskopToolStripMenuItem,
+            this.magnetometrToolStripMenuItem,
+            this.termometrToolStripMenuItem,
+            this.barometrToolStripMenuItem,
+            this.higrometrToolStripMenuItem});
+            this.daneToolStripMenuItem.Name = "daneToolStripMenuItem";
+            this.daneToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.daneToolStripMenuItem.Text = "Dane";
+            // 
+            // akcelerometrToolStripMenuItem
+            // 
+            this.akcelerometrToolStripMenuItem.Name = "akcelerometrToolStripMenuItem";
+            this.akcelerometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.akcelerometrToolStripMenuItem.Tag = "Akcelerometr";
+            this.akcelerometrToolStripMenuItem.Text = "Akcelerometr";
+            this.akcelerometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
+            // 
+            // żyroskopToolStripMenuItem
+            // 
+            this.żyroskopToolStripMenuItem.Name = "żyroskopToolStripMenuItem";
+            this.żyroskopToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.żyroskopToolStripMenuItem.Tag = "Żyroskop";
+            this.żyroskopToolStripMenuItem.Text = "Żyroskop";
+            this.żyroskopToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
+            // 
+            // magnetometrToolStripMenuItem
+            // 
+            this.magnetometrToolStripMenuItem.Name = "magnetometrToolStripMenuItem";
+            this.magnetometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.magnetometrToolStripMenuItem.Tag = "Magnetometr";
+            this.magnetometrToolStripMenuItem.Text = "Magnetometr";
+            this.magnetometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
+            // 
+            // termometrToolStripMenuItem
+            // 
+            this.termometrToolStripMenuItem.Name = "termometrToolStripMenuItem";
+            this.termometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.termometrToolStripMenuItem.Tag = "Termometr";
+            this.termometrToolStripMenuItem.Text = "Termometr";
+            this.termometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
+            // 
+            // barometrToolStripMenuItem
+            // 
+            this.barometrToolStripMenuItem.Name = "barometrToolStripMenuItem";
+            this.barometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.barometrToolStripMenuItem.Tag = "Barometr";
+            this.barometrToolStripMenuItem.Text = "Barometr";
+            this.barometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
+            // 
+            // higrometrToolStripMenuItem
+            // 
+            this.higrometrToolStripMenuItem.Name = "higrometrToolStripMenuItem";
+            this.higrometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.higrometrToolStripMenuItem.Tag = "Higrometr";
+            this.higrometrToolStripMenuItem.Text = "Higrometr";
+            this.higrometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
+            // 
+            // wykresToolStripMenuItem
+            // 
+            this.wykresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.akcelerometrToolStripMenuItem1,
+            this.żyroskopToolStripMenuItem1,
+            this.magnetometrToolStripMenuItem1,
+            this.termometrToolStripMenuItem1,
+            this.barometrToolStripMenuItem1,
+            this.higrometrToolStripMenuItem1});
+            this.wykresToolStripMenuItem.Name = "wykresToolStripMenuItem";
+            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.wykresToolStripMenuItem.Text = "Wykres";
+            // 
+            // akcelerometrToolStripMenuItem1
+            // 
+            this.akcelerometrToolStripMenuItem1.Name = "akcelerometrToolStripMenuItem1";
+            this.akcelerometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.akcelerometrToolStripMenuItem1.Tag = "Akcelerometr";
+            this.akcelerometrToolStripMenuItem1.Text = "Akcelerometr";
+            this.akcelerometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
+            // 
+            // żyroskopToolStripMenuItem1
+            // 
+            this.żyroskopToolStripMenuItem1.Name = "żyroskopToolStripMenuItem1";
+            this.żyroskopToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.żyroskopToolStripMenuItem1.Tag = "Żyroskop";
+            this.żyroskopToolStripMenuItem1.Text = "Żyroskop";
+            this.żyroskopToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
+            // 
+            // magnetometrToolStripMenuItem1
+            // 
+            this.magnetometrToolStripMenuItem1.Name = "magnetometrToolStripMenuItem1";
+            this.magnetometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.magnetometrToolStripMenuItem1.Tag = "Magnetometr";
+            this.magnetometrToolStripMenuItem1.Text = "Magnetometr";
+            this.magnetometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
+            // 
+            // termometrToolStripMenuItem1
+            // 
+            this.termometrToolStripMenuItem1.Name = "termometrToolStripMenuItem1";
+            this.termometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.termometrToolStripMenuItem1.Tag = "Termometr";
+            this.termometrToolStripMenuItem1.Text = "Termometr";
+            this.termometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
+            // 
+            // barometrToolStripMenuItem1
+            // 
+            this.barometrToolStripMenuItem1.Name = "barometrToolStripMenuItem1";
+            this.barometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.barometrToolStripMenuItem1.Tag = "Barometr";
+            this.barometrToolStripMenuItem1.Text = "Barometr";
+            this.barometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
+            // 
+            // higrometrToolStripMenuItem1
+            // 
+            this.higrometrToolStripMenuItem1.Name = "higrometrToolStripMenuItem1";
+            this.higrometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.higrometrToolStripMenuItem1.Tag = "Higrometr";
+            this.higrometrToolStripMenuItem1.Text = "Higrometr";
+            this.higrometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
             // 
             // opcjeToolStripMenuItem
             // 
@@ -2117,7 +2327,6 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ToolStripMenuItem plikToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opcjeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pomocToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem asdToolStripMenuItem;
         private System.Windows.Forms.GroupBox gBoxSensors;
         private System.Windows.Forms.GroupBox gBoxConnection;
         private System.Windows.Forms.Label labelTitle;
@@ -2263,6 +2472,28 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.RichTextBox rtBoxHeader;
         private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.ToolStripMenuItem edytujToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wyczyśćToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem daneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem akcelerometrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem żyroskopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem magnetometrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem termometrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem barometrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem higrometrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wykresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem akcelerometrToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem żyroskopToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem magnetometrToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem termometrToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem barometrToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem higrometrToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem akcelerometrToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem żyroskopToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem magnetometrToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem termometrToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem barometrToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem higrometrToolStripMenuItem2;
     }
 }
 
