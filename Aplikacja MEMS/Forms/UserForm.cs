@@ -3,10 +3,7 @@ using Aplikacja_MEMS.Transmition;
 using Aplikacja_MEMS.Analysis;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
 using System.Windows.Forms;
-using System.Diagnostics;
 using System.IO;
 using Aplikacja_MEMS.Forms;
 
@@ -29,11 +26,6 @@ namespace Aplikacja_MEMS
 
         public static bool showText = true;
 
-        static Queue<byte> addData;
-        static Queue<byte[]> frames;
-        static Queue<byte[]> checkedFrames;
-        static Queue<byte[]> sensorsData;
-        static Queue<string> toShow;
         static Command<byte[]> command;
 
         public UserForm()
@@ -160,26 +152,6 @@ namespace Aplikacja_MEMS
             else return false;
         }
 
-        public void MakeFrames()
-        {
-            Analysis.FrameAnalysis.Analysis(addData, frames);
-        }
-
-        public void CheckSum()
-        {
-            Analysis.FrameAnalysis.CheckSum(frames, checkedFrames);
-        }
-
-
-        public void AssignFrames()
-        {
-            Analysis.FrameAnalysis.AssignFrames(checkedFrames, command, sensorsData);
-        }
-        private void AddText()
-        {
-            FrameAnalysis.SensorData(sensorsData, sensors, rTBoxData);
-        }
-
         private void NewCommandToShow(object sender, EventArgs e)
         {
             byte[] data = ((Command<byte[]>)sender).Dequeue();
@@ -255,17 +227,8 @@ namespace Aplikacja_MEMS
                     gBoxMEMSSensors.Add(gBoxMagnetometer);
                 }
 
-                addData = new Queue<byte>();
-                frames = new Queue<byte[]>();
-                checkedFrames = new Queue<byte[]>();
-                sensorsData = new Queue<byte[]>();
-
                 command = new Command<byte[]>();
                 command.Changed += new EventHandler(this.NewCommandToShow);
-
-                toShow = new Queue<string>();
-
-                Analysis.FrameAnalysis.Enable();
 
                 object[] param = new object[] { command, sensors, rTBoxData };
                 ComTransmition.Read(param);
@@ -298,7 +261,6 @@ namespace Aplikacja_MEMS
                 Communication.Query((byte)CmdType.StopTransmition);
                 ComTransmition.StopRead();
                 ComTransmition.ClosePort();
-                FrameAnalysis.Disable();
 
                 progressBarCOM.Value = 0;
 
@@ -316,7 +278,6 @@ namespace Aplikacja_MEMS
             ComTransmition.StopRead();
             Communication.Query((byte)CmdType.StopTransmition);
             ComTransmition.ClosePort();
-            FrameAnalysis.Disable();
 
             foreach (Sensor s in sensors)
                 s.ClosePlot();
@@ -335,10 +296,11 @@ namespace Aplikacja_MEMS
             progressBarData.Value = 0;
 
             buttonOpen.Enabled = true;
-            buttonStop.Enabled = true;
             cBoxPorts.Enabled = true;
             btnRefresh.Enabled = true;
             portOpenToolStripMenuItem.Enabled = true;
+            otwórzPomiaryZPlikuToolStripMenuItem.Enabled = true;
+            włączWyłączPrzerwaniaToolStripMenuItem.Enabled = false;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -386,6 +348,7 @@ namespace Aplikacja_MEMS
                 otwórzPomiaryZPlikuToolStripMenuItem.Enabled = false;
                 EnableAllToolStripMenuItem.Enabled = true;
                 DisableAllToolStripMenuItem.Enabled = true;
+                włączWyłączPrzerwaniaToolStripMenuItem.Enabled = true;
 
                 foreach (Control c in tabPageSensors.Controls)
                     if (c is GroupBox gBox)
@@ -429,6 +392,7 @@ namespace Aplikacja_MEMS
             EnableAllToolStripMenuItem.Enabled = false;
             DisableAllToolStripMenuItem.Enabled = false;
             otwórzPomiaryZPlikuToolStripMenuItem.Enabled = true;
+            włączWyłączPrzerwaniaToolStripMenuItem.Enabled = false;
             buttonStart.Enabled = true;
             buttonStop.Enabled = false;
 
@@ -597,11 +561,13 @@ namespace Aplikacja_MEMS
                     fileName = s.sensorName + DateTime.Today.ToString(" MMM-dd") +".mem";
                 }
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Zapisz dane czujnika";
-            saveFileDialog.Filter = "Pliki aplikacji MEMS | *.mem";
-            saveFileDialog.FileName = fileName;
-            saveFileDialog.DefaultExt = "*.mem";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Title = "Zapisz dane czujnika",
+                Filter = "Pliki aplikacji MEMS | *.mem",
+                FileName = fileName,
+                DefaultExt = "*.mem"
+            };
 
             if (toSave != string.Empty && saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -634,31 +600,61 @@ namespace Aplikacja_MEMS
                     var fileStream = openFileDialog.OpenFile();
 
                     using (StreamReader reader = new StreamReader(fileStream))
-                    {
                         fileContent = reader.ReadToEnd();
-                    }
 
                     string sensorName = fileContent.Substring(0, fileContent.IndexOf("\n"));
-                    sensorName = sensorName.Remove(0, fileContent.IndexOf("\n") + 1);
+                    fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
 
+                    string buffer = string.Empty;
 
-                    //string buffer = string.Empty;
-                    //foreach(char c in sensorName)
-                    //{
-                    //    if(c != '\n')
-                    //    {
-                    //        if(c !=)
-                    //    }
-                    //}
-
+                    buffer = fileContent.Substring(0, 1);
+                    fileContent = fileContent.Remove(0, 2);
 
                     Plot plot = new Plot(sensorName, 0);
                     plot.Load -= plot.Plot_Load;
                     plot.WindowState = FormWindowState.Normal;
                     plot.Show();
 
+                    switch (buffer)
+                    {
+                        case "1":
+                            while(fileContent.Length > 0)
+                            {
+                                float parameter = float.Parse(fileContent.Substring(0, fileContent.IndexOf("\n")));
+                                fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
+                                plot.AddPoints(parameter);
+                            }
+                            break;
+
+                        case "3":
+                            while (fileContent.Length > 0)
+                            {
+                                int[] parameter = new int[3];
+                                for(int i = 0; i<3; i++)
+                                {
+                                    parameter[i] = Int32.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
+                                    fileContent = fileContent.Remove(0, fileContent.IndexOf("|") + 1);
+                                }
+                                fileContent = fileContent.Remove(0, 1);
+                                plot.AddPoints(parameter);
+                            }
+                            break;
+
+                        default:
+                            plot.Close();
+                            plot.Dispose();
+                            MessageBox.Show("Błąd ładowania pliku. Wybrany plik nie zgadza się z wymaganiami!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            
+                            return;
+                    }
                 }
             }
+        }
+
+        private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.ShowDialog();
         }
     }
 }

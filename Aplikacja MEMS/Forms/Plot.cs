@@ -66,13 +66,13 @@ namespace Aplikacja_MEMS.Forms
             });
         }
 
-        public void AddPoints(int[] dane)
+        public void AddPoints(int[] data)
         {
             chart.Invoke((Action)delegate
             {
-                chart.Series[0].Points.InsertY(0, dane[0]);
-                chart.Series[1].Points.InsertY(0, dane[1]);
-                chart.Series[2].Points.InsertY(0, dane[2]);
+                chart.Series[0].Points.InsertY(0, data[0]);
+                chart.Series[1].Points.InsertY(0, data[1]);
+                chart.Series[2].Points.InsertY(0, data[2]);
             });
         }
 

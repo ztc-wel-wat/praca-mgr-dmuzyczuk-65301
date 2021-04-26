@@ -63,6 +63,16 @@ namespace Aplikacja_MEMS.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap image_PF264299_en_feature_description_include_personalized_no_cpn_medium {
+            get {
+                object obj = ResourceManager.GetObject("image.PF264299.en.feature-description-include-personalized-no-cpn-medium", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Plytka {
             get {
                 object obj = ResourceManager.GetObject("Plytka", resourceCulture);
@@ -76,6 +86,26 @@ namespace Aplikacja_MEMS.Properties {
         internal static System.Drawing.Bitmap refresh {
             get {
                 object obj = ResourceManager.GetObject("refresh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap STMICROELECTRONICS {
+            get {
+                object obj = ResourceManager.GetObject("STMICROELECTRONICS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wel {
+            get {
+                object obj = ResourceManager.GetObject("wel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

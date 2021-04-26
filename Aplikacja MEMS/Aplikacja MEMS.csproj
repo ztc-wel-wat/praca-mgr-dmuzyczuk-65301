@@ -50,6 +50,12 @@
     <Compile Include="Analysis\Command.cs" />
     <Compile Include="Analysis\FrameAnalysis.cs" />
     <Compile Include="Analysis\HexUtil.cs" />
+    <Compile Include="Forms\About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Plot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transmition\ComTransmition.cs" />
+    <EmbeddedResource Include="Forms\About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +144,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\STMICROELECTRONICS.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image.PF264299.en.feature-description-include-personalized-no-cpn-medium.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
