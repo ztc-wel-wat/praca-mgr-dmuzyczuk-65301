@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace Aplikacja_MEMS.Sensors
 {
@@ -45,7 +46,7 @@ namespace Aplikacja_MEMS.Sensors
 
         private void AddNewData(object data)
         {
-            this.data[counter] = (int)data;
+            this.data[counter] = (float)data;
 
             counter++;
             plot.AddPoints((float)data);
