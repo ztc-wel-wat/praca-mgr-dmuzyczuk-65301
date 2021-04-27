@@ -6,14 +6,14 @@ namespace Aplikacja_MEMS.Sensors
     class EnvSensor : Sensor
     {
         int counter = 0;
-        float[] data = new float[10000000];
+        float[,] data = new float[10000000, 2];
 
         public EnvSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth, float sensOdr)
         {
             sensorName = name;
             activate = sensorActivate;
             sensorNr = sensorNumber;
-            isEnabled = false; 
+            isEnabled = false;
             type = "Env";
             width = sensWidth;
             odr = sensOdr;
@@ -28,7 +28,7 @@ namespace Aplikacja_MEMS.Sensors
 
         public override void ClearData()
         {
-            this.data = new float[10000000];
+            this.data = new float[10000000, 2];
             counter = 0;
         }
 
@@ -36,9 +36,10 @@ namespace Aplikacja_MEMS.Sensors
         {
             string toReturn = sensorName + "\n" + 1 + "\n"; ;
 
-            for(int i = 0; i< counter; i++)
+            for (int i = 0; i < counter; i++)
             {
-                toReturn += data[i].ToString() + "\n";
+                toReturn += data[i, 0].ToString() + "|";
+                toReturn += data[i, 1].ToString() + "|\n";
             }
 
             return toReturn;
@@ -46,10 +47,18 @@ namespace Aplikacja_MEMS.Sensors
 
         private void AddNewData(object data)
         {
-            this.data[counter] = (float)data;
+            try
+            {
+                this.data[counter, 0] = ((float[])data)[0];
+                this.data[counter, 1] = ((float[])data)[1];
 
-            counter++;
-            plot.AddPoints((float)data);
+                counter++;
+                plot.AddPoints((float[])data);
+            }
+            catch
+            {
+                counter = 0;
+            }
         }
     }
 }

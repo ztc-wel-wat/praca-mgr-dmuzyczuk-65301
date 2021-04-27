@@ -97,7 +97,6 @@ namespace Aplikacja_MEMS.Transmition
             }
             catch (Exception e)
             {
-                throw e;
             }
         }
 
@@ -210,14 +209,14 @@ namespace Aplikacja_MEMS.Transmition
                                 int sensorIndex = 0;
                                 int startIndex = 9;
 
-                                int floated = (System.BitConverter.ToInt32(frame, 3)) * 10;
-                                DateTime timestamp = new DateTime(floated);
+                                int inted = (System.BitConverter.ToInt32(frame, 3)) * 10;
+                                DateTime timestamp = new DateTime(inted);
 
                                 string showText = timestamp.ToString("H:mm:ss.ffffff") + " |";
 
                                 foreach (Sensor s in sensors)
                                 {
-                                    showText += Analysis.FrameAnalysis.AddText(frame, sensorIndex, s, startIndex);
+                                    showText += Analysis.FrameAnalysis.AddText(frame, sensorIndex, s, startIndex, inted);
                                     sensorIndex++;
                                 }
 
@@ -248,7 +247,7 @@ namespace Aplikacja_MEMS.Transmition
             Communication.Query((byte)CmdType.StopTransmition);
             Thread.Sleep(100);
 
-            while (serialPort.BytesToRead > 0)
+            while (serialPort.IsOpen && serialPort.BytesToRead > 0)
             {
                 string clear = serialPort.ReadExisting();
             }

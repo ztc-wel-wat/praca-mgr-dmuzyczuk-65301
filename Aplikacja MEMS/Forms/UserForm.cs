@@ -16,6 +16,7 @@ namespace Aplikacja_MEMS
         List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
         static List<Sensor> sensors = new List<Sensor>();
         List<CheckBox> checks = new List<CheckBox>();
+        List<SensorRegister> registers = new List<SensorRegister>();
 
         MotionSensor acc;
         MotionSensor gyr;
@@ -361,6 +362,8 @@ namespace Aplikacja_MEMS
                                 SetScale(cBoxScale, null);
                         }
 
+                rTBoxData.Text += "Poprawnie połączono z portem: " + cBoxPorts.Text + "\n";
+
                 progressBarData.Value = 100;
             }
             catch (Exception exc)
@@ -443,7 +446,6 @@ namespace Aplikacja_MEMS
         }
 
         // Ustawianie ODR czujników 
-
         private void SetOdr(object sender, EventArgs e)
         {
             foreach (Sensor s in sensors)
@@ -610,7 +612,7 @@ namespace Aplikacja_MEMS
                     buffer = fileContent.Substring(0, 1);
                     fileContent = fileContent.Remove(0, 2);
 
-                    Plot plot = new Plot(sensorName, 0);
+                    Plot plot = new Plot(sensorName, 1);
                     plot.Load -= plot.Plot_Load;
                     plot.WindowState = FormWindowState.Normal;
                     plot.Show();
@@ -620,8 +622,14 @@ namespace Aplikacja_MEMS
                         case "1":
                             while(fileContent.Length > 0)
                             {
-                                float parameter = float.Parse(fileContent.Substring(0, fileContent.IndexOf("\n")));
+                                float[] parameter = new float[2];
+                                parameter[0] = float.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
+                                fileContent = fileContent.Remove(0, fileContent.IndexOf("|") + 1);
+
+                                parameter[1] = float.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
                                 fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
+
+
                                 plot.AddPoints(parameter);
                             }
                             break;
@@ -629,8 +637,8 @@ namespace Aplikacja_MEMS
                         case "3":
                             while (fileContent.Length > 0)
                             {
-                                int[] parameter = new int[3];
-                                for(int i = 0; i<3; i++)
+                                int[] parameter = new int[4];
+                                for(int i = 0; i<4; i++)
                                 {
                                     parameter[i] = Int32.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
                                     fileContent = fileContent.Remove(0, fileContent.IndexOf("|") + 1);
@@ -655,6 +663,13 @@ namespace Aplikacja_MEMS
         {
             About about = new About();
             about.ShowDialog();
+        }
+
+        private void buttonAccOpen_Click(object sender, EventArgs e)
+        {
+            Registers.RegisterList.LSM6DSL();
+            SensorRegister register = new SensorRegister(Registers.RegisterList.r_LSM6DSL);
+            register.Show();
         }
     }
 }
