@@ -95,8 +95,9 @@ namespace Aplikacja_MEMS.Transmition
                 serialPort.ReadBufferSize = 16384;
                 serialPort.Open();
             }
-            catch (Exception e)
+            catch
             {
+                return;
             }
         }
 
@@ -144,9 +145,7 @@ namespace Aplikacja_MEMS.Transmition
                 return retMessage;
             }
             else
-            {
                 return null;
-            }
         }
 
         public static void Read(object data)

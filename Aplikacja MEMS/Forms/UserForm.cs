@@ -554,13 +554,13 @@ namespace Aplikacja_MEMS
         private void SaveSensorParameters(object sender, EventArgs e)
         {
             string toSave = string.Empty;
-            string fileName = string.Empty; 
+            string fileName = string.Empty;
 
             foreach (Sensor s in sensors)
                 if ((string)((ToolStripMenuItem)sender).Tag == s.sensorName)
                 {
                     toSave = s.GetData();
-                    fileName = s.sensorName + DateTime.Today.ToString(" MMM-dd") +".mem";
+                    fileName = s.sensorName + DateTime.Today.ToString(" MMM-dd") + ".mem";
                 }
 
             SaveFileDialog saveFileDialog = new SaveFileDialog
@@ -574,8 +574,8 @@ namespace Aplikacja_MEMS
             if (toSave != string.Empty && saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (Stream s = File.Open(saveFileDialog.FileName, FileMode.CreateNew))
-                    using (StreamWriter sw = new StreamWriter(s))
-                        sw.Write(toSave);
+                using (StreamWriter sw = new StreamWriter(s))
+                    sw.Write(toSave);
             }
             else if (toSave == string.Empty)
                 MessageBox.Show("Brak danych do zapisania!", "Błąd zapisu danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -595,65 +595,72 @@ namespace Aplikacja_MEMS
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    //Get the path of specified file
-                    filePath = openFileDialog.FileName;
-
-                    //Read the contents of the file into a stream
-                    var fileStream = openFileDialog.OpenFile();
-
-                    using (StreamReader reader = new StreamReader(fileStream))
-                        fileContent = reader.ReadToEnd();
-
-                    string sensorName = fileContent.Substring(0, fileContent.IndexOf("\n"));
-                    fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
-
-                    string buffer = string.Empty;
-
-                    buffer = fileContent.Substring(0, 1);
-                    fileContent = fileContent.Remove(0, 2);
-
-                    Plot plot = new Plot(sensorName, 1);
-                    plot.Load -= plot.Plot_Load;
-                    plot.WindowState = FormWindowState.Normal;
-                    plot.Show();
-
-                    switch (buffer)
+                    try
                     {
-                        case "1":
-                            while(fileContent.Length > 0)
-                            {
-                                float[] parameter = new float[2];
-                                parameter[0] = float.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
-                                fileContent = fileContent.Remove(0, fileContent.IndexOf("|") + 1);
+                        //Get the path of specified file
+                        filePath = openFileDialog.FileName;
 
-                                parameter[1] = float.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
-                                fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
+                        //Read the contents of the file into a stream
+                        var fileStream = openFileDialog.OpenFile();
 
+                        using (StreamReader reader = new StreamReader(fileStream))
+                            fileContent = reader.ReadToEnd();
 
-                                plot.AddPoints(parameter);
-                            }
-                            break;
+                        string sensorName = fileContent.Substring(0, fileContent.IndexOf("\n"));
+                        fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
 
-                        case "3":
-                            while (fileContent.Length > 0)
-                            {
-                                int[] parameter = new int[4];
-                                for(int i = 0; i<4; i++)
+                        string buffer = string.Empty;
+
+                        buffer = fileContent.Substring(0, 1);
+                        fileContent = fileContent.Remove(0, 2);
+
+                        Plot plot = new Plot(sensorName, 1);
+                        plot.Load -= plot.Plot_Load;
+                        plot.WindowState = FormWindowState.Normal;
+                        plot.Show();
+
+                        switch (buffer)
+                        {
+                            case "1":
+                                while (fileContent.Length > 0)
                                 {
-                                    parameter[i] = Int32.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
+                                    float[] parameter = new float[2];
+                                    parameter[0] = float.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
                                     fileContent = fileContent.Remove(0, fileContent.IndexOf("|") + 1);
-                                }
-                                fileContent = fileContent.Remove(0, 1);
-                                plot.AddPoints(parameter);
-                            }
-                            break;
 
-                        default:
-                            plot.Close();
-                            plot.Dispose();
-                            MessageBox.Show("Błąd ładowania pliku. Wybrany plik nie zgadza się z wymaganiami!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            
-                            return;
+                                    parameter[1] = float.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
+                                    fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
+
+
+                                    plot.AddPoints(parameter);
+                                }
+                                break;
+
+                            case "3":
+                                while (fileContent.Length > 0)
+                                {
+                                    int[] parameter = new int[4];
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        parameter[i] = Int32.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
+                                        fileContent = fileContent.Remove(0, fileContent.IndexOf("|") + 1);
+                                    }
+                                    fileContent = fileContent.Remove(0, 1);
+                                    plot.AddPoints(parameter);
+                                }
+                                break;
+
+                            default:
+                                plot.Close();
+                                plot.Dispose();
+                                MessageBox.Show("Błąd ładowania pliku. Wybrany plik nie zgadza się z wymaganiami!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                return;
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Błąd ładowania pliku. Wybrany plik nie zgadza się z wymaganiami!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
