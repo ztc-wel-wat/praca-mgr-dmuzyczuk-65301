@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
 using Aplikacja_MEMS.Forms;
-using Aplikacja_MEMS.Registers;
 
 namespace Aplikacja_MEMS
 {
@@ -133,24 +132,5 @@ namespace Aplikacja_MEMS
         {
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address));
         }
-
-
-        private void SaveParameters()
-        {
-            
-        }
-
-        public void OpenRegister()
-        {
-            RegisterList.LSM6DSL();
-            if (register == null)
-            {
-                register = new SensorRegister(RegisterList.r_LSM6DSL);
-            }
-            register.Visible = true;
-            register.TopMost = true;
-            register.TopMost = false;
-        }
-
     }
 }

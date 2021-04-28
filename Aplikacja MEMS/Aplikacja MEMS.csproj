@@ -97,13 +97,14 @@
       <DependentUpon>Plot.cs</DependentUpon>
     </Compile>
     <Compile Include="Frame\FrameParameters.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Sensors\SetSensor.cs" />
     <Compile Include="Transmition\AvailablePort.cs" />
     <Compile Include="Frame\Identificators.cs" />
-    <Compile Include="Registers\Parameter.cs" />
-    <Compile Include="Registers\Register.cs" />
-    <Compile Include="Registers\RegisterList.cs" />
-    <Compile Include="Registers\RegisterType.cs" />
     <Compile Include="Frame\SubCmdType.cs" />
     <Compile Include="Frame\CmdType.cs" />
     <Compile Include="Sensors\EnvSensor.cs" />
@@ -149,14 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Aplikacja MEMS_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -172,22 +168,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Board.png" />
+    <None Include="Resources\Plytka.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\WEL_WAT.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\refresh.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Wel.png" />
+    <None Include="Resources\wel.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\STMicroelectronics.jpg" />
+    <None Include="Resources\STMICROELECTRONICS.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Unicleo.jpg" />
+    <None Include="Resources\image.PF264299.en.feature-description-include-personalized-no-cpn-medium.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />

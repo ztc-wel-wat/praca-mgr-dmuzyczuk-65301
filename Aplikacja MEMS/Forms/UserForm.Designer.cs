@@ -196,6 +196,7 @@ namespace Aplikacja_MEMS
             this.higrometrToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.opcjeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.portOpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zamknijPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.EnableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -204,7 +205,6 @@ namespace Aplikacja_MEMS
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zamknijPortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
@@ -803,6 +803,7 @@ namespace Aplikacja_MEMS
             this.buttonHumOpen.Tag = "Higrometr";
             this.buttonHumOpen.Text = "Otwórz rejestr";
             this.buttonHumOpen.UseVisualStyleBackColor = true;
+            this.buttonHumOpen.Click += new System.EventHandler(this.buttonRegisterOpen_Click);
             // 
             // buttonHumDrawPlot
             // 
@@ -1000,6 +1001,7 @@ namespace Aplikacja_MEMS
             this.buttonMagOpen.Tag = "Magnetometr";
             this.buttonMagOpen.Text = "Otwórz rejestr";
             this.buttonMagOpen.UseVisualStyleBackColor = true;
+            this.buttonMagOpen.Click += new System.EventHandler(this.buttonRegisterOpen_Click);
             // 
             // buttonMagDrawPlot
             // 
@@ -1212,6 +1214,7 @@ namespace Aplikacja_MEMS
             this.buttonPreOpen.Tag = "Barometr";
             this.buttonPreOpen.Text = "Otwórz rejestr";
             this.buttonPreOpen.UseVisualStyleBackColor = true;
+            this.buttonPreOpen.Click += new System.EventHandler(this.buttonRegisterOpen_Click);
             // 
             // buttonPreDrawPlot
             // 
@@ -1420,6 +1423,7 @@ namespace Aplikacja_MEMS
             this.buttonGyrOpen.Tag = "Żyroskop";
             this.buttonGyrOpen.Text = "Otwórz rejestr";
             this.buttonGyrOpen.UseVisualStyleBackColor = true;
+            this.buttonGyrOpen.Click += new System.EventHandler(this.buttonRegisterOpen_Click);
             // 
             // buttonGyrDrawPlot
             // 
@@ -1630,6 +1634,7 @@ namespace Aplikacja_MEMS
             this.buttonTherOpen.Tag = "Termometr";
             this.buttonTherOpen.Text = "Otwórz rejestr";
             this.buttonTherOpen.UseVisualStyleBackColor = true;
+            this.buttonTherOpen.Click += new System.EventHandler(this.buttonRegisterOpen_Click);
             // 
             // buttonTherDrawPlot
             // 
@@ -1839,7 +1844,7 @@ namespace Aplikacja_MEMS
             this.buttonAccOpen.Tag = "Akcelerometr";
             this.buttonAccOpen.Text = "Otwórz rejestr";
             this.buttonAccOpen.UseVisualStyleBackColor = true;
-            this.buttonAccOpen.Click += new System.EventHandler(this.buttonAccOpen_Click);
+            this.buttonAccOpen.Click += new System.EventHandler(this.buttonRegisterOpen_Click);
             // 
             // buttonAccDrawPlot
             // 
@@ -1981,7 +1986,7 @@ namespace Aplikacja_MEMS
             // akcelerometrToolStripMenuItem2
             // 
             this.akcelerometrToolStripMenuItem2.Name = "akcelerometrToolStripMenuItem2";
-            this.akcelerometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.akcelerometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
             this.akcelerometrToolStripMenuItem2.Tag = "Akcelerometr";
             this.akcelerometrToolStripMenuItem2.Text = "Akcelerometr";
             this.akcelerometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -1989,7 +1994,7 @@ namespace Aplikacja_MEMS
             // żyroskopToolStripMenuItem2
             // 
             this.żyroskopToolStripMenuItem2.Name = "żyroskopToolStripMenuItem2";
-            this.żyroskopToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.żyroskopToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
             this.żyroskopToolStripMenuItem2.Tag = "Żyroskop";
             this.żyroskopToolStripMenuItem2.Text = "Żyroskop";
             this.żyroskopToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -1997,7 +2002,7 @@ namespace Aplikacja_MEMS
             // magnetometrToolStripMenuItem2
             // 
             this.magnetometrToolStripMenuItem2.Name = "magnetometrToolStripMenuItem2";
-            this.magnetometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.magnetometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
             this.magnetometrToolStripMenuItem2.Tag = "Magnetometr";
             this.magnetometrToolStripMenuItem2.Text = "Magnetometr";
             this.magnetometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2005,7 +2010,7 @@ namespace Aplikacja_MEMS
             // termometrToolStripMenuItem2
             // 
             this.termometrToolStripMenuItem2.Name = "termometrToolStripMenuItem2";
-            this.termometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.termometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
             this.termometrToolStripMenuItem2.Tag = "Termometr";
             this.termometrToolStripMenuItem2.Text = "Termometr";
             this.termometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2013,7 +2018,7 @@ namespace Aplikacja_MEMS
             // barometrToolStripMenuItem2
             // 
             this.barometrToolStripMenuItem2.Name = "barometrToolStripMenuItem2";
-            this.barometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.barometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
             this.barometrToolStripMenuItem2.Tag = "Barometr";
             this.barometrToolStripMenuItem2.Text = "Barometr";
             this.barometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2021,7 +2026,7 @@ namespace Aplikacja_MEMS
             // higrometrToolStripMenuItem2
             // 
             this.higrometrToolStripMenuItem2.Name = "higrometrToolStripMenuItem2";
-            this.higrometrToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.higrometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
             this.higrometrToolStripMenuItem2.Tag = "Higrometr";
             this.higrometrToolStripMenuItem2.Text = "Higrometr";
             this.higrometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2205,6 +2210,12 @@ namespace Aplikacja_MEMS
             this.portOpenToolStripMenuItem.Text = "Otworz port";
             this.portOpenToolStripMenuItem.Click += new System.EventHandler(this.portOpenToolStripMenuItem_Click);
             // 
+            // zamknijPortToolStripMenuItem
+            // 
+            this.zamknijPortToolStripMenuItem.Name = "zamknijPortToolStripMenuItem";
+            this.zamknijPortToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.zamknijPortToolStripMenuItem.Text = "Zamknij port";
+            // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
@@ -2260,12 +2271,6 @@ namespace Aplikacja_MEMS
             this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.oProgramieToolStripMenuItem.Text = "O programie";
             this.oProgramieToolStripMenuItem.Click += new System.EventHandler(this.oProgramieToolStripMenuItem_Click);
-            // 
-            // zamknijPortToolStripMenuItem
-            // 
-            this.zamknijPortToolStripMenuItem.Name = "zamknijPortToolStripMenuItem";
-            this.zamknijPortToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.zamknijPortToolStripMenuItem.Text = "Zamknij port";
             // 
             // UserForm
             // 

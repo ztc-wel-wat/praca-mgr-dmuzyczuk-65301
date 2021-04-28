@@ -597,10 +597,7 @@ namespace Aplikacja_MEMS
                 {
                     try
                     {
-                        //Get the path of specified file
                         filePath = openFileDialog.FileName;
-
-                        //Read the contents of the file into a stream
                         var fileStream = openFileDialog.OpenFile();
 
                         using (StreamReader reader = new StreamReader(fileStream))
@@ -631,7 +628,6 @@ namespace Aplikacja_MEMS
                                     parameter[1] = float.Parse(fileContent.Substring(0, fileContent.IndexOf("|")));
                                     fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
 
-
                                     plot.AddPoints(parameter);
                                 }
                                 break;
@@ -646,6 +642,7 @@ namespace Aplikacja_MEMS
                                         fileContent = fileContent.Remove(0, fileContent.IndexOf("|") + 1);
                                     }
                                     fileContent = fileContent.Remove(0, 1);
+
                                     plot.AddPoints(parameter);
                                 }
                                 break;
@@ -672,11 +669,39 @@ namespace Aplikacja_MEMS
             about.ShowDialog();
         }
 
-        private void buttonAccOpen_Click(object sender, EventArgs e)
+        private void buttonRegisterOpen_Click(object sender, EventArgs e)
         {
-            Registers.RegisterList.LSM6DSL();
-            SensorRegister register = new SensorRegister(Registers.RegisterList.r_LSM6DSL);
-            register.Show();
+            foreach(Control c in tabPageSensors.Controls)
+            {
+                if(c is GroupBox gBox && c.Tag == ((Button)sender).Tag)
+                {
+                    foreach(Control g in gBox.Controls)
+                    {
+                        if(g is Label lab && g.Name.Contains("NameLab"))
+                        {
+                            string regName = lab.Text;
+                            bool search = false;
+                            foreach (SensorRegister sReg in registers)
+                                if (sReg.Text == regName)
+                                {
+                                    search = true;
+                                    sReg.Show();
+                                }
+
+                            if (search != true)
+                                if (File.Exists(regName + ".txt"))
+                                { 
+                                    SensorRegister sensorRegister = new SensorRegister(regName);
+                                    registers.Add(sensorRegister);
+                                    sensorRegister.Show();
+                                }
+                                
+                                else
+                                    MessageBox.Show("Brak danych rejestru w bazie plików.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
         }
     }
 }
