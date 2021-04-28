@@ -707,9 +707,7 @@ namespace Aplikacja_MEMS
 
         private void buttonRegisterOpen_Click(object sender, EventArgs e)
         {
-            enabledRegister = true;
-            foreach (Button btn in parameters)
-                btn.Enabled = false;
+            
             foreach (Control c in tabPageSensors.Controls)
             {
                 if (c is GroupBox gBox && c.Tag == ((Button)sender).Tag)
@@ -725,6 +723,11 @@ namespace Aplikacja_MEMS
                                 {
                                     search = true;
                                     sReg.Visible = true;
+
+                                    foreach (Button btn in parameters)
+                                        btn.Enabled = false;
+
+                                    enabledRegister = true;
                                 }
 
                             if (search != true)
@@ -739,12 +742,20 @@ namespace Aplikacja_MEMS
                                             s.AssignRegister(sensorRegister);
                                             sensorRegister.Show();
 
+                                            foreach (Button btn in parameters)
+                                                btn.Enabled = false;
+
+                                            enabledRegister = true;
                                         }
 
                                 }
 
                                 else
+                                {
                                     MessageBox.Show("Brak danych rejestru w bazie plików.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                                }
+
                         }
                     }
                 }

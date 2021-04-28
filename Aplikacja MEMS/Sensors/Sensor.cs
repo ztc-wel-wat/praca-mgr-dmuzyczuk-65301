@@ -34,7 +34,7 @@ namespace Aplikacja_MEMS
         {
             if (sender is CheckBox)
             {
-                if(isEnabled)
+                if (isEnabled)
                 {
                     odrSum += newOdr;
                     odr = newOdr;
@@ -125,12 +125,20 @@ namespace Aplikacja_MEMS
         // Ustawianie parametru
         public void SetRegisterParameter(string address, string value)
         {
+            try
+            {
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.SetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address), Analysis.HexUtil.ToBytes(value));
+            }
+            catch { }
         }
 
         public void GetRegisterParameter(string address)
         {
+            try
+            {
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address));
+            }
+            catch { }
         }
 
         public void AssignRegister(SensorRegister sensorRegister)
@@ -139,7 +147,7 @@ namespace Aplikacja_MEMS
         }
 
 
-        public void AddToRegisters(string address ,string parameter)
+        public void AddToRegisters(string address, string parameter)
         {
             register.AddData(address, parameter);
         }
