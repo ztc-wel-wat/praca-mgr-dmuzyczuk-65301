@@ -235,10 +235,11 @@ namespace Aplikacja_MEMS
             this.tabControlMain.Controls.Add(this.tabPageSensors);
             this.tabControlMain.Controls.Add(this.tabPageData);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlMain.Location = new System.Drawing.Point(0, 24);
+            this.tabControlMain.Location = new System.Drawing.Point(0, 28);
+            this.tabControlMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(788, 500);
+            this.tabControlMain.Size = new System.Drawing.Size(1051, 617);
             this.tabControlMain.SizeMode = System.Windows.Forms.TabSizeMode.FillToRight;
             this.tabControlMain.TabIndex = 0;
             // 
@@ -247,10 +248,11 @@ namespace Aplikacja_MEMS
             this.tabPageGeneral.Controls.Add(this.gBoxSensors);
             this.tabPageGeneral.Controls.Add(this.gBoxConnection);
             this.tabPageGeneral.Controls.Add(this.gBoxInfo);
-            this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGeneral.Location = new System.Drawing.Point(4, 25);
+            this.tabPageGeneral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPageGeneral.Name = "tabPageGeneral";
-            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(780, 474);
+            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageGeneral.Size = new System.Drawing.Size(1043, 588);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "Ogólne";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
@@ -270,9 +272,11 @@ namespace Aplikacja_MEMS
             this.gBoxSensors.Controls.Add(this.labelGyroscope);
             this.gBoxSensors.Controls.Add(this.labelAccelerometer);
             this.gBoxSensors.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gBoxSensors.Location = new System.Drawing.Point(3, 307);
+            this.gBoxSensors.Location = new System.Drawing.Point(4, 378);
+            this.gBoxSensors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxSensors.Name = "gBoxSensors";
-            this.gBoxSensors.Size = new System.Drawing.Size(774, 144);
+            this.gBoxSensors.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxSensors.Size = new System.Drawing.Size(1035, 177);
             this.gBoxSensors.TabIndex = 2;
             this.gBoxSensors.TabStop = false;
             this.gBoxSensors.Text = "Czujniki";
@@ -283,9 +287,10 @@ namespace Aplikacja_MEMS
             this.cBoxHumidity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxHumidity.Enabled = false;
             this.cBoxHumidity.FormattingEnabled = true;
-            this.cBoxHumidity.Location = new System.Drawing.Point(566, 101);
+            this.cBoxHumidity.Location = new System.Drawing.Point(755, 124);
+            this.cBoxHumidity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxHumidity.Name = "cBoxHumidity";
-            this.cBoxHumidity.Size = new System.Drawing.Size(140, 21);
+            this.cBoxHumidity.Size = new System.Drawing.Size(185, 24);
             this.cBoxHumidity.TabIndex = 11;
             // 
             // cBoxPressure
@@ -294,9 +299,10 @@ namespace Aplikacja_MEMS
             this.cBoxPressure.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxPressure.Enabled = false;
             this.cBoxPressure.FormattingEnabled = true;
-            this.cBoxPressure.Location = new System.Drawing.Point(566, 66);
+            this.cBoxPressure.Location = new System.Drawing.Point(755, 81);
+            this.cBoxPressure.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxPressure.Name = "cBoxPressure";
-            this.cBoxPressure.Size = new System.Drawing.Size(140, 21);
+            this.cBoxPressure.Size = new System.Drawing.Size(185, 24);
             this.cBoxPressure.TabIndex = 10;
             // 
             // cBoxThermometer
@@ -305,9 +311,10 @@ namespace Aplikacja_MEMS
             this.cBoxThermometer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxThermometer.Enabled = false;
             this.cBoxThermometer.FormattingEnabled = true;
-            this.cBoxThermometer.Location = new System.Drawing.Point(566, 31);
+            this.cBoxThermometer.Location = new System.Drawing.Point(755, 38);
+            this.cBoxThermometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxThermometer.Name = "cBoxThermometer";
-            this.cBoxThermometer.Size = new System.Drawing.Size(140, 21);
+            this.cBoxThermometer.Size = new System.Drawing.Size(185, 24);
             this.cBoxThermometer.TabIndex = 9;
             // 
             // cBoxMagnetometer
@@ -316,9 +323,10 @@ namespace Aplikacja_MEMS
             this.cBoxMagnetometer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxMagnetometer.Enabled = false;
             this.cBoxMagnetometer.FormattingEnabled = true;
-            this.cBoxMagnetometer.Location = new System.Drawing.Point(172, 101);
+            this.cBoxMagnetometer.Location = new System.Drawing.Point(229, 124);
+            this.cBoxMagnetometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxMagnetometer.Name = "cBoxMagnetometer";
-            this.cBoxMagnetometer.Size = new System.Drawing.Size(140, 21);
+            this.cBoxMagnetometer.Size = new System.Drawing.Size(185, 24);
             this.cBoxMagnetometer.TabIndex = 8;
             // 
             // cBoxGyroscope
@@ -327,9 +335,10 @@ namespace Aplikacja_MEMS
             this.cBoxGyroscope.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxGyroscope.Enabled = false;
             this.cBoxGyroscope.FormattingEnabled = true;
-            this.cBoxGyroscope.Location = new System.Drawing.Point(172, 66);
+            this.cBoxGyroscope.Location = new System.Drawing.Point(229, 81);
+            this.cBoxGyroscope.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxGyroscope.Name = "cBoxGyroscope";
-            this.cBoxGyroscope.Size = new System.Drawing.Size(140, 21);
+            this.cBoxGyroscope.Size = new System.Drawing.Size(185, 24);
             this.cBoxGyroscope.TabIndex = 7;
             // 
             // cBoxAccelerometer
@@ -337,18 +346,20 @@ namespace Aplikacja_MEMS
             this.cBoxAccelerometer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cBoxAccelerometer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxAccelerometer.Enabled = false;
-            this.cBoxAccelerometer.Location = new System.Drawing.Point(172, 31);
+            this.cBoxAccelerometer.Location = new System.Drawing.Point(229, 38);
+            this.cBoxAccelerometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxAccelerometer.Name = "cBoxAccelerometer";
-            this.cBoxAccelerometer.Size = new System.Drawing.Size(140, 21);
+            this.cBoxAccelerometer.Size = new System.Drawing.Size(185, 24);
             this.cBoxAccelerometer.TabIndex = 6;
             // 
             // labelHumidity
             // 
             this.labelHumidity.AutoSize = true;
             this.labelHumidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelHumidity.Location = new System.Drawing.Point(435, 102);
+            this.labelHumidity.Location = new System.Drawing.Point(580, 126);
+            this.labelHumidity.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelHumidity.Name = "labelHumidity";
-            this.labelHumidity.Size = new System.Drawing.Size(74, 17);
+            this.labelHumidity.Size = new System.Drawing.Size(89, 20);
             this.labelHumidity.TabIndex = 5;
             this.labelHumidity.Text = "Higrometr:";
             // 
@@ -356,9 +367,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelPressure.AutoSize = true;
             this.labelPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelPressure.Location = new System.Drawing.Point(435, 67);
+            this.labelPressure.Location = new System.Drawing.Point(580, 82);
+            this.labelPressure.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPressure.Name = "labelPressure";
-            this.labelPressure.Size = new System.Drawing.Size(70, 17);
+            this.labelPressure.Size = new System.Drawing.Size(84, 20);
             this.labelPressure.TabIndex = 4;
             this.labelPressure.Text = "Barometr:";
             // 
@@ -366,9 +378,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelThermometer.AutoSize = true;
             this.labelThermometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelThermometer.Location = new System.Drawing.Point(435, 32);
+            this.labelThermometer.Location = new System.Drawing.Point(580, 39);
+            this.labelThermometer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelThermometer.Name = "labelThermometer";
-            this.labelThermometer.Size = new System.Drawing.Size(81, 17);
+            this.labelThermometer.Size = new System.Drawing.Size(96, 20);
             this.labelThermometer.TabIndex = 3;
             this.labelThermometer.Text = "Termometr:";
             // 
@@ -376,9 +389,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelMagnetometer.AutoSize = true;
             this.labelMagnetometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelMagnetometer.Location = new System.Drawing.Point(20, 102);
+            this.labelMagnetometer.Location = new System.Drawing.Point(27, 126);
+            this.labelMagnetometer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelMagnetometer.Name = "labelMagnetometer";
-            this.labelMagnetometer.Size = new System.Drawing.Size(95, 17);
+            this.labelMagnetometer.Size = new System.Drawing.Size(112, 20);
             this.labelMagnetometer.TabIndex = 2;
             this.labelMagnetometer.Text = "Magnetometr:";
             // 
@@ -386,9 +400,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelGyroscope.AutoSize = true;
             this.labelGyroscope.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelGyroscope.Location = new System.Drawing.Point(20, 67);
+            this.labelGyroscope.Location = new System.Drawing.Point(27, 82);
+            this.labelGyroscope.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelGyroscope.Name = "labelGyroscope";
-            this.labelGyroscope.Size = new System.Drawing.Size(71, 17);
+            this.labelGyroscope.Size = new System.Drawing.Size(81, 20);
             this.labelGyroscope.TabIndex = 1;
             this.labelGyroscope.Text = "Żyroskop:";
             // 
@@ -396,9 +411,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelAccelerometer.AutoSize = true;
             this.labelAccelerometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelAccelerometer.Location = new System.Drawing.Point(20, 32);
+            this.labelAccelerometer.Location = new System.Drawing.Point(27, 39);
+            this.labelAccelerometer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAccelerometer.Name = "labelAccelerometer";
-            this.labelAccelerometer.Size = new System.Drawing.Size(95, 17);
+            this.labelAccelerometer.Size = new System.Drawing.Size(113, 20);
             this.labelAccelerometer.TabIndex = 0;
             this.labelAccelerometer.Text = "Akcelerometr:";
             // 
@@ -417,9 +433,11 @@ namespace Aplikacja_MEMS
             this.gBoxConnection.Controls.Add(this.cBoxPorts);
             this.gBoxConnection.Controls.Add(this.labelPortSelection);
             this.gBoxConnection.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gBoxConnection.Location = new System.Drawing.Point(3, 163);
+            this.gBoxConnection.Location = new System.Drawing.Point(4, 201);
+            this.gBoxConnection.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxConnection.Name = "gBoxConnection";
-            this.gBoxConnection.Size = new System.Drawing.Size(774, 144);
+            this.gBoxConnection.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxConnection.Size = new System.Drawing.Size(1035, 177);
             this.gBoxConnection.TabIndex = 1;
             this.gBoxConnection.TabStop = false;
             this.gBoxConnection.Text = "Połączenie";
@@ -427,26 +445,30 @@ namespace Aplikacja_MEMS
             // pBoxLogoWEL
             // 
             this.pBoxLogoWEL.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
-            this.pBoxLogoWEL.Location = new System.Drawing.Point(347, 38);
+            this.pBoxLogoWEL.Location = new System.Drawing.Point(463, 47);
+            this.pBoxLogoWEL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pBoxLogoWEL.Name = "pBoxLogoWEL";
-            this.pBoxLogoWEL.Size = new System.Drawing.Size(80, 80);
+            this.pBoxLogoWEL.Size = new System.Drawing.Size(107, 98);
+            this.pBoxLogoWEL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pBoxLogoWEL.TabIndex = 11;
             this.pBoxLogoWEL.TabStop = false;
             // 
             // progressBarData
             // 
-            this.progressBarData.Location = new System.Drawing.Point(470, 104);
+            this.progressBarData.Location = new System.Drawing.Point(627, 128);
+            this.progressBarData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBarData.Name = "progressBarData";
-            this.progressBarData.Size = new System.Drawing.Size(266, 23);
+            this.progressBarData.Size = new System.Drawing.Size(355, 28);
             this.progressBarData.TabIndex = 10;
             // 
             // labelExchangeStatus
             // 
             this.labelExchangeStatus.AutoSize = true;
             this.labelExchangeStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelExchangeStatus.Location = new System.Drawing.Point(467, 81);
+            this.labelExchangeStatus.Location = new System.Drawing.Point(623, 100);
+            this.labelExchangeStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelExchangeStatus.Name = "labelExchangeStatus";
-            this.labelExchangeStatus.Size = new System.Drawing.Size(173, 17);
+            this.labelExchangeStatus.Size = new System.Drawing.Size(202, 20);
             this.labelExchangeStatus.TabIndex = 9;
             this.labelExchangeStatus.Text = "Status pobierania danych:";
             // 
@@ -454,9 +476,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelDataExchange.AutoSize = true;
             this.labelDataExchange.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelDataExchange.Location = new System.Drawing.Point(538, 28);
+            this.labelDataExchange.Location = new System.Drawing.Point(717, 34);
+            this.labelDataExchange.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDataExchange.Name = "labelDataExchange";
-            this.labelDataExchange.Size = new System.Drawing.Size(130, 17);
+            this.labelDataExchange.Size = new System.Drawing.Size(151, 20);
             this.labelDataExchange.TabIndex = 8;
             this.labelDataExchange.Text = "Pobieranie danych:";
             // 
@@ -464,9 +487,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStart.Enabled = false;
-            this.buttonStart.Location = new System.Drawing.Point(470, 55);
+            this.buttonStart.Location = new System.Drawing.Point(627, 68);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(130, 23);
+            this.buttonStart.Size = new System.Drawing.Size(173, 28);
             this.buttonStart.TabIndex = 7;
             this.buttonStart.Text = " Start";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -477,9 +501,10 @@ namespace Aplikacja_MEMS
             this.buttonStop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStop.Enabled = false;
             this.buttonStop.ForeColor = System.Drawing.Color.Red;
-            this.buttonStop.Location = new System.Drawing.Point(606, 55);
+            this.buttonStop.Location = new System.Drawing.Point(808, 68);
+            this.buttonStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(130, 23);
+            this.buttonStop.Size = new System.Drawing.Size(173, 28);
             this.buttonStop.TabIndex = 6;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -487,27 +512,30 @@ namespace Aplikacja_MEMS
             // 
             // progressBarCOM
             // 
-            this.progressBarCOM.Location = new System.Drawing.Point(31, 104);
+            this.progressBarCOM.Location = new System.Drawing.Point(41, 128);
+            this.progressBarCOM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.progressBarCOM.Name = "progressBarCOM";
-            this.progressBarCOM.Size = new System.Drawing.Size(266, 23);
+            this.progressBarCOM.Size = new System.Drawing.Size(355, 28);
             this.progressBarCOM.TabIndex = 5;
             // 
             // labelStatusCOM
             // 
             this.labelStatusCOM.AutoSize = true;
             this.labelStatusCOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelStatusCOM.Location = new System.Drawing.Point(28, 81);
+            this.labelStatusCOM.Location = new System.Drawing.Point(37, 100);
+            this.labelStatusCOM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatusCOM.Name = "labelStatusCOM";
-            this.labelStatusCOM.Size = new System.Drawing.Size(265, 17);
+            this.labelStatusCOM.Size = new System.Drawing.Size(317, 20);
             this.labelStatusCOM.TabIndex = 4;
             this.labelStatusCOM.Text = "Status połączenia z portem szeregowym:";
             // 
             // buttonOpen
             // 
             this.buttonOpen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonOpen.Location = new System.Drawing.Point(31, 55);
+            this.buttonOpen.Location = new System.Drawing.Point(41, 68);
+            this.buttonOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonOpen.Name = "buttonOpen";
-            this.buttonOpen.Size = new System.Drawing.Size(130, 23);
+            this.buttonOpen.Size = new System.Drawing.Size(173, 28);
             this.buttonOpen.TabIndex = 3;
             this.buttonOpen.Text = "Otwórz";
             this.buttonOpen.UseVisualStyleBackColor = true;
@@ -518,9 +546,10 @@ namespace Aplikacja_MEMS
             this.buttonClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonClose.Enabled = false;
             this.buttonClose.ForeColor = System.Drawing.Color.Red;
-            this.buttonClose.Location = new System.Drawing.Point(167, 55);
+            this.buttonClose.Location = new System.Drawing.Point(223, 68);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(130, 23);
+            this.buttonClose.Size = new System.Drawing.Size(173, 28);
             this.buttonClose.TabIndex = 2;
             this.buttonClose.Text = "Zamknij";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -531,18 +560,20 @@ namespace Aplikacja_MEMS
             this.cBoxPorts.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cBoxPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxPorts.FormattingEnabled = true;
-            this.cBoxPorts.Location = new System.Drawing.Point(208, 28);
+            this.cBoxPorts.Location = new System.Drawing.Point(277, 34);
+            this.cBoxPorts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxPorts.Name = "cBoxPorts";
-            this.cBoxPorts.Size = new System.Drawing.Size(89, 21);
+            this.cBoxPorts.Size = new System.Drawing.Size(117, 24);
             this.cBoxPorts.TabIndex = 1;
             // 
             // labelPortSelection
             // 
             this.labelPortSelection.AutoSize = true;
             this.labelPortSelection.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelPortSelection.Location = new System.Drawing.Point(28, 29);
+            this.labelPortSelection.Location = new System.Drawing.Point(37, 36);
+            this.labelPortSelection.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPortSelection.Name = "labelPortSelection";
-            this.labelPortSelection.Size = new System.Drawing.Size(127, 17);
+            this.labelPortSelection.Size = new System.Drawing.Size(153, 20);
             this.labelPortSelection.TabIndex = 0;
             this.labelPortSelection.Text = "Wybierz port COM:";
             // 
@@ -555,9 +586,11 @@ namespace Aplikacja_MEMS
             this.gBoxInfo.Controls.Add(this.labelAvailablePorts);
             this.gBoxInfo.Controls.Add(this.labelVersion);
             this.gBoxInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.gBoxInfo.Location = new System.Drawing.Point(3, 3);
+            this.gBoxInfo.Location = new System.Drawing.Point(4, 4);
+            this.gBoxInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxInfo.Name = "gBoxInfo";
-            this.gBoxInfo.Size = new System.Drawing.Size(774, 160);
+            this.gBoxInfo.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxInfo.Size = new System.Drawing.Size(1035, 197);
             this.gBoxInfo.TabIndex = 0;
             this.gBoxInfo.TabStop = false;
             this.gBoxInfo.Text = "Informacje";
@@ -567,9 +600,10 @@ namespace Aplikacja_MEMS
             this.btnRefresh.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.refresh;
             this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.Location = new System.Drawing.Point(115, 65);
+            this.btnRefresh.Location = new System.Drawing.Point(153, 80);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(22, 22);
+            this.btnRefresh.Size = new System.Drawing.Size(29, 27);
             this.btnRefresh.TabIndex = 5;
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
@@ -578,9 +612,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelTitle.AutoSize = true;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelTitle.Location = new System.Drawing.Point(212, 16);
+            this.labelTitle.Location = new System.Drawing.Point(283, 20);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(296, 24);
+            this.labelTitle.Size = new System.Drawing.Size(378, 29);
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Aplikacja MEMS czujnika IKS01A2";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -589,9 +624,10 @@ namespace Aplikacja_MEMS
             // 
             this.pBoxBoard.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
             this.pBoxBoard.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
-            this.pBoxBoard.Location = new System.Drawing.Point(572, 10);
+            this.pBoxBoard.Location = new System.Drawing.Point(763, 12);
+            this.pBoxBoard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pBoxBoard.Name = "pBoxBoard";
-            this.pBoxBoard.Size = new System.Drawing.Size(185, 144);
+            this.pBoxBoard.Size = new System.Drawing.Size(247, 177);
             this.pBoxBoard.TabIndex = 4;
             this.pBoxBoard.TabStop = false;
             // 
@@ -600,9 +636,10 @@ namespace Aplikacja_MEMS
             this.labelNoBoards.AutoSize = true;
             this.labelNoBoards.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelNoBoards.ForeColor = System.Drawing.Color.Red;
-            this.labelNoBoards.Location = new System.Drawing.Point(20, 85);
+            this.labelNoBoards.Location = new System.Drawing.Point(27, 105);
+            this.labelNoBoards.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelNoBoards.Name = "labelNoBoards";
-            this.labelNoBoards.Size = new System.Drawing.Size(158, 17);
+            this.labelNoBoards.Size = new System.Drawing.Size(187, 20);
             this.labelNoBoards.TabIndex = 3;
             this.labelNoBoards.Text = "Brak dostępnych płytek!";
             // 
@@ -610,9 +647,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelAvailablePorts.AutoSize = true;
             this.labelAvailablePorts.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelAvailablePorts.Location = new System.Drawing.Point(6, 66);
+            this.labelAvailablePorts.Location = new System.Drawing.Point(8, 81);
+            this.labelAvailablePorts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAvailablePorts.Name = "labelAvailablePorts";
-            this.labelAvailablePorts.Size = new System.Drawing.Size(109, 17);
+            this.labelAvailablePorts.Size = new System.Drawing.Size(129, 20);
             this.labelAvailablePorts.TabIndex = 2;
             this.labelAvailablePorts.Text = "Dostępne płytki:";
             // 
@@ -620,9 +658,10 @@ namespace Aplikacja_MEMS
             // 
             this.labelVersion.AutoSize = true;
             this.labelVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelVersion.Location = new System.Drawing.Point(6, 49);
+            this.labelVersion.Location = new System.Drawing.Point(8, 60);
+            this.labelVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(154, 17);
+            this.labelVersion.Size = new System.Drawing.Size(181, 20);
             this.labelVersion.TabIndex = 1;
             this.labelVersion.Text = "Wersja aplikacji: 1.5.10";
             // 
@@ -635,10 +674,11 @@ namespace Aplikacja_MEMS
             this.tabPageSensors.Controls.Add(this.gBoxGyroscope);
             this.tabPageSensors.Controls.Add(this.gBoxThermometer);
             this.tabPageSensors.Controls.Add(this.gBoxAccelerometer);
-            this.tabPageSensors.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSensors.Location = new System.Drawing.Point(4, 25);
+            this.tabPageSensors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPageSensors.Name = "tabPageSensors";
-            this.tabPageSensors.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSensors.Size = new System.Drawing.Size(780, 474);
+            this.tabPageSensors.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageSensors.Size = new System.Drawing.Size(1043, 586);
             this.tabPageSensors.TabIndex = 1;
             this.tabPageSensors.Text = "Czujniki MEMS";
             this.tabPageSensors.UseVisualStyleBackColor = true;
@@ -654,9 +694,11 @@ namespace Aplikacja_MEMS
             this.gBoxHumidity.Controls.Add(this.chBoxHumEnabled);
             this.gBoxHumidity.Enabled = false;
             this.gBoxHumidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxHumidity.Location = new System.Drawing.Point(409, 318);
+            this.gBoxHumidity.Location = new System.Drawing.Point(545, 391);
+            this.gBoxHumidity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxHumidity.Name = "gBoxHumidity";
-            this.gBoxHumidity.Size = new System.Drawing.Size(355, 150);
+            this.gBoxHumidity.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxHumidity.Size = new System.Drawing.Size(473, 185);
             this.gBoxHumidity.TabIndex = 4;
             this.gBoxHumidity.TabStop = false;
             this.gBoxHumidity.Tag = "Higrometr";
@@ -665,9 +707,10 @@ namespace Aplikacja_MEMS
             // humNameLab
             // 
             this.humNameLab.AutoSize = true;
-            this.humNameLab.Location = new System.Drawing.Point(103, 19);
+            this.humNameLab.Location = new System.Drawing.Point(137, 23);
+            this.humNameLab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.humNameLab.Name = "humNameLab";
-            this.humNameLab.Size = new System.Drawing.Size(16, 17);
+            this.humNameLab.Size = new System.Drawing.Size(18, 20);
             this.humNameLab.TabIndex = 24;
             this.humNameLab.Tag = "Higrometr";
             this.humNameLab.Text = "?";
@@ -676,9 +719,10 @@ namespace Aplikacja_MEMS
             // 
             this.labHumName.AutoSize = true;
             this.labHumName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labHumName.Location = new System.Drawing.Point(6, 19);
+            this.labHumName.Location = new System.Drawing.Point(8, 23);
+            this.labHumName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labHumName.Name = "labHumName";
-            this.labHumName.Size = new System.Drawing.Size(99, 15);
+            this.labHumName.Size = new System.Drawing.Size(120, 18);
             this.labHumName.TabIndex = 18;
             this.labHumName.Text = "Nazwa czujnika: ";
             // 
@@ -692,9 +736,10 @@ namespace Aplikacja_MEMS
             "1",
             "7",
             "12,5"});
-            this.cBoxHumODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxHumODR.Location = new System.Drawing.Point(12, 95);
+            this.cBoxHumODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxHumODR.Name = "cBoxHumODR";
-            this.cBoxHumODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxHumODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxHumODR.TabIndex = 20;
             this.cBoxHumODR.Tag = "Higrometr";
             this.cBoxHumODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
@@ -703,9 +748,10 @@ namespace Aplikacja_MEMS
             // 
             this.labHumODR.AutoSize = true;
             this.labHumODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labHumODR.Location = new System.Drawing.Point(6, 59);
+            this.labHumODR.Location = new System.Drawing.Point(8, 73);
+            this.labHumODR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labHumODR.Name = "labHumODR";
-            this.labHumODR.Size = new System.Drawing.Size(37, 15);
+            this.labHumODR.Size = new System.Drawing.Size(46, 18);
             this.labHumODR.TabIndex = 23;
             this.labHumODR.Text = "ODR:";
             // 
@@ -719,9 +765,11 @@ namespace Aplikacja_MEMS
             this.gBoxHumRegister.Controls.Add(this.labHumAddress);
             this.gBoxHumRegister.Controls.Add(this.buttonHumOpen);
             this.gBoxHumRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxHumRegister.Location = new System.Drawing.Point(154, 39);
+            this.gBoxHumRegister.Location = new System.Drawing.Point(205, 48);
+            this.gBoxHumRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxHumRegister.Name = "gBoxHumRegister";
-            this.gBoxHumRegister.Size = new System.Drawing.Size(195, 105);
+            this.gBoxHumRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxHumRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxHumRegister.TabIndex = 21;
             this.gBoxHumRegister.TabStop = false;
             this.gBoxHumRegister.Text = "Rejestr";
@@ -730,9 +778,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonHumGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonHumGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonHumGet.Location = new System.Drawing.Point(107, 54);
+            this.buttonHumGet.Location = new System.Drawing.Point(143, 66);
+            this.buttonHumGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonHumGet.Name = "buttonHumGet";
-            this.buttonHumGet.Size = new System.Drawing.Size(66, 23);
+            this.buttonHumGet.Size = new System.Drawing.Size(88, 28);
             this.buttonHumGet.TabIndex = 20;
             this.buttonHumGet.Tag = "Higrometr";
             this.buttonHumGet.Text = "Wczytaj";
@@ -743,9 +792,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonHumSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonHumSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonHumSet.Location = new System.Drawing.Point(30, 54);
+            this.buttonHumSet.Location = new System.Drawing.Point(40, 66);
+            this.buttonHumSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonHumSet.Name = "buttonHumSet";
-            this.buttonHumSet.Size = new System.Drawing.Size(66, 23);
+            this.buttonHumSet.Size = new System.Drawing.Size(88, 28);
             this.buttonHumSet.TabIndex = 19;
             this.buttonHumSet.Tag = "Higrometr";
             this.buttonHumSet.Text = "Ustaw";
@@ -755,9 +805,10 @@ namespace Aplikacja_MEMS
             // tBoxHumValue
             // 
             this.tBoxHumValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxHumValue.Location = new System.Drawing.Point(107, 28);
+            this.tBoxHumValue.Location = new System.Drawing.Point(143, 34);
+            this.tBoxHumValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxHumValue.Name = "tBoxHumValue";
-            this.tBoxHumValue.Size = new System.Drawing.Size(66, 20);
+            this.tBoxHumValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxHumValue.TabIndex = 18;
             this.tBoxHumValue.Tag = "Higrometr";
             this.tBoxHumValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -765,9 +816,10 @@ namespace Aplikacja_MEMS
             // tBoxHumAddress
             // 
             this.tBoxHumAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxHumAddress.Location = new System.Drawing.Point(30, 28);
+            this.tBoxHumAddress.Location = new System.Drawing.Point(40, 34);
+            this.tBoxHumAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxHumAddress.Name = "tBoxHumAddress";
-            this.tBoxHumAddress.Size = new System.Drawing.Size(66, 20);
+            this.tBoxHumAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxHumAddress.TabIndex = 17;
             this.tBoxHumAddress.Tag = "Higrometr";
             this.tBoxHumAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -776,9 +828,10 @@ namespace Aplikacja_MEMS
             // 
             this.labHumValue.AutoSize = true;
             this.labHumValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labHumValue.Location = new System.Drawing.Point(117, 10);
+            this.labHumValue.Location = new System.Drawing.Point(156, 12);
+            this.labHumValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labHumValue.Name = "labHumValue";
-            this.labHumValue.Size = new System.Drawing.Size(54, 15);
+            this.labHumValue.Size = new System.Drawing.Size(69, 18);
             this.labHumValue.TabIndex = 16;
             this.labHumValue.Text = "Wartość:";
             // 
@@ -786,9 +839,10 @@ namespace Aplikacja_MEMS
             // 
             this.labHumAddress.AutoSize = true;
             this.labHumAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labHumAddress.Location = new System.Drawing.Point(43, 10);
+            this.labHumAddress.Location = new System.Drawing.Point(57, 12);
+            this.labHumAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labHumAddress.Name = "labHumAddress";
-            this.labHumAddress.Size = new System.Drawing.Size(41, 15);
+            this.labHumAddress.Size = new System.Drawing.Size(50, 18);
             this.labHumAddress.TabIndex = 15;
             this.labHumAddress.Text = "Adres:";
             // 
@@ -796,9 +850,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonHumOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonHumOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonHumOpen.Location = new System.Drawing.Point(30, 79);
+            this.buttonHumOpen.Location = new System.Drawing.Point(40, 97);
+            this.buttonHumOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonHumOpen.Name = "buttonHumOpen";
-            this.buttonHumOpen.Size = new System.Drawing.Size(143, 23);
+            this.buttonHumOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonHumOpen.TabIndex = 14;
             this.buttonHumOpen.Tag = "Higrometr";
             this.buttonHumOpen.Text = "Otwórz rejestr";
@@ -811,9 +866,10 @@ namespace Aplikacja_MEMS
             this.buttonHumDrawPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHumDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonHumDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
-            this.buttonHumDrawPlot.Location = new System.Drawing.Point(249, 15);
+            this.buttonHumDrawPlot.Location = new System.Drawing.Point(332, 18);
+            this.buttonHumDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonHumDrawPlot.Name = "buttonHumDrawPlot";
-            this.buttonHumDrawPlot.Size = new System.Drawing.Size(100, 23);
+            this.buttonHumDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonHumDrawPlot.TabIndex = 22;
             this.buttonHumDrawPlot.Tag = "Higrometr";
             this.buttonHumDrawPlot.Text = "Rysuj wykres";
@@ -825,9 +881,10 @@ namespace Aplikacja_MEMS
             this.chBoxHumEnabled.AutoSize = true;
             this.chBoxHumEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxHumEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxHumEnabled.Location = new System.Drawing.Point(9, 37);
+            this.chBoxHumEnabled.Location = new System.Drawing.Point(12, 46);
+            this.chBoxHumEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chBoxHumEnabled.Name = "chBoxHumEnabled";
-            this.chBoxHumEnabled.Size = new System.Drawing.Size(78, 19);
+            this.chBoxHumEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxHumEnabled.TabIndex = 19;
             this.chBoxHumEnabled.Tag = "Higrometr";
             this.chBoxHumEnabled.Text = "Włączony";
@@ -847,9 +904,11 @@ namespace Aplikacja_MEMS
             this.gBoxMagnetometer.Controls.Add(this.chBoxMagEnabled);
             this.gBoxMagnetometer.Enabled = false;
             this.gBoxMagnetometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxMagnetometer.Location = new System.Drawing.Point(14, 318);
+            this.gBoxMagnetometer.Location = new System.Drawing.Point(19, 391);
+            this.gBoxMagnetometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxMagnetometer.Name = "gBoxMagnetometer";
-            this.gBoxMagnetometer.Size = new System.Drawing.Size(355, 150);
+            this.gBoxMagnetometer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxMagnetometer.Size = new System.Drawing.Size(473, 185);
             this.gBoxMagnetometer.TabIndex = 1;
             this.gBoxMagnetometer.TabStop = false;
             this.gBoxMagnetometer.Tag = "Magnetometr";
@@ -858,9 +917,10 @@ namespace Aplikacja_MEMS
             // magNameLab
             // 
             this.magNameLab.AutoSize = true;
-            this.magNameLab.Location = new System.Drawing.Point(103, 19);
+            this.magNameLab.Location = new System.Drawing.Point(137, 23);
+            this.magNameLab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.magNameLab.Name = "magNameLab";
-            this.magNameLab.Size = new System.Drawing.Size(16, 17);
+            this.magNameLab.Size = new System.Drawing.Size(18, 20);
             this.magNameLab.TabIndex = 17;
             this.magNameLab.Tag = "Magnetometr";
             this.magNameLab.Text = "?";
@@ -869,9 +929,10 @@ namespace Aplikacja_MEMS
             // 
             this.labMagName.AutoSize = true;
             this.labMagName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMagName.Location = new System.Drawing.Point(6, 19);
+            this.labMagName.Location = new System.Drawing.Point(8, 23);
+            this.labMagName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labMagName.Name = "labMagName";
-            this.labMagName.Size = new System.Drawing.Size(99, 15);
+            this.labMagName.Size = new System.Drawing.Size(120, 18);
             this.labMagName.TabIndex = 9;
             this.labMagName.Text = "Nazwa czujnika: ";
             // 
@@ -886,9 +947,10 @@ namespace Aplikacja_MEMS
             "20",
             "50",
             "100"});
-            this.cBoxMagODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxMagODR.Location = new System.Drawing.Point(12, 146);
+            this.cBoxMagODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxMagODR.Name = "cBoxMagODR";
-            this.cBoxMagODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxMagODR.TabIndex = 14;
             this.cBoxMagODR.Tag = "Magnetometr";
             this.cBoxMagODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
@@ -901,9 +963,10 @@ namespace Aplikacja_MEMS
             this.cBoxMagScale.FormattingEnabled = true;
             this.cBoxMagScale.Items.AddRange(new object[] {
             "50"});
-            this.cBoxMagScale.Location = new System.Drawing.Point(9, 77);
+            this.cBoxMagScale.Location = new System.Drawing.Point(12, 95);
+            this.cBoxMagScale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxMagScale.Name = "cBoxMagScale";
-            this.cBoxMagScale.Size = new System.Drawing.Size(121, 21);
+            this.cBoxMagScale.Size = new System.Drawing.Size(160, 24);
             this.cBoxMagScale.TabIndex = 12;
             this.cBoxMagScale.Tag = "Magnetometr";
             // 
@@ -917,9 +980,11 @@ namespace Aplikacja_MEMS
             this.gBoxMagRegister.Controls.Add(this.labMagAddress);
             this.gBoxMagRegister.Controls.Add(this.buttonMagOpen);
             this.gBoxMagRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxMagRegister.Location = new System.Drawing.Point(154, 39);
+            this.gBoxMagRegister.Location = new System.Drawing.Point(205, 48);
+            this.gBoxMagRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxMagRegister.Name = "gBoxMagRegister";
-            this.gBoxMagRegister.Size = new System.Drawing.Size(195, 105);
+            this.gBoxMagRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxMagRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxMagRegister.TabIndex = 15;
             this.gBoxMagRegister.TabStop = false;
             this.gBoxMagRegister.Text = "Rejestr";
@@ -928,9 +993,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonMagGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonMagGet.Location = new System.Drawing.Point(105, 54);
+            this.buttonMagGet.Location = new System.Drawing.Point(140, 66);
+            this.buttonMagGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonMagGet.Name = "buttonMagGet";
-            this.buttonMagGet.Size = new System.Drawing.Size(66, 23);
+            this.buttonMagGet.Size = new System.Drawing.Size(88, 28);
             this.buttonMagGet.TabIndex = 20;
             this.buttonMagGet.Tag = "Magnetometr";
             this.buttonMagGet.Text = "Wczytaj";
@@ -941,9 +1007,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonMagSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonMagSet.Location = new System.Drawing.Point(28, 54);
+            this.buttonMagSet.Location = new System.Drawing.Point(37, 66);
+            this.buttonMagSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonMagSet.Name = "buttonMagSet";
-            this.buttonMagSet.Size = new System.Drawing.Size(66, 23);
+            this.buttonMagSet.Size = new System.Drawing.Size(88, 28);
             this.buttonMagSet.TabIndex = 19;
             this.buttonMagSet.Tag = "Magnetometr";
             this.buttonMagSet.Text = "Ustaw";
@@ -953,9 +1020,10 @@ namespace Aplikacja_MEMS
             // tBoxMagValue
             // 
             this.tBoxMagValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxMagValue.Location = new System.Drawing.Point(105, 28);
+            this.tBoxMagValue.Location = new System.Drawing.Point(140, 34);
+            this.tBoxMagValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxMagValue.Name = "tBoxMagValue";
-            this.tBoxMagValue.Size = new System.Drawing.Size(66, 20);
+            this.tBoxMagValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxMagValue.TabIndex = 18;
             this.tBoxMagValue.Tag = "Magnetometr";
             this.tBoxMagValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -963,9 +1031,10 @@ namespace Aplikacja_MEMS
             // tBoxMagAddress
             // 
             this.tBoxMagAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxMagAddress.Location = new System.Drawing.Point(28, 28);
+            this.tBoxMagAddress.Location = new System.Drawing.Point(37, 34);
+            this.tBoxMagAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxMagAddress.Name = "tBoxMagAddress";
-            this.tBoxMagAddress.Size = new System.Drawing.Size(66, 20);
+            this.tBoxMagAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxMagAddress.TabIndex = 17;
             this.tBoxMagAddress.Tag = "Magnetometr";
             this.tBoxMagAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -974,9 +1043,10 @@ namespace Aplikacja_MEMS
             // 
             this.labMagValue.AutoSize = true;
             this.labMagValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMagValue.Location = new System.Drawing.Point(115, 10);
+            this.labMagValue.Location = new System.Drawing.Point(153, 12);
+            this.labMagValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labMagValue.Name = "labMagValue";
-            this.labMagValue.Size = new System.Drawing.Size(54, 15);
+            this.labMagValue.Size = new System.Drawing.Size(69, 18);
             this.labMagValue.TabIndex = 16;
             this.labMagValue.Text = "Wartość:";
             // 
@@ -984,9 +1054,10 @@ namespace Aplikacja_MEMS
             // 
             this.labMagAddress.AutoSize = true;
             this.labMagAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMagAddress.Location = new System.Drawing.Point(41, 10);
+            this.labMagAddress.Location = new System.Drawing.Point(55, 12);
+            this.labMagAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labMagAddress.Name = "labMagAddress";
-            this.labMagAddress.Size = new System.Drawing.Size(41, 15);
+            this.labMagAddress.Size = new System.Drawing.Size(50, 18);
             this.labMagAddress.TabIndex = 15;
             this.labMagAddress.Text = "Adres:";
             // 
@@ -994,9 +1065,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonMagOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonMagOpen.Location = new System.Drawing.Point(28, 79);
+            this.buttonMagOpen.Location = new System.Drawing.Point(37, 97);
+            this.buttonMagOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonMagOpen.Name = "buttonMagOpen";
-            this.buttonMagOpen.Size = new System.Drawing.Size(143, 23);
+            this.buttonMagOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonMagOpen.TabIndex = 14;
             this.buttonMagOpen.Tag = "Magnetometr";
             this.buttonMagOpen.Text = "Otwórz rejestr";
@@ -1009,9 +1081,10 @@ namespace Aplikacja_MEMS
             this.buttonMagDrawPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonMagDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonMagDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
-            this.buttonMagDrawPlot.Location = new System.Drawing.Point(249, 15);
+            this.buttonMagDrawPlot.Location = new System.Drawing.Point(332, 18);
+            this.buttonMagDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonMagDrawPlot.Name = "buttonMagDrawPlot";
-            this.buttonMagDrawPlot.Size = new System.Drawing.Size(100, 23);
+            this.buttonMagDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonMagDrawPlot.TabIndex = 16;
             this.buttonMagDrawPlot.Tag = "Magnetometr";
             this.buttonMagDrawPlot.Text = "Rysuj wykres";
@@ -1022,9 +1095,10 @@ namespace Aplikacja_MEMS
             // 
             this.labMagODR.AutoSize = true;
             this.labMagODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMagODR.Location = new System.Drawing.Point(6, 101);
+            this.labMagODR.Location = new System.Drawing.Point(8, 124);
+            this.labMagODR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labMagODR.Name = "labMagODR";
-            this.labMagODR.Size = new System.Drawing.Size(37, 15);
+            this.labMagODR.Size = new System.Drawing.Size(46, 18);
             this.labMagODR.TabIndex = 13;
             this.labMagODR.Text = "ODR:";
             // 
@@ -1032,9 +1106,10 @@ namespace Aplikacja_MEMS
             // 
             this.labMagScale.AutoSize = true;
             this.labMagScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labMagScale.Location = new System.Drawing.Point(6, 59);
+            this.labMagScale.Location = new System.Drawing.Point(8, 73);
+            this.labMagScale.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labMagScale.Name = "labMagScale";
-            this.labMagScale.Size = new System.Drawing.Size(47, 15);
+            this.labMagScale.Size = new System.Drawing.Size(58, 18);
             this.labMagScale.TabIndex = 11;
             this.labMagScale.Text = "Zakres:";
             // 
@@ -1043,9 +1118,10 @@ namespace Aplikacja_MEMS
             this.chBoxMagEnabled.AutoSize = true;
             this.chBoxMagEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxMagEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxMagEnabled.Location = new System.Drawing.Point(9, 37);
+            this.chBoxMagEnabled.Location = new System.Drawing.Point(12, 46);
+            this.chBoxMagEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chBoxMagEnabled.Name = "chBoxMagEnabled";
-            this.chBoxMagEnabled.Size = new System.Drawing.Size(78, 19);
+            this.chBoxMagEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxMagEnabled.TabIndex = 10;
             this.chBoxMagEnabled.Tag = "Magnetometr";
             this.chBoxMagEnabled.Text = "Włączony";
@@ -1063,9 +1139,11 @@ namespace Aplikacja_MEMS
             this.gBoxPressure.Controls.Add(this.chBoxPreEnabled);
             this.gBoxPressure.Enabled = false;
             this.gBoxPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxPressure.Location = new System.Drawing.Point(407, 162);
+            this.gBoxPressure.Location = new System.Drawing.Point(543, 199);
+            this.gBoxPressure.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxPressure.Name = "gBoxPressure";
-            this.gBoxPressure.Size = new System.Drawing.Size(355, 150);
+            this.gBoxPressure.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxPressure.Size = new System.Drawing.Size(473, 185);
             this.gBoxPressure.TabIndex = 3;
             this.gBoxPressure.TabStop = false;
             this.gBoxPressure.Tag = "Barometr";
@@ -1074,9 +1152,10 @@ namespace Aplikacja_MEMS
             // presNameLab
             // 
             this.presNameLab.AutoSize = true;
-            this.presNameLab.Location = new System.Drawing.Point(102, 19);
+            this.presNameLab.Location = new System.Drawing.Point(136, 23);
+            this.presNameLab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.presNameLab.Name = "presNameLab";
-            this.presNameLab.Size = new System.Drawing.Size(16, 17);
+            this.presNameLab.Size = new System.Drawing.Size(18, 20);
             this.presNameLab.TabIndex = 24;
             this.presNameLab.Tag = "Barometr";
             this.presNameLab.Text = "?";
@@ -1085,9 +1164,10 @@ namespace Aplikacja_MEMS
             // 
             this.labPreName.AutoSize = true;
             this.labPreName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labPreName.Location = new System.Drawing.Point(6, 19);
+            this.labPreName.Location = new System.Drawing.Point(8, 23);
+            this.labPreName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labPreName.Name = "labPreName";
-            this.labPreName.Size = new System.Drawing.Size(99, 15);
+            this.labPreName.Size = new System.Drawing.Size(120, 18);
             this.labPreName.TabIndex = 18;
             this.labPreName.Text = "Nazwa czujnika: ";
             // 
@@ -1103,9 +1183,10 @@ namespace Aplikacja_MEMS
             "25",
             "50",
             "75"});
-            this.cBoxPreODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxPreODR.Location = new System.Drawing.Point(12, 95);
+            this.cBoxPreODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxPreODR.Name = "cBoxPreODR";
-            this.cBoxPreODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxPreODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxPreODR.TabIndex = 20;
             this.cBoxPreODR.Tag = "Barometr";
             this.cBoxPreODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
@@ -1114,9 +1195,10 @@ namespace Aplikacja_MEMS
             // 
             this.labPreODR.AutoSize = true;
             this.labPreODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labPreODR.Location = new System.Drawing.Point(6, 59);
+            this.labPreODR.Location = new System.Drawing.Point(8, 73);
+            this.labPreODR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labPreODR.Name = "labPreODR";
-            this.labPreODR.Size = new System.Drawing.Size(37, 15);
+            this.labPreODR.Size = new System.Drawing.Size(46, 18);
             this.labPreODR.TabIndex = 23;
             this.labPreODR.Text = "ODR:";
             // 
@@ -1130,9 +1212,11 @@ namespace Aplikacja_MEMS
             this.gBoxPreRegister.Controls.Add(this.labPreAddress);
             this.gBoxPreRegister.Controls.Add(this.buttonPreOpen);
             this.gBoxPreRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxPreRegister.Location = new System.Drawing.Point(154, 39);
+            this.gBoxPreRegister.Location = new System.Drawing.Point(205, 48);
+            this.gBoxPreRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxPreRegister.Name = "gBoxPreRegister";
-            this.gBoxPreRegister.Size = new System.Drawing.Size(195, 105);
+            this.gBoxPreRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxPreRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxPreRegister.TabIndex = 21;
             this.gBoxPreRegister.TabStop = false;
             this.gBoxPreRegister.Text = "Rejestr";
@@ -1141,9 +1225,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonPreGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPreGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonPreGet.Location = new System.Drawing.Point(107, 54);
+            this.buttonPreGet.Location = new System.Drawing.Point(143, 66);
+            this.buttonPreGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonPreGet.Name = "buttonPreGet";
-            this.buttonPreGet.Size = new System.Drawing.Size(66, 23);
+            this.buttonPreGet.Size = new System.Drawing.Size(88, 28);
             this.buttonPreGet.TabIndex = 20;
             this.buttonPreGet.Tag = "Barometr";
             this.buttonPreGet.Text = "Wczytaj";
@@ -1154,9 +1239,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonPreSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPreSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonPreSet.Location = new System.Drawing.Point(30, 54);
+            this.buttonPreSet.Location = new System.Drawing.Point(40, 66);
+            this.buttonPreSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonPreSet.Name = "buttonPreSet";
-            this.buttonPreSet.Size = new System.Drawing.Size(66, 23);
+            this.buttonPreSet.Size = new System.Drawing.Size(88, 28);
             this.buttonPreSet.TabIndex = 19;
             this.buttonPreSet.Tag = "Barometr";
             this.buttonPreSet.Text = "Ustaw";
@@ -1166,9 +1252,10 @@ namespace Aplikacja_MEMS
             // tBoxPreValue
             // 
             this.tBoxPreValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxPreValue.Location = new System.Drawing.Point(107, 28);
+            this.tBoxPreValue.Location = new System.Drawing.Point(143, 34);
+            this.tBoxPreValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxPreValue.Name = "tBoxPreValue";
-            this.tBoxPreValue.Size = new System.Drawing.Size(66, 20);
+            this.tBoxPreValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxPreValue.TabIndex = 18;
             this.tBoxPreValue.Tag = "Barometr";
             this.tBoxPreValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1176,9 +1263,10 @@ namespace Aplikacja_MEMS
             // tBoxPreAddress
             // 
             this.tBoxPreAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxPreAddress.Location = new System.Drawing.Point(30, 28);
+            this.tBoxPreAddress.Location = new System.Drawing.Point(40, 34);
+            this.tBoxPreAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxPreAddress.Name = "tBoxPreAddress";
-            this.tBoxPreAddress.Size = new System.Drawing.Size(66, 20);
+            this.tBoxPreAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxPreAddress.TabIndex = 17;
             this.tBoxPreAddress.Tag = "Barometr";
             this.tBoxPreAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1187,9 +1275,10 @@ namespace Aplikacja_MEMS
             // 
             this.labPreValue.AutoSize = true;
             this.labPreValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labPreValue.Location = new System.Drawing.Point(117, 10);
+            this.labPreValue.Location = new System.Drawing.Point(156, 12);
+            this.labPreValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labPreValue.Name = "labPreValue";
-            this.labPreValue.Size = new System.Drawing.Size(54, 15);
+            this.labPreValue.Size = new System.Drawing.Size(69, 18);
             this.labPreValue.TabIndex = 16;
             this.labPreValue.Text = "Wartość:";
             // 
@@ -1197,9 +1286,10 @@ namespace Aplikacja_MEMS
             // 
             this.labPreAddress.AutoSize = true;
             this.labPreAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labPreAddress.Location = new System.Drawing.Point(43, 10);
+            this.labPreAddress.Location = new System.Drawing.Point(57, 12);
+            this.labPreAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labPreAddress.Name = "labPreAddress";
-            this.labPreAddress.Size = new System.Drawing.Size(41, 15);
+            this.labPreAddress.Size = new System.Drawing.Size(50, 18);
             this.labPreAddress.TabIndex = 15;
             this.labPreAddress.Text = "Adres:";
             // 
@@ -1207,9 +1297,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonPreOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPreOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonPreOpen.Location = new System.Drawing.Point(30, 79);
+            this.buttonPreOpen.Location = new System.Drawing.Point(40, 97);
+            this.buttonPreOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonPreOpen.Name = "buttonPreOpen";
-            this.buttonPreOpen.Size = new System.Drawing.Size(143, 23);
+            this.buttonPreOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonPreOpen.TabIndex = 14;
             this.buttonPreOpen.Tag = "Barometr";
             this.buttonPreOpen.Text = "Otwórz rejestr";
@@ -1222,9 +1313,10 @@ namespace Aplikacja_MEMS
             this.buttonPreDrawPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPreDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonPreDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
-            this.buttonPreDrawPlot.Location = new System.Drawing.Point(249, 15);
+            this.buttonPreDrawPlot.Location = new System.Drawing.Point(332, 18);
+            this.buttonPreDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonPreDrawPlot.Name = "buttonPreDrawPlot";
-            this.buttonPreDrawPlot.Size = new System.Drawing.Size(100, 23);
+            this.buttonPreDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonPreDrawPlot.TabIndex = 22;
             this.buttonPreDrawPlot.Tag = "Barometr";
             this.buttonPreDrawPlot.Text = "Rysuj wykres";
@@ -1236,9 +1328,10 @@ namespace Aplikacja_MEMS
             this.chBoxPreEnabled.AutoSize = true;
             this.chBoxPreEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxPreEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxPreEnabled.Location = new System.Drawing.Point(9, 37);
+            this.chBoxPreEnabled.Location = new System.Drawing.Point(12, 46);
+            this.chBoxPreEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chBoxPreEnabled.Name = "chBoxPreEnabled";
-            this.chBoxPreEnabled.Size = new System.Drawing.Size(78, 19);
+            this.chBoxPreEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxPreEnabled.TabIndex = 19;
             this.chBoxPreEnabled.Tag = "Barometr";
             this.chBoxPreEnabled.Text = "Włączony";
@@ -1258,9 +1351,11 @@ namespace Aplikacja_MEMS
             this.gBoxGyroscope.Controls.Add(this.chBoxGyrEnabled);
             this.gBoxGyroscope.Enabled = false;
             this.gBoxGyroscope.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxGyroscope.Location = new System.Drawing.Point(12, 162);
+            this.gBoxGyroscope.Location = new System.Drawing.Point(16, 199);
+            this.gBoxGyroscope.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxGyroscope.Name = "gBoxGyroscope";
-            this.gBoxGyroscope.Size = new System.Drawing.Size(355, 150);
+            this.gBoxGyroscope.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxGyroscope.Size = new System.Drawing.Size(473, 185);
             this.gBoxGyroscope.TabIndex = 1;
             this.gBoxGyroscope.TabStop = false;
             this.gBoxGyroscope.Tag = "Żyroskop";
@@ -1269,9 +1364,10 @@ namespace Aplikacja_MEMS
             // gyrNameLab
             // 
             this.gyrNameLab.AutoSize = true;
-            this.gyrNameLab.Location = new System.Drawing.Point(102, 19);
+            this.gyrNameLab.Location = new System.Drawing.Point(136, 23);
+            this.gyrNameLab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.gyrNameLab.Name = "gyrNameLab";
-            this.gyrNameLab.Size = new System.Drawing.Size(16, 17);
+            this.gyrNameLab.Size = new System.Drawing.Size(18, 20);
             this.gyrNameLab.TabIndex = 10;
             this.gyrNameLab.Tag = "Żyroskop";
             this.gyrNameLab.Text = "?";
@@ -1280,9 +1376,10 @@ namespace Aplikacja_MEMS
             // 
             this.LabGyrName.AutoSize = true;
             this.LabGyrName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.LabGyrName.Location = new System.Drawing.Point(6, 19);
+            this.LabGyrName.Location = new System.Drawing.Point(8, 23);
+            this.LabGyrName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.LabGyrName.Name = "LabGyrName";
-            this.LabGyrName.Size = new System.Drawing.Size(99, 15);
+            this.LabGyrName.Size = new System.Drawing.Size(120, 18);
             this.LabGyrName.TabIndex = 9;
             this.LabGyrName.Text = "Nazwa czujnika: ";
             // 
@@ -1303,9 +1400,10 @@ namespace Aplikacja_MEMS
             "1660",
             "3330",
             "6660"});
-            this.cBoxGyrODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxGyrODR.Location = new System.Drawing.Point(12, 146);
+            this.cBoxGyrODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxGyrODR.Name = "cBoxGyrODR";
-            this.cBoxGyrODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxGyrODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxGyrODR.TabIndex = 14;
             this.cBoxGyrODR.Tag = "Żyroskop";
             this.cBoxGyrODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
@@ -1322,9 +1420,10 @@ namespace Aplikacja_MEMS
             "500",
             "1000",
             "2000"});
-            this.cBoxGyrScale.Location = new System.Drawing.Point(9, 77);
+            this.cBoxGyrScale.Location = new System.Drawing.Point(12, 95);
+            this.cBoxGyrScale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxGyrScale.Name = "cBoxGyrScale";
-            this.cBoxGyrScale.Size = new System.Drawing.Size(121, 21);
+            this.cBoxGyrScale.Size = new System.Drawing.Size(160, 24);
             this.cBoxGyrScale.TabIndex = 12;
             this.cBoxGyrScale.Tag = "Żyroskop";
             this.cBoxGyrScale.SelectedIndexChanged += new System.EventHandler(this.SetScale);
@@ -1339,9 +1438,11 @@ namespace Aplikacja_MEMS
             this.gBoxGyrRegister.Controls.Add(this.labGyrAddress);
             this.gBoxGyrRegister.Controls.Add(this.buttonGyrOpen);
             this.gBoxGyrRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxGyrRegister.Location = new System.Drawing.Point(154, 39);
+            this.gBoxGyrRegister.Location = new System.Drawing.Point(205, 48);
+            this.gBoxGyrRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxGyrRegister.Name = "gBoxGyrRegister";
-            this.gBoxGyrRegister.Size = new System.Drawing.Size(195, 105);
+            this.gBoxGyrRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxGyrRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxGyrRegister.TabIndex = 15;
             this.gBoxGyrRegister.TabStop = false;
             this.gBoxGyrRegister.Text = "Rejestr";
@@ -1350,9 +1451,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonGyrGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonGyrGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonGyrGet.Location = new System.Drawing.Point(107, 54);
+            this.buttonGyrGet.Location = new System.Drawing.Point(143, 66);
+            this.buttonGyrGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonGyrGet.Name = "buttonGyrGet";
-            this.buttonGyrGet.Size = new System.Drawing.Size(66, 23);
+            this.buttonGyrGet.Size = new System.Drawing.Size(88, 28);
             this.buttonGyrGet.TabIndex = 20;
             this.buttonGyrGet.Tag = "Żyroskop";
             this.buttonGyrGet.Text = "Wczytaj";
@@ -1363,9 +1465,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonGyrSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonGyrSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonGyrSet.Location = new System.Drawing.Point(30, 54);
+            this.buttonGyrSet.Location = new System.Drawing.Point(40, 66);
+            this.buttonGyrSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonGyrSet.Name = "buttonGyrSet";
-            this.buttonGyrSet.Size = new System.Drawing.Size(66, 23);
+            this.buttonGyrSet.Size = new System.Drawing.Size(88, 28);
             this.buttonGyrSet.TabIndex = 19;
             this.buttonGyrSet.Tag = "Żyroskop";
             this.buttonGyrSet.Text = "Ustaw";
@@ -1375,9 +1478,10 @@ namespace Aplikacja_MEMS
             // tBoxGyrValue
             // 
             this.tBoxGyrValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxGyrValue.Location = new System.Drawing.Point(107, 28);
+            this.tBoxGyrValue.Location = new System.Drawing.Point(143, 34);
+            this.tBoxGyrValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxGyrValue.Name = "tBoxGyrValue";
-            this.tBoxGyrValue.Size = new System.Drawing.Size(66, 20);
+            this.tBoxGyrValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxGyrValue.TabIndex = 18;
             this.tBoxGyrValue.Tag = "Żyroskop";
             this.tBoxGyrValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1385,9 +1489,10 @@ namespace Aplikacja_MEMS
             // tBoxGyrAddress
             // 
             this.tBoxGyrAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxGyrAddress.Location = new System.Drawing.Point(30, 28);
+            this.tBoxGyrAddress.Location = new System.Drawing.Point(40, 34);
+            this.tBoxGyrAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxGyrAddress.Name = "tBoxGyrAddress";
-            this.tBoxGyrAddress.Size = new System.Drawing.Size(66, 20);
+            this.tBoxGyrAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxGyrAddress.TabIndex = 17;
             this.tBoxGyrAddress.Tag = "Żyroskop";
             this.tBoxGyrAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1396,9 +1501,10 @@ namespace Aplikacja_MEMS
             // 
             this.labGyrValue.AutoSize = true;
             this.labGyrValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labGyrValue.Location = new System.Drawing.Point(117, 10);
+            this.labGyrValue.Location = new System.Drawing.Point(156, 12);
+            this.labGyrValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labGyrValue.Name = "labGyrValue";
-            this.labGyrValue.Size = new System.Drawing.Size(54, 15);
+            this.labGyrValue.Size = new System.Drawing.Size(69, 18);
             this.labGyrValue.TabIndex = 16;
             this.labGyrValue.Text = "Wartość:";
             // 
@@ -1406,9 +1512,10 @@ namespace Aplikacja_MEMS
             // 
             this.labGyrAddress.AutoSize = true;
             this.labGyrAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labGyrAddress.Location = new System.Drawing.Point(43, 10);
+            this.labGyrAddress.Location = new System.Drawing.Point(57, 12);
+            this.labGyrAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labGyrAddress.Name = "labGyrAddress";
-            this.labGyrAddress.Size = new System.Drawing.Size(41, 15);
+            this.labGyrAddress.Size = new System.Drawing.Size(50, 18);
             this.labGyrAddress.TabIndex = 15;
             this.labGyrAddress.Text = "Adres:";
             // 
@@ -1416,9 +1523,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonGyrOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonGyrOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonGyrOpen.Location = new System.Drawing.Point(30, 79);
+            this.buttonGyrOpen.Location = new System.Drawing.Point(40, 97);
+            this.buttonGyrOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonGyrOpen.Name = "buttonGyrOpen";
-            this.buttonGyrOpen.Size = new System.Drawing.Size(143, 23);
+            this.buttonGyrOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonGyrOpen.TabIndex = 14;
             this.buttonGyrOpen.Tag = "Żyroskop";
             this.buttonGyrOpen.Text = "Otwórz rejestr";
@@ -1431,9 +1539,10 @@ namespace Aplikacja_MEMS
             this.buttonGyrDrawPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonGyrDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonGyrDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
-            this.buttonGyrDrawPlot.Location = new System.Drawing.Point(249, 15);
+            this.buttonGyrDrawPlot.Location = new System.Drawing.Point(332, 18);
+            this.buttonGyrDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonGyrDrawPlot.Name = "buttonGyrDrawPlot";
-            this.buttonGyrDrawPlot.Size = new System.Drawing.Size(100, 23);
+            this.buttonGyrDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonGyrDrawPlot.TabIndex = 16;
             this.buttonGyrDrawPlot.Tag = "Żyroskop";
             this.buttonGyrDrawPlot.Text = "Rysuj wykres";
@@ -1444,9 +1553,10 @@ namespace Aplikacja_MEMS
             // 
             this.labGyrODR.AutoSize = true;
             this.labGyrODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labGyrODR.Location = new System.Drawing.Point(6, 101);
+            this.labGyrODR.Location = new System.Drawing.Point(8, 124);
+            this.labGyrODR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labGyrODR.Name = "labGyrODR";
-            this.labGyrODR.Size = new System.Drawing.Size(37, 15);
+            this.labGyrODR.Size = new System.Drawing.Size(46, 18);
             this.labGyrODR.TabIndex = 13;
             this.labGyrODR.Text = "ODR:";
             // 
@@ -1454,9 +1564,10 @@ namespace Aplikacja_MEMS
             // 
             this.labGyrScale.AutoSize = true;
             this.labGyrScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labGyrScale.Location = new System.Drawing.Point(6, 59);
+            this.labGyrScale.Location = new System.Drawing.Point(8, 73);
+            this.labGyrScale.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labGyrScale.Name = "labGyrScale";
-            this.labGyrScale.Size = new System.Drawing.Size(47, 15);
+            this.labGyrScale.Size = new System.Drawing.Size(58, 18);
             this.labGyrScale.TabIndex = 11;
             this.labGyrScale.Text = "Zakres:";
             // 
@@ -1465,9 +1576,10 @@ namespace Aplikacja_MEMS
             this.chBoxGyrEnabled.AutoSize = true;
             this.chBoxGyrEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxGyrEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxGyrEnabled.Location = new System.Drawing.Point(9, 37);
+            this.chBoxGyrEnabled.Location = new System.Drawing.Point(12, 46);
+            this.chBoxGyrEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chBoxGyrEnabled.Name = "chBoxGyrEnabled";
-            this.chBoxGyrEnabled.Size = new System.Drawing.Size(78, 19);
+            this.chBoxGyrEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxGyrEnabled.TabIndex = 10;
             this.chBoxGyrEnabled.Tag = "Żyroskop";
             this.chBoxGyrEnabled.Text = "Włączony";
@@ -1485,9 +1597,11 @@ namespace Aplikacja_MEMS
             this.gBoxThermometer.Controls.Add(this.chBoxTherEnabled);
             this.gBoxThermometer.Enabled = false;
             this.gBoxThermometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxThermometer.Location = new System.Drawing.Point(407, 6);
+            this.gBoxThermometer.Location = new System.Drawing.Point(543, 7);
+            this.gBoxThermometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxThermometer.Name = "gBoxThermometer";
-            this.gBoxThermometer.Size = new System.Drawing.Size(355, 150);
+            this.gBoxThermometer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxThermometer.Size = new System.Drawing.Size(473, 185);
             this.gBoxThermometer.TabIndex = 2;
             this.gBoxThermometer.TabStop = false;
             this.gBoxThermometer.Tag = "Termometr";
@@ -1496,9 +1610,10 @@ namespace Aplikacja_MEMS
             // terNameLab
             // 
             this.terNameLab.AutoSize = true;
-            this.terNameLab.Location = new System.Drawing.Point(102, 19);
+            this.terNameLab.Location = new System.Drawing.Point(136, 23);
+            this.terNameLab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.terNameLab.Name = "terNameLab";
-            this.terNameLab.Size = new System.Drawing.Size(16, 17);
+            this.terNameLab.Size = new System.Drawing.Size(18, 20);
             this.terNameLab.TabIndex = 18;
             this.terNameLab.Tag = "Termometr";
             this.terNameLab.Text = "?";
@@ -1507,9 +1622,10 @@ namespace Aplikacja_MEMS
             // 
             this.labTherName.AutoSize = true;
             this.labTherName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labTherName.Location = new System.Drawing.Point(6, 19);
+            this.labTherName.Location = new System.Drawing.Point(8, 23);
+            this.labTherName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labTherName.Name = "labTherName";
-            this.labTherName.Size = new System.Drawing.Size(99, 15);
+            this.labTherName.Size = new System.Drawing.Size(120, 18);
             this.labTherName.TabIndex = 9;
             this.labTherName.Text = "Nazwa czujnika: ";
             // 
@@ -1523,9 +1639,10 @@ namespace Aplikacja_MEMS
             "1",
             "7",
             "12,5"});
-            this.cBoxTherODR.Location = new System.Drawing.Point(9, 77);
+            this.cBoxTherODR.Location = new System.Drawing.Point(12, 95);
+            this.cBoxTherODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxTherODR.Name = "cBoxTherODR";
-            this.cBoxTherODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxTherODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxTherODR.TabIndex = 12;
             this.cBoxTherODR.Tag = "Termometr";
             this.cBoxTherODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
@@ -1534,9 +1651,10 @@ namespace Aplikacja_MEMS
             // 
             this.labTherODR.AutoSize = true;
             this.labTherODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labTherODR.Location = new System.Drawing.Point(6, 59);
+            this.labTherODR.Location = new System.Drawing.Point(8, 73);
+            this.labTherODR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labTherODR.Name = "labTherODR";
-            this.labTherODR.Size = new System.Drawing.Size(37, 15);
+            this.labTherODR.Size = new System.Drawing.Size(46, 18);
             this.labTherODR.TabIndex = 17;
             this.labTherODR.Text = "ODR:";
             // 
@@ -1550,9 +1668,11 @@ namespace Aplikacja_MEMS
             this.gBoxTherRegister.Controls.Add(this.labTherAddress);
             this.gBoxTherRegister.Controls.Add(this.buttonTherOpen);
             this.gBoxTherRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxTherRegister.Location = new System.Drawing.Point(154, 39);
+            this.gBoxTherRegister.Location = new System.Drawing.Point(205, 48);
+            this.gBoxTherRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxTherRegister.Name = "gBoxTherRegister";
-            this.gBoxTherRegister.Size = new System.Drawing.Size(195, 105);
+            this.gBoxTherRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxTherRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxTherRegister.TabIndex = 15;
             this.gBoxTherRegister.TabStop = false;
             this.gBoxTherRegister.Text = "Rejestr";
@@ -1561,9 +1681,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonTherGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonTherGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonTherGet.Location = new System.Drawing.Point(107, 54);
+            this.buttonTherGet.Location = new System.Drawing.Point(143, 66);
+            this.buttonTherGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonTherGet.Name = "buttonTherGet";
-            this.buttonTherGet.Size = new System.Drawing.Size(66, 23);
+            this.buttonTherGet.Size = new System.Drawing.Size(88, 28);
             this.buttonTherGet.TabIndex = 20;
             this.buttonTherGet.Tag = "Termometr";
             this.buttonTherGet.Text = "Wczytaj";
@@ -1574,9 +1695,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonTherSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonTherSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonTherSet.Location = new System.Drawing.Point(30, 54);
+            this.buttonTherSet.Location = new System.Drawing.Point(40, 66);
+            this.buttonTherSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonTherSet.Name = "buttonTherSet";
-            this.buttonTherSet.Size = new System.Drawing.Size(66, 23);
+            this.buttonTherSet.Size = new System.Drawing.Size(88, 28);
             this.buttonTherSet.TabIndex = 19;
             this.buttonTherSet.Tag = "Termometr";
             this.buttonTherSet.Text = "Ustaw";
@@ -1586,9 +1708,10 @@ namespace Aplikacja_MEMS
             // tBoxTherValue
             // 
             this.tBoxTherValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxTherValue.Location = new System.Drawing.Point(107, 28);
+            this.tBoxTherValue.Location = new System.Drawing.Point(143, 34);
+            this.tBoxTherValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxTherValue.Name = "tBoxTherValue";
-            this.tBoxTherValue.Size = new System.Drawing.Size(66, 20);
+            this.tBoxTherValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxTherValue.TabIndex = 18;
             this.tBoxTherValue.Tag = "Termometr";
             this.tBoxTherValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1596,9 +1719,10 @@ namespace Aplikacja_MEMS
             // tBoxTherAddress
             // 
             this.tBoxTherAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxTherAddress.Location = new System.Drawing.Point(30, 28);
+            this.tBoxTherAddress.Location = new System.Drawing.Point(40, 34);
+            this.tBoxTherAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxTherAddress.Name = "tBoxTherAddress";
-            this.tBoxTherAddress.Size = new System.Drawing.Size(66, 20);
+            this.tBoxTherAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxTherAddress.TabIndex = 17;
             this.tBoxTherAddress.Tag = "Termometr";
             this.tBoxTherAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1607,9 +1731,10 @@ namespace Aplikacja_MEMS
             // 
             this.labTherValue.AutoSize = true;
             this.labTherValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labTherValue.Location = new System.Drawing.Point(117, 10);
+            this.labTherValue.Location = new System.Drawing.Point(156, 12);
+            this.labTherValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labTherValue.Name = "labTherValue";
-            this.labTherValue.Size = new System.Drawing.Size(54, 15);
+            this.labTherValue.Size = new System.Drawing.Size(69, 18);
             this.labTherValue.TabIndex = 16;
             this.labTherValue.Text = "Wartość:";
             // 
@@ -1617,9 +1742,10 @@ namespace Aplikacja_MEMS
             // 
             this.labTherAddress.AutoSize = true;
             this.labTherAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labTherAddress.Location = new System.Drawing.Point(43, 10);
+            this.labTherAddress.Location = new System.Drawing.Point(57, 12);
+            this.labTherAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labTherAddress.Name = "labTherAddress";
-            this.labTherAddress.Size = new System.Drawing.Size(41, 15);
+            this.labTherAddress.Size = new System.Drawing.Size(50, 18);
             this.labTherAddress.TabIndex = 15;
             this.labTherAddress.Text = "Adres:";
             // 
@@ -1627,9 +1753,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonTherOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonTherOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonTherOpen.Location = new System.Drawing.Point(30, 79);
+            this.buttonTherOpen.Location = new System.Drawing.Point(40, 97);
+            this.buttonTherOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonTherOpen.Name = "buttonTherOpen";
-            this.buttonTherOpen.Size = new System.Drawing.Size(143, 23);
+            this.buttonTherOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonTherOpen.TabIndex = 14;
             this.buttonTherOpen.Tag = "Termometr";
             this.buttonTherOpen.Text = "Otwórz rejestr";
@@ -1642,9 +1769,10 @@ namespace Aplikacja_MEMS
             this.buttonTherDrawPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonTherDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonTherDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
-            this.buttonTherDrawPlot.Location = new System.Drawing.Point(249, 15);
+            this.buttonTherDrawPlot.Location = new System.Drawing.Point(332, 18);
+            this.buttonTherDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonTherDrawPlot.Name = "buttonTherDrawPlot";
-            this.buttonTherDrawPlot.Size = new System.Drawing.Size(100, 23);
+            this.buttonTherDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonTherDrawPlot.TabIndex = 16;
             this.buttonTherDrawPlot.Tag = "Termometr";
             this.buttonTherDrawPlot.Text = "Rysuj wykres";
@@ -1656,9 +1784,10 @@ namespace Aplikacja_MEMS
             this.chBoxTherEnabled.AutoSize = true;
             this.chBoxTherEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxTherEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxTherEnabled.Location = new System.Drawing.Point(9, 37);
+            this.chBoxTherEnabled.Location = new System.Drawing.Point(12, 46);
+            this.chBoxTherEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chBoxTherEnabled.Name = "chBoxTherEnabled";
-            this.chBoxTherEnabled.Size = new System.Drawing.Size(78, 19);
+            this.chBoxTherEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxTherEnabled.TabIndex = 10;
             this.chBoxTherEnabled.Tag = "Termometr";
             this.chBoxTherEnabled.Text = "Włączony";
@@ -1679,9 +1808,11 @@ namespace Aplikacja_MEMS
             this.gBoxAccelerometer.Enabled = false;
             this.gBoxAccelerometer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.gBoxAccelerometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxAccelerometer.Location = new System.Drawing.Point(12, 6);
+            this.gBoxAccelerometer.Location = new System.Drawing.Point(16, 7);
+            this.gBoxAccelerometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxAccelerometer.Name = "gBoxAccelerometer";
-            this.gBoxAccelerometer.Size = new System.Drawing.Size(355, 150);
+            this.gBoxAccelerometer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxAccelerometer.Size = new System.Drawing.Size(473, 185);
             this.gBoxAccelerometer.TabIndex = 0;
             this.gBoxAccelerometer.TabStop = false;
             this.gBoxAccelerometer.Tag = "Akcelerometr";
@@ -1690,9 +1821,10 @@ namespace Aplikacja_MEMS
             // accNameLab
             // 
             this.accNameLab.AutoSize = true;
-            this.accNameLab.Location = new System.Drawing.Point(102, 19);
+            this.accNameLab.Location = new System.Drawing.Point(136, 23);
+            this.accNameLab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.accNameLab.Name = "accNameLab";
-            this.accNameLab.Size = new System.Drawing.Size(16, 17);
+            this.accNameLab.Size = new System.Drawing.Size(18, 20);
             this.accNameLab.TabIndex = 9;
             this.accNameLab.Tag = "Akcelerometr";
             this.accNameLab.Text = "?";
@@ -1701,9 +1833,10 @@ namespace Aplikacja_MEMS
             // 
             this.labAccName.AutoSize = true;
             this.labAccName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labAccName.Location = new System.Drawing.Point(6, 19);
+            this.labAccName.Location = new System.Drawing.Point(8, 23);
+            this.labAccName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labAccName.Name = "labAccName";
-            this.labAccName.Size = new System.Drawing.Size(99, 15);
+            this.labAccName.Size = new System.Drawing.Size(120, 18);
             this.labAccName.TabIndex = 0;
             this.labAccName.Text = "Nazwa czujnika: ";
             // 
@@ -1724,9 +1857,10 @@ namespace Aplikacja_MEMS
             "1660",
             "3330",
             "6660"});
-            this.cBoxAccODR.Location = new System.Drawing.Point(9, 119);
+            this.cBoxAccODR.Location = new System.Drawing.Point(12, 146);
+            this.cBoxAccODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxAccODR.Name = "cBoxAccODR";
-            this.cBoxAccODR.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAccODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxAccODR.TabIndex = 5;
             this.cBoxAccODR.Tag = "Akcelerometr";
             this.cBoxAccODR.SelectedIndexChanged += new System.EventHandler(this.SetOdr);
@@ -1742,9 +1876,10 @@ namespace Aplikacja_MEMS
             "4",
             "8",
             "16"});
-            this.cBoxAccScale.Location = new System.Drawing.Point(9, 77);
+            this.cBoxAccScale.Location = new System.Drawing.Point(12, 95);
+            this.cBoxAccScale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cBoxAccScale.Name = "cBoxAccScale";
-            this.cBoxAccScale.Size = new System.Drawing.Size(121, 21);
+            this.cBoxAccScale.Size = new System.Drawing.Size(160, 24);
             this.cBoxAccScale.TabIndex = 3;
             this.cBoxAccScale.Tag = "Akcelerometr";
             this.cBoxAccScale.SelectedIndexChanged += new System.EventHandler(this.SetScale);
@@ -1759,9 +1894,11 @@ namespace Aplikacja_MEMS
             this.gBoxAccRegister.Controls.Add(this.labAccAddress);
             this.gBoxAccRegister.Controls.Add(this.buttonAccOpen);
             this.gBoxAccRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.gBoxAccRegister.Location = new System.Drawing.Point(154, 39);
+            this.gBoxAccRegister.Location = new System.Drawing.Point(205, 48);
+            this.gBoxAccRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gBoxAccRegister.Name = "gBoxAccRegister";
-            this.gBoxAccRegister.Size = new System.Drawing.Size(195, 105);
+            this.gBoxAccRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxAccRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxAccRegister.TabIndex = 7;
             this.gBoxAccRegister.TabStop = false;
             this.gBoxAccRegister.Text = "Rejestr";
@@ -1770,9 +1907,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonAccGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAccGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonAccGet.Location = new System.Drawing.Point(107, 54);
+            this.buttonAccGet.Location = new System.Drawing.Point(143, 66);
+            this.buttonAccGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAccGet.Name = "buttonAccGet";
-            this.buttonAccGet.Size = new System.Drawing.Size(66, 23);
+            this.buttonAccGet.Size = new System.Drawing.Size(88, 28);
             this.buttonAccGet.TabIndex = 20;
             this.buttonAccGet.Tag = "Akcelerometr";
             this.buttonAccGet.Text = "Wczytaj";
@@ -1783,9 +1921,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonAccSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAccSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonAccSet.Location = new System.Drawing.Point(30, 54);
+            this.buttonAccSet.Location = new System.Drawing.Point(40, 66);
+            this.buttonAccSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAccSet.Name = "buttonAccSet";
-            this.buttonAccSet.Size = new System.Drawing.Size(66, 23);
+            this.buttonAccSet.Size = new System.Drawing.Size(88, 28);
             this.buttonAccSet.TabIndex = 19;
             this.buttonAccSet.Tag = "Akcelerometr";
             this.buttonAccSet.Text = "Ustaw";
@@ -1795,9 +1934,10 @@ namespace Aplikacja_MEMS
             // tBoxAccValue
             // 
             this.tBoxAccValue.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxAccValue.Location = new System.Drawing.Point(107, 28);
+            this.tBoxAccValue.Location = new System.Drawing.Point(143, 34);
+            this.tBoxAccValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxAccValue.Name = "tBoxAccValue";
-            this.tBoxAccValue.Size = new System.Drawing.Size(66, 20);
+            this.tBoxAccValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxAccValue.TabIndex = 18;
             this.tBoxAccValue.Tag = "Akcelerometr";
             this.tBoxAccValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1805,10 +1945,11 @@ namespace Aplikacja_MEMS
             // tBoxAccAddress
             // 
             this.tBoxAccAddress.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tBoxAccAddress.Location = new System.Drawing.Point(30, 28);
+            this.tBoxAccAddress.Location = new System.Drawing.Point(40, 34);
+            this.tBoxAccAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tBoxAccAddress.MaxLength = 4;
             this.tBoxAccAddress.Name = "tBoxAccAddress";
-            this.tBoxAccAddress.Size = new System.Drawing.Size(66, 20);
+            this.tBoxAccAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxAccAddress.TabIndex = 17;
             this.tBoxAccAddress.Tag = "Akcelerometr";
             this.tBoxAccAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1817,9 +1958,10 @@ namespace Aplikacja_MEMS
             // 
             this.labAccValue.AutoSize = true;
             this.labAccValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labAccValue.Location = new System.Drawing.Point(117, 10);
+            this.labAccValue.Location = new System.Drawing.Point(156, 12);
+            this.labAccValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labAccValue.Name = "labAccValue";
-            this.labAccValue.Size = new System.Drawing.Size(54, 15);
+            this.labAccValue.Size = new System.Drawing.Size(69, 18);
             this.labAccValue.TabIndex = 16;
             this.labAccValue.Text = "Wartość:";
             // 
@@ -1827,9 +1969,10 @@ namespace Aplikacja_MEMS
             // 
             this.labAccAddress.AutoSize = true;
             this.labAccAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labAccAddress.Location = new System.Drawing.Point(43, 10);
+            this.labAccAddress.Location = new System.Drawing.Point(57, 12);
+            this.labAccAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labAccAddress.Name = "labAccAddress";
-            this.labAccAddress.Size = new System.Drawing.Size(41, 15);
+            this.labAccAddress.Size = new System.Drawing.Size(50, 18);
             this.labAccAddress.TabIndex = 15;
             this.labAccAddress.Text = "Adres:";
             // 
@@ -1837,9 +1980,10 @@ namespace Aplikacja_MEMS
             // 
             this.buttonAccOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAccOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonAccOpen.Location = new System.Drawing.Point(30, 79);
+            this.buttonAccOpen.Location = new System.Drawing.Point(40, 97);
+            this.buttonAccOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAccOpen.Name = "buttonAccOpen";
-            this.buttonAccOpen.Size = new System.Drawing.Size(143, 23);
+            this.buttonAccOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonAccOpen.TabIndex = 14;
             this.buttonAccOpen.Tag = "Akcelerometr";
             this.buttonAccOpen.Text = "Otwórz rejestr";
@@ -1852,9 +1996,10 @@ namespace Aplikacja_MEMS
             this.buttonAccDrawPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonAccDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonAccDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
-            this.buttonAccDrawPlot.Location = new System.Drawing.Point(249, 15);
+            this.buttonAccDrawPlot.Location = new System.Drawing.Point(332, 18);
+            this.buttonAccDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAccDrawPlot.Name = "buttonAccDrawPlot";
-            this.buttonAccDrawPlot.Size = new System.Drawing.Size(100, 23);
+            this.buttonAccDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonAccDrawPlot.TabIndex = 8;
             this.buttonAccDrawPlot.Tag = "Akcelerometr";
             this.buttonAccDrawPlot.Text = "Rysuj wykres";
@@ -1865,9 +2010,10 @@ namespace Aplikacja_MEMS
             // 
             this.labAccODR.AutoSize = true;
             this.labAccODR.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labAccODR.Location = new System.Drawing.Point(6, 101);
+            this.labAccODR.Location = new System.Drawing.Point(8, 124);
+            this.labAccODR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labAccODR.Name = "labAccODR";
-            this.labAccODR.Size = new System.Drawing.Size(37, 15);
+            this.labAccODR.Size = new System.Drawing.Size(46, 18);
             this.labAccODR.TabIndex = 4;
             this.labAccODR.Text = "ODR:";
             // 
@@ -1875,9 +2021,10 @@ namespace Aplikacja_MEMS
             // 
             this.labAccScale.AutoSize = true;
             this.labAccScale.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labAccScale.Location = new System.Drawing.Point(6, 59);
+            this.labAccScale.Location = new System.Drawing.Point(8, 73);
+            this.labAccScale.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labAccScale.Name = "labAccScale";
-            this.labAccScale.Size = new System.Drawing.Size(47, 15);
+            this.labAccScale.Size = new System.Drawing.Size(58, 18);
             this.labAccScale.TabIndex = 2;
             this.labAccScale.Text = "Zakres:";
             // 
@@ -1886,9 +2033,10 @@ namespace Aplikacja_MEMS
             this.chBoxAccEnabled.AutoSize = true;
             this.chBoxAccEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxAccEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.chBoxAccEnabled.Location = new System.Drawing.Point(9, 37);
+            this.chBoxAccEnabled.Location = new System.Drawing.Point(12, 46);
+            this.chBoxAccEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chBoxAccEnabled.Name = "chBoxAccEnabled";
-            this.chBoxAccEnabled.Size = new System.Drawing.Size(78, 19);
+            this.chBoxAccEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxAccEnabled.TabIndex = 1;
             this.chBoxAccEnabled.Tag = "Akcelerometr";
             this.chBoxAccEnabled.Text = "Włączony";
@@ -1900,9 +2048,10 @@ namespace Aplikacja_MEMS
             this.tabPageData.Controls.Add(this.rtBoxHeader);
             this.tabPageData.Controls.Add(this.btnClear);
             this.tabPageData.Controls.Add(this.rTBoxData);
-            this.tabPageData.Location = new System.Drawing.Point(4, 22);
+            this.tabPageData.Location = new System.Drawing.Point(4, 25);
+            this.tabPageData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabPageData.Name = "tabPageData";
-            this.tabPageData.Size = new System.Drawing.Size(780, 474);
+            this.tabPageData.Size = new System.Drawing.Size(1043, 586);
             this.tabPageData.TabIndex = 2;
             this.tabPageData.Text = "Datalog";
             this.tabPageData.UseVisualStyleBackColor = true;
@@ -1914,18 +2063,20 @@ namespace Aplikacja_MEMS
             this.rtBoxHeader.Enabled = false;
             this.rtBoxHeader.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(238)));
             this.rtBoxHeader.Location = new System.Drawing.Point(0, 0);
+            this.rtBoxHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rtBoxHeader.Name = "rtBoxHeader";
             this.rtBoxHeader.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rtBoxHeader.Size = new System.Drawing.Size(780, 45);
+            this.rtBoxHeader.Size = new System.Drawing.Size(1043, 55);
             this.rtBoxHeader.TabIndex = 2;
             this.rtBoxHeader.Text = "";
             // 
             // btnClear
             // 
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnClear.Location = new System.Drawing.Point(683, 443);
+            this.btnClear.Location = new System.Drawing.Point(911, 545);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(89, 23);
+            this.btnClear.Size = new System.Drawing.Size(119, 28);
             this.btnClear.TabIndex = 1;
             this.btnClear.Text = "Wyczyść log";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -1937,10 +2088,11 @@ namespace Aplikacja_MEMS
             this.rTBoxData.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(238)));
             this.rTBoxData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.rTBoxData.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.rTBoxData.Location = new System.Drawing.Point(0, 51);
+            this.rTBoxData.Location = new System.Drawing.Point(0, 63);
+            this.rTBoxData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rTBoxData.Name = "rTBoxData";
             this.rTBoxData.ReadOnly = true;
-            this.rTBoxData.Size = new System.Drawing.Size(780, 389);
+            this.rTBoxData.Size = new System.Drawing.Size(1039, 478);
             this.rTBoxData.TabIndex = 0;
             this.rTBoxData.Text = "";
             this.rTBoxData.WordWrap = false;
@@ -1955,7 +2107,7 @@ namespace Aplikacja_MEMS
             this.pomocToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(788, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1051, 28);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -1967,7 +2119,7 @@ namespace Aplikacja_MEMS
             this.toolStripMenuItem1,
             this.zamknijToolStripMenuItem});
             this.plikToolStripMenuItem.Name = "plikToolStripMenuItem";
-            this.plikToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.plikToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
             this.plikToolStripMenuItem.Text = "Plik";
             // 
             // zapiszPomiaryToolStripMenuItem
@@ -1980,13 +2132,13 @@ namespace Aplikacja_MEMS
             this.barometrToolStripMenuItem2,
             this.higrometrToolStripMenuItem2});
             this.zapiszPomiaryToolStripMenuItem.Name = "zapiszPomiaryToolStripMenuItem";
-            this.zapiszPomiaryToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.zapiszPomiaryToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.zapiszPomiaryToolStripMenuItem.Text = "Zapisz pomiary";
             // 
             // akcelerometrToolStripMenuItem2
             // 
             this.akcelerometrToolStripMenuItem2.Name = "akcelerometrToolStripMenuItem2";
-            this.akcelerometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
+            this.akcelerometrToolStripMenuItem2.Size = new System.Drawing.Size(183, 26);
             this.akcelerometrToolStripMenuItem2.Tag = "Akcelerometr";
             this.akcelerometrToolStripMenuItem2.Text = "Akcelerometr";
             this.akcelerometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -1994,7 +2146,7 @@ namespace Aplikacja_MEMS
             // żyroskopToolStripMenuItem2
             // 
             this.żyroskopToolStripMenuItem2.Name = "żyroskopToolStripMenuItem2";
-            this.żyroskopToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
+            this.żyroskopToolStripMenuItem2.Size = new System.Drawing.Size(183, 26);
             this.żyroskopToolStripMenuItem2.Tag = "Żyroskop";
             this.żyroskopToolStripMenuItem2.Text = "Żyroskop";
             this.żyroskopToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2002,7 +2154,7 @@ namespace Aplikacja_MEMS
             // magnetometrToolStripMenuItem2
             // 
             this.magnetometrToolStripMenuItem2.Name = "magnetometrToolStripMenuItem2";
-            this.magnetometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
+            this.magnetometrToolStripMenuItem2.Size = new System.Drawing.Size(183, 26);
             this.magnetometrToolStripMenuItem2.Tag = "Magnetometr";
             this.magnetometrToolStripMenuItem2.Text = "Magnetometr";
             this.magnetometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2010,7 +2162,7 @@ namespace Aplikacja_MEMS
             // termometrToolStripMenuItem2
             // 
             this.termometrToolStripMenuItem2.Name = "termometrToolStripMenuItem2";
-            this.termometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
+            this.termometrToolStripMenuItem2.Size = new System.Drawing.Size(183, 26);
             this.termometrToolStripMenuItem2.Tag = "Termometr";
             this.termometrToolStripMenuItem2.Text = "Termometr";
             this.termometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2018,7 +2170,7 @@ namespace Aplikacja_MEMS
             // barometrToolStripMenuItem2
             // 
             this.barometrToolStripMenuItem2.Name = "barometrToolStripMenuItem2";
-            this.barometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
+            this.barometrToolStripMenuItem2.Size = new System.Drawing.Size(183, 26);
             this.barometrToolStripMenuItem2.Tag = "Barometr";
             this.barometrToolStripMenuItem2.Text = "Barometr";
             this.barometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2026,7 +2178,7 @@ namespace Aplikacja_MEMS
             // higrometrToolStripMenuItem2
             // 
             this.higrometrToolStripMenuItem2.Name = "higrometrToolStripMenuItem2";
-            this.higrometrToolStripMenuItem2.Size = new System.Drawing.Size(147, 22);
+            this.higrometrToolStripMenuItem2.Size = new System.Drawing.Size(183, 26);
             this.higrometrToolStripMenuItem2.Tag = "Higrometr";
             this.higrometrToolStripMenuItem2.Text = "Higrometr";
             this.higrometrToolStripMenuItem2.Click += new System.EventHandler(this.SaveSensorParameters);
@@ -2034,19 +2186,19 @@ namespace Aplikacja_MEMS
             // otwórzPomiaryZPlikuToolStripMenuItem
             // 
             this.otwórzPomiaryZPlikuToolStripMenuItem.Name = "otwórzPomiaryZPlikuToolStripMenuItem";
-            this.otwórzPomiaryZPlikuToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.otwórzPomiaryZPlikuToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.otwórzPomiaryZPlikuToolStripMenuItem.Text = "Otwórz pomiary z pliku";
             this.otwórzPomiaryZPlikuToolStripMenuItem.Click += new System.EventHandler(this.otwórzPomiaryZPlikuToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(193, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(243, 6);
             // 
             // zamknijToolStripMenuItem
             // 
             this.zamknijToolStripMenuItem.Name = "zamknijToolStripMenuItem";
-            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.zamknijToolStripMenuItem.Size = new System.Drawing.Size(246, 26);
             this.zamknijToolStripMenuItem.Text = "Zamknij";
             this.zamknijToolStripMenuItem.Click += new System.EventHandler(this.zamknijToolStripMenuItem_Click);
             // 
@@ -2055,7 +2207,7 @@ namespace Aplikacja_MEMS
             this.edytujToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wyczyśćToolStripMenuItem});
             this.edytujToolStripMenuItem.Name = "edytujToolStripMenuItem";
-            this.edytujToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.edytujToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.edytujToolStripMenuItem.Text = "Edytuj";
             // 
             // wyczyśćToolStripMenuItem
@@ -2064,7 +2216,7 @@ namespace Aplikacja_MEMS
             this.daneToolStripMenuItem,
             this.wykresToolStripMenuItem});
             this.wyczyśćToolStripMenuItem.Name = "wyczyśćToolStripMenuItem";
-            this.wyczyśćToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.wyczyśćToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
             this.wyczyśćToolStripMenuItem.Text = "Wyczyść";
             // 
             // daneToolStripMenuItem
@@ -2077,13 +2229,13 @@ namespace Aplikacja_MEMS
             this.barometrToolStripMenuItem,
             this.higrometrToolStripMenuItem});
             this.daneToolStripMenuItem.Name = "daneToolStripMenuItem";
-            this.daneToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.daneToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.daneToolStripMenuItem.Text = "Dane czujnika";
             // 
             // akcelerometrToolStripMenuItem
             // 
             this.akcelerometrToolStripMenuItem.Name = "akcelerometrToolStripMenuItem";
-            this.akcelerometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.akcelerometrToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.akcelerometrToolStripMenuItem.Tag = "Akcelerometr";
             this.akcelerometrToolStripMenuItem.Text = "Akcelerometr";
             this.akcelerometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
@@ -2091,7 +2243,7 @@ namespace Aplikacja_MEMS
             // żyroskopToolStripMenuItem
             // 
             this.żyroskopToolStripMenuItem.Name = "żyroskopToolStripMenuItem";
-            this.żyroskopToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.żyroskopToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.żyroskopToolStripMenuItem.Tag = "Żyroskop";
             this.żyroskopToolStripMenuItem.Text = "Żyroskop";
             this.żyroskopToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
@@ -2099,7 +2251,7 @@ namespace Aplikacja_MEMS
             // magnetometrToolStripMenuItem
             // 
             this.magnetometrToolStripMenuItem.Name = "magnetometrToolStripMenuItem";
-            this.magnetometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.magnetometrToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.magnetometrToolStripMenuItem.Tag = "Magnetometr";
             this.magnetometrToolStripMenuItem.Text = "Magnetometr";
             this.magnetometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
@@ -2107,7 +2259,7 @@ namespace Aplikacja_MEMS
             // termometrToolStripMenuItem
             // 
             this.termometrToolStripMenuItem.Name = "termometrToolStripMenuItem";
-            this.termometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.termometrToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.termometrToolStripMenuItem.Tag = "Termometr";
             this.termometrToolStripMenuItem.Text = "Termometr";
             this.termometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
@@ -2115,7 +2267,7 @@ namespace Aplikacja_MEMS
             // barometrToolStripMenuItem
             // 
             this.barometrToolStripMenuItem.Name = "barometrToolStripMenuItem";
-            this.barometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.barometrToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.barometrToolStripMenuItem.Tag = "Barometr";
             this.barometrToolStripMenuItem.Text = "Barometr";
             this.barometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
@@ -2123,7 +2275,7 @@ namespace Aplikacja_MEMS
             // higrometrToolStripMenuItem
             // 
             this.higrometrToolStripMenuItem.Name = "higrometrToolStripMenuItem";
-            this.higrometrToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.higrometrToolStripMenuItem.Size = new System.Drawing.Size(183, 26);
             this.higrometrToolStripMenuItem.Tag = "Higrometr";
             this.higrometrToolStripMenuItem.Text = "Higrometr";
             this.higrometrToolStripMenuItem.Click += new System.EventHandler(this.CleartSensorData);
@@ -2138,13 +2290,13 @@ namespace Aplikacja_MEMS
             this.barometrToolStripMenuItem1,
             this.higrometrToolStripMenuItem1});
             this.wykresToolStripMenuItem.Name = "wykresToolStripMenuItem";
-            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.wykresToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.wykresToolStripMenuItem.Text = "Wykres";
             // 
             // akcelerometrToolStripMenuItem1
             // 
             this.akcelerometrToolStripMenuItem1.Name = "akcelerometrToolStripMenuItem1";
-            this.akcelerometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.akcelerometrToolStripMenuItem1.Size = new System.Drawing.Size(183, 26);
             this.akcelerometrToolStripMenuItem1.Tag = "Akcelerometr";
             this.akcelerometrToolStripMenuItem1.Text = "Akcelerometr";
             this.akcelerometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
@@ -2152,7 +2304,7 @@ namespace Aplikacja_MEMS
             // żyroskopToolStripMenuItem1
             // 
             this.żyroskopToolStripMenuItem1.Name = "żyroskopToolStripMenuItem1";
-            this.żyroskopToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.żyroskopToolStripMenuItem1.Size = new System.Drawing.Size(183, 26);
             this.żyroskopToolStripMenuItem1.Tag = "Żyroskop";
             this.żyroskopToolStripMenuItem1.Text = "Żyroskop";
             this.żyroskopToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
@@ -2160,7 +2312,7 @@ namespace Aplikacja_MEMS
             // magnetometrToolStripMenuItem1
             // 
             this.magnetometrToolStripMenuItem1.Name = "magnetometrToolStripMenuItem1";
-            this.magnetometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.magnetometrToolStripMenuItem1.Size = new System.Drawing.Size(183, 26);
             this.magnetometrToolStripMenuItem1.Tag = "Magnetometr";
             this.magnetometrToolStripMenuItem1.Text = "Magnetometr";
             this.magnetometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
@@ -2168,7 +2320,7 @@ namespace Aplikacja_MEMS
             // termometrToolStripMenuItem1
             // 
             this.termometrToolStripMenuItem1.Name = "termometrToolStripMenuItem1";
-            this.termometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.termometrToolStripMenuItem1.Size = new System.Drawing.Size(183, 26);
             this.termometrToolStripMenuItem1.Tag = "Termometr";
             this.termometrToolStripMenuItem1.Text = "Termometr";
             this.termometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
@@ -2176,7 +2328,7 @@ namespace Aplikacja_MEMS
             // barometrToolStripMenuItem1
             // 
             this.barometrToolStripMenuItem1.Name = "barometrToolStripMenuItem1";
-            this.barometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.barometrToolStripMenuItem1.Size = new System.Drawing.Size(183, 26);
             this.barometrToolStripMenuItem1.Tag = "Barometr";
             this.barometrToolStripMenuItem1.Text = "Barometr";
             this.barometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
@@ -2184,7 +2336,7 @@ namespace Aplikacja_MEMS
             // higrometrToolStripMenuItem1
             // 
             this.higrometrToolStripMenuItem1.Name = "higrometrToolStripMenuItem1";
-            this.higrometrToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.higrometrToolStripMenuItem1.Size = new System.Drawing.Size(183, 26);
             this.higrometrToolStripMenuItem1.Tag = "Higrometr";
             this.higrometrToolStripMenuItem1.Text = "Higrometr";
             this.higrometrToolStripMenuItem1.Click += new System.EventHandler(this.ClearSensorPlot);
@@ -2200,32 +2352,32 @@ namespace Aplikacja_MEMS
             this.włączWyłączPrzerwaniaToolStripMenuItem,
             this.toolStripMenuItem3});
             this.opcjeToolStripMenuItem.Name = "opcjeToolStripMenuItem";
-            this.opcjeToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.opcjeToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.opcjeToolStripMenuItem.Text = "Opcje";
             // 
             // portOpenToolStripMenuItem
             // 
             this.portOpenToolStripMenuItem.Name = "portOpenToolStripMenuItem";
-            this.portOpenToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.portOpenToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
             this.portOpenToolStripMenuItem.Text = "Otworz port";
             this.portOpenToolStripMenuItem.Click += new System.EventHandler(this.portOpenToolStripMenuItem_Click);
             // 
             // zamknijPortToolStripMenuItem
             // 
             this.zamknijPortToolStripMenuItem.Name = "zamknijPortToolStripMenuItem";
-            this.zamknijPortToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.zamknijPortToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
             this.zamknijPortToolStripMenuItem.Text = "Zamknij port";
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(204, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(259, 6);
             // 
             // EnableAllToolStripMenuItem
             // 
             this.EnableAllToolStripMenuItem.Enabled = false;
             this.EnableAllToolStripMenuItem.Name = "EnableAllToolStripMenuItem";
-            this.EnableAllToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.EnableAllToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
             this.EnableAllToolStripMenuItem.Text = "Włącz wszystkie czujniki";
             this.EnableAllToolStripMenuItem.Click += new System.EventHandler(this.włączWszystkieCzujnikiToolStripMenuItem_Click);
             // 
@@ -2233,7 +2385,7 @@ namespace Aplikacja_MEMS
             // 
             this.DisableAllToolStripMenuItem.Enabled = false;
             this.DisableAllToolStripMenuItem.Name = "DisableAllToolStripMenuItem";
-            this.DisableAllToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.DisableAllToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
             this.DisableAllToolStripMenuItem.Text = "Wyłącz wszystkie czujniki";
             this.DisableAllToolStripMenuItem.Click += new System.EventHandler(this.wyłączWszystkieCzujnikiToolStripMenuItem_Click);
             // 
@@ -2241,14 +2393,14 @@ namespace Aplikacja_MEMS
             // 
             this.włączWyłączPrzerwaniaToolStripMenuItem.Enabled = false;
             this.włączWyłączPrzerwaniaToolStripMenuItem.Name = "włączWyłączPrzerwaniaToolStripMenuItem";
-            this.włączWyłączPrzerwaniaToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.włączWyłączPrzerwaniaToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
             this.włączWyłączPrzerwaniaToolStripMenuItem.Text = "Włącz/Wyłącz przerwania";
             this.włączWyłączPrzerwaniaToolStripMenuItem.Click += new System.EventHandler(this.włączWyłączPrzerwaniaToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(204, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(259, 6);
             // 
             // pomocToolStripMenuItem
             // 
@@ -2256,31 +2408,32 @@ namespace Aplikacja_MEMS
             this.pomocToolStripMenuItem1,
             this.oProgramieToolStripMenuItem});
             this.pomocToolStripMenuItem.Name = "pomocToolStripMenuItem";
-            this.pomocToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.pomocToolStripMenuItem.Size = new System.Drawing.Size(68, 24);
             this.pomocToolStripMenuItem.Text = "Pomoc";
             // 
             // pomocToolStripMenuItem1
             // 
             this.pomocToolStripMenuItem1.Name = "pomocToolStripMenuItem1";
-            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(177, 26);
             this.pomocToolStripMenuItem1.Text = "Pomoc";
             // 
             // oProgramieToolStripMenuItem
             // 
             this.oProgramieToolStripMenuItem.Name = "oProgramieToolStripMenuItem";
-            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
             this.oProgramieToolStripMenuItem.Text = "O programie";
             this.oProgramieToolStripMenuItem.Click += new System.EventHandler(this.oProgramieToolStripMenuItem_Click);
             // 
             // UserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(788, 524);
+            this.ClientSize = new System.Drawing.Size(1051, 645);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "UserForm";
             this.Text = "Aplikacja MEMS";

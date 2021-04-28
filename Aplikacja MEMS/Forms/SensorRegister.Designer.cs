@@ -43,10 +43,12 @@ namespace Aplikacja_MEMS
             // 
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(404, 524);
+            this.tabControl.Size = new System.Drawing.Size(539, 645);
             this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPage
             // 
@@ -88,18 +90,19 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxParam.Location = new System.Drawing.Point(0, 0);
             this.tBoxParam.Name = "tBoxParam";
-            this.tBoxParam.Size = new System.Drawing.Size(100, 20);
+            this.tBoxParam.Size = new System.Drawing.Size(100, 22);
             this.tBoxParam.TabIndex = 0;
             // 
             // SensorRegister
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(404, 524);
+            this.ClientSize = new System.Drawing.Size(539, 645);
             this.Controls.Add(this.tabControl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "SensorRegister";
             this.Text = "SensorRegister";
@@ -116,6 +119,7 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.TextBox tBoxParam;
         private System.Windows.Forms.Button btnSet;
         private System.Windows.Forms.Button btnGet;
+        private System.Windows.Forms.Button btnGetAll;
         private System.Windows.Forms.Label label;
     }
 }

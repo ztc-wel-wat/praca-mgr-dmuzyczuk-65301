@@ -14,11 +14,11 @@ namespace Aplikacja_MEMS
         public byte sensorNr;
         public bool isEnabled;
         public string sensorName;
-        public SensorRegister register;
         public int selectedDeviceIndex;
         public string type;
         public int width;
         protected Plot plot;
+        protected SensorRegister register;
 
         public abstract void AddData(object data);
         public abstract void ClearData();
@@ -132,5 +132,17 @@ namespace Aplikacja_MEMS
         {
                 Communication.Query((byte)CmdType.SensorCmd, (byte)SubCmdType.GetRegisterValue, this.sensorNr, Analysis.HexUtil.ToBytes(address));
         }
+
+        public void AssignRegister(SensorRegister sensorRegister)
+        {
+            register = sensorRegister;
+        }
+
+
+        public void AddToRegisters(string address ,string parameter)
+        {
+            register.AddData(address, parameter);
+        }
+
     }
 }

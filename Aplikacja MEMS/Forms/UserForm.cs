@@ -11,12 +11,14 @@ namespace Aplikacja_MEMS
 {
     public partial class UserForm : Form
     {
-        List<Control> enableDisable = new List<Control>();
-        List<ComboBox> clear = new List<ComboBox>();
-        List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
+        static List<Control> enableDisable = new List<Control>();
+        static List<ComboBox> clear = new List<ComboBox>();
+        static List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
         static List<Sensor> sensors = new List<Sensor>();
         List<CheckBox> checks = new List<CheckBox>();
-        List<SensorRegister> registers = new List<SensorRegister>();
+        static List<Button> parameters = new List<Button>();
+        static List<SensorRegister> registers = new List<SensorRegister>();
+        static bool enabledRegister = false;
 
         MotionSensor acc;
         MotionSensor gyr;
@@ -64,6 +66,20 @@ namespace Aplikacja_MEMS
             cBoxAccScale.Text = cBoxAccScale.Items[0].ToString();
             cBoxMagScale.Text = cBoxMagScale.Items[0].ToString();
             cBoxGyrScale.Text = cBoxGyrScale.Items[0].ToString();
+
+            // Przyciski obsługi rejestrów
+            parameters.Add(buttonAccGet);
+            parameters.Add(buttonAccSet);
+            parameters.Add(buttonGyrGet);
+            parameters.Add(buttonGyrSet);
+            parameters.Add(buttonMagGet);
+            parameters.Add(buttonMagSet);
+            parameters.Add(buttonTherGet);
+            parameters.Add(buttonTherSet);
+            parameters.Add(buttonPreGet);
+            parameters.Add(buttonPreSet);
+            parameters.Add(buttonHumGet);
+            parameters.Add(buttonHumSet);
 
             // Ustalenie listy checkBoxów
             checks.Add(chBoxAccEnabled);
@@ -156,21 +172,26 @@ namespace Aplikacja_MEMS
         private void NewCommandToShow(object sender, EventArgs e)
         {
             byte[] data = ((Command<byte[]>)sender).Dequeue();
+
+
             foreach (Sensor s in sensors)
             {
                 if (s.sensorNr == data[4])
                 {
-                    foreach (Control c in tabPageSensors.Controls)
+                    if (enabledRegister)
                     {
-                        if (c is GroupBox && (string)c.Tag == s.sensorName)
-                        {
-                            TextBox tBox = (TextBox)(c.Controls[4].Controls[2]);
-                            tBox.Invoke((Action)delegate
-                            {
-                                tBox.Text = data[6].ToString("X2");
-                            });
-                        }
+                        s.AddToRegisters(data[5].ToString("X2"), data[6].ToString("X2"));
                     }
+                    else
+                        foreach (Control c in tabPageSensors.Controls)
+                            if (c is GroupBox && (string)c.Tag == s.sensorName)
+                            {
+                                TextBox tBox = (TextBox)(c.Controls[4].Controls[2]);
+                                tBox.Invoke((Action)delegate
+                                {
+                                    tBox.Text = data[6].ToString("X2");
+                                });
+                            }
                 }
             }
         }
@@ -330,7 +351,7 @@ namespace Aplikacja_MEMS
                 // Wstawianie nazwy sensora
                 accNameLab.Text = cBoxAccelerometer.Text;
                 terNameLab.Text = cBoxThermometer.Text;
-                magNameLab.Text = cBoxAccelerometer.Text;
+                magNameLab.Text = cBoxMagnetometer.Text;
                 gyrNameLab.Text = cBoxGyroscope.Text;
                 humNameLab.Text = cBoxHumidity.Text;
                 presNameLab.Text = cBoxPressure.Text;
@@ -669,15 +690,33 @@ namespace Aplikacja_MEMS
             about.ShowDialog();
         }
 
+        public static void EnableParameterButtons()
+        {
+            bool allDisable = true;
+            foreach (SensorRegister sReg in registers)
+                if (sReg.Visible)
+                    allDisable = false;
+
+            if (allDisable)
+            {
+                enabledRegister = false;
+                foreach (Button btn in parameters)
+                    btn.Enabled = true;
+            }
+        }
+
         private void buttonRegisterOpen_Click(object sender, EventArgs e)
         {
-            foreach(Control c in tabPageSensors.Controls)
+            enabledRegister = true;
+            foreach (Button btn in parameters)
+                btn.Enabled = false;
+            foreach (Control c in tabPageSensors.Controls)
             {
-                if(c is GroupBox gBox && c.Tag == ((Button)sender).Tag)
+                if (c is GroupBox gBox && c.Tag == ((Button)sender).Tag)
                 {
-                    foreach(Control g in gBox.Controls)
+                    foreach (Control g in gBox.Controls)
                     {
-                        if(g is Label lab && g.Name.Contains("NameLab"))
+                        if (g is Label lab && g.Name.Contains("NameLab"))
                         {
                             string regName = lab.Text;
                             bool search = false;
@@ -685,17 +724,25 @@ namespace Aplikacja_MEMS
                                 if (sReg.Text == regName)
                                 {
                                     search = true;
-                                    sReg.Show();
+                                    sReg.Visible = true;
                                 }
 
                             if (search != true)
                                 if (File.Exists(regName + ".txt"))
-                                { 
-                                    SensorRegister sensorRegister = new SensorRegister(regName);
-                                    registers.Add(sensorRegister);
-                                    sensorRegister.Show();
+                                {
+                                    foreach (Sensor s in sensors)
+                                        if ((string)(lab.Tag) == s.sensorName)
+                                        {
+                                            SensorRegister sensorRegister = new SensorRegister(regName, s);
+                                            registers.Add(sensorRegister);
+
+                                            s.AssignRegister(sensorRegister);
+                                            sensorRegister.Show();
+
+                                        }
+
                                 }
-                                
+
                                 else
                                     MessageBox.Show("Brak danych rejestru w bazie plików.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
