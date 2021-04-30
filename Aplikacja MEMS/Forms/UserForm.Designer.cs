@@ -46,7 +46,6 @@ namespace Aplikacja_MEMS
             this.labelGyroscope = new System.Windows.Forms.Label();
             this.labelAccelerometer = new System.Windows.Forms.Label();
             this.gBoxConnection = new System.Windows.Forms.GroupBox();
-            this.pBoxLogoWEL = new System.Windows.Forms.PictureBox();
             this.progressBarData = new System.Windows.Forms.ProgressBar();
             this.labelExchangeStatus = new System.Windows.Forms.Label();
             this.labelDataExchange = new System.Windows.Forms.Label();
@@ -59,9 +58,7 @@ namespace Aplikacja_MEMS
             this.cBoxPorts = new System.Windows.Forms.ComboBox();
             this.labelPortSelection = new System.Windows.Forms.Label();
             this.gBoxInfo = new System.Windows.Forms.GroupBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.pBoxBoard = new System.Windows.Forms.PictureBox();
             this.labelNoBoards = new System.Windows.Forms.Label();
             this.labelAvailablePorts = new System.Windows.Forms.Label();
             this.labelVersion = new System.Windows.Forms.Label();
@@ -201,17 +198,17 @@ namespace Aplikacja_MEMS
             this.EnableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DisableAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.włączWyłączPrzerwaniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.oProgramieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pBoxLogoWEL = new System.Windows.Forms.PictureBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pBoxBoard = new System.Windows.Forms.PictureBox();
             this.tabControlMain.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.gBoxSensors.SuspendLayout();
             this.gBoxConnection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).BeginInit();
             this.gBoxInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).BeginInit();
             this.tabPageSensors.SuspendLayout();
             this.gBoxHumidity.SuspendLayout();
             this.gBoxHumRegister.SuspendLayout();
@@ -227,6 +224,8 @@ namespace Aplikacja_MEMS
             this.gBoxAccRegister.SuspendLayout();
             this.tabPageData.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlMain
@@ -236,7 +235,7 @@ namespace Aplikacja_MEMS
             this.tabControlMain.Controls.Add(this.tabPageData);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Location = new System.Drawing.Point(0, 28);
-            this.tabControlMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControlMain.Margin = new System.Windows.Forms.Padding(4);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(1051, 617);
@@ -249,9 +248,9 @@ namespace Aplikacja_MEMS
             this.tabPageGeneral.Controls.Add(this.gBoxConnection);
             this.tabPageGeneral.Controls.Add(this.gBoxInfo);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 25);
-            this.tabPageGeneral.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageGeneral.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageGeneral.Name = "tabPageGeneral";
-            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageGeneral.Size = new System.Drawing.Size(1043, 588);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "Ogólne";
@@ -273,9 +272,9 @@ namespace Aplikacja_MEMS
             this.gBoxSensors.Controls.Add(this.labelAccelerometer);
             this.gBoxSensors.Dock = System.Windows.Forms.DockStyle.Top;
             this.gBoxSensors.Location = new System.Drawing.Point(4, 378);
-            this.gBoxSensors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxSensors.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxSensors.Name = "gBoxSensors";
-            this.gBoxSensors.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxSensors.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxSensors.Size = new System.Drawing.Size(1035, 177);
             this.gBoxSensors.TabIndex = 2;
             this.gBoxSensors.TabStop = false;
@@ -288,10 +287,12 @@ namespace Aplikacja_MEMS
             this.cBoxHumidity.Enabled = false;
             this.cBoxHumidity.FormattingEnabled = true;
             this.cBoxHumidity.Location = new System.Drawing.Point(755, 124);
-            this.cBoxHumidity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxHumidity.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxHumidity.Name = "cBoxHumidity";
             this.cBoxHumidity.Size = new System.Drawing.Size(185, 24);
             this.cBoxHumidity.TabIndex = 11;
+            this.cBoxHumidity.Tag = "Higrometr";
+            this.cBoxHumidity.SelectedIndexChanged += new System.EventHandler(this.ChangeDeviceIndex);
             // 
             // cBoxPressure
             // 
@@ -300,10 +301,12 @@ namespace Aplikacja_MEMS
             this.cBoxPressure.Enabled = false;
             this.cBoxPressure.FormattingEnabled = true;
             this.cBoxPressure.Location = new System.Drawing.Point(755, 81);
-            this.cBoxPressure.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxPressure.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxPressure.Name = "cBoxPressure";
             this.cBoxPressure.Size = new System.Drawing.Size(185, 24);
             this.cBoxPressure.TabIndex = 10;
+            this.cBoxPressure.Tag = "Barometr";
+            this.cBoxPressure.SelectedIndexChanged += new System.EventHandler(this.ChangeDeviceIndex);
             // 
             // cBoxThermometer
             // 
@@ -312,10 +315,12 @@ namespace Aplikacja_MEMS
             this.cBoxThermometer.Enabled = false;
             this.cBoxThermometer.FormattingEnabled = true;
             this.cBoxThermometer.Location = new System.Drawing.Point(755, 38);
-            this.cBoxThermometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxThermometer.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxThermometer.Name = "cBoxThermometer";
             this.cBoxThermometer.Size = new System.Drawing.Size(185, 24);
             this.cBoxThermometer.TabIndex = 9;
+            this.cBoxThermometer.Tag = "Termomentr";
+            this.cBoxThermometer.SelectedIndexChanged += new System.EventHandler(this.ChangeDeviceIndex);
             // 
             // cBoxMagnetometer
             // 
@@ -324,10 +329,12 @@ namespace Aplikacja_MEMS
             this.cBoxMagnetometer.Enabled = false;
             this.cBoxMagnetometer.FormattingEnabled = true;
             this.cBoxMagnetometer.Location = new System.Drawing.Point(229, 124);
-            this.cBoxMagnetometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxMagnetometer.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxMagnetometer.Name = "cBoxMagnetometer";
             this.cBoxMagnetometer.Size = new System.Drawing.Size(185, 24);
             this.cBoxMagnetometer.TabIndex = 8;
+            this.cBoxMagnetometer.Tag = "Magnetometr";
+            this.cBoxMagnetometer.SelectedIndexChanged += new System.EventHandler(this.ChangeDeviceIndex);
             // 
             // cBoxGyroscope
             // 
@@ -336,10 +343,12 @@ namespace Aplikacja_MEMS
             this.cBoxGyroscope.Enabled = false;
             this.cBoxGyroscope.FormattingEnabled = true;
             this.cBoxGyroscope.Location = new System.Drawing.Point(229, 81);
-            this.cBoxGyroscope.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxGyroscope.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxGyroscope.Name = "cBoxGyroscope";
             this.cBoxGyroscope.Size = new System.Drawing.Size(185, 24);
             this.cBoxGyroscope.TabIndex = 7;
+            this.cBoxGyroscope.Tag = "Żyroskop";
+            this.cBoxGyroscope.SelectedIndexChanged += new System.EventHandler(this.ChangeDeviceIndex);
             // 
             // cBoxAccelerometer
             // 
@@ -347,10 +356,12 @@ namespace Aplikacja_MEMS
             this.cBoxAccelerometer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxAccelerometer.Enabled = false;
             this.cBoxAccelerometer.Location = new System.Drawing.Point(229, 38);
-            this.cBoxAccelerometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxAccelerometer.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxAccelerometer.Name = "cBoxAccelerometer";
             this.cBoxAccelerometer.Size = new System.Drawing.Size(185, 24);
             this.cBoxAccelerometer.TabIndex = 6;
+            this.cBoxAccelerometer.Tag = "Akcelerometr";
+            this.cBoxAccelerometer.SelectedIndexChanged += new System.EventHandler(this.ChangeDeviceIndex);
             // 
             // labelHumidity
             // 
@@ -434,29 +445,18 @@ namespace Aplikacja_MEMS
             this.gBoxConnection.Controls.Add(this.labelPortSelection);
             this.gBoxConnection.Dock = System.Windows.Forms.DockStyle.Top;
             this.gBoxConnection.Location = new System.Drawing.Point(4, 201);
-            this.gBoxConnection.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxConnection.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxConnection.Name = "gBoxConnection";
-            this.gBoxConnection.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxConnection.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxConnection.Size = new System.Drawing.Size(1035, 177);
             this.gBoxConnection.TabIndex = 1;
             this.gBoxConnection.TabStop = false;
             this.gBoxConnection.Text = "Połączenie";
             // 
-            // pBoxLogoWEL
-            // 
-            this.pBoxLogoWEL.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
-            this.pBoxLogoWEL.Location = new System.Drawing.Point(463, 47);
-            this.pBoxLogoWEL.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pBoxLogoWEL.Name = "pBoxLogoWEL";
-            this.pBoxLogoWEL.Size = new System.Drawing.Size(107, 98);
-            this.pBoxLogoWEL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pBoxLogoWEL.TabIndex = 11;
-            this.pBoxLogoWEL.TabStop = false;
-            // 
             // progressBarData
             // 
             this.progressBarData.Location = new System.Drawing.Point(627, 128);
-            this.progressBarData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBarData.Margin = new System.Windows.Forms.Padding(4);
             this.progressBarData.Name = "progressBarData";
             this.progressBarData.Size = new System.Drawing.Size(355, 28);
             this.progressBarData.TabIndex = 10;
@@ -488,7 +488,7 @@ namespace Aplikacja_MEMS
             this.buttonStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonStart.Enabled = false;
             this.buttonStart.Location = new System.Drawing.Point(627, 68);
-            this.buttonStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(4);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(173, 28);
             this.buttonStart.TabIndex = 7;
@@ -502,7 +502,7 @@ namespace Aplikacja_MEMS
             this.buttonStop.Enabled = false;
             this.buttonStop.ForeColor = System.Drawing.Color.Red;
             this.buttonStop.Location = new System.Drawing.Point(808, 68);
-            this.buttonStop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonStop.Margin = new System.Windows.Forms.Padding(4);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(173, 28);
             this.buttonStop.TabIndex = 6;
@@ -513,7 +513,7 @@ namespace Aplikacja_MEMS
             // progressBarCOM
             // 
             this.progressBarCOM.Location = new System.Drawing.Point(41, 128);
-            this.progressBarCOM.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.progressBarCOM.Margin = new System.Windows.Forms.Padding(4);
             this.progressBarCOM.Name = "progressBarCOM";
             this.progressBarCOM.Size = new System.Drawing.Size(355, 28);
             this.progressBarCOM.TabIndex = 5;
@@ -533,7 +533,7 @@ namespace Aplikacja_MEMS
             // 
             this.buttonOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonOpen.Location = new System.Drawing.Point(41, 68);
-            this.buttonOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonOpen.Margin = new System.Windows.Forms.Padding(4);
             this.buttonOpen.Name = "buttonOpen";
             this.buttonOpen.Size = new System.Drawing.Size(173, 28);
             this.buttonOpen.TabIndex = 3;
@@ -547,7 +547,7 @@ namespace Aplikacja_MEMS
             this.buttonClose.Enabled = false;
             this.buttonClose.ForeColor = System.Drawing.Color.Red;
             this.buttonClose.Location = new System.Drawing.Point(223, 68);
-            this.buttonClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(4);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(173, 28);
             this.buttonClose.TabIndex = 2;
@@ -561,7 +561,7 @@ namespace Aplikacja_MEMS
             this.cBoxPorts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cBoxPorts.FormattingEnabled = true;
             this.cBoxPorts.Location = new System.Drawing.Point(277, 34);
-            this.cBoxPorts.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxPorts.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxPorts.Name = "cBoxPorts";
             this.cBoxPorts.Size = new System.Drawing.Size(117, 24);
             this.cBoxPorts.TabIndex = 1;
@@ -587,26 +587,13 @@ namespace Aplikacja_MEMS
             this.gBoxInfo.Controls.Add(this.labelVersion);
             this.gBoxInfo.Dock = System.Windows.Forms.DockStyle.Top;
             this.gBoxInfo.Location = new System.Drawing.Point(4, 4);
-            this.gBoxInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxInfo.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxInfo.Name = "gBoxInfo";
-            this.gBoxInfo.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxInfo.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxInfo.Size = new System.Drawing.Size(1035, 197);
             this.gBoxInfo.TabIndex = 0;
             this.gBoxInfo.TabStop = false;
             this.gBoxInfo.Text = "Informacje";
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.refresh;
-            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefresh.Location = new System.Drawing.Point(153, 80);
-            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(29, 27);
-            this.btnRefresh.TabIndex = 5;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // labelTitle
             // 
@@ -619,17 +606,6 @@ namespace Aplikacja_MEMS
             this.labelTitle.TabIndex = 0;
             this.labelTitle.Text = "Aplikacja MEMS czujnika IKS01A2";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pBoxBoard
-            // 
-            this.pBoxBoard.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
-            this.pBoxBoard.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
-            this.pBoxBoard.Location = new System.Drawing.Point(763, 12);
-            this.pBoxBoard.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pBoxBoard.Name = "pBoxBoard";
-            this.pBoxBoard.Size = new System.Drawing.Size(247, 177);
-            this.pBoxBoard.TabIndex = 4;
-            this.pBoxBoard.TabStop = false;
             // 
             // labelNoBoards
             // 
@@ -675,9 +651,9 @@ namespace Aplikacja_MEMS
             this.tabPageSensors.Controls.Add(this.gBoxThermometer);
             this.tabPageSensors.Controls.Add(this.gBoxAccelerometer);
             this.tabPageSensors.Location = new System.Drawing.Point(4, 25);
-            this.tabPageSensors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageSensors.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageSensors.Name = "tabPageSensors";
-            this.tabPageSensors.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageSensors.Padding = new System.Windows.Forms.Padding(4);
             this.tabPageSensors.Size = new System.Drawing.Size(1043, 586);
             this.tabPageSensors.TabIndex = 1;
             this.tabPageSensors.Text = "Czujniki MEMS";
@@ -695,9 +671,9 @@ namespace Aplikacja_MEMS
             this.gBoxHumidity.Enabled = false;
             this.gBoxHumidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxHumidity.Location = new System.Drawing.Point(545, 391);
-            this.gBoxHumidity.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxHumidity.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxHumidity.Name = "gBoxHumidity";
-            this.gBoxHumidity.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxHumidity.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxHumidity.Size = new System.Drawing.Size(473, 185);
             this.gBoxHumidity.TabIndex = 4;
             this.gBoxHumidity.TabStop = false;
@@ -737,7 +713,7 @@ namespace Aplikacja_MEMS
             "7",
             "12,5"});
             this.cBoxHumODR.Location = new System.Drawing.Point(12, 95);
-            this.cBoxHumODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxHumODR.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxHumODR.Name = "cBoxHumODR";
             this.cBoxHumODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxHumODR.TabIndex = 20;
@@ -766,9 +742,9 @@ namespace Aplikacja_MEMS
             this.gBoxHumRegister.Controls.Add(this.buttonHumOpen);
             this.gBoxHumRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxHumRegister.Location = new System.Drawing.Point(205, 48);
-            this.gBoxHumRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxHumRegister.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxHumRegister.Name = "gBoxHumRegister";
-            this.gBoxHumRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxHumRegister.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxHumRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxHumRegister.TabIndex = 21;
             this.gBoxHumRegister.TabStop = false;
@@ -779,7 +755,7 @@ namespace Aplikacja_MEMS
             this.buttonHumGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonHumGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonHumGet.Location = new System.Drawing.Point(143, 66);
-            this.buttonHumGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonHumGet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonHumGet.Name = "buttonHumGet";
             this.buttonHumGet.Size = new System.Drawing.Size(88, 28);
             this.buttonHumGet.TabIndex = 20;
@@ -793,7 +769,7 @@ namespace Aplikacja_MEMS
             this.buttonHumSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonHumSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonHumSet.Location = new System.Drawing.Point(40, 66);
-            this.buttonHumSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonHumSet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonHumSet.Name = "buttonHumSet";
             this.buttonHumSet.Size = new System.Drawing.Size(88, 28);
             this.buttonHumSet.TabIndex = 19;
@@ -806,7 +782,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxHumValue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxHumValue.Location = new System.Drawing.Point(143, 34);
-            this.tBoxHumValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxHumValue.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxHumValue.Name = "tBoxHumValue";
             this.tBoxHumValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxHumValue.TabIndex = 18;
@@ -817,7 +793,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxHumAddress.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxHumAddress.Location = new System.Drawing.Point(40, 34);
-            this.tBoxHumAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxHumAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxHumAddress.Name = "tBoxHumAddress";
             this.tBoxHumAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxHumAddress.TabIndex = 17;
@@ -851,7 +827,7 @@ namespace Aplikacja_MEMS
             this.buttonHumOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonHumOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonHumOpen.Location = new System.Drawing.Point(40, 97);
-            this.buttonHumOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonHumOpen.Margin = new System.Windows.Forms.Padding(4);
             this.buttonHumOpen.Name = "buttonHumOpen";
             this.buttonHumOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonHumOpen.TabIndex = 14;
@@ -867,7 +843,7 @@ namespace Aplikacja_MEMS
             this.buttonHumDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonHumDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
             this.buttonHumDrawPlot.Location = new System.Drawing.Point(332, 18);
-            this.buttonHumDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonHumDrawPlot.Margin = new System.Windows.Forms.Padding(4);
             this.buttonHumDrawPlot.Name = "buttonHumDrawPlot";
             this.buttonHumDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonHumDrawPlot.TabIndex = 22;
@@ -882,7 +858,7 @@ namespace Aplikacja_MEMS
             this.chBoxHumEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxHumEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxHumEnabled.Location = new System.Drawing.Point(12, 46);
-            this.chBoxHumEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chBoxHumEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.chBoxHumEnabled.Name = "chBoxHumEnabled";
             this.chBoxHumEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxHumEnabled.TabIndex = 19;
@@ -905,9 +881,9 @@ namespace Aplikacja_MEMS
             this.gBoxMagnetometer.Enabled = false;
             this.gBoxMagnetometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxMagnetometer.Location = new System.Drawing.Point(19, 391);
-            this.gBoxMagnetometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxMagnetometer.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxMagnetometer.Name = "gBoxMagnetometer";
-            this.gBoxMagnetometer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxMagnetometer.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxMagnetometer.Size = new System.Drawing.Size(473, 185);
             this.gBoxMagnetometer.TabIndex = 1;
             this.gBoxMagnetometer.TabStop = false;
@@ -948,7 +924,7 @@ namespace Aplikacja_MEMS
             "50",
             "100"});
             this.cBoxMagODR.Location = new System.Drawing.Point(12, 146);
-            this.cBoxMagODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxMagODR.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxMagODR.Name = "cBoxMagODR";
             this.cBoxMagODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxMagODR.TabIndex = 14;
@@ -964,7 +940,7 @@ namespace Aplikacja_MEMS
             this.cBoxMagScale.Items.AddRange(new object[] {
             "50"});
             this.cBoxMagScale.Location = new System.Drawing.Point(12, 95);
-            this.cBoxMagScale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxMagScale.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxMagScale.Name = "cBoxMagScale";
             this.cBoxMagScale.Size = new System.Drawing.Size(160, 24);
             this.cBoxMagScale.TabIndex = 12;
@@ -981,9 +957,9 @@ namespace Aplikacja_MEMS
             this.gBoxMagRegister.Controls.Add(this.buttonMagOpen);
             this.gBoxMagRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxMagRegister.Location = new System.Drawing.Point(205, 48);
-            this.gBoxMagRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxMagRegister.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxMagRegister.Name = "gBoxMagRegister";
-            this.gBoxMagRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxMagRegister.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxMagRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxMagRegister.TabIndex = 15;
             this.gBoxMagRegister.TabStop = false;
@@ -994,7 +970,7 @@ namespace Aplikacja_MEMS
             this.buttonMagGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonMagGet.Location = new System.Drawing.Point(140, 66);
-            this.buttonMagGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonMagGet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonMagGet.Name = "buttonMagGet";
             this.buttonMagGet.Size = new System.Drawing.Size(88, 28);
             this.buttonMagGet.TabIndex = 20;
@@ -1008,7 +984,7 @@ namespace Aplikacja_MEMS
             this.buttonMagSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonMagSet.Location = new System.Drawing.Point(37, 66);
-            this.buttonMagSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonMagSet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonMagSet.Name = "buttonMagSet";
             this.buttonMagSet.Size = new System.Drawing.Size(88, 28);
             this.buttonMagSet.TabIndex = 19;
@@ -1021,7 +997,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxMagValue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxMagValue.Location = new System.Drawing.Point(140, 34);
-            this.tBoxMagValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxMagValue.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxMagValue.Name = "tBoxMagValue";
             this.tBoxMagValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxMagValue.TabIndex = 18;
@@ -1032,7 +1008,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxMagAddress.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxMagAddress.Location = new System.Drawing.Point(37, 34);
-            this.tBoxMagAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxMagAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxMagAddress.Name = "tBoxMagAddress";
             this.tBoxMagAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxMagAddress.TabIndex = 17;
@@ -1066,7 +1042,7 @@ namespace Aplikacja_MEMS
             this.buttonMagOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonMagOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonMagOpen.Location = new System.Drawing.Point(37, 97);
-            this.buttonMagOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonMagOpen.Margin = new System.Windows.Forms.Padding(4);
             this.buttonMagOpen.Name = "buttonMagOpen";
             this.buttonMagOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonMagOpen.TabIndex = 14;
@@ -1082,7 +1058,7 @@ namespace Aplikacja_MEMS
             this.buttonMagDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonMagDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
             this.buttonMagDrawPlot.Location = new System.Drawing.Point(332, 18);
-            this.buttonMagDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonMagDrawPlot.Margin = new System.Windows.Forms.Padding(4);
             this.buttonMagDrawPlot.Name = "buttonMagDrawPlot";
             this.buttonMagDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonMagDrawPlot.TabIndex = 16;
@@ -1119,7 +1095,7 @@ namespace Aplikacja_MEMS
             this.chBoxMagEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxMagEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxMagEnabled.Location = new System.Drawing.Point(12, 46);
-            this.chBoxMagEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chBoxMagEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.chBoxMagEnabled.Name = "chBoxMagEnabled";
             this.chBoxMagEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxMagEnabled.TabIndex = 10;
@@ -1140,9 +1116,9 @@ namespace Aplikacja_MEMS
             this.gBoxPressure.Enabled = false;
             this.gBoxPressure.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxPressure.Location = new System.Drawing.Point(543, 199);
-            this.gBoxPressure.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxPressure.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxPressure.Name = "gBoxPressure";
-            this.gBoxPressure.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxPressure.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxPressure.Size = new System.Drawing.Size(473, 185);
             this.gBoxPressure.TabIndex = 3;
             this.gBoxPressure.TabStop = false;
@@ -1184,7 +1160,7 @@ namespace Aplikacja_MEMS
             "50",
             "75"});
             this.cBoxPreODR.Location = new System.Drawing.Point(12, 95);
-            this.cBoxPreODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxPreODR.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxPreODR.Name = "cBoxPreODR";
             this.cBoxPreODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxPreODR.TabIndex = 20;
@@ -1213,9 +1189,9 @@ namespace Aplikacja_MEMS
             this.gBoxPreRegister.Controls.Add(this.buttonPreOpen);
             this.gBoxPreRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxPreRegister.Location = new System.Drawing.Point(205, 48);
-            this.gBoxPreRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxPreRegister.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxPreRegister.Name = "gBoxPreRegister";
-            this.gBoxPreRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxPreRegister.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxPreRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxPreRegister.TabIndex = 21;
             this.gBoxPreRegister.TabStop = false;
@@ -1226,7 +1202,7 @@ namespace Aplikacja_MEMS
             this.buttonPreGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPreGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonPreGet.Location = new System.Drawing.Point(143, 66);
-            this.buttonPreGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPreGet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPreGet.Name = "buttonPreGet";
             this.buttonPreGet.Size = new System.Drawing.Size(88, 28);
             this.buttonPreGet.TabIndex = 20;
@@ -1240,7 +1216,7 @@ namespace Aplikacja_MEMS
             this.buttonPreSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPreSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonPreSet.Location = new System.Drawing.Point(40, 66);
-            this.buttonPreSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPreSet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPreSet.Name = "buttonPreSet";
             this.buttonPreSet.Size = new System.Drawing.Size(88, 28);
             this.buttonPreSet.TabIndex = 19;
@@ -1253,7 +1229,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxPreValue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxPreValue.Location = new System.Drawing.Point(143, 34);
-            this.tBoxPreValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxPreValue.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxPreValue.Name = "tBoxPreValue";
             this.tBoxPreValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxPreValue.TabIndex = 18;
@@ -1264,7 +1240,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxPreAddress.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxPreAddress.Location = new System.Drawing.Point(40, 34);
-            this.tBoxPreAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxPreAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxPreAddress.Name = "tBoxPreAddress";
             this.tBoxPreAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxPreAddress.TabIndex = 17;
@@ -1298,7 +1274,7 @@ namespace Aplikacja_MEMS
             this.buttonPreOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonPreOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonPreOpen.Location = new System.Drawing.Point(40, 97);
-            this.buttonPreOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPreOpen.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPreOpen.Name = "buttonPreOpen";
             this.buttonPreOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonPreOpen.TabIndex = 14;
@@ -1314,7 +1290,7 @@ namespace Aplikacja_MEMS
             this.buttonPreDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonPreDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
             this.buttonPreDrawPlot.Location = new System.Drawing.Point(332, 18);
-            this.buttonPreDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPreDrawPlot.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPreDrawPlot.Name = "buttonPreDrawPlot";
             this.buttonPreDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonPreDrawPlot.TabIndex = 22;
@@ -1329,7 +1305,7 @@ namespace Aplikacja_MEMS
             this.chBoxPreEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxPreEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxPreEnabled.Location = new System.Drawing.Point(12, 46);
-            this.chBoxPreEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chBoxPreEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.chBoxPreEnabled.Name = "chBoxPreEnabled";
             this.chBoxPreEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxPreEnabled.TabIndex = 19;
@@ -1352,9 +1328,9 @@ namespace Aplikacja_MEMS
             this.gBoxGyroscope.Enabled = false;
             this.gBoxGyroscope.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxGyroscope.Location = new System.Drawing.Point(16, 199);
-            this.gBoxGyroscope.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxGyroscope.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxGyroscope.Name = "gBoxGyroscope";
-            this.gBoxGyroscope.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxGyroscope.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxGyroscope.Size = new System.Drawing.Size(473, 185);
             this.gBoxGyroscope.TabIndex = 1;
             this.gBoxGyroscope.TabStop = false;
@@ -1401,7 +1377,7 @@ namespace Aplikacja_MEMS
             "3330",
             "6660"});
             this.cBoxGyrODR.Location = new System.Drawing.Point(12, 146);
-            this.cBoxGyrODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxGyrODR.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxGyrODR.Name = "cBoxGyrODR";
             this.cBoxGyrODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxGyrODR.TabIndex = 14;
@@ -1421,7 +1397,7 @@ namespace Aplikacja_MEMS
             "1000",
             "2000"});
             this.cBoxGyrScale.Location = new System.Drawing.Point(12, 95);
-            this.cBoxGyrScale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxGyrScale.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxGyrScale.Name = "cBoxGyrScale";
             this.cBoxGyrScale.Size = new System.Drawing.Size(160, 24);
             this.cBoxGyrScale.TabIndex = 12;
@@ -1439,9 +1415,9 @@ namespace Aplikacja_MEMS
             this.gBoxGyrRegister.Controls.Add(this.buttonGyrOpen);
             this.gBoxGyrRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxGyrRegister.Location = new System.Drawing.Point(205, 48);
-            this.gBoxGyrRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxGyrRegister.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxGyrRegister.Name = "gBoxGyrRegister";
-            this.gBoxGyrRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxGyrRegister.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxGyrRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxGyrRegister.TabIndex = 15;
             this.gBoxGyrRegister.TabStop = false;
@@ -1452,7 +1428,7 @@ namespace Aplikacja_MEMS
             this.buttonGyrGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonGyrGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonGyrGet.Location = new System.Drawing.Point(143, 66);
-            this.buttonGyrGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonGyrGet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGyrGet.Name = "buttonGyrGet";
             this.buttonGyrGet.Size = new System.Drawing.Size(88, 28);
             this.buttonGyrGet.TabIndex = 20;
@@ -1466,7 +1442,7 @@ namespace Aplikacja_MEMS
             this.buttonGyrSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonGyrSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonGyrSet.Location = new System.Drawing.Point(40, 66);
-            this.buttonGyrSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonGyrSet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGyrSet.Name = "buttonGyrSet";
             this.buttonGyrSet.Size = new System.Drawing.Size(88, 28);
             this.buttonGyrSet.TabIndex = 19;
@@ -1479,7 +1455,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxGyrValue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxGyrValue.Location = new System.Drawing.Point(143, 34);
-            this.tBoxGyrValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxGyrValue.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxGyrValue.Name = "tBoxGyrValue";
             this.tBoxGyrValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxGyrValue.TabIndex = 18;
@@ -1490,7 +1466,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxGyrAddress.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxGyrAddress.Location = new System.Drawing.Point(40, 34);
-            this.tBoxGyrAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxGyrAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxGyrAddress.Name = "tBoxGyrAddress";
             this.tBoxGyrAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxGyrAddress.TabIndex = 17;
@@ -1524,7 +1500,7 @@ namespace Aplikacja_MEMS
             this.buttonGyrOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonGyrOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonGyrOpen.Location = new System.Drawing.Point(40, 97);
-            this.buttonGyrOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonGyrOpen.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGyrOpen.Name = "buttonGyrOpen";
             this.buttonGyrOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonGyrOpen.TabIndex = 14;
@@ -1540,7 +1516,7 @@ namespace Aplikacja_MEMS
             this.buttonGyrDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonGyrDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
             this.buttonGyrDrawPlot.Location = new System.Drawing.Point(332, 18);
-            this.buttonGyrDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonGyrDrawPlot.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGyrDrawPlot.Name = "buttonGyrDrawPlot";
             this.buttonGyrDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonGyrDrawPlot.TabIndex = 16;
@@ -1577,7 +1553,7 @@ namespace Aplikacja_MEMS
             this.chBoxGyrEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxGyrEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxGyrEnabled.Location = new System.Drawing.Point(12, 46);
-            this.chBoxGyrEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chBoxGyrEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.chBoxGyrEnabled.Name = "chBoxGyrEnabled";
             this.chBoxGyrEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxGyrEnabled.TabIndex = 10;
@@ -1598,9 +1574,9 @@ namespace Aplikacja_MEMS
             this.gBoxThermometer.Enabled = false;
             this.gBoxThermometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxThermometer.Location = new System.Drawing.Point(543, 7);
-            this.gBoxThermometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxThermometer.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxThermometer.Name = "gBoxThermometer";
-            this.gBoxThermometer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxThermometer.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxThermometer.Size = new System.Drawing.Size(473, 185);
             this.gBoxThermometer.TabIndex = 2;
             this.gBoxThermometer.TabStop = false;
@@ -1640,7 +1616,7 @@ namespace Aplikacja_MEMS
             "7",
             "12,5"});
             this.cBoxTherODR.Location = new System.Drawing.Point(12, 95);
-            this.cBoxTherODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxTherODR.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxTherODR.Name = "cBoxTherODR";
             this.cBoxTherODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxTherODR.TabIndex = 12;
@@ -1669,9 +1645,9 @@ namespace Aplikacja_MEMS
             this.gBoxTherRegister.Controls.Add(this.buttonTherOpen);
             this.gBoxTherRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxTherRegister.Location = new System.Drawing.Point(205, 48);
-            this.gBoxTherRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxTherRegister.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxTherRegister.Name = "gBoxTherRegister";
-            this.gBoxTherRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxTherRegister.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxTherRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxTherRegister.TabIndex = 15;
             this.gBoxTherRegister.TabStop = false;
@@ -1682,7 +1658,7 @@ namespace Aplikacja_MEMS
             this.buttonTherGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonTherGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonTherGet.Location = new System.Drawing.Point(143, 66);
-            this.buttonTherGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonTherGet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTherGet.Name = "buttonTherGet";
             this.buttonTherGet.Size = new System.Drawing.Size(88, 28);
             this.buttonTherGet.TabIndex = 20;
@@ -1696,7 +1672,7 @@ namespace Aplikacja_MEMS
             this.buttonTherSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonTherSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonTherSet.Location = new System.Drawing.Point(40, 66);
-            this.buttonTherSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonTherSet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTherSet.Name = "buttonTherSet";
             this.buttonTherSet.Size = new System.Drawing.Size(88, 28);
             this.buttonTherSet.TabIndex = 19;
@@ -1709,7 +1685,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxTherValue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxTherValue.Location = new System.Drawing.Point(143, 34);
-            this.tBoxTherValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxTherValue.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxTherValue.Name = "tBoxTherValue";
             this.tBoxTherValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxTherValue.TabIndex = 18;
@@ -1720,7 +1696,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxTherAddress.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxTherAddress.Location = new System.Drawing.Point(40, 34);
-            this.tBoxTherAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxTherAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxTherAddress.Name = "tBoxTherAddress";
             this.tBoxTherAddress.Size = new System.Drawing.Size(87, 23);
             this.tBoxTherAddress.TabIndex = 17;
@@ -1754,7 +1730,7 @@ namespace Aplikacja_MEMS
             this.buttonTherOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonTherOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonTherOpen.Location = new System.Drawing.Point(40, 97);
-            this.buttonTherOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonTherOpen.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTherOpen.Name = "buttonTherOpen";
             this.buttonTherOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonTherOpen.TabIndex = 14;
@@ -1770,7 +1746,7 @@ namespace Aplikacja_MEMS
             this.buttonTherDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonTherDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
             this.buttonTherDrawPlot.Location = new System.Drawing.Point(332, 18);
-            this.buttonTherDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonTherDrawPlot.Margin = new System.Windows.Forms.Padding(4);
             this.buttonTherDrawPlot.Name = "buttonTherDrawPlot";
             this.buttonTherDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonTherDrawPlot.TabIndex = 16;
@@ -1785,7 +1761,7 @@ namespace Aplikacja_MEMS
             this.chBoxTherEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxTherEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxTherEnabled.Location = new System.Drawing.Point(12, 46);
-            this.chBoxTherEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chBoxTherEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.chBoxTherEnabled.Name = "chBoxTherEnabled";
             this.chBoxTherEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxTherEnabled.TabIndex = 10;
@@ -1809,9 +1785,9 @@ namespace Aplikacja_MEMS
             this.gBoxAccelerometer.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.gBoxAccelerometer.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxAccelerometer.Location = new System.Drawing.Point(16, 7);
-            this.gBoxAccelerometer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxAccelerometer.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxAccelerometer.Name = "gBoxAccelerometer";
-            this.gBoxAccelerometer.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxAccelerometer.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxAccelerometer.Size = new System.Drawing.Size(473, 185);
             this.gBoxAccelerometer.TabIndex = 0;
             this.gBoxAccelerometer.TabStop = false;
@@ -1858,7 +1834,7 @@ namespace Aplikacja_MEMS
             "3330",
             "6660"});
             this.cBoxAccODR.Location = new System.Drawing.Point(12, 146);
-            this.cBoxAccODR.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxAccODR.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxAccODR.Name = "cBoxAccODR";
             this.cBoxAccODR.Size = new System.Drawing.Size(160, 24);
             this.cBoxAccODR.TabIndex = 5;
@@ -1877,7 +1853,7 @@ namespace Aplikacja_MEMS
             "8",
             "16"});
             this.cBoxAccScale.Location = new System.Drawing.Point(12, 95);
-            this.cBoxAccScale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cBoxAccScale.Margin = new System.Windows.Forms.Padding(4);
             this.cBoxAccScale.Name = "cBoxAccScale";
             this.cBoxAccScale.Size = new System.Drawing.Size(160, 24);
             this.cBoxAccScale.TabIndex = 3;
@@ -1895,9 +1871,9 @@ namespace Aplikacja_MEMS
             this.gBoxAccRegister.Controls.Add(this.buttonAccOpen);
             this.gBoxAccRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.gBoxAccRegister.Location = new System.Drawing.Point(205, 48);
-            this.gBoxAccRegister.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxAccRegister.Margin = new System.Windows.Forms.Padding(4);
             this.gBoxAccRegister.Name = "gBoxAccRegister";
-            this.gBoxAccRegister.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gBoxAccRegister.Padding = new System.Windows.Forms.Padding(4);
             this.gBoxAccRegister.Size = new System.Drawing.Size(260, 129);
             this.gBoxAccRegister.TabIndex = 7;
             this.gBoxAccRegister.TabStop = false;
@@ -1908,7 +1884,7 @@ namespace Aplikacja_MEMS
             this.buttonAccGet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAccGet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonAccGet.Location = new System.Drawing.Point(143, 66);
-            this.buttonAccGet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAccGet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAccGet.Name = "buttonAccGet";
             this.buttonAccGet.Size = new System.Drawing.Size(88, 28);
             this.buttonAccGet.TabIndex = 20;
@@ -1922,7 +1898,7 @@ namespace Aplikacja_MEMS
             this.buttonAccSet.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAccSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonAccSet.Location = new System.Drawing.Point(40, 66);
-            this.buttonAccSet.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAccSet.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAccSet.Name = "buttonAccSet";
             this.buttonAccSet.Size = new System.Drawing.Size(88, 28);
             this.buttonAccSet.TabIndex = 19;
@@ -1935,7 +1911,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxAccValue.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxAccValue.Location = new System.Drawing.Point(143, 34);
-            this.tBoxAccValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxAccValue.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxAccValue.Name = "tBoxAccValue";
             this.tBoxAccValue.Size = new System.Drawing.Size(87, 23);
             this.tBoxAccValue.TabIndex = 18;
@@ -1946,7 +1922,7 @@ namespace Aplikacja_MEMS
             // 
             this.tBoxAccAddress.Cursor = System.Windows.Forms.Cursors.Hand;
             this.tBoxAccAddress.Location = new System.Drawing.Point(40, 34);
-            this.tBoxAccAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tBoxAccAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tBoxAccAddress.MaxLength = 4;
             this.tBoxAccAddress.Name = "tBoxAccAddress";
             this.tBoxAccAddress.Size = new System.Drawing.Size(87, 23);
@@ -1981,7 +1957,7 @@ namespace Aplikacja_MEMS
             this.buttonAccOpen.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonAccOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonAccOpen.Location = new System.Drawing.Point(40, 97);
-            this.buttonAccOpen.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAccOpen.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAccOpen.Name = "buttonAccOpen";
             this.buttonAccOpen.Size = new System.Drawing.Size(191, 28);
             this.buttonAccOpen.TabIndex = 14;
@@ -1997,7 +1973,7 @@ namespace Aplikacja_MEMS
             this.buttonAccDrawPlot.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonAccDrawPlot.ForeColor = System.Drawing.Color.LimeGreen;
             this.buttonAccDrawPlot.Location = new System.Drawing.Point(332, 18);
-            this.buttonAccDrawPlot.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonAccDrawPlot.Margin = new System.Windows.Forms.Padding(4);
             this.buttonAccDrawPlot.Name = "buttonAccDrawPlot";
             this.buttonAccDrawPlot.Size = new System.Drawing.Size(133, 28);
             this.buttonAccDrawPlot.TabIndex = 8;
@@ -2034,7 +2010,7 @@ namespace Aplikacja_MEMS
             this.chBoxAccEnabled.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chBoxAccEnabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.chBoxAccEnabled.Location = new System.Drawing.Point(12, 46);
-            this.chBoxAccEnabled.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chBoxAccEnabled.Margin = new System.Windows.Forms.Padding(4);
             this.chBoxAccEnabled.Name = "chBoxAccEnabled";
             this.chBoxAccEnabled.Size = new System.Drawing.Size(96, 22);
             this.chBoxAccEnabled.TabIndex = 1;
@@ -2049,9 +2025,9 @@ namespace Aplikacja_MEMS
             this.tabPageData.Controls.Add(this.btnClear);
             this.tabPageData.Controls.Add(this.rTBoxData);
             this.tabPageData.Location = new System.Drawing.Point(4, 25);
-            this.tabPageData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPageData.Margin = new System.Windows.Forms.Padding(4);
             this.tabPageData.Name = "tabPageData";
-            this.tabPageData.Size = new System.Drawing.Size(1043, 586);
+            this.tabPageData.Size = new System.Drawing.Size(1043, 588);
             this.tabPageData.TabIndex = 2;
             this.tabPageData.Text = "Datalog";
             this.tabPageData.UseVisualStyleBackColor = true;
@@ -2063,7 +2039,7 @@ namespace Aplikacja_MEMS
             this.rtBoxHeader.Enabled = false;
             this.rtBoxHeader.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(238)));
             this.rtBoxHeader.Location = new System.Drawing.Point(0, 0);
-            this.rtBoxHeader.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtBoxHeader.Margin = new System.Windows.Forms.Padding(4);
             this.rtBoxHeader.Name = "rtBoxHeader";
             this.rtBoxHeader.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
             this.rtBoxHeader.Size = new System.Drawing.Size(1043, 55);
@@ -2074,7 +2050,7 @@ namespace Aplikacja_MEMS
             // 
             this.btnClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClear.Location = new System.Drawing.Point(911, 545);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(119, 28);
             this.btnClear.TabIndex = 1;
@@ -2089,7 +2065,7 @@ namespace Aplikacja_MEMS
             this.rTBoxData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.rTBoxData.ImeMode = System.Windows.Forms.ImeMode.On;
             this.rTBoxData.Location = new System.Drawing.Point(0, 63);
-            this.rTBoxData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rTBoxData.Margin = new System.Windows.Forms.Padding(4);
             this.rTBoxData.Name = "rTBoxData";
             this.rTBoxData.ReadOnly = true;
             this.rTBoxData.Size = new System.Drawing.Size(1039, 478);
@@ -2349,8 +2325,7 @@ namespace Aplikacja_MEMS
             this.toolStripMenuItem2,
             this.EnableAllToolStripMenuItem,
             this.DisableAllToolStripMenuItem,
-            this.włączWyłączPrzerwaniaToolStripMenuItem,
-            this.toolStripMenuItem3});
+            this.włączWyłączPrzerwaniaToolStripMenuItem});
             this.opcjeToolStripMenuItem.Name = "opcjeToolStripMenuItem";
             this.opcjeToolStripMenuItem.Size = new System.Drawing.Size(62, 24);
             this.opcjeToolStripMenuItem.Text = "Opcje";
@@ -2364,6 +2339,7 @@ namespace Aplikacja_MEMS
             // 
             // zamknijPortToolStripMenuItem
             // 
+            this.zamknijPortToolStripMenuItem.Enabled = false;
             this.zamknijPortToolStripMenuItem.Name = "zamknijPortToolStripMenuItem";
             this.zamknijPortToolStripMenuItem.Size = new System.Drawing.Size(262, 26);
             this.zamknijPortToolStripMenuItem.Text = "Zamknij port";
@@ -2397,11 +2373,6 @@ namespace Aplikacja_MEMS
             this.włączWyłączPrzerwaniaToolStripMenuItem.Text = "Włącz/Wyłącz przerwania";
             this.włączWyłączPrzerwaniaToolStripMenuItem.Click += new System.EventHandler(this.włączWyłączPrzerwaniaToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(259, 6);
-            // 
             // pomocToolStripMenuItem
             // 
             this.pomocToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2414,15 +2385,51 @@ namespace Aplikacja_MEMS
             // pomocToolStripMenuItem1
             // 
             this.pomocToolStripMenuItem1.Name = "pomocToolStripMenuItem1";
-            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(177, 26);
+            this.pomocToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.pomocToolStripMenuItem1.Text = "Pomoc";
+            this.pomocToolStripMenuItem1.Click += new System.EventHandler(this.pomocToolStripMenuItem1_Click);
             // 
             // oProgramieToolStripMenuItem
             // 
             this.oProgramieToolStripMenuItem.Name = "oProgramieToolStripMenuItem";
-            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(177, 26);
+            this.oProgramieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.oProgramieToolStripMenuItem.Text = "O programie";
             this.oProgramieToolStripMenuItem.Click += new System.EventHandler(this.oProgramieToolStripMenuItem_Click);
+            // 
+            // pBoxLogoWEL
+            // 
+            this.pBoxLogoWEL.Image = global::Aplikacja_MEMS.Properties.Resources.WEL_WAT;
+            this.pBoxLogoWEL.Location = new System.Drawing.Point(463, 47);
+            this.pBoxLogoWEL.Margin = new System.Windows.Forms.Padding(4);
+            this.pBoxLogoWEL.Name = "pBoxLogoWEL";
+            this.pBoxLogoWEL.Size = new System.Drawing.Size(107, 98);
+            this.pBoxLogoWEL.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pBoxLogoWEL.TabIndex = 11;
+            this.pBoxLogoWEL.TabStop = false;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.refresh;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefresh.Location = new System.Drawing.Point(153, 80);
+            this.btnRefresh.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(29, 27);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // pBoxBoard
+            // 
+            this.pBoxBoard.Image = global::Aplikacja_MEMS.Properties.Resources.Plytka;
+            this.pBoxBoard.InitialImage = global::Aplikacja_MEMS.Properties.Resources.Plytka;
+            this.pBoxBoard.Location = new System.Drawing.Point(763, 12);
+            this.pBoxBoard.Margin = new System.Windows.Forms.Padding(4);
+            this.pBoxBoard.Name = "pBoxBoard";
+            this.pBoxBoard.Size = new System.Drawing.Size(247, 177);
+            this.pBoxBoard.TabIndex = 4;
+            this.pBoxBoard.TabStop = false;
             // 
             // UserForm
             // 
@@ -2433,7 +2440,7 @@ namespace Aplikacja_MEMS
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "UserForm";
             this.Text = "Aplikacja MEMS";
@@ -2447,10 +2454,8 @@ namespace Aplikacja_MEMS
             this.gBoxSensors.PerformLayout();
             this.gBoxConnection.ResumeLayout(false);
             this.gBoxConnection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).EndInit();
             this.gBoxInfo.ResumeLayout(false);
             this.gBoxInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).EndInit();
             this.tabPageSensors.ResumeLayout(false);
             this.gBoxHumidity.ResumeLayout(false);
             this.gBoxHumidity.PerformLayout();
@@ -2479,6 +2484,8 @@ namespace Aplikacja_MEMS
             this.tabPageData.ResumeLayout(false);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxLogoWEL)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pBoxBoard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2634,7 +2641,6 @@ namespace Aplikacja_MEMS
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem zamknijToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.RichTextBox rtBoxHeader;
         private System.Windows.Forms.Button btnRefresh;

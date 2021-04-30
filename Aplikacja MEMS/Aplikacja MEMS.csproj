@@ -90,6 +90,12 @@
     <Compile Include="Forms\About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Plot.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     <Compile Include="Transmition\ComTransmition.cs" />
     <EmbeddedResource Include="Forms\About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Loading.resx">
       <DependentUpon>Loading.cs</DependentUpon>
@@ -187,6 +196,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\help11.png" />
+    <None Include="Resources\help101.png" />
+    <None Include="Resources\help10.png" />
+    <None Include="Resources\help9.png" />
+    <None Include="Resources\help8.png" />
+    <None Include="Resources\help7.png" />
+    <None Include="Resources\help6.png" />
+    <None Include="Resources\help5.png" />
+    <None Include="Resources\help4.png" />
+    <None Include="Resources\help3.png" />
+    <None Include="Resources\help2.png" />
+    <None Include="Resources\help1.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

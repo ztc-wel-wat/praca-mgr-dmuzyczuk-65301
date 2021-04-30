@@ -127,7 +127,38 @@ namespace Aplikacja_MEMS.Transmition
             if (serialPort.IsOpen)
             {
                 byte[] message = (byte[])e.Argument;
-                serialPort.Write(message, 0, message.Length);
+                byte[] buffer = new byte[(int)Frame.FrameParameters.MaxFrameLength];
+                int counter = 0;
+
+                for (int i = 0; i < message.Length - 1; i++)
+                {
+                    if (message[i] == (byte)Frame.Identificators.FrameEnd || message[i] == 0xF1)
+                    {
+                        buffer[counter] = 0xF1;
+                        counter++;
+
+                        switch(message[i])
+                        {
+                            case 0xF0:
+                                buffer[counter] = 0xF2;
+                                break;
+                            case 0xF1:
+                                buffer[counter] = 0xF1;
+                                break;
+                        }
+                    }
+                    else buffer[counter] = message[i];
+                    
+                    counter++;
+                }
+
+                buffer[counter] = (byte)Frame.Identificators.FrameEnd;
+                counter++;
+
+                byte[] checkedMessage = new byte[counter];
+                Array.Copy(buffer, checkedMessage, counter);
+
+                serialPort.Write(checkedMessage, 0, checkedMessage.Length);
             }
         }
 
@@ -183,6 +214,20 @@ namespace Aplikacja_MEMS.Transmition
                     // Dodawanie kolejnych bajtów do buffora
                     while (add != (byte)Frame.Identificators.FrameEnd)
                     {
+                        if(add == 0xF1)
+                        {
+                            add = (byte)(serialPort.ReadByte());
+                            switch (add)
+                            {
+                                case 0xF1:
+                                    add = 0xF1;
+                                    break;
+                                case 0xF2:
+                                    add = 0xF0;
+                                    break;
+                            }
+                        }
+
                         buffer[counter] = add;
                         counter++;
                         chSum += add;

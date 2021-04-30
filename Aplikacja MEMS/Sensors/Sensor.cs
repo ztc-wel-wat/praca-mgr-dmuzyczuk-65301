@@ -146,11 +146,9 @@ namespace Aplikacja_MEMS
             register = sensorRegister;
         }
 
-
         public void AddToRegisters(string address, string parameter)
         {
             register.AddData(address, parameter);
         }
-
     }
 }

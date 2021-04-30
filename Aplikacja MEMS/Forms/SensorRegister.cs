@@ -62,109 +62,121 @@ namespace Aplikacja_MEMS
 
 
                 int where = 25;
-                do
+                try
                 {
-
-                    this.groupBox = new System.Windows.Forms.GroupBox();
-
-                    this.label = new System.Windows.Forms.Label();
-                    this.btnGet = new System.Windows.Forms.Button();
-                    this.tBoxParam = new System.Windows.Forms.TextBox();
-
-                    string address = bankBuffer.Substring(0, bankBuffer.IndexOf('|'));
-                    bankBuffer = bankBuffer.Remove(0, bankBuffer.IndexOf('|') + 1);
-
-
-                    string paramName = bankBuffer.Substring(0, bankBuffer.IndexOf('|'));
-                    bankBuffer = bankBuffer.Remove(0, bankBuffer.IndexOf('|') + 1);
-
-
-                    string getSet = bankBuffer.Substring(0, bankBuffer.IndexOf('|'));
-                    bankBuffer = bankBuffer.Remove(0, bankBuffer.IndexOf('|') + 1);
-
-
-                    // 
-                    // label
-                    // 
-                    this.label.AutoSize = true;
-                    this.label.Location = new System.Drawing.Point(6, 16);
-                    this.label.Name = "label" + paramName;
-                    this.label.Size = new System.Drawing.Size(29, 13);
-                    this.label.TabIndex = 0;
-                    this.label.Text = "0x" + address + " " + paramName;
-                    // 
-                    // btnGet
-                    // 
-                    this.btnGet.Cursor = System.Windows.Forms.Cursors.Hand;
-                    this.btnGet.Location = new System.Drawing.Point(201, 12);
-                    this.btnGet.Name = address;
-                    this.btnGet.Size = new System.Drawing.Size(50, 22);
-                    this.btnGet.TabIndex = 1;
-                    this.btnGet.Text = "Get";
-                    this.btnGet.Tag = pageTag;
-                    this.btnGet.Click += new System.EventHandler(this.Get);
-                    this.btnGet.UseVisualStyleBackColor = true;
-
-
-                    if (getSet == "S")
+                    do
                     {
+
+                        this.groupBox = new System.Windows.Forms.GroupBox();
+
+                        this.label = new System.Windows.Forms.Label();
+                        this.btnGet = new System.Windows.Forms.Button();
+                        this.tBoxParam = new System.Windows.Forms.TextBox();
+
+                        string address = bankBuffer.Substring(0, bankBuffer.IndexOf('|'));
+                        bankBuffer = bankBuffer.Remove(0, bankBuffer.IndexOf('|') + 1);
+
+
+                        string paramName = bankBuffer.Substring(0, bankBuffer.IndexOf('|'));
+                        bankBuffer = bankBuffer.Remove(0, bankBuffer.IndexOf('|') + 1);
+
+
+                        string getSet = bankBuffer.Substring(0, bankBuffer.IndexOf('|'));
+                        bankBuffer = bankBuffer.Remove(0, bankBuffer.IndexOf('|') + 1);
+
+
                         // 
-                        // btnSet
+                        // label
                         // 
-                        this.btnSet = new System.Windows.Forms.Button();
-                        this.btnSet.Cursor = System.Windows.Forms.Cursors.Hand;
-                        this.btnSet.Location = new System.Drawing.Point(257, 12);
-                        this.btnSet.Name = address;
-                        this.btnSet.Size = new System.Drawing.Size(50, 22);
-                        this.btnSet.TabIndex = 2;
-                        this.btnSet.Text = "Set";
-                        this.btnSet.Tag = pageTag;
-                        this.btnSet.Click += new System.EventHandler(this.Set_Parameter);
-                        this.btnSet.UseVisualStyleBackColor = true;
-                        this.groupBox.Controls.Add(this.btnSet);
-                    }
-                    // 
-                    // tBoxParam
-                    // 
-                    this.tBoxParam.Cursor = System.Windows.Forms.Cursors.Hand;
-                    this.tBoxParam.Location = new System.Drawing.Point(313, 13);
-                    this.tBoxParam.Name = address;
-                    this.tBoxParam.Size = new System.Drawing.Size(50, 20);
-                    this.tBoxParam.TabIndex = 3;
-                    this.tBoxParam.Tag = pageTag;
-                    this.tBoxParam.ReadOnly = true;
-                    this.tBoxParam.TextAlign = HorizontalAlignment.Center;
+                        this.label.AutoSize = true;
+                        this.label.Location = new System.Drawing.Point(6, 16);
+                        this.label.Name = "label" + paramName;
+                        this.label.Size = new System.Drawing.Size(29, 13);
+                        this.label.TabIndex = 0;
+                        this.label.Text = "0x" + address + " " + paramName;
+                        // 
+                        // btnGet
+                        // 
+                        this.btnGet.Cursor = System.Windows.Forms.Cursors.Hand;
+                        this.btnGet.Location = new System.Drawing.Point(201, 12);
+                        this.btnGet.Name = address;
+                        this.btnGet.Size = new System.Drawing.Size(50, 22);
+                        this.btnGet.TabIndex = 1;
+                        this.btnGet.Text = "Get";
+                        this.btnGet.Tag = pageTag;
+                        this.btnGet.Click += new System.EventHandler(this.Get);
+                        this.btnGet.UseVisualStyleBackColor = true;
 
 
-                    this.groupBox.Controls.Add(this.tBoxParam);
-                    this.groupBox.Controls.Add(this.btnGet);
-                    this.groupBox.Controls.Add(this.label);
-                    this.groupBox.Tag = pageTag;
-                    this.groupBox.Location = new System.Drawing.Point(3, where);
-                    this.groupBox.Name = address;
-                    this.groupBox.Size = new System.Drawing.Size(369, 40);
-                    this.groupBox.TabIndex = 0;
-                    this.groupBox.TabStop = false;
-                    where += 43;
+                        if (getSet == "S")
+                        {
+                            // 
+                            // btnSet
+                            // 
+                            this.btnSet = new System.Windows.Forms.Button();
+                            this.btnSet.Cursor = System.Windows.Forms.Cursors.Hand;
+                            this.btnSet.Location = new System.Drawing.Point(257, 12);
+                            this.btnSet.Name = address;
+                            this.btnSet.Size = new System.Drawing.Size(50, 22);
+                            this.btnSet.TabIndex = 2;
+                            this.btnSet.Text = "Set";
+                            this.btnSet.Tag = pageTag;
+                            this.btnSet.Click += new System.EventHandler(this.Set_Parameter);
+                            this.btnSet.UseVisualStyleBackColor = true;
+                            this.groupBox.Controls.Add(this.btnSet);
+                        }
+                        // 
+                        // tBoxParam
+                        // 
+                        this.tBoxParam.Cursor = System.Windows.Forms.Cursors.Hand;
+                        this.tBoxParam.Location = new System.Drawing.Point(313, 13);
+                        this.tBoxParam.Name = address;
+                        this.tBoxParam.Size = new System.Drawing.Size(50, 20);
+                        this.tBoxParam.TabIndex = 3;
+                        this.tBoxParam.Tag = pageTag;
+                        this.tBoxParam.TextAlign = HorizontalAlignment.Center;
 
-                    this.tabPage.Controls.Add(this.groupBox);
 
-                } while (bankBuffer.Length > 1);
+                        this.groupBox.Controls.Add(this.tBoxParam);
+                        this.groupBox.Controls.Add(this.btnGet);
+                        this.groupBox.Controls.Add(this.label);
+                        this.groupBox.Tag = pageTag;
+                        this.groupBox.Location = new System.Drawing.Point(3, where);
+                        this.groupBox.Name = address;
+                        this.groupBox.Size = new System.Drawing.Size(369, 40);
+                        this.groupBox.TabIndex = 0;
+                        this.groupBox.TabStop = false;
+                        where += 43;
 
-                fileContent = fileContent.Remove(0, fileContent.IndexOf("-") + 1);
+                        this.tabPage.Controls.Add(this.groupBox);
+
+                    } while (bankBuffer.Length > 1);
+
+                    fileContent = fileContent.Remove(0, fileContent.IndexOf("-") + 1);
+                }
+                catch (Exception exc)
+                {
+                    throw exc;
+                }
             }
-
 
             tabControl.SelectedIndex = 0;
         }
+
+        public void ExitRegister()
+        {
+            this.Close();
+            this.Dispose();
+        }
+
         private void Set_Parameter(object sender, EventArgs e)
         {
             foreach (TabPage tPage in tabControl.Controls)
                 if (tPage.Name == (string)(((Button)sender).Tag))
-                    foreach (GroupBox gBox in tPage.Controls)
-                        if (gBox.Name == ((Button)sender).Name)
-                            foreach (Control c in gBox.Controls)
-                                if (c is TextBox tBox)
+                    foreach (Control c in tPage.Controls)
+                        if (c is GroupBox gBox && c.Name == ((Button)sender).Name)
+                            foreach (Control g in gBox.Controls)
+                                if (g is TextBox tBox)
                                     sensor.SetRegisterParameter(((Button)sender).Name, tBox.Text);
         }
         private void SetRegister(object sender, EventArgs e)

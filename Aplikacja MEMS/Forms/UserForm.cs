@@ -12,6 +12,7 @@ namespace Aplikacja_MEMS
     public partial class UserForm : Form
     {
         static List<Control> enableDisable = new List<Control>();
+        static List<ToolStripMenuItem> startTransmisionEnableDisable = new List<ToolStripMenuItem>();
         static List<ComboBox> clear = new List<ComboBox>();
         static List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
         static List<Sensor> sensors = new List<Sensor>();
@@ -46,6 +47,12 @@ namespace Aplikacja_MEMS
             enableDisable.Add(cBoxPorts);
             enableDisable.Add(buttonStart);
             enableDisable.Add(buttonStop);
+
+            // Lista obiektów MenuStrip do włączania/Wyłączania
+            startTransmisionEnableDisable.Add(EnableAllToolStripMenuItem);
+            startTransmisionEnableDisable.Add(DisableAllToolStripMenuItem);
+            startTransmisionEnableDisable.Add(otwórzPomiaryZPlikuToolStripMenuItem);
+            startTransmisionEnableDisable.Add(włączWyłączPrzerwaniaToolStripMenuItem);
 
             // Lista comboboxów do wyczyszczenia po ponownym załądowaniu portu COM
             clear.Add(cBoxAccelerometer);
@@ -274,6 +281,7 @@ namespace Aplikacja_MEMS
                 cBoxPorts.Enabled = false;
                 btnRefresh.Enabled = false;
                 portOpenToolStripMenuItem.Enabled = false;
+                zamknijPortToolStripMenuItem.Enabled = true;
 
                 progressBarCOM.Value = 100;
             }
@@ -313,6 +321,9 @@ namespace Aplikacja_MEMS
                 box.Enabled = false;
 
             sensors.Clear();
+            ClearRegisters();
+
+            rTBoxData.Text += "Poprawnie zamknięto połączenie z portem " + cBoxPorts.Text;
 
             progressBarCOM.Value = 0;
             progressBarData.Value = 0;
@@ -322,7 +333,10 @@ namespace Aplikacja_MEMS
             btnRefresh.Enabled = true;
             portOpenToolStripMenuItem.Enabled = true;
             otwórzPomiaryZPlikuToolStripMenuItem.Enabled = true;
+
             włączWyłączPrzerwaniaToolStripMenuItem.Enabled = false;
+            DisableAllToolStripMenuItem.Enabled = false;
+            EnableAllToolStripMenuItem.Enabled = false;
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -365,12 +379,12 @@ namespace Aplikacja_MEMS
                 foreach (ComboBox combo in clear)
                     combo.Enabled = false;
 
+                // Blokowanie/odblokowywanie odpowiednich opcji w pasku menu
+                foreach (ToolStripMenuItem menuItem in startTransmisionEnableDisable)
+                    menuItem.Enabled = !menuItem.Enabled;
+
                 buttonStart.Enabled = false;
                 buttonStop.Enabled = true;
-                otwórzPomiaryZPlikuToolStripMenuItem.Enabled = false;
-                EnableAllToolStripMenuItem.Enabled = true;
-                DisableAllToolStripMenuItem.Enabled = true;
-                włączWyłączPrzerwaniaToolStripMenuItem.Enabled = true;
 
                 foreach (Control c in tabPageSensors.Controls)
                     if (c is GroupBox gBox)
@@ -413,15 +427,19 @@ namespace Aplikacja_MEMS
             foreach (ComboBox combo in clear)
                 combo.Enabled = true;
 
-            EnableAllToolStripMenuItem.Enabled = false;
-            DisableAllToolStripMenuItem.Enabled = false;
-            otwórzPomiaryZPlikuToolStripMenuItem.Enabled = true;
-            włączWyłączPrzerwaniaToolStripMenuItem.Enabled = false;
+            // Blokowanie/odblokowywanie odpowiednich opcji w pasku menu
+            foreach (ToolStripMenuItem menuItem in startTransmisionEnableDisable)
+                menuItem.Enabled = !menuItem.Enabled;
+
             buttonStart.Enabled = true;
             buttonStop.Enabled = false;
 
+            // Czyszczenie rejestrów oraz listy rejestrów
+            ClearRegisters();
+
             progressBarData.Value = 0;
         }
+
 
         // Włączanie/wyłączaqnie czujników
         private void włączWszystkieCzujnikiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -530,6 +548,14 @@ namespace Aplikacja_MEMS
         private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void ClearRegisters()
+        {
+            foreach (SensorRegister sr in registers)
+                sr.ExitRegister();
+
+            registers.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -760,6 +786,19 @@ namespace Aplikacja_MEMS
                     }
                 }
             }
+        }
+
+        private void ChangeDeviceIndex(object sender, EventArgs e)
+        {
+            foreach (Sensor s in sensors)
+                if ((string)((ComboBox)sender).Tag == s.sensorName)
+                    s.selectedDeviceIndex = ((ComboBox)sender).SelectedIndex;
+        }
+
+        private void pomocToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Forms.Help help = new Forms.Help();
+            help.ShowDialog();
         }
     }
 }
