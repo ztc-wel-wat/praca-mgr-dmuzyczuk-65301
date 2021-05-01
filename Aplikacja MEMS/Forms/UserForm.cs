@@ -335,7 +335,9 @@ namespace Aplikacja_MEMS
             ComTransmition.ClosePort();
 
             foreach (Sensor s in sensors)
+            {
                 s.ClosePlot();
+            }
 
             // Włączanie/wyłączanie przycisków
             foreach (Control control in enableDisable)

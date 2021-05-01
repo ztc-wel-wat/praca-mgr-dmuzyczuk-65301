@@ -83,16 +83,6 @@ namespace Aplikacja_MEMS.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap help101 {
-            get {
-                object obj = ResourceManager.GetObject("help101", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap help11 {
             get {
                 object obj = ResourceManager.GetObject("help11", resourceCulture);

@@ -6,7 +6,7 @@ namespace Aplikacja_MEMS.Sensors
     class EnvSensor : Sensor
     {
         int counter = 0;
-        float[,] data = new float[10000000, 2];
+        float[,] data = new float[1000000, 2];
 
         public EnvSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth, float sensOdr)
         {
@@ -28,7 +28,7 @@ namespace Aplikacja_MEMS.Sensors
 
         public override void ClearData()
         {
-            this.data = new float[10000000, 2];
+            this.data = new float[1000000, 2];
             counter = 0;
         }
 

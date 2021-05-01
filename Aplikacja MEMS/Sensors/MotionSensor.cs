@@ -6,7 +6,7 @@ namespace Aplikacja_MEMS
     class MotionSensor : Sensor
     {
         int counter = 0;
-        int[,] data = new int[10000000, 4];
+        int[,] data = new int[1000000, 4];
 
         public MotionSensor(byte sensorNumber, byte sensorActivate, string name, int sensWidth, float sensOdr)
         {
@@ -48,7 +48,7 @@ namespace Aplikacja_MEMS
 
         public override void ClearData()
         {
-            this.data = new int[10000000, 3];
+            this.data = new int[1000000, 3];
             counter = 0;
         }
         public override string GetData()
