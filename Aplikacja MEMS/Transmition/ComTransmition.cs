@@ -105,6 +105,7 @@ namespace Aplikacja_MEMS.Transmition
         {
             if (serialPort.IsOpen)
             {
+                ClearBuffer();
                 StopRead();
                 serialPort.DiscardInBuffer();
                 serialPort.DiscardOutBuffer();
@@ -130,6 +131,7 @@ namespace Aplikacja_MEMS.Transmition
                 byte[] buffer = new byte[(int)Frame.FrameParameters.MaxFrameLength];
                 int counter = 0;
 
+                // Sprawdzanie czy wewnątrz ramki nie użyto wartości 0xF1 lub 0xF0
                 for (int i = 0; i < message.Length - 1; i++)
                 {
                     if (message[i] == (byte)Frame.Identificators.FrameEnd || message[i] == 0xF1)
@@ -214,6 +216,7 @@ namespace Aplikacja_MEMS.Transmition
                     // Dodawanie kolejnych bajtów do buffora
                     while (add != (byte)Frame.Identificators.FrameEnd)
                     {
+                        // Sprawdzanie pojawienia się znaku specjalnego 0xF1
                         if(add == 0xF1)
                         {
                             add = (byte)(serialPort.ReadByte());
@@ -286,6 +289,7 @@ namespace Aplikacja_MEMS.Transmition
             }
         }
 
+        // Czyszczenie buffera na wypadek pozostałości z poprzedniego połączenia
         public static void ClearBuffer()
         {
             Communication.Query((byte)CmdType.StopTransmition);

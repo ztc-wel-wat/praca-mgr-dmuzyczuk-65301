@@ -40,7 +40,6 @@ namespace Aplikacja_MEMS.Analysis
                         int inted = (System.BitConverter.ToInt32(frame, startIndex));
                         data[i] = inted;
 
-
                         string floated = inted.ToString() + "|";
                         floated = String.Format("{0," + s.width + "}", floated);
                         text += floated;
@@ -61,7 +60,6 @@ namespace Aplikacja_MEMS.Analysis
                     }
                 }
             }
-
             return text;
         }
     }

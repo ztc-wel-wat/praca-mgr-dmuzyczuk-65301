@@ -16,9 +16,11 @@ namespace Aplikacja_MEMS
         static List<ComboBox> clear = new List<ComboBox>();
         static List<GroupBox> gBoxMEMSSensors = new List<GroupBox>();
         static List<Sensor> sensors = new List<Sensor>();
+        static List<Label> sensorNames = new List<Label>();
         List<CheckBox> checks = new List<CheckBox>();
         static List<Button> parameters = new List<Button>();
         static List<SensorRegister> registers = new List<SensorRegister>();
+
         static bool enabledRegister = false;
 
         MotionSensor acc;
@@ -95,6 +97,14 @@ namespace Aplikacja_MEMS
             checks.Add(chBoxTherEnabled);
             checks.Add(chBoxHumEnabled);
             checks.Add(chBoxPreEnabled);
+
+            // Dodawanie etykiet wybranych sensorów
+            sensorNames.Add(accNameLab);
+            sensorNames.Add(terNameLab);
+            sensorNames.Add(magNameLab);
+            sensorNames.Add(gyrNameLab);
+            sensorNames.Add(humNameLab);
+            sensorNames.Add(presNameLab);
         }
 
         private void CheckPorts()
@@ -103,6 +113,7 @@ namespace Aplikacja_MEMS
             List<AvailablePort> memsPorts = ComTransmition.CheckAvaliablePorts();
             int counter = 0;
 
+            // Usuwanie listy poprzednich dostępnych urządzeń
             foreach (Control c in gBoxInfo.Controls)
             {
                 if ((string)(c.Tag) == "port")
@@ -111,6 +122,7 @@ namespace Aplikacja_MEMS
                 }
             }
             cBoxPorts.Items.Clear();
+
             // Tworzenie listy etykiet z urządzeniami MEMS
             foreach (AvailablePort port in memsPorts)
             {
@@ -147,6 +159,7 @@ namespace Aplikacja_MEMS
                                   "   [h:m:s.us]  | [hPa] | [°C] |  [%] | [mg] | [mg] | [mg] | [mdps] | [mdps] | [mdps] | [mG] | [mG] | [mG] |          | dane \n" +
                                   "-----------------------------------------------------------------------------------------------------------------------------\n");
 
+            // Wyświetlenia okna głównego  po ukryciu paska ładowania
             BringToFront();
         }
 
@@ -158,9 +171,12 @@ namespace Aplikacja_MEMS
 
         private bool ChceckDevices(ComboBox deviceList, byte sensor)
         {
+            // Pobiearanie listy dostępnych sensorów danego rodzaju
             List<string> sensorDevices;
             sensorDevices = Communication.GetAvailableSensors(sensor);
             progressBarCOM.Value += 100 / 6;
+
+            // Dodawanie dostępnych sensorów do odpowiednich ComboBoxów
             if (sensorDevices != null)
             {
                 foreach (string s in sensorDevices)
@@ -173,19 +189,22 @@ namespace Aplikacja_MEMS
                 return true;
             }
 
+            // Jeżeli brak odpowiedzi - brak czujnika - GroupBox w zakładce "czujniki MEMS" nie zostanie odblokowany
             else return false;
         }
 
+        // Wypisanie wartości rejestru w GroupBoxie "Rejestr"
         private void NewCommandToShow(object sender, EventArgs e)
         {
+            // Pobranie ramki z informacją
             byte[] data = ((Command<byte[]>)sender).Dequeue();
 
-
+            // Przypisanie wartości do odpowiedniego TextBoxa
             foreach (Sensor s in sensors)
             {
-                if (s.sensorNr == data[4])
+                if (s.sensorNr == data[4]) // Odnalezienie odpowiedniego czujnika
                 {
-                    if (enabledRegister)
+                    if (enabledRegister) // Jeżeli otwarty rejestr wartości wyświetlą się w oknie rejestru
                     {
                         s.AddToRegisters(data[5].ToString("X2"), data[6].ToString("X2"));
                     }
@@ -203,6 +222,7 @@ namespace Aplikacja_MEMS
             }
         }
 
+        // Otwarcie portu szeregowego
         private void buttonOtworz_Click(object sender, EventArgs e)
         {
             try
@@ -214,6 +234,7 @@ namespace Aplikacja_MEMS
                 // Wysłanie ustawień początkowych aplikacji
                 Communication.Query((byte)CmdType.DataSet, cBoxPorts.Text);
 
+                // Sprawdzanie dostępności poszczególnych sensorów
                 if (ChceckDevices(cBoxPressure, (byte)SensId.PressureSensor))
                 {
                     pre = new EnvSensor((byte)SensId.PressureSensor, (byte)SetSensor.PresEnable, "Barometr", 8, float.Parse(cBoxPreODR.Text));
@@ -256,12 +277,15 @@ namespace Aplikacja_MEMS
                     gBoxMEMSSensors.Add(gBoxMagnetometer);
                 }
 
+                // Tworzenie kolejki (Command) czułej na zdarzenie (pojawienie się nowej ramki z komendą rejestru)
                 command = new Command<byte[]>();
                 command.Changed += new EventHandler(this.NewCommandToShow);
 
+                // Tworzenie referencji dla obiektu portu szeregowego
                 object[] param = new object[] { command, sensors, rTBoxData };
                 ComTransmition.Read(param);
 
+                // Tworzenie okien wykresów 
                 foreach (Sensor s in sensors)
                     if (s is EnvSensor)
                         s.OpenPlot(0);
@@ -283,6 +307,7 @@ namespace Aplikacja_MEMS
                 portOpenToolStripMenuItem.Enabled = false;
                 zamknijPortToolStripMenuItem.Enabled = true;
 
+                rTBoxData.Text += "Poprawnie połączono z portem: " + cBoxPorts.Text + "\n";
                 progressBarCOM.Value = 100;
             }
             catch (Exception exc)
@@ -320,11 +345,13 @@ namespace Aplikacja_MEMS
             foreach (GroupBox box in gBoxMEMSSensors)
                 box.Enabled = false;
 
+            // Czyszczenie listy czujników
             sensors.Clear();
             ClearRegisters();
 
-            rTBoxData.Text += "Poprawnie zamknięto połączenie z portem " + cBoxPorts.Text;
+            rTBoxData.Text += "Poprawnie zamknięto połączenie z portem " + cBoxPorts.Text + "\n";
 
+            // Włączanie/ wyłączanie kontrolek
             progressBarCOM.Value = 0;
             progressBarData.Value = 0;
 
@@ -332,6 +359,7 @@ namespace Aplikacja_MEMS
             cBoxPorts.Enabled = true;
             btnRefresh.Enabled = true;
             portOpenToolStripMenuItem.Enabled = true;
+            zamknijPortToolStripMenuItem.Enabled = false;
             otwórzPomiaryZPlikuToolStripMenuItem.Enabled = true;
 
             włączWyłączPrzerwaniaToolStripMenuItem.Enabled = false;
@@ -353,9 +381,11 @@ namespace Aplikacja_MEMS
                 // Ustawienie wszystkich sensorów jako wyłączone
                 Sensor.DisableAll();
 
+                // Odznaczanie wszystkich checkBoxów "Włączony"
                 foreach (CheckBox cBox in checks)
                     cBox.Checked = false;
 
+                // Ustawienie parametru wyłączenie płytki
                 foreach (Sensor s in sensors)
                     s.isEnabled = false;
 
@@ -363,13 +393,11 @@ namespace Aplikacja_MEMS
                 tabControlMain.SelectedIndex = 1;
 
                 // Wstawianie nazwy sensora
-                accNameLab.Text = cBoxAccelerometer.Text;
-                terNameLab.Text = cBoxThermometer.Text;
-                magNameLab.Text = cBoxMagnetometer.Text;
-                gyrNameLab.Text = cBoxGyroscope.Text;
-                humNameLab.Text = cBoxHumidity.Text;
-                presNameLab.Text = cBoxPressure.Text;
-
+                foreach (Control c in gBoxSensors.Controls)
+                    if (c is ComboBox cBox)
+                        foreach (Label lab in sensorNames)
+                            if (cBox.Tag == lab.Tag)
+                                lab.Text = cBox.Text;
 
                 // Odblokowanie groupBoxów
                 foreach (GroupBox box in gBoxMEMSSensors)
@@ -386,6 +414,7 @@ namespace Aplikacja_MEMS
                 buttonStart.Enabled = false;
                 buttonStop.Enabled = true;
 
+                // Wysyłanie początkowych ustawień zakresów oraz ODR
                 foreach (Control c in tabPageSensors.Controls)
                     if (c is GroupBox gBox)
                         foreach (Control gBoxC in gBox.Controls)
@@ -396,8 +425,6 @@ namespace Aplikacja_MEMS
                             if (gBoxC is ComboBox cBoxScale && cBoxScale.Name.Contains("Scale"))
                                 SetScale(cBoxScale, null);
                         }
-
-                rTBoxData.Text += "Poprawnie połączono z portem: " + cBoxPorts.Text + "\n";
 
                 progressBarData.Value = 100;
             }
@@ -462,8 +489,9 @@ namespace Aplikacja_MEMS
             foreach (Sensor s in sensors)
                 if (s.sensorName == (string)((CheckBox)sender).Tag)
                 {
-                    s.SetEnable(((CheckBox)sender).Checked);
+                    s.SetEnable(((CheckBox)sender).Checked); // Wysłanie informacji do płytki
 
+                    // Sprawdzenie czy sumaryczny ODR nie jest za wysoki i ewentualne blokowanie TextBoxa z zakładki "Datalog"
                     foreach (Control c in tabPageSensors.Controls)
                         if (c is GroupBox)
                             foreach (Control g in c.Controls)
@@ -479,6 +507,7 @@ namespace Aplikacja_MEMS
 
         }
 
+        // Włączanie/ wyłączanie wysyłania przerwań przez płytkę
         private void włączWyłączPrzerwaniaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Sensor.ChangeInterrupt();
@@ -535,21 +564,25 @@ namespace Aplikacja_MEMS
 
         }
 
+        // Zamknięcie portu przed wyłączeniem aplikacji
         private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             buttonZamknij_Click(this, null);
         }
 
+        // Otwarcie połączenia z portem przez pasek menu
         private void portOpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             buttonOtworz_Click(this, null);
         }
 
+        // Zamknięcie aplikacji przez pasek menu
         private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        // Usuwanie okien rejestrów (podczas rozłączania z portem)
         private void ClearRegisters()
         {
             foreach (SensorRegister sr in registers)
@@ -558,16 +591,19 @@ namespace Aplikacja_MEMS
             registers.Clear();
         }
 
+        // Czyszczenie Datalogu
         private void button1_Click(object sender, EventArgs e)
         {
             rTBoxData.Text = "";
         }
 
+        // Odświeżanie listy dostępnych urządzeń (groupBox "Informacje")
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             CheckPorts();
         }
 
+        // Tworzenie/ wyświetlanie okna wykresów
         private void ShowPlot(object sender, EventArgs e)
         {
             foreach (Sensor s in sensors)
@@ -575,6 +611,7 @@ namespace Aplikacja_MEMS
                     s.OpenPlot(0);
         }
 
+        // Czyszczenie danych czujników (pasek menu)
         private void CleartSensorData(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Czy na pewno chcesz usunąć dane oraz wykresy z tego czujnika?", "Usuń dane", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -588,6 +625,7 @@ namespace Aplikacja_MEMS
                     }
         }
 
+        // Czyszczenie wykresów czujników (pasek menu)
         private void ClearSensorPlot(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Czy na pewno chcesz usunąć wykresy z tego czujnika?", "Usuń wykres", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -598,18 +636,21 @@ namespace Aplikacja_MEMS
                         s.ClearPlot();
         }
 
+        // Zapisywanie parametrów czujników (pasek menu)
         private void SaveSensorParameters(object sender, EventArgs e)
         {
             string toSave = string.Empty;
             string fileName = string.Empty;
 
+            // Dobieranie wybranego czujnika
             foreach (Sensor s in sensors)
-                if ((string)((ToolStripMenuItem)sender).Tag == s.sensorName)
+                if ((sender is ToolStripMenuItem && (string)((ToolStripMenuItem)sender).Tag == s.sensorName) || (sender is Sensor sens && sens.sensorName == s.sensorName))
                 {
-                    toSave = s.GetData();
-                    fileName = s.sensorName + DateTime.Today.ToString(" MMM-dd") + ".mem";
+                    toSave = s.GetData(); // Pobieranie danych czujnika
+                    fileName = s.sensorName + DateTime.Today.ToString(" MMM-dd") + ".mem"; // Tworzenie proponowanej nazwy pliku
                 }
 
+            // Tworzenie obiektu okna dialogowego
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 Title = "Zapisz dane czujnika",
@@ -618,6 +659,7 @@ namespace Aplikacja_MEMS
                 DefaultExt = "*.mem"
             };
 
+            // Zapis pliku na dysku
             if (toSave != string.Empty && saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 using (Stream s = File.Open(saveFileDialog.FileName, FileMode.CreateNew))
@@ -628,11 +670,13 @@ namespace Aplikacja_MEMS
                 MessageBox.Show("Brak danych do zapisania!", "Błąd zapisu danych", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
+        // Rysoiwanie wykresu z pliku
         private void otwórzPomiaryZPlikuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var fileContent = string.Empty;
             var filePath = string.Empty;
 
+            // Otwieranie okna dialogowego
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = "c:\\";
@@ -647,9 +691,11 @@ namespace Aplikacja_MEMS
                         filePath = openFileDialog.FileName;
                         var fileStream = openFileDialog.OpenFile();
 
+                        // Pobieranie danych z pliku
                         using (StreamReader reader = new StreamReader(fileStream))
                             fileContent = reader.ReadToEnd();
 
+                        // Sczytywanie danych podstawowych (rodzaj czujnika oraz ilość parametrów)
                         string sensorName = fileContent.Substring(0, fileContent.IndexOf("\n"));
                         fileContent = fileContent.Remove(0, fileContent.IndexOf("\n") + 1);
 
@@ -658,14 +704,16 @@ namespace Aplikacja_MEMS
                         buffer = fileContent.Substring(0, 1);
                         fileContent = fileContent.Remove(0, 2);
 
+                        // Tworzenie okna wykresu
                         Plot plot = new Plot(sensorName, 1);
                         plot.Load -= plot.Plot_Load;
                         plot.WindowState = FormWindowState.Normal;
                         plot.Show();
 
+                        // Rysuj wykres...
                         switch (buffer)
                         {
-                            case "1":
+                            case "1": // ...z jednym parametrem
                                 while (fileContent.Length > 0)
                                 {
                                     float[] parameter = new float[2];
@@ -679,7 +727,7 @@ namespace Aplikacja_MEMS
                                 }
                                 break;
 
-                            case "3":
+                            case "3": // ...z trzema parametrami
                                 while (fileContent.Length > 0)
                                 {
                                     int[] parameter = new int[4];
@@ -710,12 +758,14 @@ namespace Aplikacja_MEMS
             }
         }
 
+        // Otwarcie okna "O programie"
         private void oProgramieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             About about = new About();
             about.ShowDialog();
         }
 
+        // Włączanie textBoxów w GroupBoxach "Rejestr" (przy zamknięciu okna rejestru)
         public static void EnableParameterButtons()
         {
             bool allDisable = true;
@@ -731,20 +781,21 @@ namespace Aplikacja_MEMS
             }
         }
 
+        // Otwarcie okna rejestru
         private void buttonRegisterOpen_Click(object sender, EventArgs e)
         {
-            
+
             foreach (Control c in tabPageSensors.Controls)
             {
                 if (c is GroupBox gBox && c.Tag == ((Button)sender).Tag)
                 {
                     foreach (Control g in gBox.Controls)
                     {
-                        if (g is Label lab && g.Name.Contains("NameLab"))
+                        if (g is Label lab && g.Name.Contains("NameLab")) // Pobieranie nazwy sensora
                         {
                             string regName = lab.Text;
                             bool search = false;
-                            foreach (SensorRegister sReg in registers)
+                            foreach (SensorRegister sReg in registers) // Sprawdzanie czy okno zostało utworzone
                                 if (sReg.Text == regName)
                                 {
                                     search = true;
@@ -756,12 +807,13 @@ namespace Aplikacja_MEMS
                                     enabledRegister = true;
                                 }
 
-                            if (search != true)
-                                if (File.Exists(regName + ".txt"))
+                            if (search != true)  // Jeżeli nie stworzono okna rejestru
+                                if (File.Exists(regName + ".txt")) // Sprawdzanie dostępności pliku do stworzenia rejestru
                                 {
                                     foreach (Sensor s in sensors)
                                         if ((string)(lab.Tag) == s.sensorName)
                                         {
+                                            // Tworzenie okna rejestru
                                             SensorRegister sensorRegister = new SensorRegister(regName, s);
                                             registers.Add(sensorRegister);
 
@@ -775,19 +827,17 @@ namespace Aplikacja_MEMS
                                         }
 
                                 }
-
                                 else
                                 {
                                     MessageBox.Show("Brak danych rejestru w bazie plików.", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                                 }
-
                         }
                     }
                 }
             }
         }
 
+        // Zmiana indeksu wybranego czujnika danego typu
         private void ChangeDeviceIndex(object sender, EventArgs e)
         {
             foreach (Sensor s in sensors)
@@ -795,10 +845,47 @@ namespace Aplikacja_MEMS
                     s.selectedDeviceIndex = ((ComboBox)sender).SelectedIndex;
         }
 
+        // Okno "Pomoc"
         private void pomocToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             Forms.Help help = new Forms.Help();
             help.ShowDialog();
+        }
+
+        // Zapisanie danych z wszystkich czujników
+        private void zapiszWszystkieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Sensor s in sensors)
+                SaveSensorParameters(s, null);
+        }
+
+        // Czyszczenie wykresów z wszystkich czujników
+        private void wyczyśćWszystkieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Czy na pewno chcesz usunąć wykresy ze wszystkich czujników?", "Usuń wykresy", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                foreach (Sensor s in sensors)
+                    s.ClearPlot();
+        }
+
+        // Czyszczenie danych z wszystkich czujników
+        private void wyczyśćWszystkieToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Czy na pewno chcesz usunąć dane oraz wykresy ze wsystkich czujników?", "Usuń dane", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+                foreach (Sensor s in sensors)
+                {
+                    s.ClearData();
+                    s.ClearPlot();
+                }
+        }
+
+        // Zamknięcie połączenia z portem szeregowym z poziomu paska menu
+        private void zamknijPortToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            buttonZamknij_Click(this, null);
         }
     }
 }

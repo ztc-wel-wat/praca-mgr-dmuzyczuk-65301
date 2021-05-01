@@ -69,9 +69,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox11.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help11;
             this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox11.Location = new System.Drawing.Point(-2, 323);
+            this.pictureBox11.Location = new System.Drawing.Point(2, 323);
             this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(1087, 356);
+            this.pictureBox11.Size = new System.Drawing.Size(1087, 328);
             this.pictureBox11.TabIndex = 11;
             this.pictureBox11.TabStop = false;
             // 
@@ -79,9 +79,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox10.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help10;
             this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox10.Location = new System.Drawing.Point(-2, 340);
+            this.pictureBox10.Location = new System.Drawing.Point(2, 340);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(1087, 408);
+            this.pictureBox10.Size = new System.Drawing.Size(1090, 439);
             this.pictureBox10.TabIndex = 10;
             this.pictureBox10.TabStop = false;
             // 
@@ -89,9 +89,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox9.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help9;
             this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox9.Location = new System.Drawing.Point(-2, 255);
+            this.pictureBox9.Location = new System.Drawing.Point(2, 255);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(1087, 374);
+            this.pictureBox9.Size = new System.Drawing.Size(1090, 366);
             this.pictureBox9.TabIndex = 9;
             this.pictureBox9.TabStop = false;
             // 
@@ -99,9 +99,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox8.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help8;
             this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox8.Location = new System.Drawing.Point(-2, 223);
+            this.pictureBox8.Location = new System.Drawing.Point(2, 223);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(1087, 544);
+            this.pictureBox8.Size = new System.Drawing.Size(1090, 564);
             this.pictureBox8.TabIndex = 8;
             this.pictureBox8.TabStop = false;
             // 
@@ -109,9 +109,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox7.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help7;
             this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox7.Location = new System.Drawing.Point(-2, 208);
+            this.pictureBox7.Location = new System.Drawing.Point(2, 208);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(1087, 609);
+            this.pictureBox7.Size = new System.Drawing.Size(1090, 670);
             this.pictureBox7.TabIndex = 7;
             this.pictureBox7.TabStop = false;
             // 
@@ -119,9 +119,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox6.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help6;
             this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox6.Location = new System.Drawing.Point(-2, 323);
+            this.pictureBox6.Location = new System.Drawing.Point(2, 323);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(1087, 580);
+            this.pictureBox6.Size = new System.Drawing.Size(1090, 669);
             this.pictureBox6.TabIndex = 6;
             this.pictureBox6.TabStop = false;
             // 
@@ -129,9 +129,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox5.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help5;
             this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox5.Location = new System.Drawing.Point(-2, 265);
+            this.pictureBox5.Location = new System.Drawing.Point(2, 265);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(1087, 364);
+            this.pictureBox5.Size = new System.Drawing.Size(1090, 308);
             this.pictureBox5.TabIndex = 5;
             this.pictureBox5.TabStop = false;
             // 
@@ -139,9 +139,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox4.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help4;
             this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox4.Location = new System.Drawing.Point(-2, 363);
+            this.pictureBox4.Location = new System.Drawing.Point(2, 363);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(1087, 502);
+            this.pictureBox4.Size = new System.Drawing.Size(1090, 426);
             this.pictureBox4.TabIndex = 4;
             this.pictureBox4.TabStop = false;
             // 
@@ -149,9 +149,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox3.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help3;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox3.Location = new System.Drawing.Point(-2, 477);
+            this.pictureBox3.Location = new System.Drawing.Point(2, 477);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(1087, 497);
+            this.pictureBox3.Size = new System.Drawing.Size(1090, 484);
             this.pictureBox3.TabIndex = 3;
             this.pictureBox3.TabStop = false;
             // 
@@ -159,9 +159,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox2.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help2;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(-2, 459);
+            this.pictureBox2.Location = new System.Drawing.Point(2, 459);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(1087, 429);
+            this.pictureBox2.Size = new System.Drawing.Size(1090, 473);
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
             // 
@@ -169,9 +169,9 @@ namespace Aplikacja_MEMS.Forms
             // 
             this.pictureBox1.BackgroundImage = global::Aplikacja_MEMS.Properties.Resources.help1;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 56);
+            this.pictureBox1.Location = new System.Drawing.Point(2, 56);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1087, 397);
+            this.pictureBox1.Size = new System.Drawing.Size(1090, 432);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
