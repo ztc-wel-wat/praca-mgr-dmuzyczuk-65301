@@ -501,6 +501,7 @@ namespace Aplikacja_MEMS
                                 {
                                     bool wasShown = showText;
                                     showText = s.SumOdr(sender, float.Parse(g.Text));
+                                    ComTransmition.UpdateShow(showText);
 
                                     if (wasShown && !showText)
                                         rTBoxData.AppendText("Ustawiono zbyt duży ODR, aby wyświetlić parametry!\n");
@@ -526,6 +527,7 @@ namespace Aplikacja_MEMS
 
                     s.SetOdr(BitConverter.GetBytes(float.Parse(((ComboBox)sender).Text)));
                     showText = s.SumOdr(sender, float.Parse(((ComboBox)sender).Text));
+                    ComTransmition.UpdateShow(showText);
 
                     if (wasShown && !showText)
                         rTBoxData.AppendText("Ustawiono zbyt duży ODR, aby wyświetlić parametry!\n");
